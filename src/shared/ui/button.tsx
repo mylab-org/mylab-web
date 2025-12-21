@@ -7,7 +7,7 @@ type Props = {
 } & ComponentProps<'button'>
 
 export const Button = ({ children, variant = 'primary', ...props }: Props) => {
-  const base = 'font-pretendard h-[50px] rounded-[10px] text-[16px] text-white font-bold'
+  const base = 'font-pretendard rounded-[10px] text-[16px] text-white font-bold px-[20px] py-[10px]'
   const variants = {
     primary: 'bg-gray700 cursor-pointer',
     error: 'bg-error',
