@@ -9,7 +9,6 @@ function isMatch(pathname: string, urls: string[]) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  console.log('체크')
 
   return NextResponse.next()
 }
