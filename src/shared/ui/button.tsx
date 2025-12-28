@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import type { ComponentProps } from 'react'
 
@@ -14,7 +16,7 @@ export const Button = ({ children, variant = 'primary', ...props }: Props) => {
     noActive: 'bg-gray300',
   }
   return (
-    <button {...props} className={clsx(base, variants[variant], props.className)}>
+    <button {...props} className={clsx(base, variants[variant], props.className)} disabled={variant === 'noActive'}>
       {children}
     </button>
   )
