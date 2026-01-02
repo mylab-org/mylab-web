@@ -1,6 +1,16 @@
+'use client'
+
+import { useEffect } from 'react'
+import { useModalStore } from '@/shared/store'
 import { Button, Input, P } from '@/shared/ui'
 
 export const StuLabModal = () => {
+  const setModal = useModalStore(state => state.setModal)
+
+  useEffect(() => {
+    return () => setModal('isStuModal', false)
+  }, [])
+
   return (
     <section className={'absolute inset-0 z-[1100] flex h-full w-full items-center justify-center bg-black/10'}>
       <div className={'flex flex-col gap-[30px] rounded-[24px] bg-white px-[40px] py-[64px] shadow-lg'}>
