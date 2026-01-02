@@ -1,7 +1,8 @@
 'use client'
 
+import clsx from 'clsx'
 import { useProfessor } from '@/features/auth/survey/model/useProfessor'
-import { Button, Input, P } from '@/shared/ui'
+import { Button, FloatingLabel, Input, P } from '@/shared/ui'
 
 export const ProfessorForm = () => {
   const { data, isInput, handleChangeData } = useProfessor()
@@ -9,29 +10,26 @@ export const ProfessorForm = () => {
     <>
       <P className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실을 생성하세요'}</P>
       <form id={'create-lab-form'} action="" className={'flex w-[400px] flex-col gap-[20px]'}>
-        <Input
-          type={'text'}
-          className={'w-full'}
-          placeholder={'학교 이름'}
+        <FloatingLabel
+          labelName={'학교 이름'}
           name={'schoolName'}
           value={data.schoolName}
           onChange={handleChangeData}
+          isError={true}
         />
-        <Input
-          type={'text'}
-          className={'w-full'}
-          placeholder={'학과 이름'}
+        <FloatingLabel
+          labelName={'학과 이름'}
           name={'departmentName'}
           value={data.departmentName}
           onChange={handleChangeData}
+          isError={false}
         />
-        <Input
-          type={'text'}
-          className={'w-full'}
-          placeholder={'연구실 이름'}
+        <FloatingLabel
+          labelName={'연구실 이름'}
           name={'labName'}
           value={data.labName}
           onChange={handleChangeData}
+          isError={false}
         />
       </form>
       <Button form={'create-lab-form'} variant={isInput() ? 'primary' : 'noActive'}>
