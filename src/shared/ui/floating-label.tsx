@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react'
 
 type Props = {
   className?: string
-  isError: boolean
+  isError?: boolean
   labelName: string
   errorMsg?: string
 } & ComponentProps<'input'>
@@ -25,8 +25,8 @@ export const FloatingLabel = ({ labelName, className, isError, errorMsg, ...prop
         className={clsx(
           'absolute top-2 -z-10 origin-left -translate-y-6 scale-65 transform text-[18px] duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-65',
           isError
-            ? 'text-error peer-focus:text-error peer-placeholder-shown:text-gray300'
-            : 'peer-focus:text-gray900 peer-placeholder-shown:text-gray300',
+            ? 'text-error peer-focus:text-error peer-placeholder-shown:text-gray400'
+            : 'peer-focus:text-gray900 peer-placeholder-shown:text-gray400',
         )}
       >
         {labelName}
