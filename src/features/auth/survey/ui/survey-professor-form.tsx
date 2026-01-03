@@ -15,22 +15,14 @@ export const ProfessorForm = () => {
           name={'schoolName'}
           value={data.schoolName}
           onChange={handleChangeData}
-          isError={true}
         />
         <FloatingLabel
           labelName={'학과 이름'}
           name={'departmentName'}
           value={data.departmentName}
           onChange={handleChangeData}
-          isError={false}
         />
-        <FloatingLabel
-          labelName={'연구실 이름'}
-          name={'labName'}
-          value={data.labName}
-          onChange={handleChangeData}
-          isError={false}
-        />
+        <FloatingLabel labelName={'연구실 이름'} name={'labName'} value={data.labName} onChange={handleChangeData} />
       </form>
       <Button form={'create-lab-form'} variant={isInput() ? 'primary' : 'noActive'}>
         연구실 생성하기
