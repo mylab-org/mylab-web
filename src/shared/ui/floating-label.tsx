@@ -15,7 +15,6 @@ export const FloatingLabel = ({ labelName, className, isError, errorMsg, ...prop
     <div className="relative z-0">
       <Input
         {...props}
-        type="text"
         id="floating_standard"
         className={clsx('peer block w-full border-b-2', isError ? '!border-b-error' : '!border-b-gray300')}
         placeholder=" "
