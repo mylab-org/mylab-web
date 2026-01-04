@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex h-dvh w-full">{children}</body>
+      <body className="bg-background flex h-dvh w-full">{children}</body>
     </html>
   )
 }
