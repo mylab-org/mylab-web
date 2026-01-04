@@ -1,8 +1,12 @@
+'use client'
+
 import { RegistForm } from '@/features/auth/regist'
+import { useRegist } from '@/features/auth/regist/model/useRegist'
 import { Button, Radio } from '@/shared/ui'
 import { AuthLinkItem } from '@/widgets/auth'
 
 export const RegistPage = () => {
+  const { data, isInput, handleChangeData } = useRegist()
   return (
     <div className={'flex flex-col gap-[20px]'}>
       {/*<div className={'flex gap-[20px]'}>*/}
@@ -14,8 +18,8 @@ export const RegistPage = () => {
       {/*  <Radio id={'survey4'} name={'student'} title={'석사'} />*/}
       {/*  <Radio id={'survey5'} name={'student'} title={'박사'} />*/}
       {/*</div>*/}
-      <RegistForm />
-      <Button form={'login-form'} variant={'noActive'}>
+      <RegistForm data={data} onChange={handleChangeData} />
+      <Button form={'regist-form'} variant={isInput() ? 'primary' : 'noActive'}>
         가입하기
       </Button>
       <footer>
