@@ -31,19 +31,19 @@ export default async function MainLayout({
               <LabIcon />
               <P className={'text-gray400! text-[12px] font-semibold'}>연구실</P>
             </li>
-            <li className={'flex flex-col items-center justify-center gap-[5px]'}>
+            <li className={'flex cursor-pointer flex-col items-center justify-center gap-[5px]'}>
               <CalenderIcon />
               <P className={'text-[12px] font-semibold'}>캘린더</P>
             </li>
-            <li className={'flex flex-col items-center justify-center gap-[5px]'}>
+            <li className={'flex cursor-pointer flex-col items-center justify-center gap-[5px]'}>
               <BoardIcon />
               <P className={'text-[12px] font-semibold'}>게시판</P>
             </li>
-            <li className={'flex flex-col items-center justify-center gap-[5px]'}>
+            <li className={'flex cursor-pointer flex-col items-center justify-center gap-[5px]'}>
               <WorkIcon />
               <P className={'text-[12px] font-semibold'}>업무</P>
             </li>
-            <li className={'flex flex-col items-center justify-center gap-[5px]'}>
+            <li className={'flex cursor-pointer flex-col items-center justify-center gap-[5px]'}>
               <UserIcon />
               <P className={'text-[12px] font-semibold'}>내 정보</P>
             </li>
