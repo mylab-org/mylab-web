@@ -1,6 +1,27 @@
+'use client'
+
+import clsx from 'clsx'
+import { Image } from 'next/dist/client/image-component'
 import { P } from '@/shared/ui'
 
 export const MainPage = () => {
+  const getWeekDates = (baseDate: Date) => {
+    const day = baseDate.getDay() // 0(일) ~ 6(토)
+    const sunday = new Date(baseDate)
+    sunday.setDate(baseDate.getDate() - day)
+
+    return Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(sunday)
+      date.setDate(sunday.getDate() + i)
+      return date
+    })
+  }
+
+  const today = new Date('2029-01-01')
+  const weekDates = getWeekDates(today)
+
+  const isToday = (date: Date) => date.toDateString() === today.toDateString()
+
   return (
     <div className={'flex h-full justify-center gap-[30px]'}>
       <section className={'flex w-[441px] flex-col gap-[30px]'}>
@@ -212,8 +233,101 @@ export const MainPage = () => {
           </div>
         </div>
       </section>
-      <section className={'flex flex-col gap-[30px]'}>2</section>
-      <section className={'flex flex-col gap-[30px]'}>3</section>
+      <section className={'flex w-[445px] flex-col gap-[30px]'}>
+        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+          <h3 className={'font-pretendard text-[24px] font-bold'}>이번 주 일정</h3>
+          <div>
+            <div className={'grid grid-cols-7 text-center'}>
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>일</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>월</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>화</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>수</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>목</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>금</P>*/}
+              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>토</P>*/}
+              {['일', '월', '화', '수', '목', '금', '토'].map(day => (
+                <P key={day} className="text-[14px] font-medium text-[#6B7280]!">
+                  {day}
+                </P>
+              ))}
+            </div>
+            {/* 날짜 */}
+            <div className="grid grid-cols-7 text-center">
+              {weekDates.map(date => (
+                <div key={date.toISOString()} className="flex justify-center">
+                  <P
+                    className={`flex h-[30px] w-[30px] items-center justify-center rounded-full text-[18px] font-medium ${
+                      isToday(date) ? 'bg-dark text-white' : 'text-gray-900'
+                    } `}
+                  >
+                    {date.getDate()}
+                  </P>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
+            <div className={'flex items-center gap-[5px]'}>
+              <span className={'h-[10px] w-[10px] rounded-full bg-[#1E75F8]'} />
+              <P className={'text-[14px] font-bold'}>2025 한국통신학회 동계종합학술발표회</P>
+            </div>
+            <div>
+              <P className={'text-[14px] font-light'}>2026.02.04(수)~2026.02.06(금)</P>
+              <P className={'text-[14px] font-light'}>모나 용평(용평리조트)</P>
+            </div>
+          </div>
+          <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
+            <div className={'flex items-center gap-[5px]'}>
+              <span className={'h-[10px] w-[10px] rounded-full bg-[#E35C67]'} />
+              <P className={'text-[14px] font-bold'}>정기 미팅</P>
+            </div>
+            <div>
+              <P className={'text-[14px] font-light'}>2025.12.11(목)</P>
+              <P className={'text-[14px] font-light'}>8공 812호 세미나실</P>
+            </div>
+          </div>
+        </div>
+        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+          <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>
+          <div className={'flex flex-col gap-[10px]'}>
+            <div
+              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
+            >
+              <div className={'flex gap-[6px]'}>
+                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
+                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
+              </div>
+              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
+            </div>
+            <div
+              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
+            >
+              <div className={'flex gap-[6px]'}>
+                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
+                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
+              </div>
+              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
+            </div>
+            <div
+              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
+            >
+              <div className={'flex gap-[6px]'}>
+                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
+                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
+              </div>
+              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={'flex w-[550px] flex-col gap-[30px]'}>
+        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+          <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
+        </div>
+        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+          <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>
+        </div>
+      </section>
     </div>
   )
 }
