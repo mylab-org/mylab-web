@@ -321,11 +321,80 @@ export const MainPage = () => {
         </div>
       </section>
       <section className={'flex w-[550px] flex-col gap-[30px]'}>
-        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
+        <div className={'flex flex-col gap-[10px] p-[24px]'}>
+          <div className={'flex items-center justify-between'}>
+            <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
+            <Image src={'/icon/move.svg'} alt={''} width={24} height={24} className={'cursor-pointer'} />
+          </div>
+          <div className={'gap-[5px] rounded-[12px] bg-white p-[20px]'}>
+            <div className={'flex flex-col gap-[3px]'}>
+              <P className={'text-[16px] font-medium'}>금주 미팅 안내드립니다.</P>
+              <P className={'text-[14px] font-normal'}>이번주 미팅 없어염</P>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <P className={'text-[14px] font-light text-[#6B6B6B]!'}>2025.12.04(수) 12:31</P>
+              <P className={'text-[14px] font-normal text-[#6B6B6B]!'}>김교수</P>
+            </div>
+          </div>
+          <div className={'gap-[5px] rounded-[12px] bg-white p-[20px]'}>
+            <div className={'flex flex-col gap-[3px]'}>
+              <P className={'text-[16px] font-medium'}>금주 미팅 안내드립니다.</P>
+              <P className={'text-[14px] font-normal'}>이번주 미팅 없어염</P>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <P className={'text-[14px] font-light text-[#6B6B6B]!'}>2025.12.04(수) 12:31</P>
+              <P className={'text-[14px] font-normal text-[#6B6B6B]!'}>김교수</P>
+            </div>
+          </div>
         </div>
-        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+        <div className={'flex flex-col gap-[10px] p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>
+          <div className={'flex flex-col gap-[10px] rounded-[12px] bg-white p-[20px]'}>
+            <div className={'flex flex-col gap-[5px]'}>
+              <div className={'flex items-center gap-[5px]'}>
+                <span className={'h-[10px] w-[10px] rounded-full bg-[#1E75F8]'} />
+                <P className={'text-[20px] font-bold'}>2025 한국통신학회 동계종합학술발표회</P>
+              </div>
+              <div>
+                <P className={'text-[16px] font-normal'}>2026.02.04(수)~2026.02.06(금)</P>
+                <P className={'text-[16px] font-normal'}>모나 용평(용평리조트)</P>
+              </div>
+            </div>
+            <div className={'flex flex-col gap-[5px]'}>
+              <div className={'flex items-start gap-[10px]'}>
+                <P className={'min-w-[80px] truncate text-[14px] font-bold'}>김랩장</P>
+                <div className={'flex w-full flex-col gap-[6px] py-[4px]'}>
+                  <div className={'bg-gray300 relative h-[10px] w-full rounded-[24px]'}>
+                    <div className={'bg-blue500 absolute h-full w-2/3 rounded-[24px]'} />
+                  </div>
+                  <div className={'flex gap-[6px]'}>
+                    <span
+                      className={
+                        'font-pretendard rounded-[20px] bg-blue-100 px-[8px] py-[4px] text-[12px] font-semibold text-blue-800'
+                      }
+                    >
+                      교수 컨펌 대기
+                    </span>
+                    <span
+                      className={'font-pretendard bg-gray100 text-gray400 rounded-[20px] px-[8px] py-[4px] text-[12px]'}
+                    >
+                      초안 작성
+                    </span>
+                    <span
+                      className={'font-pretendard bg-gray100 text-gray400 rounded-[20px] px-[8px] py-[4px] text-[12px]'}
+                    >
+                      연구 진행
+                    </span>
+                    <span
+                      className={'font-pretendard bg-gray100 text-gray400 rounded-[20px] px-[8px] py-[4px] text-[12px]'}
+                    >
+                      계획 수립
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
