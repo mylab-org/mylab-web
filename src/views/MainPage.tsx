@@ -1,8 +1,9 @@
 'use client'
 
-import clsx from 'clsx'
 import { Image } from 'next/dist/client/image-component'
-import { P } from '@/shared/ui'
+import { BoardListItem } from '@/entities/board'
+import { LabDownloadData, LabLinkBtn } from '@/entities/lab-main'
+import { P, Tag } from '@/shared/ui'
 
 export const MainPage = () => {
   const getWeekDates = (baseDate: Date) => {
@@ -54,34 +55,10 @@ export const MainPage = () => {
             <span className={'font-pretendard rounded-full bg-gray-200 px-[10px] py-[6px] text-[14px] font-medium'}>
               + 추가하기
             </span>
-            <span
-              className={
-                'font-pretendard border-gray300 rounded-full border bg-white px-[10px] py-[6px] text-[14px] font-normal'
-              }
-            >
-              연구실 홈페이지
-            </span>
-            <span
-              className={
-                'font-pretendard border-gray300 rounded-full border bg-white px-[10px] py-[6px] text-[14px] font-normal'
-              }
-            >
-              엑셀
-            </span>
-            <span
-              className={
-                'font-pretendard border-gray300 rounded-full border bg-white px-[10px] py-[6px] text-[14px] font-normal'
-              }
-            >
-              이것저것
-            </span>
-            <span
-              className={
-                'font-pretendard border-gray300 rounded-full border bg-white px-[10px] py-[6px] text-[14px] font-normal'
-              }
-            >
-              링크
-            </span>
+            <LabLinkBtn href={'#'} name={'연구실 홈페이지'} />
+            <LabLinkBtn href={'#'} name={'엑셀'} />
+            <LabLinkBtn href={'#'} name={'이것저것'} />
+            <LabLinkBtn href={'#'} name={'링크'} />
           </div>
         </div>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
@@ -89,146 +66,51 @@ export const MainPage = () => {
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>김교수</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#E1F4FF] px-[10px] py-[3px] text-[14px] font-medium text-[#1E75F8]'
-                }
-              >
-                교수
-              </span>
+              <Tag variant={'professor'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'leader'} />
+              <Tag variant={'doctoral'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'master'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'leader'} />
+              <Tag variant={'student'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'student'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'student'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'student'} />
             </div>
           </div>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
             <div className={'flex gap-[4px]'}>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FFF4E9] px-[10px] py-[3px] text-[14px] font-medium text-[#E35C67]'
-                }
-              >
-                랩장
-              </span>
-              <span
-                className={
-                  'font-pretendard w-fit rounded-full bg-[#FBE9FF] px-[10px] py-[3px] text-[14px] font-medium text-[#8F42FC]'
-                }
-              >
-                박사
-              </span>
+              <Tag variant={'student'} />
             </div>
           </div>
         </div>
@@ -238,13 +120,6 @@ export const MainPage = () => {
           <h3 className={'font-pretendard text-[24px] font-bold'}>이번 주 일정</h3>
           <div>
             <div className={'grid grid-cols-7 text-center'}>
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>일</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>월</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>화</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>수</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>목</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>금</P>*/}
-              {/*<P className={'text-[14px] font-medium text-[#6B7280]!'}>토</P>*/}
               {['일', '월', '화', '수', '목', '금', '토'].map(day => (
                 <P key={day} className="text-[14px] font-medium text-[#6B7280]!">
                   {day}
@@ -290,33 +165,9 @@ export const MainPage = () => {
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>
           <div className={'flex flex-col gap-[10px]'}>
-            <div
-              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
-            >
-              <div className={'flex gap-[6px]'}>
-                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
-                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
-              </div>
-              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
-            </div>
-            <div
-              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
-            >
-              <div className={'flex gap-[6px]'}>
-                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
-                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
-              </div>
-              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
-            </div>
-            <div
-              className={'bg-gray100 flex cursor-pointer items-center justify-between rounded-[8px] px-[12px] py-[8px]'}
-            >
-              <div className={'flex gap-[6px]'}>
-                <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
-                <P className={'text-[14px] font-normal'}>2025 논문 발표 자료 GoogleDrive</P>
-              </div>
-              <P className={'text-[14px] font-normal text-[#6b6b6b]!'}>김교수</P>
-            </div>
+            <LabDownloadData />
+            <LabDownloadData />
+            <LabDownloadData />
           </div>
         </div>
       </section>
@@ -326,26 +177,8 @@ export const MainPage = () => {
             <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
             <Image src={'/icon/move.svg'} alt={''} width={24} height={24} className={'cursor-pointer'} />
           </div>
-          <div className={'gap-[5px] rounded-[12px] bg-white p-[20px]'}>
-            <div className={'flex flex-col gap-[3px]'}>
-              <P className={'text-[16px] font-medium'}>금주 미팅 안내드립니다.</P>
-              <P className={'text-[14px] font-normal'}>이번주 미팅 없어염</P>
-            </div>
-            <div className={'flex items-center justify-between'}>
-              <P className={'text-[14px] font-light text-[#6B6B6B]!'}>2025.12.04(수) 12:31</P>
-              <P className={'text-[14px] font-normal text-[#6B6B6B]!'}>김교수</P>
-            </div>
-          </div>
-          <div className={'gap-[5px] rounded-[12px] bg-white p-[20px]'}>
-            <div className={'flex flex-col gap-[3px]'}>
-              <P className={'text-[16px] font-medium'}>금주 미팅 안내드립니다.</P>
-              <P className={'text-[14px] font-normal'}>이번주 미팅 없어염</P>
-            </div>
-            <div className={'flex items-center justify-between'}>
-              <P className={'text-[14px] font-light text-[#6B6B6B]!'}>2025.12.04(수) 12:31</P>
-              <P className={'text-[14px] font-normal text-[#6B6B6B]!'}>김교수</P>
-            </div>
-          </div>
+          <BoardListItem />
+          <BoardListItem />
         </div>
         <div className={'flex flex-col gap-[10px] p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>
