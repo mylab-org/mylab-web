@@ -1,10 +1,10 @@
-import { P } from '@/shared/ui'
+import { ListItemTag, P } from '@/shared/ui'
 
 export const CalendarListItem = () => {
   return (
     <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
       <div className={'flex items-center gap-[5px]'}>
-        <span className={'h-[10px] w-[10px] rounded-full bg-[#1E75F8]'} />
+        <ListItemTag.Blue />
         <P className={'text-[14px] font-bold'}>2025 한국통신학회 동계종합학술발표회</P>
       </div>
       <div>
