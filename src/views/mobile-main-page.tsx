@@ -1,17 +1,15 @@
-'use client'
-
 import { Image } from 'next/dist/client/image-component'
 import { BoardListItem } from '@/entities/board'
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
 import { LabUser } from '@/entities/lab'
 import { LabDownloadData, LabLinkBtn } from '@/entities/lab-main'
 import { WorkListItem, WorkProgress } from '@/entities/works'
-import { P, Tag, ListItemTag } from '@/shared/ui'
+import { ListItemTag, P, Tag } from '@/shared/ui'
 
-export const MainPage = () => {
+export const MobileMainPage = () => {
   return (
-    <div className={'scrollbar-hidden flex h-full justify-center gap-[30px] overflow-auto'}>
-      <section className={'flex w-[441px] flex-col gap-[30px]'}>
+    <div className={'flex h-full justify-center gap-[30px]'}>
+      <section className={'flex w-full flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] font-bold text-blue-600'}>마이랩 연구실</h3>
           <div className={'flex flex-wrap gap-[6px]'}>
@@ -86,57 +84,57 @@ export const MainPage = () => {
           </div>
         </div>
       </section>
-      <section className={'flex w-[445px] flex-col gap-[30px]'}>
-        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>이번 주 일정</h3>
-          <CalendarWeek />
-          <CalendarListItem />
-          <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
-            <div className={'flex items-center gap-[5px]'}>
-              <ListItemTag.Red />
-              <P className={'text-[14px] font-bold'}>정기 미팅</P>
-            </div>
-            <div>
-              <P className={'text-[14px] font-light'}>2025.12.11(목)</P>
-              <P className={'text-[14px] font-light'}>8공 812호 세미나실</P>
-            </div>
-          </div>
-        </div>
-        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>
-          <div className={'flex flex-col gap-[10px]'}>
-            <LabDownloadData />
-            <LabDownloadData />
-            <LabDownloadData />
-          </div>
-        </div>
-      </section>
-      <section className={'flex w-[550px] flex-col gap-[30px]'}>
-        <div className={'flex flex-col gap-[10px]'}>
-          <div className={'flex items-center justify-between'}>
-            <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
-            <Image src={'/icon/move.svg'} alt={''} width={24} height={24} className={'cursor-pointer'} />
-          </div>
-          <ul className={'flex flex-col gap-[10px]'}>
-            <BoardListItem />
-            <BoardListItem />
-          </ul>
-        </div>
-        {/* 업무 진척도 */}
-        <div className={'flex flex-col gap-[10px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>
-          <div className={'flex flex-col gap-[10px] rounded-[12px] bg-white p-[20px]'}>
-            <div className={'flex flex-col gap-[5px]'}>
-              <WorkListItem />
-            </div>
-            <div className={'flex flex-col gap-[5px]'}>
-              <WorkProgress />
-              <WorkProgress />
-              <WorkProgress />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*<section className={'flex w-[445px] flex-col gap-[30px]'}>*/}
+      {/*  <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>*/}
+      {/*    <h3 className={'font-pretendard text-[24px] font-bold'}>이번 주 일정</h3>*/}
+      {/*    <CalendarWeek />*/}
+      {/*    <CalendarListItem />*/}
+      {/*    <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>*/}
+      {/*      <div className={'flex items-center gap-[5px]'}>*/}
+      {/*        <ListItemTag.Red />*/}
+      {/*        <P className={'text-[14px] font-bold'}>정기 미팅</P>*/}
+      {/*      </div>*/}
+      {/*      <div>*/}
+      {/*        <P className={'text-[14px] font-light'}>2025.12.11(목)</P>*/}
+      {/*        <P className={'text-[14px] font-light'}>8공 812호 세미나실</P>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*  <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>*/}
+      {/*    <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>*/}
+      {/*    <div className={'flex flex-col gap-[10px]'}>*/}
+      {/*      <LabDownloadData />*/}
+      {/*      <LabDownloadData />*/}
+      {/*      <LabDownloadData />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
+      {/*<section className={'flex w-[550px] flex-col gap-[30px]'}>*/}
+      {/*  <div className={'flex flex-col gap-[10px]'}>*/}
+      {/*    <div className={'flex items-center justify-between'}>*/}
+      {/*      <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>*/}
+      {/*      <Image src={'/icon/move.svg'} alt={''} width={24} height={24} className={'cursor-pointer'} />*/}
+      {/*    </div>*/}
+      {/*    <ul className={'flex flex-col gap-[10px]'}>*/}
+      {/*      <BoardListItem />*/}
+      {/*      <BoardListItem />*/}
+      {/*    </ul>*/}
+      {/*  </div>*/}
+      {/*  /!* 업무 진척도 *!/*/}
+      {/*  <div className={'flex flex-col gap-[10px]'}>*/}
+      {/*    <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>*/}
+      {/*    <div className={'flex flex-col gap-[10px] rounded-[12px] bg-white p-[20px]'}>*/}
+      {/*      <div className={'flex flex-col gap-[5px]'}>*/}
+      {/*        <WorkListItem />*/}
+      {/*      </div>*/}
+      {/*      <div className={'flex flex-col gap-[5px]'}>*/}
+      {/*        <WorkProgress />*/}
+      {/*        <WorkProgress />*/}
+      {/*        <WorkProgress />*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
     </div>
   )
 }
