@@ -1,15 +1,11 @@
-import { Image } from 'next/dist/client/image-component'
-import { BoardListItem } from '@/entities/board'
-import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
 import { LabUser } from '@/entities/lab'
 import { LabDownloadData, LabLinkBtn } from '@/entities/lab-main'
-import { WorkListItem, WorkProgress } from '@/entities/works'
-import { ListItemTag, P, Tag } from '@/shared/ui'
+import { P, Tag } from '@/shared/ui'
 
 export const MobileMainPage = () => {
   return (
-    <div className={'flex h-full justify-center gap-[30px]'}>
-      <section className={'flex w-full flex-col gap-[30px]'}>
+    <div className={'flex flex-1 justify-center gap-[30px]'}>
+      <section className={'flex h-full w-full flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] font-bold text-blue-600'}>마이랩 연구실</h3>
           <div className={'flex flex-wrap gap-[6px]'}>
@@ -83,6 +79,14 @@ export const MobileMainPage = () => {
             </div>
           </div>
         </div>
+        <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
+          <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>
+          <div className={'flex flex-col gap-[10px]'}>
+            <LabDownloadData />
+            <LabDownloadData />
+            <LabDownloadData />
+          </div>
+        </div>
       </section>
       {/*<section className={'flex w-[445px] flex-col gap-[30px]'}>*/}
       {/*  <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>*/}
@@ -98,14 +102,6 @@ export const MobileMainPage = () => {
       {/*        <P className={'text-[14px] font-light'}>2025.12.11(목)</P>*/}
       {/*        <P className={'text-[14px] font-light'}>8공 812호 세미나실</P>*/}
       {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*  <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>*/}
-      {/*    <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>*/}
-      {/*    <div className={'flex flex-col gap-[10px]'}>*/}
-      {/*      <LabDownloadData />*/}
-      {/*      <LabDownloadData />*/}
-      {/*      <LabDownloadData />*/}
       {/*    </div>*/}
       {/*  </div>*/}
       {/*</section>*/}
