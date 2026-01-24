@@ -1,4 +1,4 @@
-export const TAG_STYLE = {
+export const ROLL_TAG = {
   professor: {
     label: '교수',
     bg: 'bg-[#E1F4FF]',
