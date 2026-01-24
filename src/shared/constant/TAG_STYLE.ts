@@ -6,7 +6,7 @@ export const TAG_STYLE = {
   },
   doctoral: {
     label: '박사',
-    bg: 'bg-[#FFF4E9]',
+    bg: 'bg-[#FBE9FF]',
     text: 'text-[#8F42FC]',
   },
   master: {
