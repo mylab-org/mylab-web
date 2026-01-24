@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { TAG_STYLE } from '@/shared/constant/TAG_STYLE'
+import { ROLL_TAG } from '@/shared/constant/tag'
 
 interface RollTagProps {
-  variant: keyof typeof TAG_STYLE
+  variant: keyof typeof ROLL_TAG
 }
 
 interface WorkTagProps {
@@ -19,7 +19,7 @@ const LabTag = ({ children }: { children: React.ReactNode }) => {
 }
 
 const RollTag = ({ variant }: RollTagProps) => {
-  const { bg, text, label } = TAG_STYLE[variant]
+  const { bg, text, label } = ROLL_TAG[variant]
   return (
     <span className={`font-pretendard w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[14px] font-medium`}>
       {label}
