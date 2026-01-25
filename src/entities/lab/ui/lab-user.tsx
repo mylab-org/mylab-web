@@ -7,7 +7,7 @@ interface Props {
 export const LabUser = ({ children }: Props) => {
   return (
     <div className={'flex items-center justify-between'}>
-      <P className={'text-[16px] font-medium'}>{children}</P>
+      <P className={'text-[16px] leading-[24px] font-medium'}>{children}</P>
       <div className={'flex gap-[4px]'}>
         <Tag.Roll variant={'professor'} />
       </div>

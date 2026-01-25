@@ -10,10 +10,10 @@ import { P, Tag, ListItemTag } from '@/shared/ui'
 
 export const MainPage = () => {
   return (
-    <div className={'scrollbar-hidden flex h-full justify-center gap-[30px] overflow-auto'}>
+    <div className={'scrollbar-hidden flex h-full justify-center gap-[30px] overflow-y-auto'}>
       <section className={'flex w-[441px] flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold text-blue-600'}>마이랩 연구실</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold text-blue-600'}>마이랩 연구실</h3>
           <div className={'flex flex-wrap gap-[6px]'}>
             <Tag.Lab>무선 네트워크</Tag.Lab>
             <Tag.Lab>모바일 엣지/클라우드 컴퓨팅</Tag.Lab>
@@ -26,7 +26,7 @@ export const MainPage = () => {
           </div>
         </div>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>링크</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>링크</h3>
           <div className={'flex flex-wrap gap-[6px]'}>
             <span className={'font-pretendard rounded-full bg-gray-200 px-[10px] py-[6px] text-[14px] font-medium'}>
               + 추가하기
@@ -38,7 +38,7 @@ export const MainPage = () => {
           </div>
         </div>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>연구원</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>연구원</h3>
           <LabUser>김교수</LabUser>
           <div className={'flex items-center justify-between'}>
             <P className={'text-[16px] font-medium'}>이랩장</P>
@@ -88,7 +88,7 @@ export const MainPage = () => {
       </section>
       <section className={'flex w-[445px] flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>이번 주 일정</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>이번 주 일정</h3>
           <CalendarWeek />
           <CalendarListItem />
           <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
@@ -103,7 +103,7 @@ export const MainPage = () => {
           </div>
         </div>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>자료</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>자료</h3>
           <div className={'flex flex-col gap-[10px]'}>
             <LabDownloadData />
             <LabDownloadData />
@@ -114,7 +114,7 @@ export const MainPage = () => {
       <section className={'flex w-[550px] flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[10px]'}>
           <div className={'flex items-center justify-between'}>
-            <h3 className={'font-pretendard text-[24px] font-bold'}>공지사항</h3>
+            <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>공지사항</h3>
             <Image src={'/icon/move.svg'} alt={''} width={24} height={24} className={'cursor-pointer'} />
           </div>
           <ul className={'flex flex-col gap-[10px]'}>
@@ -124,7 +124,7 @@ export const MainPage = () => {
         </div>
         {/* 업무 진척도 */}
         <div className={'flex flex-col gap-[10px]'}>
-          <h3 className={'font-pretendard text-[24px] font-bold'}>업무 진척도</h3>
+          <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>업무 진척도</h3>
           <div className={'flex flex-col gap-[10px] rounded-[12px] bg-white p-[20px]'}>
             <div className={'flex flex-col gap-[5px]'}>
               <WorkListItem />

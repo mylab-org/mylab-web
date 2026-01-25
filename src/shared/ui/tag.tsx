@@ -12,7 +12,9 @@ interface WorkTagProps {
 
 const LabTag = ({ children }: { children: React.ReactNode }) => {
   return (
-    <span className={'font-pretendard bg-gray100 rounded-full px-[10px] py-[4px] text-[14px] font-medium'}>
+    <span
+      className={'font-pretendard bg-gray100 rounded-full px-[10px] py-[4px] text-[14px] leading-[20px] font-medium'}
+    >
       {children}
     </span>
   )
@@ -21,7 +23,9 @@ const LabTag = ({ children }: { children: React.ReactNode }) => {
 const RollTag = ({ variant }: RollTagProps) => {
   const { bg, text, label } = ROLL_TAG[variant]
   return (
-    <span className={`font-pretendard w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[14px] font-medium`}>
+    <span
+      className={`font-pretendard w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[14px] leading-[22px] font-medium`}
+    >
       {label}
     </span>
   )

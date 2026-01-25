@@ -26,7 +26,7 @@ export default async function MainLayout({
         <SideMenuBar />
         <main className={'bg-background relative flex h-full flex-1 flex-col gap-[20px] p-[30px]'}>
           <header className={'flex items-center justify-between'}>
-            <h1 className={'font-pretendard text-gray900 text-[36px] font-bold'}>마이랩 연구실</h1>
+            <h1 className={'font-pretendard text-gray900 text-[36px] leading-none font-bold'}>마이랩 연구실</h1>
             <Image src={'/icon/bell.svg'} alt={'알림'} width={24} height={24} className={'cursor-pointer'} />
           </header>
           {children}
