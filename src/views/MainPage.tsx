@@ -10,7 +10,7 @@ import { P, Tag, ListItemTag } from '@/shared/ui'
 
 export const MainPage = () => {
   return (
-    <div className={'scrollbar-hidden flex h-full justify-center gap-[30px] overflow-y-auto'}>
+    <div className={'scrollbar-hidden flex h-full justify-center gap-[30px] overflow-scroll focus:outline-none'}>
       <section className={'flex w-[441px] flex-col gap-[30px]'}>
         <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
           <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold text-blue-600'}>마이랩 연구실</h3>
