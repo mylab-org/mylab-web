@@ -16,7 +16,9 @@ export default async function MainLayout({
           <h1 className={'font-pretendard text-gray900 text-[20px] font-semibold'}>MyLab</h1>
           <Image src={'/icon/bell.svg'} alt={'알림'} width={24} height={24} className={'cursor-pointer'} />
         </header>
-        <div className={'flex flex-1 flex-col gap-[10px] overflow-auto px-[20px] pb-[30px]'}>{children}</div>
+        <div className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] overflow-auto px-[20px] pb-[30px]'}>
+          {children}
+        </div>
         <MobileSideMenuBar />
       </main>
     )
