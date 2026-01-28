@@ -1,1 +1,1 @@
-export { AlramWrapper } from './ui/alram-wrapper'
+export { AlarmWrapper } from './ui/alarm-wrapper'

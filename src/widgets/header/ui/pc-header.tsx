@@ -2,7 +2,7 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { AlramWrapper } from '@/widgets/alram'
+import { AlarmWrapper } from '@/widgets/alram'
 
 export const PcHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -17,7 +17,7 @@ export const PcHeader = () => {
         height={24}
         onClick={() => setIsOpen(prev => !prev)}
       />
-      <AlramWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   )
 }
