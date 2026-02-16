@@ -16,13 +16,13 @@ export const FloatingLabel = ({ labelName, className, isError, errorMsg, ...prop
       <Input
         {...props}
         id="floating_standard"
-        className={clsx('peer block w-full border-b-2', isError ? '!border-b-error' : '!border-b-gray300')}
+        className={clsx('peer block w-full border-b-2', isError ? 'border-b-error!' : 'border-b-gray300!')}
         placeholder=" "
       />
       <label
         htmlFor="floating_standard"
         className={clsx(
-          'absolute top-2 -z-10 origin-left -translate-y-6 scale-65 transform text-[18px] duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-65',
+          'absolute top-0 -z-10 origin-left -translate-y-6 scale-65 transform text-[18px] duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-65',
           isError
             ? 'text-error peer-focus:text-error peer-placeholder-shown:text-gray400'
             : 'peer-focus:text-gray900 peer-placeholder-shown:text-gray400',
@@ -30,7 +30,7 @@ export const FloatingLabel = ({ labelName, className, isError, errorMsg, ...prop
       >
         {labelName}
       </label>
-      {isError && <P className={'!text-error text-[12px]'}>{errorMsg}</P>}
+      {isError && <P className={'text-error! text-[12px]'}>{errorMsg}</P>}
     </div>
   )
 }

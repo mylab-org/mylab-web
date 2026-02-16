@@ -16,7 +16,7 @@ export const LoginForm = () => {
         e.preventDefault()
         dispatch(new FormData(e.currentTarget))
       }}
-      className={'flex w-[400px] flex-col gap-[20px]'}
+      className={'border-red flex w-[400px] flex-col gap-[30px]'}
     >
       {/*<Input className={clsx(state.idMsg && '!border-b-error')} type={'text'} name={'email'} placeholder={'이메일'} />*/}
       {/*<P className={'!text-error text-[12px]'}>{state.idMsg}</P>*/}
