@@ -17,9 +17,5 @@ export const useRegist = () => {
     }))
   }
 
-  const isInput = (): boolean => {
-    return !!(data.username.length && data.email.length && data.password.length && data.passwordCheck.length)
-  }
-
-  return { data, handleChangeData, isInput }
+  return { data, handleChangeData }
 }
