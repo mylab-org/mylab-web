@@ -6,7 +6,7 @@ import { BoardListItem } from '@/entities/board'
 import { LabUser } from '@/entities/lab'
 import { LabDownloadData, LabLinkBtn } from '@/entities/lab-main'
 import type { LabType } from '@/shared/constant/nav'
-import { P, Tag } from '@/shared/ui'
+import { Text, Tag } from '@/shared/ui'
 import { MobileMainMenu } from '@/widgets/mobile-menu'
 
 export const MobileMainPage = () => {
@@ -27,7 +27,7 @@ export const MobileMainPage = () => {
                 <Tag.Lab>지능형 미디어 통신</Tag.Lab>
               </div>
               <div className={'bg-gray100 w-full rounded-[8px] px-[10px] py-[8px]'}>
-                <P className={'text-[14px] font-medium'}>본 연구실은 광대역 지능형 통신 네트워크를 연구합니다.</P>
+                <Text className={'text-[14px] font-medium'}>본 연구실은 광대역 지능형 통신 네트워크를 연구합니다.</Text>
               </div>
             </div>
             <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
@@ -57,45 +57,45 @@ export const MobileMainPage = () => {
               <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>연구원</h3>
               <LabUser>김교수</LabUser>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'leader'} />
                   <Tag.Roll variant={'doctoral'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'master'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'leader'} />
                   <Tag.Roll variant={'student'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'student'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'student'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'student'} />
                 </div>
               </div>
               <div className={'flex items-center justify-between'}>
-                <P className={'text-[16px] font-medium'}>이랩장</P>
+                <Text className={'text-[16px] font-medium'}>이랩장</Text>
                 <div className={'flex gap-[4px]'}>
                   <Tag.Roll variant={'student'} />
                 </div>
@@ -125,11 +125,11 @@ export const MobileMainPage = () => {
         {/*    <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>*/}
         {/*      <div className={'flex items-center gap-[5px]'}>*/}
         {/*        <ListItemTag.Red />*/}
-        {/*        <P className={'text-[14px] font-bold'}>정기 미팅</P>*/}
+        {/*        <Text className={'text-[14px] font-bold'}>정기 미팅</Text>*/}
         {/*      </div>*/}
         {/*      <div>*/}
-        {/*        <P className={'text-[14px] font-light'}>2025.12.11(목)</P>*/}
-        {/*        <P className={'text-[14px] font-light'}>8공 812호 세미나실</P>*/}
+        {/*        <Text className={'text-[14px] font-light'}>2025.12.11(목)</Text>*/}
+        {/*        <Text className={'text-[14px] font-light'}>8공 812호 세미나실</Text>*/}
         {/*      </div>*/}
         {/*    </div>*/}
         {/*  </div>*/}

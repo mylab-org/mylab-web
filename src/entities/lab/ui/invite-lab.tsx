@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Button, FloatingLabel, IconInput, P } from '@/shared/ui'
+import { Button, FloatingLabel, IconInput, Text } from '@/shared/ui'
 
 export const InviteLab = () => {
   const [isCopy, setIsCopy] = useState<boolean>(false)
@@ -11,7 +11,7 @@ export const InviteLab = () => {
   }
   return (
     <>
-      <P className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실이 생성되었습니다'}</P>
+      <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실이 생성되었습니다'}</Text>
       <form>
         <IconInput
           basicSvgName={'/icon/clipboard.svg'}
@@ -23,9 +23,9 @@ export const InviteLab = () => {
           className={'cursor-pointer'}
         />
         {isCopy ? (
-          <P className={'!text-success text-[12px]'}>초대코드가 복사되었습니다</P>
+          <Text className={'!text-success text-[12px]'}>초대코드가 복사되었습니다</Text>
         ) : (
-          <P className={'text-[12px]'}>초대코드는 24시간동안 유효합니다</P>
+          <Text className={'text-[12px]'}>초대코드는 24시간동안 유효합니다</Text>
         )}
       </form>
       <Button variant={'primary'}>연구실 입장하기</Button>

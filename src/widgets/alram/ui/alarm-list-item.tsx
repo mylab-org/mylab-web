@@ -1,5 +1,5 @@
 import { Image } from 'next/dist/client/image-component'
-import { P } from '@/shared/ui'
+import { Text } from '@/shared/ui'
 
 interface AlarmItemProps {
   type: string
@@ -13,10 +13,10 @@ export const AlarmListItem = ({ dateAt, type, title }: AlarmItemProps) => {
       <Image src={'/icon_example.png'} alt={''} width={20} height={20} className={'shrink-0'} />
       <div className={'flex-1'}>
         <div className={'flex items-center justify-between'}>
-          <P className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{type}</P>
-          <P className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{dateAt}</P>
+          <Text className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{type}</Text>
+          <Text className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{dateAt}</Text>
         </div>
-        <P className={'text-[16px] leading-[20px] font-normal'}>{title}</P>
+        <Text className={'text-[16px] leading-[20px] font-normal'}>{title}</Text>
       </div>
     </li>
   )

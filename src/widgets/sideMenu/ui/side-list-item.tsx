@@ -1,12 +1,12 @@
 import { usePathname } from 'next/dist/client/components/navigation'
-import { P } from '@/shared/ui'
+import { Text } from '@/shared/ui'
 
 interface Props {
   path: string
   device?: 'pc' | 'mobile'
   onItemClick: () => void
   children: React.ReactNode
-  itemName: '연구실' | '캘린더' | '게시판' | '업무' | '내 정보'
+  itemName: '연구실' | '캘린더' | '게시판' | '업무' | '더보기'
 }
 
 export const SideListItem = ({ device = 'pc', onItemClick, children, itemName, path }: Props) => {
@@ -22,7 +22,7 @@ export const SideListItem = ({ device = 'pc', onItemClick, children, itemName, p
       onClick={onItemClick}
     >
       <div className={`${isActive ? 'text-gray900!' : 'text-gray400!'} ${iconWidth}`}>{children}</div>
-      <P className={`${isActive ? 'text-gray900!' : 'text-gray400!'} ${textSize} font-semibold`}>{itemName}</P>
+      <Text className={`${isActive ? 'text-gray900!' : 'text-gray400!'} ${textSize} font-semibold`}>{itemName}</Text>
     </li>
   )
 }

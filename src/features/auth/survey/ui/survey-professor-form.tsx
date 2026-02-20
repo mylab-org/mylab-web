@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import type { SurveyProfessorValues } from '@/features/auth/survey/model/survey.schema'
 import { SurveyProfessorSchema } from '@/features/auth/survey/model/survey.schema'
 import { useProfessor } from '@/features/auth/survey/model/useProfessor'
-import { Button, FloatingLabel, Input, P } from '@/shared/ui'
+import { Button, FloatingLabel, Input, Text } from '@/shared/ui'
 
 export const ProfessorForm = () => {
   const { data, isInput, handleChangeData } = useProfessor()
@@ -21,7 +21,7 @@ export const ProfessorForm = () => {
   })
   return (
     <>
-      <P className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실을 생성하세요'}</P>
+      <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실을 생성하세요'}</Text>
       <form id={'create-lab-form'} action="" className={'flex w-[400px] flex-col gap-[20px]'}>
         <FloatingLabel labelName={'학교 이름'} {...register('schoolName')} />
         <FloatingLabel labelName={'학과 이름'} {...register('departmentName')} />
@@ -30,7 +30,7 @@ export const ProfessorForm = () => {
       <Button form={'create-lab-form'} variant={isValid ? 'primary' : 'noActive'}>
         연구실 생성하기
       </Button>
-      <P className={'text-[18px] font-medium'}>연구실 검토는 평균 2일 이내에 처리됩니다.</P>
+      <Text className={'text-[18px] font-medium'}>연구실 검토는 평균 2일 이내에 처리됩니다.</Text>
     </>
   )
 }
