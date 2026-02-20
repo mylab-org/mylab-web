@@ -1,6 +1,6 @@
 export { Button } from './button'
 export { Input } from './input'
-export { P } from './p'
+export { Text } from './Text'
 export { LinkText } from './link-text'
 export { Radio } from './radio'
 export { FloatingLabel } from './floating-label'

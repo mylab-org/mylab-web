@@ -23,10 +23,10 @@ export default async function MainLayout({
     return (
       <>
         <SideMenuBar />
-        <main className={'bg-background relative flex h-full flex-1 flex-col gap-[20px] p-[30px]'}>
+        <div className={'bg-background relative flex flex-1 flex-col gap-[20px] py-[30px] pr-[20px] pl-[100px]'}>
           <PcHeader />
           {children}
-        </main>
+        </div>
       </>
     )
   }

@@ -11,7 +11,7 @@ export const MobileHeader = () => {
     <header className={'relative flex items-center justify-between px-[20px] py-[10px]'}>
       <h1 className={'font-pretendard text-gray900 text-[20px] font-semibold'}>MyLab</h1>
       <Image
-        src={'/icon/bell.svg'}
+        src={'/icon/icon_main_alarm.svg'}
         alt={'알림'}
         width={24}
         height={24}

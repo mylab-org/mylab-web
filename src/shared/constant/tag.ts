@@ -25,3 +25,18 @@ export const ROLL_TAG = {
     text: 'text-[#E35C67]',
   },
 } as const
+
+export const WORK_TYPE = {
+  MEET: {
+    NAME: '미팅 준비',
+    BG: 'bg-[#FF2056]',
+  },
+  CONFERENCE: {
+    NAME: '학회 업무',
+    BG: 'bg-[#2B7FFF]',
+  },
+  PERSONAL: {
+    NAME: '개인 업무',
+    BG: 'bg-[#8E51FF]',
+  },
+}
