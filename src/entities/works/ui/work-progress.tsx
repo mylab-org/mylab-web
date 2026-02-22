@@ -1,9 +1,9 @@
-import { P, Tag } from '@/shared/ui'
+import { Text, Tag } from '@/shared/ui'
 
 export const WorkProgress = () => {
   return (
     <div className={'flex items-start gap-[10px]'}>
-      <P className={'min-w-[80px] truncate text-[14px] font-bold'}>김랩장</P>
+      <Text className={'min-w-[80px] truncate text-[14px] font-bold'}>김랩장</Text>
       <div className={'flex w-full flex-col gap-[6px] py-[4px]'}>
         <div className={'bg-gray300 relative h-[10px] w-full rounded-[24px]'}>
           <div className={'bg-blue500 absolute h-full w-2/3 rounded-[24px]'} />

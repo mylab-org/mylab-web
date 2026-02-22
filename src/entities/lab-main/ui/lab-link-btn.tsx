@@ -10,7 +10,7 @@ export const LabLinkBtn = ({ href, name, ...rest }: LabLinkProps) => {
     <a
       href={href}
       className={
-        'font-pretendard border-gray300 flex items-center gap-[6px] rounded-full border bg-white px-[10px] py-[6px] text-[14px] font-normal'
+        'font-pretendard border-gray300 flex items-center gap-[6px] rounded-full border bg-white px-[10px] py-[6px] text-[12px] md:text-[14px]'
       }
       {...rest}
     >

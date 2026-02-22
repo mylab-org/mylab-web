@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { type ComponentProps, forwardRef } from 'react'
 import { Input } from '@/shared/ui/input'
-import { P } from '@/shared/ui/p'
+import { Text } from '@/shared/ui/Text'
 
 type Props = {
   className?: string
@@ -34,7 +34,7 @@ export const FloatingLabel = forwardRef<HTMLInputElement, Props>(
         >
           {labelName}
         </label>
-        {isError && <P className={'text-error! text-[12px]'}>{errorMsg}</P>}
+        {isError && <Text className={'text-error! text-[12px]'}>{errorMsg}</Text>}
       </div>
     )
   },

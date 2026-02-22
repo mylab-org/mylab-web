@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import type { SurveyStudentValues } from '@/features/auth/survey/model/survey.schema'
 import { SurveyStudentSchema } from '@/features/auth/survey/model/survey.schema'
 import { useModalStore } from '@/shared/store'
-import { Button, FloatingLabel, P } from '@/shared/ui'
+import { Button, FloatingLabel, Text } from '@/shared/ui'
 import { StuLabModal } from '@/widgets/modal'
 
 export const StudentForm = () => {
@@ -30,7 +30,7 @@ export const StudentForm = () => {
   return (
     <>
       {isStuModal && <StuLabModal />}
-      <P className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실에 참여하세요'}</P>
+      <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실에 참여하세요'}</Text>
       <form
         id={'join-lab-form'}
         className={'flex w-[400px] flex-col gap-[20px]'}

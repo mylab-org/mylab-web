@@ -11,7 +11,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
   return (
     <section
       className={clsx(
-        'absolute top-0 right-0 z-[10] flex h-dvh w-full flex-col gap-[14px] bg-white p-[24px] shadow-md transition-all duration-200 ease-out md:top-10 md:h-[600px] md:w-[400px] md:rounded-[24px]',
+        'absolute top-0 right-0 z-[10] flex min-h-dvh w-full flex-col gap-[14px] bg-white p-[24px] shadow-md transition-all duration-200 ease-out md:top-10 md:h-[600px] md:w-[400px] md:rounded-[24px]',
         isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0',
       )}
     >

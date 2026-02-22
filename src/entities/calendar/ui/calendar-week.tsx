@@ -1,4 +1,4 @@
-import { P } from '@/shared/ui'
+import { Text } from '@/shared/ui'
 
 export const CalendarWeek = () => {
   const getWeekDates = (baseDate: Date) => {
@@ -22,22 +22,22 @@ export const CalendarWeek = () => {
     <div>
       <div className={'grid grid-cols-7 text-center'}>
         {['일', '월', '화', '수', '목', '금', '토'].map(day => (
-          <P key={day} className="text-[14px] font-medium text-[#6B7280]!">
+          <Text key={day} className="text-[14px] font-medium text-[#6B7280]!">
             {day}
-          </P>
+          </Text>
         ))}
       </div>
       {/* 날짜 */}
       <div className="grid grid-cols-7 text-center">
         {weekDates.map(date => (
           <div key={date.toISOString()} className="flex justify-center">
-            <P
+            <Text
               className={`flex h-[30px] w-[30px] items-center justify-center rounded-full text-[18px] font-medium ${
                 isToday(date) ? 'bg-dark text-white' : 'text-gray-900'
               } `}
             >
               {date.getDate()}
-            </P>
+            </Text>
           </div>
         ))}
       </div>
