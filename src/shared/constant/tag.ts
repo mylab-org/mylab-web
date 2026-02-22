@@ -40,3 +40,11 @@ export const WORK_TYPE = {
     BG: 'bg-[#8E51FF]',
   },
 }
+
+export const ETC_TYPE = {
+  NOTICE: {
+    NAME: '중요',
+    BG: 'bg-red-100',
+    TC: 'text-red-500',
+  },
+}

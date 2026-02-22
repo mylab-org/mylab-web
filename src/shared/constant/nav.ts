@@ -4,9 +4,14 @@ import BoardIcon from '@/../public/icon/board.svg'
 import CalenderIcon from '@/../public/icon/calendar.svg'
 import DataIcon from '@/../public/icon/icon_main_data.svg'
 import ManagementIcon from '@/../public/icon/icon_main_management.svg'
+import MemberIcon from '@/../public/icon/icon_main_member.svg'
 import NoticeIcon from '@/../public/icon/icon_main_notice.svg'
+
 import PostIcon from '@/../public/icon/icon_main_post.svg'
 import RentalIcon from '@/../public/icon/icon_main_rental.svg'
+
+import WeekIcon from '@/../public/icon/icon_main_week.svg'
+import WorkingIcon from '@/../public/icon/icon_main_work.svg'
 import EtcIcon from '@/../public/icon/icon_side_etc.svg'
 import LabIcon from '@/../public/icon/lab.svg'
 import WorkIcon from '@/../public/icon/work.svg'
@@ -55,6 +60,21 @@ export const LAB_NAV = [
     name: '연구 자료',
     Icon: DataIcon,
     isAdmin: false,
+  },
+]
+
+export const MOBILE_LAB_DETAIL_NAV = [
+  {
+    name: '주간 연구실 일정',
+    Icon: WeekIcon,
+  },
+  {
+    name: '진행 중인 업무 현황',
+    Icon: WorkingIcon,
+  },
+  {
+    name: '연구실 구성원',
+    Icon: MemberIcon,
   },
 ]
 

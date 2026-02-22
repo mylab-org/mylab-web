@@ -1,12 +1,8 @@
 'use client'
 
-import { Image } from 'next/dist/client/image-component'
-import { BoardListItem } from '@/entities/board'
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
-import { LabUser } from '@/entities/lab'
-import { LabDownloadData, LabLinkBtn } from '@/entities/lab-main'
 import { LabUserInfo } from '@/entities/user'
-import { WorkListItem, WorkMyProgress, WorkProgress } from '@/entities/works'
+import { WorkListItem, WorkMyProgress } from '@/entities/works'
 import { Text, Tag, ListItemTag } from '@/shared/ui'
 import { PageFooter } from '@/widgets/footer'
 import { LabMenuWrapper } from '@/widgets/lab-top-menu'
@@ -36,7 +32,7 @@ export const MainPage = () => {
         </section>
 
         <section className={'flex flex-1 flex-col gap-[30px]'}>
-          <LabMenuWrapper />
+          <LabMenuWrapper type={'top'} />
           <div className={'flex min-h-0 flex-1 gap-[30px]'}>
             <div className={'flex flex-1 flex-col gap-[30px]'}>
               <LabIntro />

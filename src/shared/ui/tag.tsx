@@ -1,8 +1,12 @@
 import clsx from 'clsx'
-import { ROLL_TAG, WORK_TYPE } from '@/shared/constant/tag'
+import { ETC_TYPE, ROLL_TAG, WORK_TYPE } from '@/shared/constant/tag'
 
 interface RollTagProps {
   variant: keyof typeof ROLL_TAG
+}
+
+interface ETCTagProps {
+  variant: keyof typeof ETC_TYPE
 }
 
 interface WorkTagProps {
@@ -17,7 +21,9 @@ interface WorkTypeProps {
 const LabTag = ({ children }: { children: React.ReactNode }) => {
   return (
     <span
-      className={'font-pretendard bg-gray100 rounded-full px-[10px] py-[4px] text-[14px] leading-[20px] font-medium'}
+      className={
+        'font-pretendard bg-gray100 rounded-full px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]'
+      }
     >
       # {children}
     </span>
@@ -28,9 +34,20 @@ const RollTag = ({ variant }: RollTagProps) => {
   const { bg, text, label } = ROLL_TAG[variant]
   return (
     <span
-      className={`font-pretendard w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[14px] leading-[22px] font-medium`}
+      className={`font-pretendard w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[12px] leading-[22px] font-medium md:text-[14px]`}
     >
       {label}
+    </span>
+  )
+}
+
+const ETCTag = ({ variant }: ETCTagProps) => {
+  const { BG, NAME, TC } = ETC_TYPE[variant]
+  return (
+    <span
+      className={`font-pretendard w-fit rounded-[15px] ${BG} ${TC} px-[8px] py-[2px] text-[12px] font-semibold lg:text-[14px]`}
+    >
+      {NAME}
     </span>
   )
 }
@@ -62,4 +79,5 @@ export const Tag = Object.assign(() => null, {
   Lab: LabTag,
   Work: WorkTag,
   WorkType: WorkTypeTag,
+  Etc: ETCTag,
 })

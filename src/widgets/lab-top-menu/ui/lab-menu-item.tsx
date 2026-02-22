@@ -10,11 +10,11 @@ export const LabTopMenu = ({ children, name }: LabTopMenu) => {
   return (
     <div
       className={
-        'flex w-[150px] cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[24px] bg-white px-[20px] py-[10px]'
+        'flex w-[150px] flex-1 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[8px] bg-white p-[5px] md:rounded-[24px] md:px-[20px] md:py-[10px]'
       }
     >
-      <div className={'h-[30px] w-[30px]'}>{children}</div>
-      <Text className={'text-[18px] font-bold'}>{name}</Text>
+      <div className={'h-[16px] w-[16px] md:h-[30px] md:w-[30px]'}>{children}</div>
+      <Text className={'text-[10px] font-bold md:text-[18px]'}>{name}</Text>
     </div>
   )
 }
