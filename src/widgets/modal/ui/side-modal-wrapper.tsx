@@ -10,8 +10,8 @@ export const SideModalWrapper = () => {
   useLockBodyScroll(isSideOpen)
 
   return (
-    <section className={'fixed inset-0 z-[10] flex h-dvh w-full justify-end bg-black/10'}>
-      <div className={'flex w-full flex-col bg-white px-[20px] shadow-lg lg:w-fit lg:rounded-l-[20px]'}>
+    <section className={'fixed inset-0 z-10 flex h-dvh w-full justify-end bg-black/10'}>
+      <div className={'flex w-full flex-col bg-white px-[30px] shadow-lg lg:w-fit lg:rounded-l-[20px]'}>
         <SideModalHeader />
         {Content && <Content />}
       </div>
