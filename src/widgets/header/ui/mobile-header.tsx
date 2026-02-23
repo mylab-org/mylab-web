@@ -18,8 +18,8 @@ export const MobileHeader = () => {
             className={'cursor-pointer'}
             src={'/icon/icon_main_logo.svg'}
             alt={'로고'}
-            width={20}
-            height={20}
+            width={24}
+            height={24}
             onClick={() => setIsOpen(prev => !prev)}
           />
           <h1 className={'font-pretendard text-gray900 text-[18px] font-semibold'}>MyLab</h1>
@@ -27,8 +27,8 @@ export const MobileHeader = () => {
         <Image
           src={'/icon/icon_main_alarm.svg'}
           alt={'알림'}
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           className={'cursor-pointer'}
           onClick={() => setIsOpen(prev => !prev)}
         />
