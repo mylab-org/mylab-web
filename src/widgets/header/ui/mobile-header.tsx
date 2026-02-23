@@ -2,33 +2,39 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
+import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { AlarmWrapper } from '@/widgets/alram'
+import { SideModalWrapper } from '@/widgets/modal'
 
 export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const isSideModal = useSideModalStore(state => state.isSideOpen)
 
   return (
-    <header className={'relative flex items-center justify-between px-[20px] py-[10px]'}>
-      <div className={'flex items-center justify-center gap-[10px]'}>
+    <>
+      <header className={'relative flex items-center justify-between px-[20px] py-[10px]'}>
+        <div className={'flex items-center justify-center gap-[10px]'}>
+          <Image
+            className={'cursor-pointer'}
+            src={'/icon/icon_main_logo.svg'}
+            alt={'로고'}
+            width={20}
+            height={20}
+            onClick={() => setIsOpen(prev => !prev)}
+          />
+          <h1 className={'font-pretendard text-gray900 text-[18px] font-semibold'}>MyLab</h1>
+        </div>
         <Image
-          className={'cursor-pointer'}
-          src={'/icon/icon_main_logo.svg'}
-          alt={'로고'}
+          src={'/icon/icon_main_alarm.svg'}
+          alt={'알림'}
           width={20}
           height={20}
+          className={'cursor-pointer'}
           onClick={() => setIsOpen(prev => !prev)}
         />
-        <h1 className={'font-pretendard text-gray900 text-[18px] font-semibold'}>MyLab</h1>
-      </div>
-      <Image
-        src={'/icon/icon_main_alarm.svg'}
-        alt={'알림'}
-        width={20}
-        height={20}
-        className={'cursor-pointer'}
-        onClick={() => setIsOpen(prev => !prev)}
-      />
-      <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </header>
+        <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      </header>
+      {isSideModal && <SideModalWrapper />}
+    </>
   )
 }
