@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { Image } from 'next/dist/client/image-component'
+import { useLockBodyScroll } from '@/shared/hooks'
 import { AlarmListItem } from '@/widgets/alram/ui/alarm-list-item'
 
 interface AlarmWrapperProps {
@@ -8,10 +9,12 @@ interface AlarmWrapperProps {
 }
 
 export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
+  useLockBodyScroll(isOpen)
+
   return (
     <section
       className={clsx(
-        'absolute top-0 right-0 z-[10] flex h-dvh w-full flex-col gap-[14px] bg-white p-[24px] shadow-md transition-all duration-200 ease-out md:top-10 md:h-[600px] md:w-[400px] md:rounded-[24px]',
+        'fixed top-0 right-0 z-[10] flex h-dvh w-full flex-col gap-[14px] bg-white p-[24px] shadow-md transition-all duration-200 ease-out md:top-20 md:right-5 md:h-[600px] md:w-[400px] md:rounded-[24px]',
         isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0',
       )}
     >
@@ -27,6 +30,8 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
         />
       </div>
       <ul className={'flex flex-col gap-[10px] overflow-auto px-[10px]'}>
+        <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
+        <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
         <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
       </ul>
     </section>
