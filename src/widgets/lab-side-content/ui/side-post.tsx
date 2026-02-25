@@ -15,7 +15,7 @@ export const SidePost = () => {
   ]
 
   return (
-    <div className={'flex w-full flex-1 flex-col gap-[10px] lg:w-[700px]'}>
+    <div className={'flex w-full flex-1 flex-col gap-[10px] px-[30px] lg:w-[750px]'}>
       <Tab tabs={tabs} />
       <Button className={'mb-[20px]'}>비품 신청하기</Button>
     </div>
