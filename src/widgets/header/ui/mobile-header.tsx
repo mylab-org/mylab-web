@@ -4,7 +4,7 @@ import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { AlarmWrapper } from '@/widgets/alram'
-import { SideModalWrapper } from '@/widgets/modal'
+import { SideWrap } from '@/widgets/modal'
 
 export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -34,7 +34,7 @@ export const MobileHeader = () => {
         />
         <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </header>
-      {isSideModal && <SideModalWrapper />}
+      {isSideModal && <SideWrap />}
     </>
   )
 }

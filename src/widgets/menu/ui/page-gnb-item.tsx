@@ -9,7 +9,7 @@ interface Props {
   itemName: '연구실' | '캘린더' | '게시판' | '업무' | '더보기'
 }
 
-export const SideListItem = ({ device = 'pc', onItemClick, children, itemName, path }: Props) => {
+export const PageGnbItem = ({ device = 'pc', onItemClick, children, itemName, path }: Props) => {
   const iconWidth = device === 'pc' ? 'h-[24px] w-[24px]' : 'h-[20px] w-[20px]'
   const textSize = device === 'pc' ? 'text-[12px]' : 'text-[10px]'
   const currentPath = usePathname() !== '/' ? usePathname() : '/home'

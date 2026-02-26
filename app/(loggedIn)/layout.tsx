@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 import { PageFooter } from '@/widgets/footer'
 import { MobileHeader, PcHeader } from '@/widgets/header'
-import { MobileSideMenuBar, SideMenuBar } from '@/widgets/sideMenu'
+import { MobileBottomBar, PageGnb } from '@/widgets/menu'
 
 export default async function MainLayout({
   children,
@@ -18,13 +18,13 @@ export default async function MainLayout({
           <main className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] px-[20px] pb-[20px]'}>{children}</main>
           <PageFooter />
         </div>
-        <MobileSideMenuBar />
+        <MobileBottomBar />
       </>
     )
   } else {
     return (
       <>
-        <SideMenuBar />
+        <PageGnb />
         <div className={'bg-background relative flex flex-1 flex-col gap-[20px] py-[30px] pr-[20px] pl-[100px]'}>
           <PcHeader />
           {children}

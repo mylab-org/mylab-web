@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/dist/client/components/navigation'
 import { SIDEMENU_ITEM } from '@/shared/constant/nav'
-import { SideListItem } from '@/widgets/sideMenu/ui/side-list-item'
+import { PageGnbItem } from '@/widgets/menu/ui/page-gnb-item'
 
-export const MobileSideMenuBar = () => {
+export const MobileBottomBar = () => {
   const router = useRouter()
   return (
     <aside
@@ -14,9 +14,9 @@ export const MobileSideMenuBar = () => {
     >
       <ul className={'flex w-full items-center justify-around'}>
         {SIDEMENU_ITEM.map(({ name, path, Icon }) => (
-          <SideListItem device={'mobile'} itemName={name} path={path} onItemClick={() => router.push(path)}>
+          <PageGnbItem device={'mobile'} itemName={name} path={path} onItemClick={() => router.push(path)}>
             <Icon />
-          </SideListItem>
+          </PageGnbItem>
         ))}
       </ul>
     </aside>

@@ -4,7 +4,7 @@ import { useLockBodyScroll } from '@/shared/hooks'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { SideModalHeader } from '@/widgets/header'
 
-export const SideModalWrapper = () => {
+export const SideWrap = () => {
   const isSideOpen = useSideModalStore(state => state.isSideOpen)
   const closeSideModal = useSideModalStore(state => state.closeSideModal)
   const Content = useSideModalStore(state => state.selectedContent)
