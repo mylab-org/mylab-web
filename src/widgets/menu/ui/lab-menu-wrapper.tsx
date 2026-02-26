@@ -1,6 +1,6 @@
 import { LAB_NAV, MOBILE_LAB_DETAIL_NAV } from '@/shared/constant/nav'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
-import { LabTopMenu } from '@/widgets/lab-top-menu/ui/lab-menu-item'
+import { LabTopMenu } from '@/widgets/menu/ui/lab-menu-item'
 
 export const LabMenuWrapper = ({ type }: { type: 'top' | 'center' }) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)

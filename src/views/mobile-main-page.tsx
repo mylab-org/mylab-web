@@ -1,8 +1,8 @@
 'use client'
 
 import { LabUserInfo } from '@/entities/user'
-import { LabMenuWrapper } from '@/widgets/lab-top-menu'
 import { LabIntro, LabLink } from '@/widgets/lab-widgets'
+import { LabMenuWrapper } from '@/widgets/menu'
 
 export const MobileMainPage = () => {
   return (

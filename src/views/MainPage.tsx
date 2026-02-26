@@ -5,8 +5,8 @@ import { LabUserInfo } from '@/entities/user'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
 import { Text, Tag, ListItemTag } from '@/shared/ui'
 import { PageFooter } from '@/widgets/footer'
-import { LabMenuWrapper } from '@/widgets/lab-top-menu'
 import { LabIntro, LabLink, LabMember } from '@/widgets/lab-widgets'
+import { LabMenuWrapper } from '@/widgets/menu'
 
 export const MainPage = () => {
   return (

@@ -28,22 +28,6 @@ import WorkIcon from '@/../public/icon/work.svg'
 
 type SvgIcon = ComponentType<SVGProps<SVGSVGElement>>
 type SideMenuName = '연구실' | '캘린더' | '게시판' | '업무' | '더보기'
-export type LabType = 'home' | 'member' | 'notice'
-
-export const MOBILE_MAIN_NAV = {
-  HOME: {
-    NAME: '홈 화면',
-    VALUE: 'home',
-  },
-  MEMBER: {
-    NAME: '연구실 인원',
-    VALUE: 'member',
-  },
-  NOTICE: {
-    NAME: '공지사항',
-    VALUE: 'notice',
-  },
-}
 
 export const LAB_NAV = [
   {
@@ -96,7 +80,7 @@ export const MOBILE_LAB_DETAIL_NAV = [
   },
 ]
 
-export const SIDEMENU_ITEM: { name: SideMenuName; path: string; Icon: SvgIcon }[] = [
+export const GNB_ITEM: { name: SideMenuName; path: string; Icon: SvgIcon }[] = [
   {
     name: '연구실',
     path: ROUTES.HOME,
