@@ -2,7 +2,7 @@ import { ROUTES } from '@/shared/constant/routes'
 import {
   SideNotice,
   SideRental,
-  SidePost,
+  SideRequest,
   SideManagement,
   SideData,
   SideWeek,
@@ -68,7 +68,7 @@ export const LAB_NAV = [
     name: '비품 신청',
     Icon: PostIcon,
     isAdmin: false,
-    content: SidePost,
+    content: SideRequest,
   },
   {
     name: '연구 자료',

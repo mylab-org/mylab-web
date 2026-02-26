@@ -1,20 +1,32 @@
 import { useState } from 'react'
-import { SideRentalList } from '@/entities/lab-side'
-import { SideRentalTime } from '@/features/lab-side-modal'
+import { SideStuRequestList } from '@/entities/lab-side'
+import { SideManagementPost, SideRequestPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui'
 import { SideModalWrap } from '@/widgets/modal'
+import { Tab } from '@/widgets/tab'
 
-export const SideRental = () => {
+export const SideRequest = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const tabs = [
+    {
+      name: '비품 신청 내역',
+      content: <SideStuRequestList />,
+    },
+    {
+      name: '비품 승인 내역',
+      content: <SideStuRequestList />,
+    },
+  ]
+
   return (
     <div className={'flex w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
-      <SideRentalList />
+      <Tab tabs={tabs} />
       <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
-        대여 시간 변경하기
+        비품 신청하기
       </Button>
       {isOpen && (
         <SideModalWrap onClose={() => setIsOpen(false)}>
-          <SideRentalTime />
+          <SideRequestPost />
         </SideModalWrap>
       )}
     </div>

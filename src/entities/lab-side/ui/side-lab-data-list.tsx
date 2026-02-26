@@ -5,16 +5,18 @@ const SideLabDataItem = () => {
   return (
     <div className={'flex items-start gap-[10px] border-b border-b-gray-200 py-[10px]'}>
       <div className={'flex min-w-0 flex-1 flex-col gap-[5px]'}>
-        <Text className={'text-[18px] font-bold'}>시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구</Text>
+        <Text className={'truncate text-[14px] font-bold lg:text-[18px]'}>
+          시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
+        </Text>
         <div className={'flex min-w-0 items-center gap-[6px]'}>
           <Image src={'/icon/link.svg'} alt={''} width={16} height={16} />
-          <Text className={'min-w-0 truncate text-[14px] font-normal text-gray-500!'}>
+          <Text className={'min-w-0 truncate text-[12px] font-normal text-gray-500! lg:text-[14px]'}>
             시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
           </Text>
         </div>
         <div className={'flex min-w-0 items-center gap-[6px]'}>
           <Image src={'/icon/icon_main_download.svg'} alt={''} width={16} height={16} />
-          <Text className={'min-w-0 truncate text-[14px] font-normal text-gray-500!'}>
+          <Text className={'min-w-0 truncate text-[12px] font-normal text-gray-500! lg:text-[14px]'}>
             시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
           </Text>
         </div>
@@ -26,7 +28,7 @@ const SideLabDataItem = () => {
               alt={''}
               width={20}
               height={20}
-              className={'bg-gray300 h-[20px] w-[20px] rounded-full'}
+              className={'bg-gray300 h-[16px] w-[16px] rounded-full lg:h-[20px] lg:w-[20px]'}
             />
             <Text className={'text-[#1a1a1a]!'}>김교수</Text>
           </div>
@@ -38,7 +40,7 @@ const SideLabDataItem = () => {
 
 export const SideLabDataList = () => {
   return (
-    <div className={'border-t-gray300 flex flex-1 flex-col gap-[15px] border-t py-[10px]'}>
+    <div className={'border-t-gray300 flex flex-1 flex-col border-t py-[10px]'}>
       <SearchInput />
       <div className={'flex flex-1 flex-col gap-[15px]'}>
         <SideLabDataItem />

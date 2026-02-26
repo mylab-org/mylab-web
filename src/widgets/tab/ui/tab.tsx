@@ -26,7 +26,7 @@ export const Tab = ({ tabs, leftItem }: TabsProps) => {
             return (
               <button
                 className={clsx(
-                  'font-pretendard cursor-pointer rounded-[10px] px-[15px] py-[10px] text-[18px] font-semibold',
+                  'font-pretendard cursor-pointer rounded-[10px] px-[15px] py-[10px] text-[14px] font-semibold lg:text-[18px]',
                   isActive ? 'bg-gray100' : 'text-gray400!',
                 )}
                 onClick={() => setCurrentTab(tab.name)}

@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import { SideLabDataList } from '@/entities/lab-side'
+import { SideDataPost, SideManagementPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui'
+import { SideModalWrap } from '@/widgets/modal'
 import { Tab } from '@/widgets/tab'
 
 export const SideData = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const tabs = [
     {
       name: '논문 및 저널',
@@ -15,9 +19,16 @@ export const SideData = () => {
   ]
 
   return (
-    <div className={'flex w-full flex-1 flex-col gap-[10px] px-[30px] lg:w-[750px]'}>
+    <div className={'flex w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
       <Tab tabs={tabs} />
-      <Button className={'mb-[20px]'}>자료 등록하기</Button>
+      <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
+        자료 등록하기
+      </Button>
+      {isOpen && (
+        <SideModalWrap onClose={() => setIsOpen(false)}>
+          <SideDataPost />
+        </SideModalWrap>
+      )}
     </div>
   )
 }

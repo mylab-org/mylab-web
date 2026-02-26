@@ -1,5 +1,5 @@
 export { SideManagenemtList } from './ui/side-managenemt-list'
-export { SidePostList } from './ui/side-post-list'
-export { SideStuPostList } from './ui/side-stu-post-list'
+export { SideRequestList } from './ui/side-request-list'
+export { SideStuRequestList } from './ui/side-stu-request-list'
 export { SideLabDataList } from './ui/side-lab-data-list'
 export { SideRentalList } from './ui/side-rental-list'
