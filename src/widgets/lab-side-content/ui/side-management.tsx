@@ -1,7 +1,9 @@
+'use client'
+
 import { useState } from 'react'
 import { SideManagenemtList, SideRequestList } from '@/entities/lab-side'
 import { SideManagementPost } from '@/features/lab-side-modal'
-import { Button, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
 import { SideModalWrap } from '@/widgets/modal'
 import { Tab } from '@/widgets/tab'
 
@@ -20,7 +22,7 @@ export const SideManagement = () => {
   ]
 
   return (
-    <div className={'flex w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
+    <div className={'flex min-h-0 w-full flex-1 flex-col gap-[10px] px-[20px] pb-5 lg:w-[750px] lg:px-[30px]'}>
       <Tab
         tabs={tabs}
         leftItem={

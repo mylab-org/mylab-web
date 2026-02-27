@@ -1,6 +1,8 @@
+'use client'
+
 import { useState } from 'react'
 import { SideStuRequestList } from '@/entities/lab-side'
-import { SideManagementPost, SideRequestPost } from '@/features/lab-side-modal'
+import { SideRequestPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui'
 import { SideModalWrap } from '@/widgets/modal'
 import { Tab } from '@/widgets/tab'
@@ -19,7 +21,7 @@ export const SideRequest = () => {
   ]
 
   return (
-    <div className={'flex w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
+    <div className={'flex min-h-0 w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
       <Tab tabs={tabs} />
       <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
         비품 신청하기

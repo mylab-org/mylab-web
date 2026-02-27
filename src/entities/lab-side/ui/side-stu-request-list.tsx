@@ -36,8 +36,15 @@ const SidePostItem = () => {
 
 export const SideStuRequestList = () => {
   return (
-    <div className={'border-t-gray300 flex flex-1 flex-col gap-[15px] border-t py-[10px]'}>
-      <div className={'flex flex-1 flex-col gap-[15px]'}>
+    <div className={'border-t-gray300 flex min-h-0 flex-1 flex-col gap-[15px] border-t pt-[10px]'}>
+      <div className={'flex flex-1 flex-col gap-[15px] overflow-auto'}>
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
         <SidePostItem />
       </div>
     </div>

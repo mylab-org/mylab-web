@@ -40,7 +40,7 @@ const SideRentalItem = () => {
 
 export const SideRentalList = () => {
   return (
-    <div className={'flex flex-1 flex-col gap-[15px]'}>
+    <div className={'flex min-h-0 flex-1 flex-col gap-[15px]'}>
       <div
         className={'border-gray300 flex items-center gap-[20px] rounded-[12px] border px-[20px] py-[10px] lg:py-[15px]'}
       >
@@ -56,7 +56,11 @@ export const SideRentalList = () => {
           <Text className={'text-gray400! text-[10px] font-medium lg:text-[16px]'}>총 18시간 이용</Text>
         </div>
       </div>
-      <div className={'flex flex-1 flex-col gap-[15px]'}>
+      <div className={'flex flex-1 flex-col gap-[15px] overflow-auto'}>
+        <SideRentalItem />
+        <SideRentalItem />
+        <SideRentalItem />
+        <SideRentalItem />
         <SideRentalItem />
         <SideRentalItem />
         <SideRentalItem />

@@ -37,7 +37,7 @@ const SidePostItem = () => {
 
 export const SideRequestList = () => {
   return (
-    <div className={'border-t-gray300 flex flex-col gap-[15px] border-t py-[10px]'}>
+    <div className={'border-t-gray300 flex min-h-0 flex-col gap-[15px] border-t pt-[10px]'}>
       <div className={'flex items-center justify-between'}>
         <div className={'flex items-center gap-[12px]'}>
           <input type="checkbox" />
@@ -48,7 +48,12 @@ export const SideRequestList = () => {
           <Text className={'text-[14px] font-bold lg:text-[18px]'}>반려</Text>
         </div>
       </div>
-      <div className={'flex flex-col gap-[15px]'}>
+      <div className={'flex flex-col gap-[15px] overflow-auto'}>
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
+        <SidePostItem />
         <SidePostItem />
         <SidePostItem />
         <SidePostItem />
