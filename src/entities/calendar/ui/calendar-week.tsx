@@ -13,7 +13,7 @@ export const CalendarWeek = () => {
     })
   }
 
-  const today = new Date('2029-01-01')
+  const today = new Date()
   const weekDates = getWeekDates(today)
 
   const isToday = (date: Date) => date.toDateString() === today.toDateString()

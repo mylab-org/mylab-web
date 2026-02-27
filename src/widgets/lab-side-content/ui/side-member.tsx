@@ -1,10 +1,30 @@
-import { SearchInput } from '@/shared/ui'
+import { LabUser } from '@/entities/lab'
 
 export const SideMember = () => {
   return (
-    <div className={'flex w-full flex-1 flex-col gap-[10px] py-[20px] lg:w-[700px]'}>
-      <SearchInput />
-      <div className={'flex-1'}>구성원</div>
+    <div className={'flex h-full min-h-0 w-full flex-col px-[20px] pb-[20px] lg:w-[750px] lg:px-[30px]'}>
+      <div className={'flex flex-1 flex-col gap-[15px] overflow-auto'}>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+        <LabUser>김교수</LabUser>
+      </div>
     </div>
   )
 }
