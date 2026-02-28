@@ -27,7 +27,7 @@ export const SideData = () => {
         자료 등록하기
       </Button>
       {isOpen && (
-        <SideModalWrap onClose={() => setIsOpen(false)}>
+        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <SideDataPost />
         </SideModalWrap>
       )}

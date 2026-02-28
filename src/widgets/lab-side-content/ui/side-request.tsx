@@ -27,7 +27,7 @@ export const SideRequest = () => {
         비품 신청하기
       </Button>
       {isOpen && (
-        <SideModalWrap onClose={() => setIsOpen(false)}>
+        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <SideRequestPost />
         </SideModalWrap>
       )}

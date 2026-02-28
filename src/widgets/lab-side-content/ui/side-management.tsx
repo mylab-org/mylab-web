@@ -34,11 +34,9 @@ export const SideManagement = () => {
           </Text>
         }
       />
-      {isOpen && (
-        <SideModalWrap onClose={() => setIsOpen(false)}>
-          <SideManagementPost />
-        </SideModalWrap>
-      )}
+      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <SideManagementPost />
+      </SideModalWrap>
     </div>
   )
 }

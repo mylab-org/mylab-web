@@ -15,7 +15,7 @@ export const SideRental = () => {
         대여 시간 변경하기
       </Button>
       {isOpen && (
-        <SideModalWrap onClose={() => setIsOpen(false)}>
+        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <SideRentalTime />
         </SideModalWrap>
       )}
