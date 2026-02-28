@@ -10,21 +10,20 @@ import {
   SideMember,
 } from '@/widgets/lab-side-content'
 import type { ComponentType, SVGProps } from 'react'
-import BoardIcon from '@/../public/icon/board.svg'
-import CalenderIcon from '@/../public/icon/calendar.svg'
+import BoardIcon from '@/../public/icon/icon_gnb_board.svg'
+import CalenderIcon from '@/../public/icon/icon_gnb_calendar.svg'
+import EtcIcon from '@/../public/icon/icon_gnb_etc.svg'
+import LabIcon from '@/../public/icon/icon_gnb_lab.svg'
+import WorkIcon from '@/../public/icon/icon_gnb_work.svg'
+
 import DataIcon from '@/../public/icon/icon_main_data.svg'
 import ManagementIcon from '@/../public/icon/icon_main_management.svg'
 import MemberIcon from '@/../public/icon/icon_main_member.svg'
 import NoticeIcon from '@/../public/icon/icon_main_notice.svg'
-
 import PostIcon from '@/../public/icon/icon_main_post.svg'
 import RentalIcon from '@/../public/icon/icon_main_rental.svg'
-
 import WeekIcon from '@/../public/icon/icon_main_week.svg'
 import WorkingIcon from '@/../public/icon/icon_main_work.svg'
-import EtcIcon from '@/../public/icon/icon_side_etc.svg'
-import LabIcon from '@/../public/icon/lab.svg'
-import WorkIcon from '@/../public/icon/work.svg'
 
 type SvgIcon = ComponentType<SVGProps<SVGSVGElement>>
 type SideMenuName = '연구실' | '캘린더' | '게시판' | '업무' | '더보기'
