@@ -14,11 +14,9 @@ export const SideRental = () => {
       <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
         대여 시간 변경하기
       </Button>
-      {isOpen && (
-        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <SideRentalTime />
-        </SideModalWrap>
-      )}
+      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <SideRentalTime />
+      </SideModalWrap>
     </div>
   )
 }

@@ -26,11 +26,9 @@ export const SideRequest = () => {
       <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
         비품 신청하기
       </Button>
-      {isOpen && (
-        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <SideRequestPost />
-        </SideModalWrap>
-      )}
+      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <SideRequestPost />
+      </SideModalWrap>
     </div>
   )
 }

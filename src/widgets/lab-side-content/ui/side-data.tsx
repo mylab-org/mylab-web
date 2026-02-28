@@ -26,11 +26,9 @@ export const SideData = () => {
       <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
         자료 등록하기
       </Button>
-      {isOpen && (
-        <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <SideDataPost />
-        </SideModalWrap>
-      )}
+      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <SideDataPost />
+      </SideModalWrap>
     </div>
   )
 }

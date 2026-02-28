@@ -34,7 +34,7 @@ export const MobileHeader = () => {
         />
         <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </header>
-      {isSideModal && <SideWrap />}
+      <SideWrap />
     </>
   )
 }

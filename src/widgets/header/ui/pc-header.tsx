@@ -34,7 +34,7 @@ export const PcHeader = () => {
         />
         <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </header>
-      {isSideModal && <SideWrap />}
+      <SideWrap />
     </>
   )
 }
