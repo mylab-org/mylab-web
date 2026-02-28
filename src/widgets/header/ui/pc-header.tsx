@@ -2,13 +2,11 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { AlarmWrapper } from '@/widgets/alram'
 import { SideWrap } from '@/widgets/modal'
 
 export const PcHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const isSideModal = useSideModalStore(state => state.isSideOpen)
 
   return (
     <>
