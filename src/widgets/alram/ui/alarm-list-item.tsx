@@ -13,10 +13,10 @@ export const AlarmListItem = ({ dateAt, type, title }: AlarmItemProps) => {
       <Image src={'/icon_example.png'} alt={''} width={20} height={20} className={'shrink-0'} />
       <div className={'flex-1'}>
         <div className={'flex items-center justify-between'}>
-          <Text className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{type}</Text>
-          <Text className={'text-[12px] leading-[22px] font-normal text-[#9CA3AF]!'}>{dateAt}</Text>
+          <Text className={'text-[10px] leading-[22px] font-normal text-[#9CA3AF]! lg:text-[12px]'}>{type}</Text>
+          <Text className={'text-[10px] leading-[22px] font-normal text-[#9CA3AF]! lg:text-[12px]'}>{dateAt}</Text>
         </div>
-        <Text className={'text-[16px] leading-[20px] font-normal'}>{title}</Text>
+        <Text className={'text-[12px] leading-[20px] font-normal lg:text-[16px]'}>{title}</Text>
       </div>
     </li>
   )

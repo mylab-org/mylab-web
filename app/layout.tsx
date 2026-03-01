@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
-import { SideModalWrapper } from '@/widgets/modal'
 
 export const metadata: Metadata = {
   title: 'MyLab',
@@ -14,10 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="bg-background flex min-h-dvh w-full">
-        {children}
-        {/*<SideModalWrapper />*/}
-      </body>
+      <body className="bg-background flex min-h-dvh w-full">{children}</body>
     </html>
   )
 }

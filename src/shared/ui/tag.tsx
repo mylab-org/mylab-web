@@ -56,7 +56,7 @@ const WorkTag = ({ isActive, children }: WorkTagProps) => {
   return (
     <span
       className={clsx(
-        'font-pretendard rounded-[20px] px-[8px] py-[4px] text-[12px]',
+        'font-pretendard rounded-[20px] px-[8px] py-[4px] text-[10px] lg:text-[12px]',
         isActive ? 'bg-blue-100 font-semibold text-blue-800' : 'bg-gray100 text-gray400',
       )}
     >
@@ -68,7 +68,12 @@ const WorkTag = ({ isActive, children }: WorkTagProps) => {
 const WorkTypeTag = ({ type }: WorkTypeProps) => {
   const { NAME, BG } = WORK_TYPE[type]
   return (
-    <span className={clsx('font-pretendard w-fit rounded-[20px] px-[8px] py-[4px] text-[12px] text-white', BG)}>
+    <span
+      className={clsx(
+        'font-pretendard w-fit rounded-[20px] px-[8px] py-[4px] text-[10px] text-white lg:text-[12px]',
+        BG,
+      )}
+    >
       {NAME}
     </span>
   )
