@@ -56,7 +56,7 @@ export const MainPage = () => {
           </div>
         </section>
       </div>
-      <PageFooter />
+      {/*<PageFooter />*/}
     </div>
   )
 }

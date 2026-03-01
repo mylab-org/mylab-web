@@ -1,3 +1,3 @@
 export const UserPage = () => {
-  return <div>내 정보</div>
+  return <div className={'flex flex-1 gap-[30px] focus:outline-none'}>내 정보</div>
 }

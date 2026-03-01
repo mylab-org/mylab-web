@@ -28,6 +28,7 @@ export default async function MainLayout({
         <div className={'bg-background relative flex flex-1 flex-col gap-[20px] py-[30px] pr-[20px] pl-[100px]'}>
           <PcHeader />
           {children}
+          <PageFooter />
         </div>
       </>
     )
