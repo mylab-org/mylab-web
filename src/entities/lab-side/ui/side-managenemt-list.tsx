@@ -1,6 +1,8 @@
-import { Text } from '@/shared/ui'
+import { useState } from 'react'
+import { Text, ToggleSwitch } from '@/shared/ui'
 
 const SideManagementItem = () => {
+  const [enabled, setEnabled] = useState<boolean>(false)
   return (
     <div className={'flex items-start gap-[10px] py-[10px]'}>
       <input type="checkbox" />
@@ -10,7 +12,7 @@ const SideManagementItem = () => {
           <Text className={'text-[14px] font-bold lg:text-[24px]'}>공용 모니터</Text>
           <div className={'flex items-center gap-[10px]'}>
             <Text className={'text-[8px] font-bold text-gray-500! lg:text-[16px]'}>대여 활성화</Text>
-            <div className={'h-[14px] w-[22px] rounded-[10px] bg-gray-200 lg:h-[24px] lg:w-[40px]'} />
+            <ToggleSwitch isSwitch={enabled} onSwitch={() => setEnabled(prev => !prev)} />
           </div>
         </div>
       </div>
