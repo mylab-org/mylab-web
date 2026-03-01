@@ -1,11 +1,12 @@
 'use client'
 
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
+import { LabIntro } from '@/entities/lab/ui/lab-intro'
 import { LabUserInfo } from '@/entities/user'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
 import { Text, Tag, ListItemTag } from '@/shared/ui'
 import { PageFooter } from '@/widgets/footer'
-import { LabIntro, LabLink, LabMember } from '@/widgets/lab-widgets'
+import { LabLink, LabMember } from '@/widgets/lab-widgets'
 import { LabMenuWrapper } from '@/widgets/menu'
 
 export const MainPage = () => {

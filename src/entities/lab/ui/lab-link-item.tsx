@@ -5,7 +5,7 @@ interface LabLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   name: string
 }
 
-export const LabLinkBtn = ({ href, name, ...rest }: LabLinkProps) => {
+export const LabLinkItem = ({ href, name, ...rest }: LabLinkProps) => {
   return (
     <a
       href={href}
