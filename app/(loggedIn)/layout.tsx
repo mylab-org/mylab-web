@@ -15,7 +15,7 @@ export default async function MainLayout({
       <>
         <div className={'bg-background flex w-full flex-1 flex-col overflow-auto pb-[75px]'}>
           <MobileHeader />
-          <main className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] px-[20px] pb-[20px]'}>{children}</main>
+          <main className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] pb-[20px]'}>{children}</main>
           <PageFooter />
         </div>
         <MobileBottomBar />

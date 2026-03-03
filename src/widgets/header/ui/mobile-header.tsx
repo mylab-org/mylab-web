@@ -1,5 +1,7 @@
 'use client'
 
+import clsx from 'clsx'
+import { usePathname } from 'next/dist/client/components/navigation'
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { AlarmWrapper } from '@/widgets/alram'
@@ -7,10 +9,13 @@ import { SideWrap } from '@/widgets/modal'
 
 export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const pathname = usePathname()
+  const isWhite = pathname !== '/'
+  console.log(pathname)
 
   return (
     <>
-      <header className={'relative flex items-center justify-between px-[20px] py-[10px]'}>
+      <header className={clsx('relative flex items-center justify-between px-[20px] py-[10px]', isWhite && 'bg-white')}>
         <div className={'flex items-center justify-center gap-[10px]'}>
           <Image
             className={'cursor-pointer'}
