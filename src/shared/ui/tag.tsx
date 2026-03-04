@@ -18,14 +18,22 @@ interface WorkTypeProps {
   type: keyof typeof WORK_TYPE
 }
 
-const LabTag = ({ children }: { children: React.ReactNode }) => {
+interface LabTagProps {
+  className?: string
+  Icon?: React.ReactNode
+  children: React.ReactNode
+}
+
+const LabTag = ({ children, Icon, className }: LabTagProps) => {
   return (
     <span
-      className={
-        'font-pretendard bg-gray100 rounded-full px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]'
-      }
+      className={clsx(
+        'font-pretendard bg-gray100 rounded-full px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]',
+        className,
+      )}
     >
       # {children}
+      {Icon && Icon}
     </span>
   )
 }
