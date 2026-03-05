@@ -10,7 +10,7 @@ export const PageGnb = () => {
     <aside className={'fixed z-10 h-full rounded-tr-[24px] rounded-br-[24px] bg-white px-[20px] pt-[30px]'}>
       <ul className={'flex flex-col gap-[24px]'}>
         {GNB_ITEM.map(({ name, path, Icon }) => (
-          <PageGnbItem itemName={name} path={path} onItemClick={() => router.push(path)}>
+          <PageGnbItem key={name} itemName={name} path={path} onItemClick={() => router.push(path)}>
             <Icon />
           </PageGnbItem>
         ))}

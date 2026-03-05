@@ -36,7 +36,7 @@ export const MainPage = () => {
           <LabMenuWrapper type={'top'} />
           <div className={'flex min-h-0 flex-1 gap-[30px]'}>
             <div className={'flex flex-1 flex-col gap-[30px]'}>
-              <LabIntro />
+              <LabIntro className={'p-[20px] md:p-[24px]'} />
               <LabLink />
               <LabMember />
             </div>

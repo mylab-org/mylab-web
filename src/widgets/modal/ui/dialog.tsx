@@ -1,16 +1,18 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
+import { useDialogStore } from '@/shared/store/useDialogStore'
 import { Button, Input, Text } from '@/shared/ui'
 
-interface LabLinkModal {
-  onClose?: () => void
-  isOpen: boolean
-}
+export const Dialog = () => {
+  const btnText = useDialogStore(state => state.btnText)
+  const item = useDialogStore(state => state.item)
+  const isOpen = useDialogStore(state => state.isOpen)
+  const closeDialogModal = useDialogStore(state => state.closeDialogModal)
+  const callback = useDialogStore(state => state.callback)
 
-export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
-      onClose?.()
+      closeDialogModal()
     }
   }
 
@@ -35,26 +37,29 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className={'flex w-[300px] flex-col gap-[10px] p-[30px] md:w-[600px]'}>
+            <div className={'flex w-[300px] flex-col p-[20px] md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
-                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
+                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>{item.title}</h3>
                 <Image
                   src={'icon/x.svg'}
                   alt={''}
                   width={30}
                   height={30}
                   className={'block shrink-0 cursor-pointer'}
-                  onClick={onClose}
+                  onClick={handleClose}
                 />
               </div>
-              <form className={'flex flex-col gap-[10px]'}>
-                <Text className={'text-[12px] font-medium text-gray-600! md:text-[14px]'}>
-                  추가할 링크 정보를 입력해주세요
+              <div className={'flex flex-col gap-[10px] py-[20px]'}>
+                <Text className={'text-[12px] font-medium whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
+                  {item.description}
                 </Text>
-                <Input placeholder={'링크 제목'} />
-                <Input placeholder={'링크 주소'} />
-                <Button>등록</Button>
-              </form>
+                {item.etc && (
+                  <Text className={'text-[12px] font-bold whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
+                    {item.etc}
+                  </Text>
+                )}
+              </div>
+              <Button onClick={callback}>{btnText}</Button>
             </div>
           </motion.div>
         </motion.section>

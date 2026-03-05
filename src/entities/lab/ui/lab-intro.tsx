@@ -1,8 +1,12 @@
 import { Tag, Text } from '@/shared/ui'
 
-export const LabIntro = () => {
+interface LabIntroProps {
+  className?: string
+}
+
+export const LabIntro = ({ className }: LabIntroProps) => {
   return (
-    <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[20px] md:p-[24px]'}>
+    <div className={`flex flex-col gap-[14px] rounded-[24px] bg-white ${className}`}>
       <h3 className={'font-pretendard text-[18px] leading-[32px] font-bold text-blue-600 md:text-[24px]'}>
         마이랩 연구실
       </h3>
