@@ -1,11 +1,11 @@
 import { headers } from 'next/headers'
-import { MorePage } from '@/views/more'
+import { MobileMorePage, MorePage } from '@/views/more'
 
 export default async function User() {
   const h = await headers()
   const ua = h.get('user-agent') ?? ''
   if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
-    return <MorePage />
+    return <MobileMorePage />
   } else {
     return <MorePage />
   }
