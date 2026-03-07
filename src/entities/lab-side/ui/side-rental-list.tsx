@@ -38,7 +38,7 @@ const SideRentalItem = () => {
   )
 }
 
-export const SideRentalList = () => {
+export const SideRentalList = ({ isBottom }: { isBottom: boolean }) => {
   return (
     <div className={'flex min-h-0 flex-1 flex-col gap-[15px]'}>
       <div
@@ -56,7 +56,7 @@ export const SideRentalList = () => {
           <Text className={'text-gray400! text-[10px] font-medium lg:text-[16px]'}>총 18시간 이용</Text>
         </div>
       </div>
-      <div className={'flex flex-1 flex-col gap-[15px] overflow-auto'}>
+      <div className={`flex flex-1 flex-col gap-[15px] ${isBottom ? 'overflow-hidden' : 'overflow-auto'}`}>
         <SideRentalItem />
         <SideRentalItem />
         <SideRentalItem />

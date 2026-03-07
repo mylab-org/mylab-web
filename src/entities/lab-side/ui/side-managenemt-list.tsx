@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLockBodyScroll } from '@/shared/hooks'
 import { Text, ToggleSwitch } from '@/shared/ui'
 
 const SideManagementItem = () => {
@@ -20,7 +21,7 @@ const SideManagementItem = () => {
   )
 }
 
-export const SideManagenemtList = () => {
+export const SideManagenemtList = ({ isBottom }: { isBottom: boolean }) => {
   return (
     <div className={'border-t-gray300 flex min-h-0 flex-col gap-[15px] border-t pt-[10px]'}>
       <div className={'flex items-center justify-between'}>
@@ -30,7 +31,7 @@ export const SideManagenemtList = () => {
         </div>
         <Text className={'text-[14px] font-bold lg:text-[18px]'}>삭제</Text>
       </div>
-      <div className={'flex flex-1 flex-col gap-[15px] overflow-auto'}>
+      <div className={`flex flex-1 flex-col gap-[15px] ${isBottom ? 'overflow-hidden' : 'overflow-auto'}`}>
         <SideManagementItem />
         <SideManagementItem />
         <SideManagementItem />
