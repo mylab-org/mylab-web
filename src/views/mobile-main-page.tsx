@@ -11,7 +11,7 @@ export const MobileMainPage = () => {
     <section className={'flex flex-1 flex-col gap-[10px] px-[20px]'}>
       <LabMenuWrapper type={'top'} />
       <LabUserInfo />
-      <LabIntro />
+      <LabIntro className={'p-[20px] md:p-[24px]'} />
       <LabMenuWrapper type={'center'} />
       <LabLink />
     </section>

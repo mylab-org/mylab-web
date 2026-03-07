@@ -5,7 +5,7 @@ export const BASE_PATHS = {
   SURVEY: '/survey',
   BOARD: '/board',
   CALENDAR: '/calendar',
-  USER: '/user',
+  USER: '/more',
   WORKS: '/works',
 }
 

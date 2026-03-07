@@ -3,7 +3,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { AlarmWrapper } from '@/widgets/alram'
-import { SideWrap } from '@/widgets/modal'
+import { Alert, Confirm, Dialog, SideWrap } from '@/widgets/modal'
 
 export const PcHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -33,6 +33,9 @@ export const PcHeader = () => {
         <AlarmWrapper isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </header>
       <SideWrap />
+      <Dialog />
+      <Confirm />
+      <Alert />
     </>
   )
 }
