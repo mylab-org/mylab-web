@@ -8,15 +8,15 @@ import { MoreMenuWrap } from '@/widgets/more/ui/more-menu-wrap'
 import { MoreLabMember, MoreLabUpdate } from '@/widgets/more-side-content'
 
 interface WrapProps {
-  width?: string
+  isMaxWidth?: boolean
 }
 
-export const MoreLabWrap = ({ width }: WrapProps) => {
+export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
 
   return (
-    <section className={`flex flex-col gap-[10px] ${width ? width : 'flex-1'}`}>
+    <section className={`flex flex-[1_0_400px] flex-col gap-[10px] ${isMaxWidth && 'max-w-[550px]'}`}>
       <div className={'flex flex-col gap-[20px] rounded-[12px] bg-white md:p-[24px]'}>
         <div className={'flex flex-col gap-[14px]'}>
           <LabIntro />

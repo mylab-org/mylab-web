@@ -10,10 +10,10 @@ import { MoreToggleWrap } from '@/widgets/more/ui/more-toggle-wrap'
 import { MoreServiceUse, MoreUserPw } from '@/widgets/more-side-content'
 
 interface WrapProps {
-  width?: string
+  isMaxWidth?: boolean
 }
 
-export const MoreServiceWrap = ({ width }: WrapProps) => {
+export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
@@ -25,7 +25,7 @@ export const MoreServiceWrap = ({ width }: WrapProps) => {
   }
 
   return (
-    <section className={`flex shrink-1 flex-col gap-[10px] ${width ? width : 'flex-1'}`}>
+    <section className={`flex flex-[1_0_400px] flex-col gap-[10px] ${isMaxWidth && 'max-w-[550px]'}`}>
       <MoreMenuWrap title={'서비스 설정'}>
         <div className={'flex flex-col gap-[20px]'}>
           <div>

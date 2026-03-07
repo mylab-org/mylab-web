@@ -3,25 +3,29 @@ import { Button, Input, Tag, Text } from '@/shared/ui'
 
 export const MoreLabUpdate = () => {
   return (
-    <div className={'flex min-h-0 w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[550px] lg:px-[30px]'}>
+    <div
+      className={
+        'flex min-h-0 w-full flex-1 flex-col gap-[10px] overflow-auto px-[20px] pb-[20px] lg:w-[550px] lg:px-[30px]'
+      }
+    >
       <div className={'flex flex-col gap-[30px] py-[20px]'}>
         <div className={'flex flex-col gap-[20px]'}>
-          <Text className={'text-[16px] font-bold'}>연구 분야</Text>
+          <Text className={'text-[12px] font-bold md:text-[16px]'}>연구 분야</Text>
           <div className={'flex justify-between gap-[20px] rounded-[12px] border border-gray-200 px-[12px] py-[10px]'}>
-            <Text className={'text-[18px] font-medium'}>컴퓨터 통신</Text>
+            <Text className={'text-[14px] font-medium md:text-[18px]'}>컴퓨터 통신</Text>
             <Image src={'/icon/icon_common_drop.svg'} alt={''} width={10} height={5} />
           </div>
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] text-gray-600!'}>연구실 이름</Text>
-          <Input placeholder={'연구실 이름'} className={'w-full text-[18px]!'} />
+          <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 이름</Text>
+          <Input placeholder={'연구실 이름'} className={'w-full text-[14px]! md:text-[18px]!'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] text-gray-600!'}>연구실 소개</Text>
-          <Input placeholder={'연구실 소개'} className={'w-full text-[18px]!'} />
+          <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 소개</Text>
+          <Input placeholder={'연구실 소개'} className={'w-full text-[14px]! md:text-[18px]!'} />
         </div>
         <div className={'flex flex-col gap-[20px]'}>
-          <Text className={'text-[16px] font-bold'}>연구실 해시태그</Text>
+          <Text className={'text-[12px]! font-bold md:text-[16px]!'}>연구실 해시태그</Text>
           <div className={'flex flex-wrap gap-[6px]'}>
             <span
               className={
@@ -63,7 +67,7 @@ export const MoreLabUpdate = () => {
           </div>
         </div>
       </div>
-      <Button className={'mt-[20px]'}>연구실 정보 수정하기</Button>
+      <Button className={'mt-[20px] text-[12px]! md:text-[16px]!'}>연구실 정보 수정하기</Button>
     </div>
   )
 }
