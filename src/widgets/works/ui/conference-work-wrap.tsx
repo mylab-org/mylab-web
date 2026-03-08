@@ -1,6 +1,10 @@
+import { useSideModalStore } from '@/shared/store'
 import { Tag, Text } from '@/shared/ui'
+import { WorkConferenceDetail } from '@/widgets/work-side-content'
 
 export const ConferenceWorkWrap = () => {
+  const openSideModal = useSideModalStore(state => state.openSideModal)
+
   return (
     <section className={'flex gap-[30px] p-[10px]'}>
       <section className={'flex w-[373] flex-col gap-[30px]'}>
@@ -18,7 +22,10 @@ export const ConferenceWorkWrap = () => {
       <section className={'flex w-[373] flex-col gap-[30px]'}>
         <h4 className={'font-pretendard text-[22px] font-bold'}>실험 진행</h4>
         <div className={'flex flex-col gap-[10px]'}>
-          <div className={'flex min-h-[165px] flex-col items-center gap-[20px] rounded-[12px] p-[20px] shadow-lg'}>
+          <div
+            className={'flex min-h-[165px] flex-col items-center gap-[20px] rounded-[12px] p-[20px] shadow-lg'}
+            onClick={() => openSideModal(WorkConferenceDetail, '2026 한국통신학회 추계종합학술발표회')}
+          >
             <div className={'flex w-full flex-col gap-[5px]'}>
               <h5 className={'font-pretendard text-[20px] font-bold'}>2026 한국통신학회 추계종합학술발표회</h5>
               <div className={'flex flex-col'}>
