@@ -11,16 +11,11 @@ export const PcHeader = () => {
   return (
     <>
       <header className={'relative flex items-center justify-between'}>
-        <div className={'flex items-center gap-[10px]'}>
-          <Image
-            className={'cursor-pointer'}
-            src={'/Mylab_Logo.png'}
-            alt={'로고'}
-            width={40}
-            height={40}
-            onClick={() => setIsOpen(prev => !prev)}
-          />
-          <h1 className={'font-pretendard text-gray900 text-[36px] leading-none font-bold'}>나의 연구 생활, MyLab</h1>
+        <div className={'flex cursor-pointer items-center gap-[10px]'}>
+          <Image src={'/Mylab_Logo.png'} alt={'로고'} width={40} height={40} />
+          <h1 className={'font-pretendard text-gray900 text-[36px] leading-none font-extrabold'}>
+            나의 연구 생활, MyLab
+          </h1>
         </div>
         <Image
           className={'cursor-pointer'}

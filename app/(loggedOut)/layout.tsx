@@ -18,7 +18,7 @@ export default async function AuthLayout({
   } else {
     return (
       <main className={'flex w-full flex-1 bg-white'}>
-        <div className={'h-full flex-1 bg-[url("/MyLab_Logo.png")] bg-cover bg-center bg-no-repeat'} />
+        <div className={'h-full flex-1 bg-[url("/MyLab_Logo.png")] bg-center bg-no-repeat'} />
         <div
           className={'relative flex h-full w-[730px] flex-col items-center justify-center gap-[30px] overscroll-auto'}
         >
