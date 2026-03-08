@@ -12,11 +12,11 @@ export const SideData = () => {
   const tabs = [
     {
       name: '논문 및 저널',
-      content: <SideLabDataList />,
+      content: <SideLabDataList isBottom={isOpen} />,
     },
     {
       name: '연구 참고 자료',
-      content: <SideLabDataList />,
+      content: <SideLabDataList isBottom={isOpen} />,
     },
   ]
 

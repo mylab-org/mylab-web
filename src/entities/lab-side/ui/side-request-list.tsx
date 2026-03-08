@@ -35,7 +35,7 @@ const SidePostItem = () => {
   )
 }
 
-export const SideRequestList = () => {
+export const SideRequestList = ({ isBottom }: { isBottom: boolean }) => {
   return (
     <div className={'border-t-gray300 flex min-h-0 flex-col gap-[15px] border-t pt-[10px]'}>
       <div className={'flex items-center justify-between'}>
@@ -48,7 +48,7 @@ export const SideRequestList = () => {
           <Text className={'text-[14px] font-bold lg:text-[18px]'}>반려</Text>
         </div>
       </div>
-      <div className={'flex flex-col gap-[15px] overflow-auto'}>
+      <div className={`flex flex-col gap-[15px] ${isBottom ? 'overflow-hidden' : 'overflow-auto'}`}>
         <SidePostItem />
         <SidePostItem />
         <SidePostItem />

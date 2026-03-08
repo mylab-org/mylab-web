@@ -13,11 +13,11 @@ export const SideManagement = () => {
   const tabs = [
     {
       name: '대여 목록 관리',
-      content: <SideManagenemtList />,
+      content: <SideManagenemtList isBottom={isOpen} />,
     },
     {
       name: '비품 신청 내역',
-      content: <SideRequestList />,
+      content: <SideRequestList isBottom={isOpen} />,
     },
   ]
 
