@@ -58,3 +58,37 @@ input::-webkit-inner-spin-button {
     transition: background-color 9999s ease-out 0s;
   }
 }
+
+html {
+  /* 스크롤바가 있든 없든 공간을 미리 확보하여 레이아웃 밀림을 방지합니다. */
+  scrollbar-gutter: stable;
+}
+
+@layer base {
+  /* 모든 요소에 적용하거나, 특정 클래스(.custom-scrollbar)에만 적용할 수 있습니다. */
+
+  /* 1. 크롬, 사파리, 엣지 (WebKit 기반) */
+  ::-webkit-scrollbar {
+    width: 6px;  /* 세로 스크롤바 너비 */
+    height: 6px; /* 가로 스크롤바 높이 */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; /* 스크롤바 뒷 배경 (투명하게 두면 깔끔합니다) */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D1D5DC; /* 스크롤바 막대 색상 (정의하신 --color-gray300 추천) */
+    border-radius: 10px; /* 막대 둥글게 */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #99A1AF; /* 마우스 올렸을 때 색상 (--color-gray400) */
+  }
+
+  /* 2. 파이어폭스 전용 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #D1D5DC transparent;
+  }
+}
