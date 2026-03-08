@@ -11,10 +11,10 @@ export const PcHeader = () => {
   return (
     <>
       <header className={'relative flex items-center justify-between'}>
-        <div className={'flex gap-[10px]'}>
+        <div className={'flex items-center gap-[10px]'}>
           <Image
             className={'cursor-pointer'}
-            src={'/icon/icon_main_logo.svg'}
+            src={'/Mylab_Logo.png'}
             alt={'로고'}
             width={40}
             height={40}
