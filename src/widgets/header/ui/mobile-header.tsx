@@ -16,13 +16,13 @@ export const MobileHeader = () => {
   return (
     <>
       <header className={clsx('relative flex items-center justify-between px-[20px] py-[10px]', isWhite && 'bg-white')}>
-        <div className={'flex items-center justify-center gap-[10px]'}>
+        <div className={'flex items-center justify-center gap-[5px]'}>
           <Image
             className={'cursor-pointer'}
-            src={'/icon/icon_main_logo.svg'}
+            src={'/Mylab_Logo.png'}
             alt={'로고'}
-            width={24}
-            height={24}
+            width={35}
+            height={35}
             onClick={() => setIsOpen(prev => !prev)}
           />
           <h1 className={'font-pretendard text-gray900 text-[18px] font-semibold'}>MyLab</h1>
