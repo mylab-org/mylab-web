@@ -1,137 +1,187 @@
-// import { WorkEmptyCard } from '@/widgets/works/ui/work-Empty-card'
-// import { ConferenceCard } from '@/entities/works'
-//
-// export const ConferenceWorkWrap = () => {
-//   return (
-//     <section className={'flex gap-[30px] p-[10px]'}>
-//       <section className={'flex w-[373] flex-col gap-[30px]'}>
-//         <h4 className={'font-pretendard text-[22px] font-bold'}>연구 준비</h4>
-//         <div className={'flex flex-col gap-[10px]'}>
-//           <WorkEmptyCard />
-//         </div>
-//       </section>
-//       <section className={'flex w-[373] flex-col gap-[30px]'}>
-//         <h4 className={'font-pretendard text-[22px] font-bold'}>실험 진행</h4>
-//         <div className={'flex flex-col gap-[10px]'}>
-//           <ConferenceCard isDeadLine />
-//         </div>
-//       </section>
-//       <section className={'flex w-[373] flex-col gap-[30px]'}>
-//         <h4 className={'font-pretendard text-[22px] font-bold'}>초안 작성</h4>
-//         <div className={'flex flex-col gap-[10px]'}>
-//           <WorkEmptyCard />
-//         </div>
-//       </section>
-//       <section className={'flex w-[373] flex-col gap-[30px]'}>
-//         <h4 className={'font-pretendard text-[22px] font-bold'}>교수 검토</h4>
-//         <div className={'flex flex-col gap-[10px]'}>
-//           <ConferenceCard isDeadLine />
-//         </div>
-//       </section>
-//       <section className={'flex w-[373] flex-col gap-[30px]'}>
-//         <h4 className={'font-pretendard text-[22px] font-bold'}>완료</h4>
-//         <div className={'flex flex-col gap-[10px]'}>
-//           <ConferenceCard isEnd />
-//         </div>
-//       </section>
-//     </section>
-//   )
-// }
 'use client'
 
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
-import { useState } from 'react'
+import {
+  DndContext,
+  DragOverlay,
+  closestCorners,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  pointerWithin,
+} from '@dnd-kit/core'
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { ConferenceCard } from '@/entities/works'
-import { WorkEmptyCard } from '@/widgets/works/ui/work-Empty-card'
-import type { DropResult } from '@hello-pangea/dnd'
+import { Container } from '@/widgets/works/ui/container'
+import type { DragEndEvent, DragOverEvent, DragStart } from '@dnd-kit/core'
 
-// 1. 초기 데이터 구조 정의 (id는 고유해야 합니다)
-const initialData = {
-  READY: [{ id: 'conf-1', type: 'PREP' }], // 연구 준비
-  PROGRESS: [{ id: 'conf-2', isDeadLine: true }], // 실험 진행
-  DRAFT: [], // 초안 작성
-  REVIEW: [{ id: 'conf-3', isDeadLine: true }], // 교수 검토
-  DONE: [{ id: 'conf-4', isEnd: true }], // 완료
+const initialData: Record<string, any[]> = {
+  READY: [
+    { id: 'conf-1', type: 'CONFERENCE' },
+    { id: 'conf-2', type: 'CONFERENCE' },
+    { id: 'conf-3', type: 'CONFERENCE' },
+    { id: 'conf-4', type: 'CONFERENCE' },
+    { id: 'conf-5', type: 'CONFERENCE' },
+    { id: 'conf-6', type: 'CONFERENCE' },
+  ],
+  PROGRESS: [{ id: 'conf-7', type: 'CONFERENCE', isDeadLine: true }],
+  DRAFT: [],
+  REVIEW: [{ id: 'conf-8', type: 'CONFERENCE', isDeadLine: true }],
+  DONE: [{ id: 'conf-9', type: 'CONFERENCE', isEnd: true }],
 }
-
-type ColumnType = keyof typeof initialData
 
 export const ConferenceWorkWrap = () => {
   const [data, setData] = useState(initialData)
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [enabled, setEnabled] = useState(false)
 
-  // 2. 드래그 종료 핸들러
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result
+  useEffect(() => {
+    setEnabled(true)
+  }, [])
 
-    if (!destination) return
-    if (source.droppableId === destination.droppableId && source.index === destination.index) return
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10, // PC: 클릭 실수 방지
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250, // 모바일: 스크롤과 드래그 구분
+        tolerance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  )
 
-    const sourceCol = source.droppableId as ColumnType
-    const destCol = destination.droppableId as ColumnType
+  // PC row 레이아웃에서 컬럼 간 이동을 부드럽게 만드는 충돌 전략
+  const collisionDetectionStrategy = (args: any) => {
+    const pointerCollisions = pointerWithin(args)
+    if (pointerCollisions.length > 0) {
+      return pointerCollisions
+    }
+    return closestCorners(args)
+  }
 
-    const sourceItems = [...data[sourceCol]]
-    const destItems = sourceCol === destCol ? sourceItems : [...data[destCol]]
+  const findContainer = (id: string) => {
+    if (id in data) return id
+    return Object.keys(data).find(key => data[key].some(item => item.id === id))
+  }
 
-    const [removed] = sourceItems.splice(source.index, 1)
-    destItems.splice(destination.index, 0, removed)
+  const handleDragStart = (event: DragStart) => {
+    setActiveId(event.active.id as string)
+    setIsDragging(true)
+    if (window.navigator.vibrate) window.navigator.vibrate(50)
+  }
 
-    setData({
-      ...data,
-      [sourceCol]: sourceItems,
-      [destCol]: destItems,
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event
+    if (!over) return
+
+    const activeId = active.id as string
+    const overId = over.id as string
+
+    const activeContainer = findContainer(activeId)
+    const overContainer = findContainer(overId)
+
+    if (!activeContainer || !overContainer || activeContainer === overContainer) return
+
+    setData(prev => {
+      const activeItems = prev[activeContainer]
+      const overItems = prev[overContainer]
+      const activeIndex = activeItems.findIndex(i => i.id === activeId)
+      const overIndex = overItems.findIndex(i => i.id === overId)
+
+      let newIndex: number
+      if (overId in prev) {
+        newIndex = overItems.length
+      } else {
+        newIndex = overIndex >= 0 ? overIndex : overItems.length
+      }
+
+      return {
+        ...prev,
+        [activeContainer]: activeItems.filter(i => i.id !== activeId),
+        [overContainer]: [...overItems.slice(0, newIndex), activeItems[activeIndex], ...overItems.slice(newIndex)],
+      }
     })
   }
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    const activeContainer = findContainer(active.id as string)
+    const overContainer = over ? findContainer(over.id as string) : null
+
+    if (activeContainer && overContainer && activeContainer === overContainer) {
+      const activeIndex = data[activeContainer].findIndex(i => i.id === active.id)
+      const overIndex = data[overContainer].findIndex(i => i.id === over.id)
+
+      if (activeIndex !== overIndex) {
+        setData(prev => ({
+          ...prev,
+          [overContainer]: arrayMove(prev[overContainer], activeIndex, overIndex),
+        }))
+      }
+    }
+    setActiveId(null)
+    setIsDragging(false)
+  }
+
+  if (!enabled) return null
+
+  // 드래그 중인 아이템 데이터 찾기
+  const activeItem = activeId
+    ? Object.values(data)
+        .flat()
+        .find(i => i.id === activeId)
+    : null
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <section className={'flex min-h-screen gap-[30px] overflow-x-auto p-[10px]'}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={collisionDetectionStrategy}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
+      <section className="relative flex flex-1 flex-col gap-[30px] overflow-x-auto p-[10px] md:flex-row md:items-start md:justify-start">
+        {/* 드래그 배경 오버레이 */}
+        <div
+          className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
+            isDragging ? 'bg-black/40 opacity-100' : 'bg-transparent opacity-0'
+          }`}
+        />
+
         {Object.entries(data).map(([columnId, items]) => (
-          <section key={columnId} className={'flex w-[373px] flex-col gap-[30px]'}>
-            <h4 className={'font-pretendard text-[22px] font-bold'}>
+          <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
+            <h4 className={`font-pretendard text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
               {columnId === 'READY' && '연구 준비'}
               {columnId === 'PROGRESS' && '실험 진행'}
               {columnId === 'DRAFT' && '초안 작성'}
               {columnId === 'REVIEW' && '교수 검토'}
               {columnId === 'DONE' && '완료'}
             </h4>
-
-            {/* 3. 드롭 영역 정의 */}
-            <Droppable droppableId={columnId}>
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className={`flex min-h-[300px] flex-1 flex-col gap-[10px] rounded-[12px] transition-colors ${
-                    snapshot.isDraggingOver ? 'bg-gray-200' : ''
-                  }`}
-                >
-                  {items.length > 0 ? (
-                    items.map((item, index) => (
-                      /* 4. 드래그 아이템 정의 */
-                      <Draggable key={item.id} draggableId={item.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{ ...provided.draggableProps.style }}
-                            className={snapshot.isDragging ? 'z-50' : ''}
-                          >
-                            <ConferenceCard isDeadLine={item.isDeadLine} isEnd={item.isEnd} />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))
-                  ) : (
-                    <WorkEmptyCard />
-                  )}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </section>
+          </Container>
         ))}
       </section>
-    </DragDropContext>
+
+      {createPortal(
+        <DragOverlay zIndex={1000}>
+          {activeId && activeItem ? (
+            <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
+              {/* Conference 전용 카드 렌더링 */}
+              <ConferenceCard id={'eee'} isDeadLine={activeItem.isDeadLine} isEnd={activeItem.isEnd} />
+            </div>
+          ) : null}
+        </DragOverlay>,
+        document.body,
+      )}
+    </DndContext>
   )
 }
