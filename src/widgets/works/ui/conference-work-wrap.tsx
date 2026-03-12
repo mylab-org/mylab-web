@@ -16,7 +16,7 @@ import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { ConferenceCard } from '@/entities/works'
 import { Container } from '@/widgets/works/ui/container'
-import type { DragEndEvent, DragOverEvent, DragStart } from '@dnd-kit/core'
+import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
   READY: [
@@ -74,7 +74,7 @@ export const ConferenceWorkWrap = () => {
     return Object.keys(data).find(key => data[key].some(item => item.id === id))
   }
 
-  const handleDragStart = (event: DragStart) => {
+  const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string)
     setIsDragging(true)
     if (window.navigator.vibrate) window.navigator.vibrate(50)
@@ -120,7 +120,7 @@ export const ConferenceWorkWrap = () => {
 
     if (activeContainer && overContainer && activeContainer === overContainer) {
       const activeIndex = data[activeContainer].findIndex(i => i.id === active.id)
-      const overIndex = data[overContainer].findIndex(i => i.id === over.id)
+      const overIndex = data[overContainer].findIndex(i => i.id === over!.id)
 
       if (activeIndex !== overIndex) {
         setData(prev => ({

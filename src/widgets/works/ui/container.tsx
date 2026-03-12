@@ -12,7 +12,7 @@ export const Container = ({ id, items, isDragging, isConference = false, childre
       <SortableContext id={id} items={items.map((i: any) => i.id)} strategy={verticalListSortingStrategy}>
         <div
           ref={setNodeRef}
-          className={`touch-action-pan-x flex min-h-[150px] flex-1 flex-row gap-[10px] overflow-x-auto rounded-[16px] transition-colors duration-300 md:min-h-[500px] md:flex-col md:overflow-x-visible ${
+          className={`touch-action-pan-x flex min-h-[150px] flex-1 flex-row items-center gap-[10px] overflow-x-auto rounded-[12px] transition-colors duration-300 md:min-h-[500px] md:flex-col md:overflow-x-visible ${
             isDragging
               ? 'border-2 border-dashed border-white/40 bg-white/5'
               : 'border-2 border-transparent bg-transparent'

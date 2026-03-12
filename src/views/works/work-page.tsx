@@ -5,7 +5,7 @@ import { ConferenceWorkWrap, MeetingEtcWorkWrap, PersonalWorkWrap } from '@/widg
 
 const tabs = [
   {
-    name: '개인별 업무 현황',
+    name: '연구실 전체',
     content: <PersonalWorkWrap />,
   },
   {
@@ -13,7 +13,7 @@ const tabs = [
     content: <ConferenceWorkWrap />,
   },
   {
-    name: '미팅 준비 & 개인 업무',
+    name: '미팅 & 개인',
     content: <MeetingEtcWorkWrap />,
   },
 ]
