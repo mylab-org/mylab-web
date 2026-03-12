@@ -9,7 +9,7 @@ export const MobileBottomBar = () => {
   return (
     <aside
       className={
-        'border-gray100 fixed bottom-0 w-full rounded-t-[20px] border-t border-r border-l bg-white px-[10px] py-[7px]'
+        'border-gray100 fixed bottom-0 z-[30] w-full rounded-t-[20px] border-t border-r border-l bg-white px-[10px] py-[7px]'
       }
     >
       <ul className={'flex w-full items-center justify-around'}>

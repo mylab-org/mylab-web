@@ -12,6 +12,7 @@ interface ETCTagProps {
 interface WorkTagProps {
   children: React.ReactNode
   isActive: boolean
+  type?: keyof typeof WORK_TYPE
 }
 
 interface WorkTypeProps {
@@ -22,6 +23,16 @@ interface LabTagProps {
   className?: string
   Icon?: React.ReactNode
   children: React.ReactNode
+}
+
+interface MemberTagProps {
+  name: string
+}
+
+const WORK_TAG_COLOR: Record<keyof typeof WORK_TYPE, string> = {
+  MEET: ' bg-red-100 text-red-800',
+  PERSONAL: 'bg-violet-100 text-violet-800',
+  CONFERENCE: 'bg-blue-100 text-blue-800',
 }
 
 const LabTag = ({ children, Icon, className }: LabTagProps) => {
@@ -60,12 +71,12 @@ const ETCTag = ({ variant }: ETCTagProps) => {
   )
 }
 
-const WorkTag = ({ isActive, children }: WorkTagProps) => {
+const WorkTag = ({ isActive, children, type = 'CONFERENCE' }: WorkTagProps) => {
   return (
     <span
       className={clsx(
         'font-pretendard rounded-[20px] px-[8px] py-[4px] text-[10px] lg:text-[12px]',
-        isActive ? 'bg-blue-100 font-semibold text-blue-800' : 'bg-gray100 text-gray400',
+        isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-gray100 text-gray400',
       )}
     >
       {children}
@@ -87,10 +98,23 @@ const WorkTypeTag = ({ type }: WorkTypeProps) => {
   )
 }
 
+const WorkMemberTag = ({ name }: MemberTagProps) => {
+  return (
+    <span
+      className={
+        'font-pretendard w-fit rounded-[20px] bg-blue-100 px-[8px] py-[4px] text-[10px] font-semibold text-blue-800 lg:text-[12px]'
+      }
+    >
+      {name}
+    </span>
+  )
+}
+
 export const Tag = Object.assign(() => null, {
   Roll: RollTag,
   Lab: LabTag,
   Work: WorkTag,
   WorkType: WorkTypeTag,
   Etc: ETCTag,
+  Member: WorkMemberTag,
 })

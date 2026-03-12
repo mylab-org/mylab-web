@@ -20,7 +20,7 @@ export const SideWrap = () => {
       {isSideOpen && (
         <motion.section
           onClick={handleCloseSideModal}
-          className={'fixed inset-0 z-10 flex h-dvh w-full justify-end bg-black/10'}
+          className={'fixed inset-0 z-50 flex h-dvh w-full justify-end bg-black/10'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
