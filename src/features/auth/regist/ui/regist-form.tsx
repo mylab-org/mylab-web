@@ -27,7 +27,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
 
   return (
     <form
-      id={'regist-form'}
+      id={'signup-form'}
       // onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
       //   e.preventDefault()
       //   dispatch(new FormData(e.currentTarget))
@@ -65,7 +65,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
         isError={!!errors.passwordCheck}
         errorMsg={errors.passwordCheck?.message}
       />
-      <Button form={'regist-form'}>가입하기</Button>
+      <Button form={'signup-form'}>가입하기</Button>
     </form>
   )
 }

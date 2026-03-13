@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
 const matchersForAuthUser = ['/']
-const matchersForSignIn = ['/login/*', '/regist/*']
+const matchersForSignIn = ['/login/*', '/signup/*']
 
 function isMatch(pathname: string, urls: string[]) {
   return urls.map(url => pathname.startsWith(url.replace('/*', '')))

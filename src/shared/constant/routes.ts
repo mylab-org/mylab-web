@@ -1,6 +1,6 @@
 export const BASE_PATHS = {
   LOGIN: '/login',
-  REGIST: '/regist',
+  SIGNUP: '/signup',
   EMAIL_VALIDATE: '/email-validate',
   SURVEY: '/survey',
   BOARD: '/board',
@@ -24,9 +24,9 @@ export const ROUTES = {
       NAME: '로그인',
       LINK: BASE_PATHS.LOGIN,
     },
-    REGIST: {
+    SIGNUP: {
       NAME: '회원가입',
-      LINK: BASE_PATHS.REGIST,
+      LINK: BASE_PATHS.SIGNUP,
     },
     PW_FINDER: {
       NAME: '비밀번호 찾기',

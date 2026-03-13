@@ -7,7 +7,7 @@ import { type RegistFormValues, registSchema } from '@/features/auth/regist/mode
 import { useRegist } from '@/features/auth/regist/model/useRegist'
 import { AuthLinkItem } from '@/widgets/auth'
 
-export const RegistPage = () => {
+export const SignupPage = () => {
   const { data, handleChangeData } = useRegist()
 
   const methods = useForm<RegistFormValues>({
