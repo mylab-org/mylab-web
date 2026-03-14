@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { SideRentalList } from '@/entities/lab-side'
 import { SideRentalTime } from '@/features/lab-side-modal'
-import { Button } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 import { SideModalWrap } from '@/widgets/modal'
 
 export const SideRental = () => {

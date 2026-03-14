@@ -1,5 +1,5 @@
-import { Image } from 'next/dist/client/image-component'
-import { Button, Input, Text } from '@/shared/ui'
+import { Input } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const MoreUserPw = () => {
   return (

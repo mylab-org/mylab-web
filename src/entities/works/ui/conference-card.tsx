@@ -3,7 +3,8 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useSideModalStore } from '@/shared/store'
-import { Tag, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Tag } from '@/shared/ui/tag'
 import { WorkConferenceDetail } from '@/widgets/work-side-content'
 
 interface ConferenceCardProps {

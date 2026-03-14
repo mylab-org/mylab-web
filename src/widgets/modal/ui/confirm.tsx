@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useConfirmStore } from '@/shared/store'
-import { Button, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const Confirm = () => {
   const isOpen = useConfirmStore(state => state.isConfirm)

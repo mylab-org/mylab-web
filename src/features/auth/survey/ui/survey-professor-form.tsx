@@ -6,7 +6,8 @@ import { useForm } from 'react-hook-form'
 import type { SurveyProfessorValues } from '@/features/auth/survey/model/survey.schema'
 import { SurveyProfessorSchema } from '@/features/auth/survey/model/survey.schema'
 import { useProfessor } from '@/features/auth/survey/model/useProfessor'
-import { Button, FloatingLabel, Input, Text } from '@/shared/ui'
+import { FloatingLabel, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const ProfessorForm = () => {
   const { data, isInput, handleChangeData } = useProfessor()

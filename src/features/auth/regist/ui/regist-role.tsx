@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import type { SignUpType } from '@/features/auth/regist/model/types'
-import { Radio } from '@/shared/ui'
+import { Radio } from '@/shared/ui/radio'
 
 export const RegistRole = () => {
   const { register, watch, setValue } = useFormContext<SignUpType>()

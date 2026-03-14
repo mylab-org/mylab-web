@@ -1,4 +1,5 @@
-import { Tag, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Tag } from '@/shared/ui/tag'
 
 export const LabUserInfo = () => {
   return (

@@ -1,5 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
-import { Button, Input, Tag, Text } from '@/shared/ui'
+import { Input, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Tag } from '@/shared/ui/tag'
 
 export const MoreLabUpdate = () => {
   return (

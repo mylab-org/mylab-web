@@ -1,5 +1,5 @@
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
-import { Tag } from '@/shared/ui'
+import { Tag } from '@/shared/ui/tag'
 
 export const SideWork = () => {
   return (

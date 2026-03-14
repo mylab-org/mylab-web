@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
-import { Button, Input, Text } from '@/shared/ui'
+import { Input, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 interface LabLinkModal {
   onClose?: () => void

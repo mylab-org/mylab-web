@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { SideLabDataList } from '@/entities/lab-side'
 import { SideDataPost } from '@/features/lab-side-modal'
-import { Button } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 import { SideModalWrap } from '@/widgets/modal'
 import { Tab } from '@/widgets/tab'
 

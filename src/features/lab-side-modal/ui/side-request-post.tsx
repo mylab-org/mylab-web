@@ -1,4 +1,5 @@
-import { Button, Input } from '@/shared/ui'
+import { Input } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const SideRequestPost = () => {
   return (

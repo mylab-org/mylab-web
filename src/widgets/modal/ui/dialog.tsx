@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
 import { useDialogStore } from '@/shared/store/useDialogStore'
-import { Button, Input, Text } from '@/shared/ui'
+import { Input, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const Dialog = () => {
   const btnText = useDialogStore(state => state.btnText)

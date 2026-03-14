@@ -4,7 +4,8 @@ import { type ChangeEvent, useActionState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { handleRegistAction } from '@/features/auth/regist/model/regist-action'
 import type { Regist } from '@/features/auth/regist/model/types'
-import { Button, FloatingLabel } from '@/shared/ui'
+import { FloatingLabel } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 type Props = {
   data: Regist

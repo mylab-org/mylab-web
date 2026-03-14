@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useLockBodyScroll } from '@/shared/hooks'
-import { Text, ToggleSwitch } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { ToggleSwitch } from '@/shared/ui/toggle-switch'
 
 const SideManagementItem = () => {
   const [enabled, setEnabled] = useState<boolean>(false)

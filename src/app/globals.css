@@ -8,15 +8,17 @@
 
 @theme {
   --color-background : #f9f9f9;
-  --color-gray900: #101828;
-  --color-gray700: #364153;
-  --color-gray400: #99A1AF;
-  --color-gray300: #D1D5DC;
-  --color-gray100 : #F3F4F6;
+  --color-primary : #364153;
+  --color-secondary : #D1D5DC;
+  /*--color-gray900: #101828;*/
+  /*--color-gray700: #364153;*/
+  /*--color-gray400: #99A1AF;*/
+  /*--color-gray300: #D1D5DC;*/
+  /*--color-gray100 : #F3F4F6;*/
   --color-success: #2ecc71;
   --color-warning: #f1c40f;
   --color-error: #E74C3C;
-  --color-blue500: #2B7FFF;
+  /*--color-blue500: #2B7FFF;*/
   --color-tag1: #1E75F8;
   --color-tag2: #E35C67;
 
@@ -62,6 +64,7 @@ input::-webkit-inner-spin-button {
 html {
   /* 스크롤바가 있든 없든 공간을 미리 확보하여 레이아웃 밀림을 방지합니다. */
   scrollbar-gutter: stable;
+  font-family: Pretendard;
 }
 
 /*@layer base {*/

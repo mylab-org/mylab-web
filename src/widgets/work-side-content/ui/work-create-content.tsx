@@ -1,5 +1,7 @@
 import { useSideModalStore } from '@/shared/store'
-import { Button, Input, Radio, Text } from '@/shared/ui'
+import { Input, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Radio } from '@/shared/ui/radio'
 
 export const WorkCreateContent = () => {
   const closeSideModal = useSideModalStore(state => state.closeSideModal)

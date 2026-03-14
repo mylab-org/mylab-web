@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/button/button'
 import { Input } from '@/shared/ui/input'
 import { LinkText } from '@/shared/ui/link-text'
 import { Text } from '@/shared/ui/Text'

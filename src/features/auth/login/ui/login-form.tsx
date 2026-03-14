@@ -6,7 +6,8 @@ import { useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 import { handleLoginAction } from '@/features/auth/login/model/login-action'
 import { type LoginFormValues, LoginSchema } from '@/features/auth/login/model/login.schema'
-import { Button, FloatingLabel } from '@/shared/ui'
+import { FloatingLabel } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 type LoginFormState = {
   email: string

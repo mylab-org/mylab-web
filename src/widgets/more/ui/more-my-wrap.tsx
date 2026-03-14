@@ -3,7 +3,9 @@
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore } from '@/shared/store/useDialogStore'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
-import { Button, MoreMenuBtn, Tag, Text } from '@/shared/ui'
+import { MoreMenuBtn, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Tag } from '@/shared/ui/tag'
 import { MoreMenuWrap } from '@/widgets/more/ui/more-menu-wrap'
 import { MoreUserUpdate } from '@/widgets/more-side-content'
 

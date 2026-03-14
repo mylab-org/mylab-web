@@ -1,5 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { Button, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const PostBoardForm = () => {
   return (

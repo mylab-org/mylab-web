@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
 import { useEffect, useRef } from 'react'
-import { useLockBodyScroll } from '@/shared/hooks'
+import { useLockBodyScroll } from '@/shared/model'
 import { AlarmListItem } from '@/widgets/alram/ui/alarm-list-item'
 
 interface AlarmWrapperProps {

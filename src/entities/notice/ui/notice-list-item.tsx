@@ -1,5 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { Tag, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Tag } from '@/shared/ui/tag'
 
 export const NoticeListItem = () => {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLockBodyScroll } from '@/shared/hooks'
+import { useLockBodyScroll } from '@/shared/model'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { SideModalHeader } from '@/widgets/header'
 

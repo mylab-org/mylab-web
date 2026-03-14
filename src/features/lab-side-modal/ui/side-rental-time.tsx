@@ -1,4 +1,5 @@
-import { Button, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 import TimePicker from '@/widgets/lab-side-content/ui/TimePicker'
 
 export const SideRentalTime = () => {

@@ -1,10 +1,10 @@
 'use client'
 
-import clsx from 'clsx'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useAlertStore } from '@/shared/store'
-import { Button, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
 
 export const Alert = () => {
   const isOpen = useAlertStore(state => state.isAlert)
