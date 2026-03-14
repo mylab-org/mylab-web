@@ -28,7 +28,7 @@ export const StuLabModal = () => {
           <Text className={'text-[14px] font-medium'}>연구실 이름</Text>
           <Input type={'text'} className={'w-full'} readOnly={true} />
         </div>
-        <Button variant={'primary'}>연구실 참여하기</Button>
+        <Button>연구실 참여하기</Button>
       </div>
     </section>
   )

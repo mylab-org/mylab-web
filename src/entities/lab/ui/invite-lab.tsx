@@ -29,7 +29,7 @@ export const InviteLab = () => {
           <Text className={'text-[12px]'}>초대코드는 24시간동안 유효합니다</Text>
         )}
       </form>
-      <Button variant={'primary'}>연구실 입장하기</Button>
+      <Button>연구실 입장하기</Button>
     </>
   )
 }

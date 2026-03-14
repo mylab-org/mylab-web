@@ -1,8 +1,9 @@
 'use client'
 
-import clsx from 'clsx'
+// import Link from 'next/link'
 import Link from 'next/link'
 import React from 'react'
+import { cn } from '@/shared/lib'
 import type { ButtonHTMLAttributes } from 'react'
 
 // type Props = {
@@ -24,7 +25,7 @@ import type { ButtonHTMLAttributes } from 'react'
 //   )
 // }
 
-type Color = 'black' | 'primary' | 'error' | 'noActive' | 'none'
+type Color = 'black' | 'primary' | 'secondary' | 'error' | 'none'
 type IconPosition = 'before' | 'after'
 
 interface BaseButtonProps {
@@ -37,7 +38,8 @@ interface BaseButtonProps {
   className?: string
 }
 
-interface ButtonRootProps extends BaseButtonProps, Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type'> {}
+interface ButtonRootProps
+  extends BaseButtonProps, Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type' | 'form'> {}
 
 interface LinkButtonProps extends BaseButtonProps {
   href: string
@@ -45,7 +47,15 @@ interface LinkButtonProps extends BaseButtonProps {
   onclick?: (e: React.MouseEvent) => void
 }
 
-const ButtonRoot = ({
+const colorVariants: Record<Color, string> = {
+  primary: 'bg-primary',
+  secondary: 'bg-secondary',
+  black: 'bg-black',
+  error: 'bg-error',
+  none: '',
+}
+
+export const ButtonRoot = ({
   children,
   color = 'primary',
   icon,
@@ -72,7 +82,7 @@ const ButtonRoot = ({
   return (
     <button
       {...rest}
-      className={clsx(base, color !== 'none' && `bg-${color}`, disabled && 'bg-gray-100', rest.className)}
+      className={cn(base, colorVariants[color], disabled && 'cursor-not-allowed bg-gray-300', rest.className)}
       style={width ? { width } : undefined}
       disabled={disabled}
     >
@@ -81,7 +91,7 @@ const ButtonRoot = ({
   )
 }
 
-const ButtonLink = ({
+export const ButtonLink = ({
   children,
   href,
   target = '_black',
@@ -91,9 +101,6 @@ const ButtonLink = ({
   width,
   ...rest
 }: LinkButtonProps) => {
-  const base =
-    'rounded-[10px] border text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
-
   const content =
     iconPosition === 'after' ? (
       <>
@@ -113,14 +120,10 @@ const ButtonLink = ({
       href={href}
       target={target}
       aria-disabled={disabled}
-      className={clsx(base, rest.className)}
+      className={cn('font-medium', rest.className)}
       style={width ? { width } : undefined}
     >
       {content}
     </Link>
   )
 }
-
-export const Button = Object.assign(ButtonRoot, {
-  Link: ButtonLink,
-})

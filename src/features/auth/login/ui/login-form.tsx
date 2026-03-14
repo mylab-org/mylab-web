@@ -85,7 +85,7 @@ export const LoginForm = () => {
         isError={!!errors.password}
         errorMsg={errors.password?.message}
       />
-      <Button variant={'primary'}>로그인</Button>
+      <Button>로그인</Button>
     </form>
   )
 }
