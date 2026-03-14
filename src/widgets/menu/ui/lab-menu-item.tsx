@@ -1,4 +1,4 @@
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
 
 type LabTopMenu = {
   name: string

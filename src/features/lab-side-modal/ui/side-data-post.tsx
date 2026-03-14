@@ -1,7 +1,9 @@
 import { Image } from 'next/dist/client/image-component'
-import { Input, Text } from '@/shared/ui'
+
 import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
 import { Radio } from '@/shared/ui/radio'
+import { Text } from '@/shared/ui/text'
 
 export const SideDataPost = () => {
   return (

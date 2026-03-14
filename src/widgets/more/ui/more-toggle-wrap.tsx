@@ -1,4 +1,4 @@
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
 import { ToggleSwitch } from '@/shared/ui/toggle-switch'
 
 interface MoreToggleWrapProps {

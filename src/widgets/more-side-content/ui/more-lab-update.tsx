@@ -1,7 +1,8 @@
 import { Image } from 'next/dist/client/image-component'
-import { Input, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
 import { Tag } from '@/shared/ui/tag'
+import { Text } from '@/shared/ui/text'
 
 export const MoreLabUpdate = () => {
   return (
@@ -20,11 +21,11 @@ export const MoreLabUpdate = () => {
         </div>
         <div className={'w-full'}>
           <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 이름</Text>
-          <Input placeholder={'연구실 이름'} className={'w-full text-[14px]! md:text-[18px]!'} />
+          <Input placeholder={'연구실 이름'} className={'w-full'} />
         </div>
         <div className={'w-full'}>
           <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 소개</Text>
-          <Input placeholder={'연구실 소개'} className={'w-full text-[14px]! md:text-[18px]!'} />
+          <Input placeholder={'연구실 소개'} className={'w-full'} />
         </div>
         <div className={'flex flex-col gap-[20px]'}>
           <Text className={'text-[12px]! font-bold md:text-[16px]!'}>연구실 해시태그</Text>

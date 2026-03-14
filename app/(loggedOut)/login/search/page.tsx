@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
-import { Text } from '@/shared/ui/Text'
+import { Input } from '@/shared/ui/input/input'
+import { Text } from '@/shared/ui/text/Text'
 
 const AuthSearch = () => {
   return (

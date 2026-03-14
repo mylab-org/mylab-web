@@ -3,8 +3,8 @@
 import { LabIntro } from '@/entities/lab'
 import { useConfirmStore } from '@/shared/store'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 import { MoreMenuWrap } from '@/widgets/more/ui/more-menu-wrap'
 import { MoreLabMember, MoreLabUpdate } from '@/widgets/more-side-content'
 

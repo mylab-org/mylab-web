@@ -6,8 +6,9 @@ import { useForm } from 'react-hook-form'
 import type { SurveyProfessorValues } from '@/features/auth/survey/model/survey.schema'
 import { SurveyProfessorSchema } from '@/features/auth/survey/model/survey.schema'
 import { useProfessor } from '@/features/auth/survey/model/useProfessor'
-import { FloatingLabel, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { FloatingLabel } from '@/shared/ui/floating-label'
+import { Text } from '@/shared/ui/text'
 
 export const ProfessorForm = () => {
   const { data, isInput, handleChangeData } = useProfessor()
@@ -28,7 +29,7 @@ export const ProfessorForm = () => {
         <FloatingLabel labelName={'학과 이름'} {...register('departmentName')} />
         <FloatingLabel labelName={'연구실 이름'} {...register('labName')} />
       </form>
-      <Button form={'create-lab-form'} variant={isValid ? 'primary' : 'noActive'}>
+      <Button form={'create-lab-form'} disabled={!isValid}>
         연구실 생성하기
       </Button>
       <Text className={'text-[18px] font-medium'}>연구실 검토는 평균 2일 이내에 처리됩니다.</Text>

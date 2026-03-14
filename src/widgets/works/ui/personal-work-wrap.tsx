@@ -1,8 +1,8 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
-import { Text } from '@/shared/ui'
 import { Tag } from '@/shared/ui/tag'
+import { Text } from '@/shared/ui/text'
 
 export const PersonalWorkWrap = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

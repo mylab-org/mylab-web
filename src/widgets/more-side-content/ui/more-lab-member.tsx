@@ -1,5 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { CheckBox, Text } from '@/shared/ui'
+import { CheckBox } from '@/shared/ui/checkbox'
+import { Text } from '@/shared/ui/text'
 
 export const MoreLabMember = () => {
   return (

@@ -1,6 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
-import { Input, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
+import { Text } from '@/shared/ui/text'
 
 export const MoreUserUpdate = () => {
   return (
@@ -13,11 +14,11 @@ export const MoreUserUpdate = () => {
         <div className={'h-[80px] w-[80px] rounded-full bg-gray-300 md:h-[120px] md:w-[120px]'}></div>
         <div className={'w-full'}>
           <Text className={'text-[14px] text-gray-600!'}>이름</Text>
-          <Input placeholder={'이름'} className={'w-full text-[14px]! md:text-[18px]!'} />
+          <Input placeholder={'이름'} className={'w-full'} />
         </div>
         <div className={'w-full'}>
           <Text className={'text-[14px] text-gray-600!'}>이메일</Text>
-          <Input placeholder={'이메일'} className={'w-full text-[14px]! md:text-[18px]!'} />
+          <Input placeholder={'이메일'} className={'w-full'} />
         </div>
         <div className={'flex w-full items-center justify-between'}>
           <Text className={'text-[14px] text-gray-600!'}>학위</Text>

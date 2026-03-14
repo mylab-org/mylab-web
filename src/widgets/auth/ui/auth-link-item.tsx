@@ -1,5 +1,5 @@
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 type Props = {
   title: string

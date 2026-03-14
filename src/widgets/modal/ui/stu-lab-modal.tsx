@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react'
 import { useModalStore } from '@/shared/store'
-import { Input, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
+import { Text } from '@/shared/ui/text'
 
 export const StuLabModal = () => {
   const setModal = useModalStore(state => state.setModal)

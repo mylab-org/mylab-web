@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useConfirmStore } from '@/shared/store'
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 export const Confirm = () => {
   const isOpen = useConfirmStore(state => state.isConfirm)
@@ -45,7 +45,7 @@ export const Confirm = () => {
               <Button className="w-full rounded-none rounded-bl-[20px]" onClick={onTrue}>
                 확 인
               </Button>
-              <Button className="w-full rounded-none rounded-br-[20px]" variant="error" onClick={onFalse}>
+              <Button className="w-full rounded-none rounded-br-[20px]" color="error" onClick={onFalse}>
                 닫 기
               </Button>
             </div>

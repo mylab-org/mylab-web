@@ -14,7 +14,7 @@ export const IconInput = ({ state, basicSvgName, effectSvgName, ...props }: Prop
       <input
         {...props}
         className={clsx(
-          'font-pretendard flex-1 py-[10px] text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
+          'flex-1 py-[10px] text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
           props.className,
         )}
         autoComplete="off"

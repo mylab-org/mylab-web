@@ -1,4 +1,5 @@
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
+import { Textarea } from '@/shared/ui/textarea'
 
 export const WorkSideChat = () => {
   return (
@@ -29,10 +30,8 @@ export const WorkSideChat = () => {
       </div>
       <div className={'flex flex-col gap-[10px] bg-[#FAFAFA] p-[10px]'}>
         <Text className={'text-[12px] font-semibold text-gray-600! md:text-[14px]'}>홍길동</Text>
-        <textarea
-          className={
-            'font-pretendard h-[80px] border border-gray-400 bg-white p-[5px] text-[12px] font-medium outline-0 placeholder:text-gray-400 md:text-[14px]'
-          }
+        <Textarea
+          className={'h-[80px] border border-gray-400 bg-white p-[5px] text-[12px] md:text-[14px]'}
           placeholder={'참여자들과 의견을 나누어보세요'}
         />
       </div>

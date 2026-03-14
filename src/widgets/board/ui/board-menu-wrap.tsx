@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
 
 interface BoardMenuWrapProps {
   isDevice?: boolean

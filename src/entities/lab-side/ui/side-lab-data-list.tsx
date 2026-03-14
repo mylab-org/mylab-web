@@ -1,5 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { SearchInput, Text } from '@/shared/ui'
+import { Input } from '@/shared/ui/input'
+import { Text } from '@/shared/ui/text'
 
 const SideLabDataItem = () => {
   return (
@@ -41,7 +42,9 @@ const SideLabDataItem = () => {
 export const SideLabDataList = ({ isBottom }: { isBottom: boolean }) => {
   return (
     <div className={'flex min-h-0 flex-1 flex-col gap-[10px] border-t border-t-gray-300 pt-[10px]'}>
-      <SearchInput />
+      <div className={'rounded-[12px] border border-gray-200 px-[20px]'}>
+        <Input className={'border-none'} placeholder={'제목으로 검색해보세요'} />
+      </div>
       <div className={`flex flex-1 flex-col gap-[15px] ${isBottom ? 'overflow-hidden' : 'overflow-auto'}`}>
         <SideLabDataItem />
         <SideLabDataItem />

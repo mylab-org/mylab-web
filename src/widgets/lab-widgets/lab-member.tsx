@@ -1,6 +1,6 @@
 import { LabUser } from '@/entities/lab'
-import { Text } from '@/shared/ui'
 import { Tag } from '@/shared/ui/tag'
+import { Text } from '@/shared/ui/text'
 
 export const LabMember = () => {
   return (

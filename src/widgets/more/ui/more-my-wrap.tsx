@@ -4,9 +4,9 @@ import { Image } from 'next/dist/client/image-component'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore } from '@/shared/store/useDialogStore'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
 import { Tag } from '@/shared/ui/tag'
+import { Text } from '@/shared/ui/text'
 import { MoreMenuWrap } from '@/widgets/more/ui/more-menu-wrap'
 import { MoreUserUpdate } from '@/widgets/more-side-content'
 
@@ -44,8 +44,6 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
           </div>
         </div>
         <Button
-          icon={<Image src={'icon/icon_main_add.svg'} width={20} height={20} alt={''} />}
-          iconPosition={'before'}
           className={'text-[12px]! md:text-[16px]!'}
           onClick={() => openSideModal(MoreUserUpdate, '내 정보 수정')}
         >

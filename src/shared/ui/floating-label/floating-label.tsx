@@ -1,7 +1,7 @@
-import clsx from 'clsx'
 import { type ComponentProps, forwardRef } from 'react'
+import { cn } from '@/shared/lib'
 import { Input } from '@/shared/ui/input'
-import { Text } from '@/shared/ui/Text'
+import { Text } from '@/shared/ui/text'
 
 type Props = {
   className?: string
@@ -20,12 +20,12 @@ export const FloatingLabel = forwardRef<HTMLInputElement, Props>(
           {...props}
           ref={ref}
           id={inputId}
-          className={clsx('peer block w-full border-b-2', isError ? 'border-b-error!' : 'border-b-gray-300!')}
+          className={cn('peer block w-full border-b-2', isError ? 'border-b-error' : 'border-b-gray-300')}
           placeholder=" "
         />
         <label
           htmlFor={inputId}
-          className={clsx(
+          className={cn(
             'absolute top-0 -z-10 origin-left -translate-y-6 scale-65 transform text-[18px] duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-65',
             isError
               ? 'text-error peer-focus:text-error peer-placeholder-shown:text-gray-400'
@@ -34,7 +34,7 @@ export const FloatingLabel = forwardRef<HTMLInputElement, Props>(
         >
           {labelName}
         </label>
-        {isError && <Text className={'text-error! text-[12px]'}>{errorMsg}</Text>}
+        {isError && <Text className={'text-error text-[12px]'}>{errorMsg}</Text>}
       </div>
     )
   },

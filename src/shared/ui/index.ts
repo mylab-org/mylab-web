@@ -1,6 +1,0 @@
-export { Input } from './input'
-export { Text } from './Text'
-export { FloatingLabel } from './floating-label'
-export { IconInput } from './icon-input'
-export { SearchInput } from './search-input'
-export { CheckBox } from './check-box'

@@ -1,6 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { CheckBox } from '@/shared/ui/checkbox'
+import { Textarea } from '@/shared/ui/textarea'
 
 export const PostBoardForm = () => {
   return (
@@ -12,10 +13,8 @@ export const PostBoardForm = () => {
         }
         placeholder={'제목'}
       />
-      <textarea
-        className={
-          'font-pretendard h-[100px] resize-none px-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:h-[200px] lg:text-[16px]'
-        }
+      <Textarea
+        className={'h-[100px] px-[10px] text-[12px] lg:h-[200px] lg:text-[16px]'}
         placeholder={'홍길동 님의 소식을 전해주세요'}
       />
       <div className={'flex flex-col border-t border-t-gray-300'}>
@@ -30,10 +29,7 @@ export const PostBoardForm = () => {
           </div>
         </div>
         <div className={'flex gap-[20px] p-[10px]'}>
-          <div className={'flex items-center gap-[5px]'}>
-            <input type="checkbox" />
-            <Text className={'text-[10px] lg:text-[14px]'}>익명</Text>
-          </div>
+          <CheckBox title="익명" />
           <Image
             src={'/icon/icon_main_img.svg'}
             alt={''}

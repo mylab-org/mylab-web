@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { FloatingLabel, IconInput, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { IconInput } from '@/shared/ui/icon-input'
+import { Text } from '@/shared/ui/text'
 
 export const InviteLab = () => {
   const [isCopy, setIsCopy] = useState<boolean>(false)

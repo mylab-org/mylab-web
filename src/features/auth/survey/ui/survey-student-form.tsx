@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import type { SurveyStudentValues } from '@/features/auth/survey/model/survey.schema'
 import { SurveyStudentSchema } from '@/features/auth/survey/model/survey.schema'
 import { useModalStore } from '@/shared/store'
-import { FloatingLabel, Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { FloatingLabel } from '@/shared/ui/floating-label'
+import { Text } from '@/shared/ui/text'
 import { StuLabModal } from '@/widgets/modal'
 
 export const StudentForm = () => {

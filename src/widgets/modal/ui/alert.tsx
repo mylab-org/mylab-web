@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useAlertStore } from '@/shared/store'
-import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 export const Alert = () => {
   const isOpen = useAlertStore(state => state.isAlert)

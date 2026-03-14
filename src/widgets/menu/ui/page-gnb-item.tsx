@@ -1,5 +1,5 @@
 import { usePathname } from 'next/dist/client/components/navigation'
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
 
 interface Props {
   path: string
