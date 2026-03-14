@@ -4,6 +4,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { cn } from '@/shared/lib'
+import { Button } from '@/shared/ui/button/index'
 import type { ButtonHTMLAttributes } from 'react'
 
 // type Props = {
@@ -44,7 +45,17 @@ interface ButtonRootProps
 interface LinkButtonProps extends BaseButtonProps {
   href: string
   target?: '_black'
-  onclick?: (e: React.MouseEvent) => void
+  onClick?: (e: React.MouseEvent) => void
+}
+
+interface MenuButtonProps extends BaseButtonProps {
+  isGray?: boolean
+  onClick?: (e: React.MouseEvent) => void
+}
+
+interface SetupButtonProps extends BaseButtonProps {
+  isActive?: boolean
+  onClick?: (e: React.MouseEvent) => void
 }
 
 const colorVariants: Record<Color, string> = {
@@ -64,7 +75,8 @@ export const ButtonRoot = ({
   width,
   ...rest
 }: ButtonRootProps) => {
-  const base = 'rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
+  const base =
+    'flex items-center justify-center gap-[5px] rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
 
   const content =
     iconPosition === 'after' ? (
@@ -120,10 +132,41 @@ export const ButtonLink = ({
       href={href}
       target={target}
       aria-disabled={disabled}
-      className={cn('font-medium', rest.className)}
+      className={cn('font-medium', icon && 'flex items-center gap-[5px]', rest.className)}
       style={width ? { width } : undefined}
     >
       {content}
     </Link>
+  )
+}
+
+export const ButtonMenu = ({ children, isGray = false, width, ...rest }: MenuButtonProps) => {
+  return (
+    <button
+      {...rest}
+      className={cn(
+        'cursor-pointer text-left text-[12px] font-medium md:text-[16px]',
+        isGray ? 'text-gray-400' : 'text-black',
+        rest.className,
+      )}
+      style={width ? { width } : undefined}
+    >
+      {children}
+    </button>
+  )
+}
+
+export const ButtonSetup = ({ children, isActive = false, ...rest }: SetupButtonProps) => {
+  return (
+    <button
+      {...rest}
+      className={cn(
+        'min-w-[80px] cursor-pointer rounded-[10px] px-[10px] py-[5px] text-center text-[12px] font-semibold md:text-[16px]',
+        isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-400',
+        rest.className,
+      )}
+    >
+      {children}
+    </button>
   )
 }

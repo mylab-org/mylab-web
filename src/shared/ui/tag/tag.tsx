@@ -110,6 +110,14 @@ const WorkMemberTag = ({ name }: MemberTagProps) => {
   )
 }
 
+const TagBlue = () => {
+  return <span className={'bg-tag1 h-[10px] w-[10px] rounded-full'} />
+}
+
+const TagRed = () => {
+  return <span className={'bg-tag2 h-[10px] w-[10px] rounded-full'} />
+}
+
 export const Tag = Object.assign(() => null, {
   Roll: RollTag,
   Lab: LabTag,
@@ -117,4 +125,6 @@ export const Tag = Object.assign(() => null, {
   WorkType: WorkTypeTag,
   Etc: ETCTag,
   Member: WorkMemberTag,
+  Blue: TagBlue,
+  Red: TagRed,
 })

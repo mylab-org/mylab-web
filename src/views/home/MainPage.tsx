@@ -4,7 +4,6 @@ import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
 import { LabIntro } from '@/entities/lab/ui/lab-intro'
 import { LabUserInfo } from '@/entities/user'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
-import { Text, ListItemTag } from '@/shared/ui'
 import { Tag } from '@/shared/ui/tag'
 import { LabLink, LabMember } from '@/widgets/lab-widgets'
 import { LabMenuWrapper } from '@/widgets/menu'
@@ -19,16 +18,7 @@ export const MainPage = () => {
             <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>이번 주 일정</h3>
             <CalendarWeek />
             <CalendarListItem />
-            <div className={'flex flex-col gap-[5px] rounded-[12px] border border-[#E2E3E5] px-[12px] py-[16px]'}>
-              <div className={'flex items-center gap-[5px]'}>
-                <ListItemTag.Red />
-                <Text className={'text-[14px] font-bold'}>정기 미팅</Text>
-              </div>
-              <div>
-                <Text className={'text-[14px] font-light'}>2025.12.11(목)</Text>
-                <Text className={'text-[14px] font-light'}>8공 812호 세미나실</Text>
-              </div>
-            </div>
+            <CalendarListItem />
           </div>
         </section>
 

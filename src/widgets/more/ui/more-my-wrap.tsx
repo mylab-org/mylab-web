@@ -1,9 +1,10 @@
 'use client'
 
+import { Image } from 'next/dist/client/image-component'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore } from '@/shared/store/useDialogStore'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
-import { MoreMenuBtn, Text } from '@/shared/ui'
+import { Text } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
 import { Tag } from '@/shared/ui/tag'
 import { MoreMenuWrap } from '@/widgets/more/ui/more-menu-wrap'
@@ -43,6 +44,8 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
           </div>
         </div>
         <Button
+          icon={<Image src={'icon/icon_main_add.svg'} width={20} height={20} alt={''} />}
+          iconPosition={'before'}
           className={'text-[12px]! md:text-[16px]!'}
           onClick={() => openSideModal(MoreUserUpdate, '내 정보 수정')}
         >
@@ -51,13 +54,13 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
       </div>
       <MoreMenuWrap title={'나의 활동'}>
         <div className={'flex flex-col gap-[20px]'}>
-          <MoreMenuBtn>내 비품 대여 내역</MoreMenuBtn>
-          <MoreMenuBtn>내 비품 신청 내역</MoreMenuBtn>
-          <MoreMenuBtn>내가 작성한 글 확인</MoreMenuBtn>
-          <MoreMenuBtn>내가 작성한 댓글 확인</MoreMenuBtn>
-          <MoreMenuBtn isGray onClick={handleLabDelete}>
+          <Button.Menu>내 비품 대여 내역</Button.Menu>
+          <Button.Menu>내 비품 신청 내역</Button.Menu>
+          <Button.Menu>내가 작성한 글 확인</Button.Menu>
+          <Button.Menu>내가 작성한 댓글 확인</Button.Menu>
+          <Button.Menu isGray onClick={handleLabDelete}>
             연구실 나가기
-          </MoreMenuBtn>
+          </Button.Menu>
         </div>
       </MoreMenuWrap>
     </section>
