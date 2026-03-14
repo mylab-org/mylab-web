@@ -26,7 +26,7 @@ import type { ButtonHTMLAttributes } from 'react'
 //   )
 // }
 
-type Color = 'black' | 'primary' | 'secondary' | 'error' | 'none'
+type Color = 'black' | 'main' | 'secondary' | 'error' | 'none'
 type IconPosition = 'before' | 'after'
 
 interface BaseButtonProps {
@@ -59,7 +59,7 @@ interface SetupButtonProps extends BaseButtonProps {
 }
 
 const colorVariants: Record<Color, string> = {
-  primary: 'bg-primary',
+  main: 'bg-main',
   secondary: 'bg-secondary',
   black: 'bg-black',
   error: 'bg-error',
@@ -68,7 +68,7 @@ const colorVariants: Record<Color, string> = {
 
 export const ButtonRoot = ({
   children,
-  color = 'primary',
+  color = 'main',
   icon,
   iconPosition = 'before',
   disabled,

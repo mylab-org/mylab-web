@@ -13,7 +13,7 @@ export default async function MainLayout({
   if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
     return (
       <>
-        <div className={'bg-background flex w-full flex-1 flex-col overflow-auto pb-[75px]'}>
+        <div className={'flex w-full flex-1 flex-col overflow-auto bg-[#f9f9f9] pb-[75px]'}>
           <MobileHeader />
           <main className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] pb-[20px]'}>{children}</main>
           <PageFooter />
@@ -25,7 +25,7 @@ export default async function MainLayout({
     return (
       <>
         <PageGnb />
-        <div className={'bg-background relative flex flex-1 flex-col gap-[20px] py-[30px] pr-[20px] pl-[100px]'}>
+        <div className={'relative flex flex-1 flex-col gap-[20px] bg-[#f9f9f9] py-[30px] pr-[20px] pl-[100px]'}>
           <PcHeader />
           {children}
           <PageFooter />

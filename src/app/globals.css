@@ -9,8 +9,7 @@
 }
 
 @theme {
-  --color-background : #f9f9f9;
-  --color-primary : #364153;
+  --color-main : #364153;
   --color-secondary : #D1D5DC;
   --color-black: #121212;
   /*--color-gray900: #101828;*/
@@ -60,15 +59,6 @@ input::-webkit-inner-spin-button {
     box-shadow: 0 0 0 1000px #ffffff inset !important;
     -webkit-text-fill-color: #111827 !important;
     transition: background-color 9999s ease-out 0s;
-  }
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
   }
 }
 

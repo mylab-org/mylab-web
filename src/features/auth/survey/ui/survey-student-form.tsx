@@ -53,7 +53,7 @@ export const StudentForm = () => {
       <Button
         // form={'join-lab-form'}
         onClick={() => console.log('eee')}
-        color={errors.labCode ? 'error' : labCode.length === 6 ? 'primary' : 'none'}
+        color={errors.labCode ? 'error' : labCode.length === 6 ? 'main' : 'none'}
         disabled={labCode.length !== 6}
       >
         연구실 참여하기
