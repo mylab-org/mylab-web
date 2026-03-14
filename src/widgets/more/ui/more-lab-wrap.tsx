@@ -30,7 +30,7 @@ export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
         </div>
         <div className={'flex flex-col gap-[20px]'}>
           <div className={'flex flex-col gap-[10px]'}>
-            <h3 className={'font-pretendard text-[16px] font-bold md:text-[20px]'}>연구실 삭제</h3>
+            <h3 className={'text-[16px] font-bold md:text-[20px]'}>연구실 삭제</h3>
             <Text className={'text-[10px] font-medium whitespace-pre-wrap text-gray-600! md:text-[12px]'}>
               {`연구실 삭제 전, 데이터 백업이 이루어졌는지 확인해주세요.\n삭제 후 데이터를 복구할 방법이 없으며, 본 서비스는 일괄 책임지지 않습니다.`}
             </Text>
@@ -64,7 +64,7 @@ export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
                   className={'-ml-2 h-[16px] w-[16px] rounded-full border bg-gray-300 md:-ml-3 md:h-[25px] md:w-[25px]'}
                 />
               </div>
-              <span className={'font-pretendard text-[12px] font-bold'}>+1</span>
+              <span className={'text-[12px] font-bold'}>+1</span>
             </div>
             연구원 전체 보기
           </Button>

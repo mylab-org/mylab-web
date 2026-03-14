@@ -47,7 +47,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
           }}
         >
           <div className={'flex items-center justify-between'}>
-            <h3 className={'font-pretendard text-[20px] leading-[32px] font-bold lg:text-[24px]'}>알림</h3>
+            <h3 className={'text-[20px] leading-[32px] font-bold lg:text-[24px]'}>알림</h3>
             <Image
               src={'icon/x.svg'}
               alt={''}

@@ -40,7 +40,7 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
           >
             <div className={'flex w-[300px] flex-col gap-[10px] p-[30px] md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
-                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
+                <h3 className={'text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
                 <Image
                   src={'icon/x.svg'}
                   alt={''}

@@ -9,7 +9,7 @@ export const PostBoardForm = () => {
       <input
         type="text"
         className={
-          'font-pretendard border-b border-b-gray-300 p-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
+          'border-b border-b-gray-300 p-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
         }
         placeholder={'제목'}
       />

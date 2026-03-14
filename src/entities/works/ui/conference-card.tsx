@@ -36,7 +36,7 @@ export const ConferenceCard = ({ id, isDeadLine = false, isEnd = false }: Confer
       onClick={() => openSideModal(WorkConferenceDetail, '2026 한국통신학회 추계종합학술발표회')}
     >
       <div className={'flex w-full flex-col gap-[5px]'}>
-        <h5 className={'font-pretendard text-[14px] font-bold md:text-[18px]'}>2026 한국통신학회 추계종합학술발표회</h5>
+        <h5 className={'text-[14px] font-bold md:text-[18px]'}>2026 한국통신학회 추계종합학술발표회</h5>
         <div className={'flex flex-col'}>
           <Text className={'text-[12px] font-normal md:text-[16px]'}>
             26.02.04(수) ~ 26.02.06(금), <b className={`font-bold ${isDeadLine && 'text-error'}`}>마감 D-27</b>

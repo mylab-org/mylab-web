@@ -162,7 +162,7 @@ export const MeetingEtcWorkWrap = () => {
           <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={false}>
             <div className="flex items-center justify-between">
               <h4
-                className={`font-pretendard text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
+                className={`text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
                   isDragging ? 'text-white' : 'text-black'
                 }`}
               >

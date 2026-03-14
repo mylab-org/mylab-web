@@ -29,7 +29,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
       <MoreMenuWrap title={'서비스 설정'}>
         <div className={'flex flex-col gap-[20px]'}>
           <div>
-            <h5 className={'font-pretendard text-[12px] font-bold md:text-[16px]'}>테마 설정</h5>
+            <h5 className={'text-[12px] font-bold md:text-[16px]'}>테마 설정</h5>
             <div className={'flex items-center justify-between p-[10px]'}>
               <Button.Setup isActive>시스템 설정</Button.Setup>
               <Button.Setup>라이트</Button.Setup>

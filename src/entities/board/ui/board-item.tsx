@@ -4,7 +4,7 @@ import { Text } from '@/shared/ui/text'
 export const BoardItem = () => {
   return (
     <div className={'flex flex-col gap-[4px]'}>
-      <h4 className={'font-pretendard text-[16px] font-bold lg:text-[18px]'}>비품 요청 드립니다!!!!!!</h4>
+      <h4 className={'text-[16px] font-bold lg:text-[18px]'}>비품 요청 드립니다!!!!!!</h4>
       <Text className={'text-[10px] font-medium text-gray-400! lg:text-[12px]'}>
         익명 님이 남긴 글 · ****** · 컴퓨터 통신
       </Text>

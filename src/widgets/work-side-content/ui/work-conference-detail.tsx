@@ -23,11 +23,7 @@ export const WorkConferenceDetail = () => {
           <Image src={'icon/icon_work_date.svg'} alt={''} width={20} height={20} />
           <div className={'flex items-center gap-[5px]'}>
             <Text className={'text-[12px] font-medium md:text-[16px]'}>26.02.04(수) ~ 26.02.06(금)</Text>
-            <div
-              className={
-                'font-pretendard rounded-[8px] bg-gray-100 px-[10px] py-[5px] text-[10px] font-bold md:text-[12px]'
-              }
-            >
+            <div className={'rounded-[8px] bg-gray-100 px-[10px] py-[5px] text-[10px] font-bold md:text-[12px]'}>
               제출마감 D-5
             </div>
           </div>

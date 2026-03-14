@@ -7,9 +7,7 @@ export const NoticeListItem = () => {
     <div className={'flex cursor-pointer flex-col gap-[10px] border-b border-b-gray-200 py-[20px]'}>
       <div className={'flex items-center gap-[10px]'}>
         <Tag.Etc variant={'NOTICE'} />
-        <h4 className={'font-pretendard text-[14px] font-bold text-gray-900! lg:text-[18px]'}>
-          금주 미팅 안내드립니다.
-        </h4>
+        <h4 className={'text-[14px] font-bold text-gray-900! lg:text-[18px]'}>금주 미팅 안내드립니다.</h4>
       </div>
       <Text className={'text-gray800! truncate text-[12px] lg:text-[16px]'}>
         안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요

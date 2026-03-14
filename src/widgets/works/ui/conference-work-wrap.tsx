@@ -160,7 +160,7 @@ export const ConferenceWorkWrap = () => {
 
         {Object.entries(data).map(([columnId, items]) => (
           <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
-            <h4 className={`font-pretendard text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
+            <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
               {columnId === 'READY' && '연구 준비'}
               {columnId === 'PROGRESS' && '실험 진행'}
               {columnId === 'DRAFT' && '초안 작성'}

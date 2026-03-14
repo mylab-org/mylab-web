@@ -13,7 +13,7 @@ import type { ButtonHTMLAttributes } from 'react'
 // } & ComponentProps<'button'>
 //
 // export const Button = ({ children, variant = 'primary', ...props }: Props) => {
-//   const base = 'font-pretendard rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px]'
+//   const base = ' rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px]'
 //   const variants = {
 //     primary: 'bg-gray-700 cursor-pointer',
 //     error: 'bg-error',

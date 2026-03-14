@@ -9,7 +9,7 @@ export const LabLink = () => {
   return (
     <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[20px] md:p-[24px]'}>
       <div className={'flex items-center justify-between'}>
-        <h3 className={'font-pretendard text-[18px] leading-[32px] font-bold md:text-[24px]'}>링크</h3>
+        <h3 className={'text-[18px] leading-[32px] font-bold md:text-[24px]'}>링크</h3>
         <Image
           src={'/icon/icon_main_add.svg'}
           alt={''}

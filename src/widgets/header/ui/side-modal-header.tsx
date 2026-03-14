@@ -14,7 +14,7 @@ export const SideModalHeader = () => {
 
   return (
     <div className={'flex items-center justify-between px-[20px] py-[20px] lg:px-[30px]'}>
-      <h3 className={'font-pretendard text-[18px] leading-[32px] font-bold lg:text-[24px]'}>{Title}</h3>
+      <h3 className={'text-[18px] leading-[32px] font-bold lg:text-[24px]'}>{Title}</h3>
       <Image
         src={'icon/x.svg'}
         alt={''}

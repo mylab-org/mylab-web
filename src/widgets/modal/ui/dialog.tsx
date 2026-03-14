@@ -40,7 +40,7 @@ export const Dialog = () => {
           >
             <div className={'flex w-[300px] flex-col p-[20px] md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
-                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>{item.title}</h3>
+                <h3 className={'text-[16px] font-bold lg:text-[20px]'}>{item.title}</h3>
                 <Image
                   src={'icon/x.svg'}
                   alt={''}

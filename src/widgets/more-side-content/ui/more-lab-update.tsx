@@ -32,7 +32,7 @@ export const MoreLabUpdate = () => {
           <div className={'flex flex-wrap gap-[6px]'}>
             <span
               className={
-                'font-pretendard rounded-full bg-gray-200 px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]'
+                'rounded-full bg-gray-200 px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]'
               }
             >
               + 추가하기

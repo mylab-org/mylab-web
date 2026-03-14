@@ -15,7 +15,7 @@ export const MainPage = () => {
         <section className={'flex w-[441px] flex-col gap-[30px]'}>
           <LabUserInfo />
           <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
-            <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>이번 주 일정</h3>
+            <h3 className={'text-[24px] leading-[32px] font-bold'}>이번 주 일정</h3>
             <CalendarWeek />
             <CalendarListItem />
             <CalendarListItem />
@@ -31,7 +31,7 @@ export const MainPage = () => {
               <LabMember />
             </div>
             <div className={'flex min-h-0 flex-1 flex-col gap-[14px] rounded-[24px] bg-white p-[20px]'}>
-              <h3 className={'font-pretendard text-[24px] leading-[32px] font-bold'}>진행 중인 업무 현황</h3>
+              <h3 className={'text-[24px] leading-[32px] font-bold'}>진행 중인 업무 현황</h3>
               <div className={'flex flex-col gap-[10px] rounded-[12px] border border-[#e2e3e5] p-[15px]'}>
                 <div className={'flex flex-col gap-[5px]'}>
                   <Tag.WorkType type={'CONFERENCE'} />
