@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export const LabUser = ({ children }: Props) => {
+export const LabMemberItem = ({ children }: Props) => {
   return (
     <div className={'flex items-center justify-between'}>
       <Text className={'text-[16px] leading-[24px] font-medium'}>{children}</Text>

@@ -20,10 +20,6 @@ export const SideRentalTime = () => {
         </div>
       </div>
       <div className={'flex flex-1 items-center justify-center gap-[40px] p-[10px]'}>
-        {/*<Text className={'text[20px] w-[120px] text-center font-medium lg:text-[30px]'}>오늘 (토)</Text>*/}
-        {/*<Text className={'text[22px] w-[60px] text-center font-medium lg:text-[34px]'}>02</Text>*/}
-        {/*<Text className={'text-[15px] font-medium lg:text-[20px]'}>:</Text>*/}
-        {/*<Text className={'text[22px] w-[60px] text-center font-medium lg:text-[34px]'}>40</Text>*/}
         <TimePicker />
       </div>
       <Button className={'mt-[10px] mb-[20px] bg-blue-500!'}>총 2시간 대여</Button>
