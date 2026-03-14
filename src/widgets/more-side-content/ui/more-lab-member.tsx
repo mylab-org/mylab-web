@@ -8,12 +8,12 @@ export const MoreLabMember = () => {
         'flex min-h-0 w-full flex-1 flex-col gap-[10px] overflow-auto px-[20px] pb-[20px] lg:w-[550px] lg:px-[30px]'
       }
     >
-      <Text className={'text-gray900! text-[14px] font-medium'}>총 4명</Text>
+      <Text className={'text-[14px] font-medium text-gray-900!'}>총 4명</Text>
       <div className={'flex flex-col gap-[30px] py-[20px]'}>
         <div className={'flex items-center justify-between gap-[10px]'}>
           <div className={'flex items-center gap-[10px]'}>
-            <div className={'bg-gray300 h-[30px] w-[30px] rounded-full md:h-[50px] md:w-[50px]'}></div>
-            <Text className={'text-gray900! text-[12px] font-medium md:text-[16px]'}>김교수</Text>
+            <div className={'h-[30px] w-[30px] rounded-full bg-gray-300 md:h-[50px] md:w-[50px]'}></div>
+            <Text className={'text-[12px] font-medium text-gray-900! md:text-[16px]'}>김교수</Text>
           </div>
           <div className={'flex items-center gap-[20px]'}>
             <CheckBox title={'랩장'} after />

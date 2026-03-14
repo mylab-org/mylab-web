@@ -8,7 +8,7 @@ interface MoreMenuBtnProps {
 export const MoreMenuBtn = ({ children, className, isGray = false, onClick }: MoreMenuBtnProps) => {
   return (
     <button
-      className={`${className} font-pretendard cursor-pointer text-left text-[12px] font-medium md:text-[16px] ${isGray ? 'text-gray-400' : 'text-gray900'}`}
+      className={`${className} font-pretendard cursor-pointer text-left text-[12px] font-medium md:text-[16px] ${isGray ? 'text-gray-400' : 'text-gray-900'}`}
       onClick={onClick}
     >
       {children}

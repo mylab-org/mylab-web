@@ -20,7 +20,7 @@ export const SideModalWrap = ({ activeBtn, children, onClose, isOpen }: SideModa
         <motion.section
           onClick={handleClose}
           className={
-            'bg-gray900/20 absolute top-0 right-0 flex h-full w-full items-end overflow-hidden lg:rounded-l-[20px]'
+            'absolute top-0 right-0 flex h-full w-full items-end overflow-hidden bg-gray-900/20 lg:rounded-l-[20px]'
           }
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

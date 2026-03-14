@@ -7,7 +7,7 @@ export const NoticeListItem = () => {
     <div className={'flex cursor-pointer flex-col gap-[10px] border-b border-b-gray-200 py-[20px]'}>
       <div className={'flex items-center gap-[10px]'}>
         <Tag.Etc variant={'NOTICE'} />
-        <h4 className={'font-pretendard text-gray900! text-[14px] font-bold lg:text-[18px]'}>
+        <h4 className={'font-pretendard text-[14px] font-bold text-gray-900! lg:text-[18px]'}>
           금주 미팅 안내드립니다.
         </h4>
       </div>
@@ -22,7 +22,7 @@ export const NoticeListItem = () => {
             alt={''}
             width={20}
             height={20}
-            className={'bg-gray300 h-[20px] w-[20px] rounded-full'}
+            className={'h-[20px] w-[20px] rounded-full bg-gray-300'}
           />
           <Text className={'text-[#1a1a1a]!'}>김교수</Text>
         </div>

@@ -28,7 +28,7 @@ const SideLabDataItem = () => {
               alt={''}
               width={20}
               height={20}
-              className={'bg-gray300 h-[16px] w-[16px] rounded-full lg:h-[20px] lg:w-[20px]'}
+              className={'h-[16px] w-[16px] rounded-full bg-gray-300 lg:h-[20px] lg:w-[20px]'}
             />
             <Text className={'text-[#1a1a1a]!'}>김교수</Text>
           </div>
@@ -40,7 +40,7 @@ const SideLabDataItem = () => {
 
 export const SideLabDataList = ({ isBottom }: { isBottom: boolean }) => {
   return (
-    <div className={'border-t-gray300 flex min-h-0 flex-1 flex-col gap-[10px] border-t pt-[10px]'}>
+    <div className={'flex min-h-0 flex-1 flex-col gap-[10px] border-t border-t-gray-300 pt-[10px]'}>
       <SearchInput />
       <div className={`flex flex-1 flex-col gap-[15px] ${isBottom ? 'overflow-hidden' : 'overflow-auto'}`}>
         <SideLabDataItem />

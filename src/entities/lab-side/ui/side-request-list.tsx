@@ -25,7 +25,7 @@ const SidePostItem = () => {
               alt={''}
               width={20}
               height={20}
-              className={'bg-gray300 h-[20px] w-[20px] rounded-full'}
+              className={'h-[20px] w-[20px] rounded-full bg-gray-300'}
             />
             <Text className={'text-[#1a1a1a]!'}>김교수</Text>
           </div>
@@ -37,7 +37,7 @@ const SidePostItem = () => {
 
 export const SideRequestList = ({ isBottom }: { isBottom: boolean }) => {
   return (
-    <div className={'border-t-gray300 flex min-h-0 flex-col gap-[15px] border-t pt-[10px]'}>
+    <div className={'flex min-h-0 flex-col gap-[15px] border-t border-t-gray-300 pt-[10px]'}>
       <div className={'flex items-center justify-between'}>
         <div className={'flex items-center gap-[12px]'}>
           <input type="checkbox" />

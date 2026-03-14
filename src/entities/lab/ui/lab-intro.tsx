@@ -18,7 +18,7 @@ export const LabIntro = ({ className }: LabIntroProps) => {
         <Tag.Lab>차세대 모바일 이동통신 (5G/6G)</Tag.Lab>
         <Tag.Lab>지능형 미디어 통신</Tag.Lab>
       </div>
-      <div className={'bg-gray100 w-full rounded-[8px] px-[10px] py-[8px]'}>
+      <div className={'w-full rounded-[8px] bg-gray-100 px-[10px] py-[8px]'}>
         <Text className={'text-[12px] font-medium md:text-[14px]'}>
           본 연구실은 광대역 지능형 통신 네트워크를 연구합니다.
         </Text>

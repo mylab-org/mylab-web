@@ -21,8 +21,8 @@ export const PageGnbItem = ({ device = 'pc', onItemClick, children, itemName, pa
       className={`flex cursor-pointer flex-col items-center justify-center gap-[5px] ${device === 'mobile' && 'flex-1'}`}
       onClick={onItemClick}
     >
-      <div className={`${isActive ? 'text-gray900!' : 'text-gray400!'} ${iconWidth}`}>{children}</div>
-      <Text className={`${isActive ? 'text-gray900!' : 'text-gray400!'} ${textSize} font-semibold`}>{itemName}</Text>
+      <div className={`${isActive ? 'text-gray-900!' : 'text-gray-400!'} ${iconWidth}`}>{children}</div>
+      <Text className={`${isActive ? 'text-gray-900!' : 'text-gray-400!'} ${textSize} font-semibold`}>{itemName}</Text>
     </li>
   )
 }

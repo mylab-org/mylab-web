@@ -6,8 +6,8 @@ export const WorkProgress = () => {
     <div className={'flex items-start gap-[10px]'}>
       <Text className={'min-w-[80px] truncate text-[14px] font-bold'}>김랩장</Text>
       <div className={'flex w-full flex-col gap-[6px] py-[4px]'}>
-        <div className={'bg-gray300 relative h-[10px] w-full rounded-[24px]'}>
-          <div className={'bg-blue500 absolute h-full w-2/3 rounded-[24px]'} />
+        <div className={'relative h-[10px] w-full rounded-[24px] bg-gray-300'}>
+          <div className={'absolute h-full w-2/3 rounded-[24px] bg-blue-500'} />
         </div>
         <div className={'flex gap-[6px]'}>
           <Tag.Work isActive={true}>교수 컨펌 대기</Tag.Work>

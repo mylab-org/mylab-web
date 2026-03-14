@@ -15,7 +15,7 @@ export const WorkMyProgress = ({ type = 'CONFERENCE' }: WorkProgressProps) => {
   return (
     <div className={'flex items-start gap-[10px]'}>
       <div className={'flex w-full flex-col gap-[6px] py-[4px]'}>
-        <div className={'bg-gray300 relative h-[8px] w-full rounded-[24px]'}>
+        <div className={'relative h-[8px] w-full rounded-[24px] bg-gray-300'}>
           <div className={`${PROGRESS_COLOR[type]} absolute h-full w-2/3 rounded-[24px]`} />
         </div>
         {type === 'CONFERENCE' ? (

@@ -18,7 +18,7 @@ export const MobileHeader = () => {
       <header className={clsx('relative flex items-center justify-between px-[20px] py-[10px]', isWhite && 'bg-white')}>
         <div className={'flex cursor-pointer items-center justify-center gap-[5px]'}>
           <Image src={'/Mylab_Logo.png'} alt={'로고'} width={30} height={30} />
-          <h1 className={'font-pretendard text-gray900 text-[18px] font-bold'}>MyLab</h1>
+          <h1 className={'font-pretendard text-[18px] font-bold text-gray-900'}>MyLab</h1>
         </div>
         <Image
           src={'/icon/icon_main_alarm.svg'}

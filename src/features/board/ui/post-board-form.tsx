@@ -4,26 +4,26 @@ import { Button } from '@/shared/ui/button'
 
 export const PostBoardForm = () => {
   return (
-    <form className={'border-gray300 flex flex-col gap-[10px] border'}>
+    <form className={'flex flex-col gap-[10px] border border-gray-300'}>
       <input
         type="text"
         className={
-          'border-b-gray300 placeholder:text-gray400 font-pretendard border-b p-[10px] text-[12px] font-medium outline-0 lg:text-[16px]'
+          'font-pretendard border-b border-b-gray-300 p-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
         }
         placeholder={'제목'}
       />
       <textarea
         className={
-          'placeholder:text-gray400 font-pretendard h-[100px] resize-none px-[10px] text-[12px] font-medium outline-0 lg:h-[200px] lg:text-[16px]'
+          'font-pretendard h-[100px] resize-none px-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:h-[200px] lg:text-[16px]'
         }
         placeholder={'홍길동 님의 소식을 전해주세요'}
       />
-      <div className={'border-t-gray300 flex flex-col border-t'}>
+      <div className={'flex flex-col border-t border-t-gray-300'}>
         <div className={'flex gap-[5px] px-[10px] pt-[10px]'}>
-          <div className={'border-gray300 h-[40px] w-[40px] border lg:h-[80px] lg:w-[80px]'}></div>
+          <div className={'h-[40px] w-[40px] border border-gray-300 lg:h-[80px] lg:w-[80px]'}></div>
           <div
             className={
-              'border-gray300 flex h-[40px] w-[40px] items-center justify-center border lg:h-[80px] lg:w-[80px]'
+              'flex h-[40px] w-[40px] items-center justify-center border border-gray-300 lg:h-[80px] lg:w-[80px]'
             }
           >
             <Image src={'/icon/icon_board_add.svg'} alt={''} width={24} height={24} />

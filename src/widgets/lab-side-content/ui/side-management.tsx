@@ -27,7 +27,7 @@ export const SideManagement = () => {
         tabs={tabs}
         leftItem={
           <Text
-            className={'text-gray400! cursor-pointer text-[12px] font-semibold lg:text-[18px]'}
+            className={'cursor-pointer text-[12px] font-semibold text-gray-400! lg:text-[18px]'}
             onClick={() => setIsOpen(true)}
           >
             비품 추가하기

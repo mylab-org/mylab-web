@@ -7,15 +7,15 @@ export const BoardSideWrap = () => {
       <div className={'flex flex-1 flex-col gap-[10px]'}>
         <div className={'flex flex-col gap-[5px] py-[10px]'}>
           <Text className={'text-[18px] font-bold'}>비품 확인해주세요</Text>
-          <Text className={'text-gray400! text-[14px] font-medium'}>26.01.31 (토) 19:30 </Text>
+          <Text className={'text-[14px] font-medium text-gray-400!'}>26.01.31 (토) 19:30 </Text>
         </div>
         <div className={'flex flex-col gap-[5px] py-[10px]'}>
           <Text className={'text-[18px] font-bold'}>비품 확인해주세요</Text>
-          <Text className={'text-gray400! text-[14px] font-medium'}>26.01.31 (토) 19:30 </Text>
+          <Text className={'text-[14px] font-medium text-gray-400!'}>26.01.31 (토) 19:30 </Text>
         </div>
         <div className={'flex flex-col gap-[5px] py-[10px]'}>
           <Text className={'text-[18px] font-bold'}>비품 확인해주세요</Text>
-          <Text className={'text-gray400! text-[14px] font-medium'}>26.01.31 (토) 19:30 </Text>
+          <Text className={'text-[14px] font-medium text-gray-400!'}>26.01.31 (토) 19:30 </Text>
         </div>
       </div>
     </section>

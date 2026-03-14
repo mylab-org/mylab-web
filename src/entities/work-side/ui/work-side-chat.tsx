@@ -31,7 +31,7 @@ export const WorkSideChat = () => {
         <Text className={'text-[12px] font-semibold text-gray-600! md:text-[14px]'}>홍길동</Text>
         <textarea
           className={
-            'font-pretendard border-gray400 placeholder:text-gray400 h-[80px] border bg-white p-[5px] text-[12px] font-medium outline-0 md:text-[14px]'
+            'font-pretendard h-[80px] border border-gray-400 bg-white p-[5px] text-[12px] font-medium outline-0 placeholder:text-gray-400 md:text-[14px]'
           }
           placeholder={'참여자들과 의견을 나누어보세요'}
         />

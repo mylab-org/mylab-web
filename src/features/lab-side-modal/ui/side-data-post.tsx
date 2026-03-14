@@ -15,11 +15,11 @@ export const SideDataPost = () => {
         <Input placeholder={'자료 링크'} />
         <div
           className={
-            'bg-gray100 border-gray300 flex h-[165px] flex-col items-center justify-center gap-[10px] rounded-[16px] border border-4 border-dotted'
+            'flex h-[165px] flex-col items-center justify-center gap-[10px] rounded-[16px] border border-4 border-dotted border-gray-300 bg-gray-100'
           }
         >
           <Image src={'/icon/icon_main_file.svg'} alt={''} width={30} height={30} />
-          <Text className={'text-gray400! text-[18px] font-semibold'}>
+          <Text className={'text-[18px] font-semibold text-gray-400!'}>
             이곳을 클릭하거나 첨부 파일을 드래그해 놓으세요
           </Text>
         </div>

@@ -8,7 +8,7 @@ export const BoardContentWrap = () => {
     <section className={'flex flex-1 flex-col gap-[10px] lg:p-[10px]'}>
       <div
         className={
-          'bg-gray100 border-gray300 flex cursor-pointer items-center gap-[10px] rounded-full border px-[20px] py-[10px]'
+          'flex cursor-pointer items-center gap-[10px] rounded-full border border-gray-300 bg-gray-100 px-[20px] py-[10px]'
         }
       >
         <Text className={'w-full text-[12px] text-gray-500! lg:text-[16px]'}>새 소식을 전해보세요!</Text>

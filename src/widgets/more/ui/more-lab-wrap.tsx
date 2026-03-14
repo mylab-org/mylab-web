@@ -50,18 +50,18 @@ export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
           </Text>
           <Button
             className={
-              'bg-gray100! text-gray900! flex items-center justify-center gap-[4px] text-[12px]! md:text-[16px]!'
+              'flex items-center justify-center gap-[4px] bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
             }
             onClick={() => openSideModal(MoreLabMember, '연구원 관리')}
           >
             <div className={'flex items-center gap-[4px]'}>
               <div className={'flex items-center'}>
-                <div className={'bg-gray300 h-[16px] w-[16px] rounded-full border md:h-[25px] md:w-[25px]'} />
+                <div className={'h-[16px] w-[16px] rounded-full border bg-gray-300 md:h-[25px] md:w-[25px]'} />
                 <div
-                  className={'bg-gray300 -ml-2 h-[16px] w-[16px] rounded-full border md:-ml-3 md:h-[25px] md:w-[25px]'}
+                  className={'-ml-2 h-[16px] w-[16px] rounded-full border bg-gray-300 md:-ml-3 md:h-[25px] md:w-[25px]'}
                 />
                 <div
-                  className={'bg-gray300 -ml-2 h-[16px] w-[16px] rounded-full border md:-ml-3 md:h-[25px] md:w-[25px]'}
+                  className={'-ml-2 h-[16px] w-[16px] rounded-full border bg-gray-300 md:-ml-3 md:h-[25px] md:w-[25px]'}
                 />
               </div>
               <span className={'font-pretendard text-[12px] font-bold'}>+1</span>

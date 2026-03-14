@@ -39,7 +39,7 @@ const LabTag = ({ children, Icon, className }: LabTagProps) => {
   return (
     <span
       className={clsx(
-        'font-pretendard bg-gray100 rounded-full px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]',
+        'font-pretendard rounded-full bg-gray-100 px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]',
         className,
       )}
     >
@@ -76,7 +76,7 @@ const WorkTag = ({ isActive, children, type = 'CONFERENCE' }: WorkTagProps) => {
     <span
       className={clsx(
         'font-pretendard rounded-[20px] px-[8px] py-[4px] text-[10px] lg:text-[12px]',
-        isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-gray100 text-gray400',
+        isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-gray-100 text-gray-400',
       )}
     >
       {children}

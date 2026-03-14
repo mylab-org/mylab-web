@@ -2,7 +2,7 @@ import { Image } from 'next/dist/client/image-component'
 
 export const PostBoardCommentForm = () => {
   return (
-    <form className={'bg-gray100 flex gap-[10px] rounded-full px-[15px] py-[5px]'}>
+    <form className={'flex gap-[10px] rounded-full bg-gray-100 px-[15px] py-[5px]'}>
       <input
         type="text"
         className={'font-pretendard w-full text-[12px] font-medium outline-0 placeholder:text-[#9CA3AF]'}

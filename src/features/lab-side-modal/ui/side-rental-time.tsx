@@ -26,7 +26,7 @@ export const SideRentalTime = () => {
         {/*<Text className={'text[22px] w-[60px] text-center font-medium lg:text-[34px]'}>40</Text>*/}
         <TimePicker />
       </div>
-      <Button className={'bg-blue500! mt-[10px] mb-[20px]'}>총 2시간 대여</Button>
+      <Button className={'mt-[10px] mb-[20px] bg-blue-500!'}>총 2시간 대여</Button>
     </div>
   )
 }

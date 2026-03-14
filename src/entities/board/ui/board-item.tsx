@@ -5,7 +5,7 @@ export const BoardItem = () => {
   return (
     <div className={'flex flex-col gap-[4px]'}>
       <h4 className={'font-pretendard text-[16px] font-bold lg:text-[18px]'}>비품 요청 드립니다!!!!!!</h4>
-      <Text className={'text-gray400! text-[10px] font-medium lg:text-[12px]'}>
+      <Text className={'text-[10px] font-medium text-gray-400! lg:text-[12px]'}>
         익명 님이 남긴 글 · ****** · 컴퓨터 통신
       </Text>
       <Text className={'text-[12px] font-normal whitespace-pre-wrap lg:text-[14px]'}>
@@ -54,7 +54,7 @@ export const BoardItem = () => {
             <Text className={'text-[12px] text-slate-400! lg:text-[16px]'}>삭제</Text>
           </button>
         </div>
-        <Text className={'text-gray400! text-[10px] font-medium lg:text-[14px]'}>26.01.31 (토) 19:30</Text>
+        <Text className={'text-[10px] font-medium text-gray-400! lg:text-[14px]'}>26.01.31 (토) 19:30</Text>
       </div>
     </div>
   )

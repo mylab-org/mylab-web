@@ -27,7 +27,7 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
     <section className={`flex flex-[1_0_400px] flex-col gap-[10px] ${isMaxWidth && 'max-w-[550px]'}`}>
       <div className={'flex flex-col gap-[10px] rounded-[12px] bg-white md:p-[20px]'}>
         <div className={'flex items-center justify-between gap-[20px] py-[20px] md:justify-start'}>
-          <div className={'bg-gray300 h-[60px] w-[60px] rounded-full md:h-[100px] md:w-[100px]'}></div>
+          <div className={'h-[60px] w-[60px] rounded-full bg-gray-300 md:h-[100px] md:w-[100px]'}></div>
           <div className={'flex flex-col gap-[5px] p-[10px]'}>
             <div className={'flex gap-[10px]'}>
               <Text className={'text-[16px] font-bold whitespace-pre-wrap md:text-[20px]'}>홍길동님</Text>

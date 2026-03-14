@@ -5,7 +5,7 @@ export const LabUserInfo = () => {
   return (
     <div className={'flex items-center gap-[10px] rounded-[24px] bg-white p-[20px] md:p-[24px]'}>
       {/*<Image src={'icon/icon_main_logo.svg'} alt={'프로필'} width={100} height={100} />*/}
-      <div className={'bg-gray300 h-[70px] w-[70px] rounded-full md:h-[100px] md:w-[100px]'}></div>
+      <div className={'h-[70px] w-[70px] rounded-full bg-gray-300 md:h-[100px] md:w-[100px]'}></div>
       <div className={'flex flex-col gap-[10px] p-[10px]'}>
         <div>
           <Text

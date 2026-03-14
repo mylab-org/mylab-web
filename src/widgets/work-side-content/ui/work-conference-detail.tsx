@@ -25,7 +25,7 @@ export const WorkConferenceDetail = () => {
             <Text className={'text-[12px] font-medium md:text-[16px]'}>26.02.04(수) ~ 26.02.06(금)</Text>
             <div
               className={
-                'bg-gray100 font-pretendard rounded-[8px] px-[10px] py-[5px] text-[10px] font-bold md:text-[12px]'
+                'font-pretendard rounded-[8px] bg-gray-100 px-[10px] py-[5px] text-[10px] font-bold md:text-[12px]'
               }
             >
               제출마감 D-5

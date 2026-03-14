@@ -13,7 +13,7 @@ export const ToggleSwitch = ({ onSwitch, isSwitch }: ToggleSwitchProps) => {
       className={clsx(
         'relative flex cursor-pointer items-center rounded-full transition-colors duration-200',
         'h-[14px] w-[22px] lg:h-[24px] lg:w-[40px]',
-        isSwitch ? 'bg-gray700' : 'bg-gray-200',
+        isSwitch ? 'bg-gray-700' : 'bg-gray-200',
       )}
     >
       <span

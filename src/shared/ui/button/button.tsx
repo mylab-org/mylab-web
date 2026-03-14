@@ -13,9 +13,9 @@ import type { ButtonHTMLAttributes } from 'react'
 // export const Button = ({ children, variant = 'primary', ...props }: Props) => {
 //   const base = 'font-pretendard rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px]'
 //   const variants = {
-//     primary: 'bg-gray700 cursor-pointer',
+//     primary: 'bg-gray-700 cursor-pointer',
 //     error: 'bg-error',
-//     noActive: 'bg-gray300',
+//     noActive: 'bg-gray-300',
 //   }
 //   return (
 //     <button {...props} className={clsx(base, variants[variant], props.className)} disabled={variant === 'noActive'}>
@@ -91,7 +91,8 @@ const ButtonLink = ({
   width,
   ...rest
 }: LinkButtonProps) => {
-  const base = 'rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
+  const base =
+    'rounded-[10px] border text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
 
   const content =
     iconPosition === 'after' ? (
