@@ -1,6 +1,6 @@
 'use client'
 
-import { LabIntro } from '@/entities/lab'
+import { LabInfo } from '@/entities/lab'
 import { useConfirmStore } from '@/shared/store'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { Button } from '@/shared/ui/button'
@@ -20,7 +20,7 @@ export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
     <section className={`flex flex-[1_0_400px] flex-col gap-[10px] ${isMaxWidth && 'max-w-[550px]'}`}>
       <div className={'flex flex-col gap-[20px] rounded-[12px] bg-white md:p-[24px]'}>
         <div className={'flex flex-col gap-[14px]'}>
-          <LabIntro />
+          <LabInfo />
           <Button
             className={'text-[12px]! md:text-[16px]!'}
             onClick={() => openSideModal(MoreLabUpdate, '연구실 정보 수정')}

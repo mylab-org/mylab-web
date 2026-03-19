@@ -1,11 +1,11 @@
 'use client'
 
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
-import { LabIntro } from '@/entities/lab/ui/lab-intro'
+import { LabInfo } from '@/entities/lab/ui/lab-info'
 import { LabUserInfo } from '@/entities/user'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
 import { Tag } from '@/shared/ui/tag'
-import { LabLink, LabMember } from '@/widgets/lab-widgets'
+import { LabLink, LabMember } from '@/widgets/lab'
 import { LabMenuWrapper } from '@/widgets/menu'
 
 export const MainPage = () => {
@@ -26,7 +26,7 @@ export const MainPage = () => {
           <LabMenuWrapper type={'top'} />
           <div className={'flex min-h-0 flex-1 gap-[30px]'}>
             <div className={'flex flex-1 flex-col gap-[30px]'}>
-              <LabIntro className={'p-[20px] md:p-[24px]'} />
+              <LabInfo className={'p-[20px] md:p-[24px]'} />
               <LabLink />
               <LabMember />
             </div>

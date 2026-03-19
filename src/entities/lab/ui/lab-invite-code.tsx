@@ -5,7 +5,7 @@ import { Button } from '@/shared/ui/button'
 import { IconInput } from '@/shared/ui/icon-input'
 import { Text } from '@/shared/ui/text'
 
-export const InviteLab = () => {
+export const LabInviteCode = () => {
   const [isCopy, setIsCopy] = useState<boolean>(false)
   const handleCopy = () => {
     navigator.clipboard.writeText('copy')

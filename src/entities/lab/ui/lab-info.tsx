@@ -5,7 +5,7 @@ interface LabIntroProps {
   className?: string
 }
 
-export const LabIntro = ({ className }: LabIntroProps) => {
+export const LabInfo = ({ className }: LabIntroProps) => {
   return (
     <div className={`flex flex-col gap-[14px] rounded-[24px] bg-white ${className}`}>
       <h3 className={'text-[18px] leading-[32px] font-bold text-blue-600 md:text-[24px]'}>마이랩 연구실</h3>
