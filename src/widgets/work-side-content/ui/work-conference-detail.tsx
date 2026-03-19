@@ -1,8 +1,8 @@
 import { Image } from 'next/dist/client/image-component'
 import { WorkSideCardList, WorkSideChat } from '@/entities/work-side'
+import { Tab } from '@/shared/ui/tab'
 import { Tag } from '@/shared/ui/tag'
 import { Text } from '@/shared/ui/text'
-import { Tab } from '@/widgets/tab'
 
 export const WorkConferenceDetail = () => {
   const tabs = [

@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { SideStuRequestList } from '@/entities/lab-side'
 import { SideRequestPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
+import { Tab } from '@/shared/ui/tab'
 import { SideModalWrap } from '@/widgets/modal'
-import { Tab } from '@/widgets/tab'
 
 export const SideRequest = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

@@ -1,1 +1,1 @@
-export { LabUserInfo } from './ui/lab-user-info'
+export { UserInfo } from './ui/user-info'

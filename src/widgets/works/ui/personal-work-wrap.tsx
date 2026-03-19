@@ -20,42 +20,10 @@ export const PersonalWorkWrap = () => {
         </div>
         {isOpen && (
           <div className={'flex w-full min-w-0 flex-1 flex-col items-center gap-[10px] md:flex-row md:overflow-x-auto'}>
-            <div className={'flex w-full flex-col gap-[10px] md:w-[373px] md:flex-shrink-0'}>
-              <div className={'flex flex-col gap-[5px]'}>
-                <Tag.WorkType type={'CONFERENCE'} />
-                <WorkListItem />
-              </div>
-              <div className={'flex flex-col gap-[5px]'}>
-                <WorkMyProgress type={'CONFERENCE'} />
-              </div>
-            </div>
-            <div className={'flex w-full flex-col gap-[10px] md:w-[373px] md:flex-shrink-0'}>
-              <div className={'flex flex-col gap-[5px]'}>
-                <Tag.WorkType type={'MEET'} />
-                <WorkListItem />
-              </div>
-              <div className={'flex flex-col gap-[5px]'}>
-                <WorkMyProgress type={'MEET'} />
-              </div>
-            </div>
-            <div className={'flex w-full flex-col gap-[10px] md:w-[373px] md:flex-shrink-0'}>
-              <div className={'flex flex-col gap-[5px]'}>
-                <Tag.WorkType type={'PERSONAL'} />
-                <WorkListItem />
-              </div>
-              <div className={'flex flex-col gap-[5px]'}>
-                <WorkMyProgress type={'PERSONAL'} />
-              </div>
-            </div>
-            <div className={'flex w-full flex-col gap-[10px] md:w-[373px] md:flex-shrink-0'}>
-              <div className={'flex flex-col gap-[5px]'}>
-                <Tag.WorkType type={'PERSONAL'} />
-                <WorkListItem />
-              </div>
-              <div className={'flex flex-col gap-[5px]'}>
-                <WorkMyProgress type={'PERSONAL'} />
-              </div>
-            </div>
+            <WorkListItem type={'MEET'} />
+            <WorkListItem type={'PERSONAL'} />
+            <WorkListItem />
+            <WorkListItem />
           </div>
         )}
       </div>

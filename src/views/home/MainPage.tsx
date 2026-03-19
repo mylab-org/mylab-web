@@ -2,7 +2,7 @@
 
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
 import { LabInfo } from '@/entities/lab/ui/lab-info'
-import { LabUserInfo } from '@/entities/user'
+import { UserInfo } from '@/entities/user'
 import { WorkListItem, WorkMyProgress } from '@/entities/works'
 import { Tag } from '@/shared/ui/tag'
 import { LabLink, LabMember } from '@/widgets/lab'
@@ -13,7 +13,7 @@ export const MainPage = () => {
     <div className={'flex flex-1 flex-col justify-center gap-[30px] focus:outline-none'}>
       <div className={'flex flex-1 gap-[30px]'}>
         <section className={'flex w-[441px] flex-col gap-[30px]'}>
-          <LabUserInfo />
+          <UserInfo isMain />
           <div className={'flex flex-col gap-[14px] rounded-[24px] bg-white p-[24px]'}>
             <h3 className={'text-[24px] leading-[32px] font-bold'}>이번 주 일정</h3>
             <CalendarWeek />
@@ -32,16 +32,8 @@ export const MainPage = () => {
             </div>
             <div className={'flex min-h-0 flex-1 flex-col gap-[14px] rounded-[24px] bg-white p-[20px]'}>
               <h3 className={'text-[24px] leading-[32px] font-bold'}>진행 중인 업무 현황</h3>
-              <div className={'flex flex-col gap-[10px] rounded-[12px] border border-[#e2e3e5] p-[15px]'}>
-                <div className={'flex flex-col gap-[5px]'}>
-                  <Tag.WorkType type={'CONFERENCE'} />
-                  <WorkListItem />
-                </div>
-                <div className={'flex flex-col gap-[5px]'}>
-                  {/*<WorkProgress />*/}
-                  <WorkMyProgress />
-                </div>
-              </div>
+              <WorkListItem className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
+              <WorkListItem className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
             </div>
           </div>
         </section>
