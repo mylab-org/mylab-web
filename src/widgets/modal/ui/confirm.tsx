@@ -22,7 +22,7 @@ export const Confirm = () => {
     <AnimatePresence>
       {isOpen && (
         <motion.section
-          className={'fixed inset-0 z-10 flex h-dvh w-full items-center justify-center bg-black/10'}
+          className={'fixed inset-0 z-50 flex h-dvh w-full items-center justify-center bg-black/10'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -38,7 +38,7 @@ export const Confirm = () => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className="flex w-full flex-1 items-center justify-center p-[50px]">
+            <div className="flex w-full flex-1 items-center justify-center p-12.5">
               <Text className="font-semibold text-black">{msg}</Text>
             </div>
             <div className="flex w-full">
