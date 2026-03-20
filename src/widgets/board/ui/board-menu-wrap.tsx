@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Text } from '@/shared/ui/text'
+import { Button } from '@/shared/ui/button'
 
 interface BoardMenuWrapProps {
   isDevice?: boolean
@@ -7,34 +7,20 @@ interface BoardMenuWrapProps {
 
 export const BoardMenuWrap = ({ isDevice = false }: BoardMenuWrapProps) => {
   return (
-    <section className={clsx('flex flex-col gap-[10px]', isDevice ? 'flex-1 p-0' : 'w-[200px] p-[10px]')}>
-      <div className={'flex flex-col gap-[10px] border-b border-b-gray-200 pb-[15px]'}>
-        <h3 className={'px-[6px] text-[12px] font-semibold text-gray-400! md:text-[14px]'}>우리 연구실 메뉴</h3>
-        <Text
-          className={
-            'flex h-[36px] items-center rounded-[8px] bg-[#F1F2F3] px-[12px] text-[14px] font-semibold md:text-[16px]'
-          }
-        >
+    <section className={clsx('flex flex-col gap-2.5', isDevice ? 'flex-1 p-0' : 'w-[200px] p-2.5')}>
+      <div className={'flex flex-col gap-2.5 border-b border-b-gray-200 pb-3.75'}>
+        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>우리 연구실 메뉴</h3>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px]'} isActive>
           자유 게시판
-        </Text>
-        <Text className={'flex h-[36px] items-center rounded-[8px] px-[12px] text-[14px] md:text-[16px]'}>
-          공지사항
-        </Text>
-        <Text className={'flex h-[36px] items-center rounded-[8px] px-[12px] text-[14px] md:text-[16px]'}>
-          게시판 명
-        </Text>
+        </Button.Setup>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px] font-medium text-black'}>공지사항</Button.Setup>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px] font-medium text-black'}>게시판 명</Button.Setup>
       </div>
-      <div className={'flex flex-col gap-[10px] pt-[15px]'}>
-        <h3 className={'px-[6px] text-[12px] font-semibold text-gray-400! md:text-[14px]'}>공유 카테고리</h3>
-        <Text className={'flex h-[36px] items-center rounded-[8px] px-[12px] text-[14px] md:text-[16px]'}>
-          자유 게시판
-        </Text>
-        <Text className={'flex h-[36px] items-center rounded-[8px] px-[12px] text-[14px] md:text-[16px]'}>
-          게시판 1
-        </Text>
-        <Text className={'flex h-[36px] items-center rounded-[8px] px-[12px] text-[14px] md:text-[16px]'}>
-          게시판 2
-        </Text>
+      <div className={'flex flex-col gap-2.5 pt-3.75'}>
+        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>공유 카테고리</h3>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px] font-medium text-black'}>자유게시판</Button.Setup>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px] font-medium text-black'}>게시판 1</Button.Setup>
+        <Button.Setup className={'rounded-[8px] text-left text-[14px] font-medium text-black'}>게시판 2</Button.Setup>
       </div>
     </section>
   )
