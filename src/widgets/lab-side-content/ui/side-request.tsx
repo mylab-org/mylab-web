@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { SideStuRequestList } from '@/entities/lab-side'
+import { SideStuRequestList } from './tab-list/side-stu-request-list'
 import { SideRequestPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
 import { Tab } from '@/shared/ui/tab'

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { SideLabDataList } from '@/entities/lab-side'
+import { SideLabDataList } from './tab-list/side-lab-data-list'
 import { SideDataPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
 import { Tab } from '@/shared/ui/tab'

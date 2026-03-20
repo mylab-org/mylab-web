@@ -1,2 +1,2 @@
-export { WorkSideCardList } from './ui/work-side-card-list'
-export { WorkSideChat } from './ui/work-side-chat'
+export { MemberProgressItem } from './ui/member-progress-item'
+export { ChatItem } from './ui/chat-item'

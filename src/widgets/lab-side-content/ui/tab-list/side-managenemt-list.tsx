@@ -1,4 +1,4 @@
-import { LabManagementItem } from './item/lab-management-item'
+import { LabManagementItem } from '@/entities/lab-side'
 import { Button } from '@/shared/ui/button'
 import { CheckBox } from '@/shared/ui/checkbox'
 
