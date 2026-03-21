@@ -25,7 +25,7 @@ export const LabInviteCode = () => {
           className={'cursor-pointer'}
         />
         {isCopy ? (
-          <Text className={'!text-success text-[12px]'}>초대코드가 복사되었습니다</Text>
+          <Text className={'text-success text-[12px]'}>초대코드가 복사되었습니다</Text>
         ) : (
           <Text className={'text-[12px]'}>초대코드는 24시간동안 유효합니다</Text>
         )}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { SideLabDataList } from './tab-list/side-lab-data-list'
+import { SideLabDataList } from '../side-tab-content/side-lab-data-list'
 import { SideDataPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
 import { Tab } from '@/shared/ui/tab'
@@ -21,9 +21,9 @@ export const SideData = () => {
   ]
 
   return (
-    <div className={'flex min-h-0 w-full flex-1 flex-col gap-[10px] px-[20px] lg:w-[750px] lg:px-[30px]'}>
+    <div className={'flex min-h-0 w-full flex-1 flex-col gap-2.5 px-5 lg:w-[750px] lg:px-7.5'}>
       <Tab tabs={tabs} />
-      <Button className={'mb-[20px]'} onClick={() => setIsOpen(true)}>
+      <Button className={'mb-5'} onClick={() => setIsOpen(true)}>
         자료 등록하기
       </Button>
       <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>

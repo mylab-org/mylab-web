@@ -135,7 +135,7 @@ export default function TimePicker() {
   const [minute, setMinute] = useState(String(Math.floor(now.getMinutes() / 10) * 10).padStart(2, '0'))
 
   return (
-    <div className="flex items-center justify-center gap-[28px] bg-white">
+    <div className="flex items-center justify-center gap-7 bg-white">
       <Wheel items={dates} width="w-[160px]" onChange={setDate} />
       <Wheel items={hours} width="w-[70px]" initialIndex={now.getHours()} onChange={setHour} />
       <div className="pb-1 text-[26px] font-semibold text-black/80">:</div>

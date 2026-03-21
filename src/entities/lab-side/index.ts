@@ -1,5 +1,0 @@
-export { LabDataItem } from './ui/lab-data-item'
-export { LabRentalItem } from './ui/lab-rental-item'
-export { LabPostItem } from './ui/lab-post-item'
-export { LabRequestItem } from './ui/lab-request-item'
-export { LabManagementItem } from './ui/lab-management-item'

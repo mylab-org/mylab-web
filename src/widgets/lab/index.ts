@@ -1,2 +1,11 @@
 export { LabLink } from './ui/lab-link'
 export { LabMember } from './ui/lab-member'
+
+export { SideNotice } from './ui/side/side-notice'
+export { SideData } from './ui/side/side-data'
+export { SideManagement } from './ui/side/side-management'
+export { SideRequest } from './ui/side/side-request'
+export { SideRental } from './ui/side/side-rental'
+export { SideMember } from './ui/side/side-member'
+export { SideWork } from './ui/side/side-work'
+export { SideWeek } from './ui/side/side-week'
