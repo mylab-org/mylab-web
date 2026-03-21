@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
 import { useConfirmStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
@@ -11,6 +12,8 @@ export const Confirm = () => {
   const msg = useConfirmStore(state => state.msg)
   const onTrue = useConfirmStore(state => state.onTrue)
   const onFalse = useConfirmStore(state => state.onFalse)
+
+  useLockBodyScroll(isOpen)
 
   useEffect(() => {
     return () => {

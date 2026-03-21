@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import { usePathname } from 'next/dist/client/components/navigation'
 import { useLockBodyScroll } from '@/shared/model'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { SideModalHeader } from '@/widgets/header'
@@ -15,6 +16,9 @@ export const SideWrap = () => {
     if (e.target === e.currentTarget) closeSideModal()
   }
 
+  const pathname = usePathname()
+  console.log('pathname', pathname)
+
   return (
     <AnimatePresence>
       {isSideOpen && (
@@ -27,7 +31,7 @@ export const SideWrap = () => {
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={'relative flex w-full flex-col bg-white shadow-lg lg:w-fit lg:rounded-l-[20px]'}
+            className={`relative flex w-full flex-col bg-white shadow-lg lg:rounded-l-[20px] ${pathname === '/more' ? 'lg:w-[550px]' : 'lg:w-[750px]'}`}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}

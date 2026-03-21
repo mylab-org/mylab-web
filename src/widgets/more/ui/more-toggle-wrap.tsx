@@ -8,7 +8,7 @@ interface MoreToggleWrapProps {
 
 export const MoreToggleWrap = ({ description, title }: MoreToggleWrapProps) => {
   return (
-    <div className={'flex flex-col gap-[5px]'}>
+    <div className={'flex flex-col gap-1.25'}>
       <div className={'flex items-center justify-between'}>
         <Text className={'text-[12px] font-bold md:text-[16px]'}>{title}</Text>
         <ToggleSwitch isSwitch={true} onSwitch={() => {}} />

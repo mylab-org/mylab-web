@@ -1,5 +1,8 @@
+'use client'
+
 import { AnimatePresence, motion } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
+import { useLockBodyScroll } from '@/shared/model'
 import { useDialogStore } from '@/shared/store/useDialogStore'
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
@@ -10,6 +13,8 @@ export const Dialog = () => {
   const isOpen = useDialogStore(state => state.isOpen)
   const closeDialogModal = useDialogStore(state => state.closeDialogModal)
   const callback = useDialogStore(state => state.callback)
+
+  useLockBodyScroll(isOpen)
 
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {

@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
 import { useAlertStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
@@ -10,6 +11,8 @@ export const Alert = () => {
   const isOpen = useAlertStore(state => state.isAlert)
   const msg = useAlertStore(state => state.msg)
   const onCloseAlert = useAlertStore(state => state.onCloseAlert)
+
+  useLockBodyScroll(isOpen)
 
   useEffect(() => {
     return () => {
