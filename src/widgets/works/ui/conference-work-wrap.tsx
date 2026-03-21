@@ -16,6 +16,7 @@ import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Container } from './container'
 import { ConferenceCard } from '@/entities/works'
+import { WorkConferenceDetail } from '@/widgets/works/ui/side/work-conference-detail'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
@@ -176,7 +177,12 @@ export const ConferenceWorkWrap = () => {
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               {/* Conference 전용 카드 렌더링 */}
-              <ConferenceCard id={'eee'} isDeadLine={activeItem.isDeadLine} isEnd={activeItem.isEnd} />
+              <ConferenceCard
+                id={'eee'}
+                isDeadLine={activeItem.isDeadLine}
+                isEnd={activeItem.isEnd}
+                detailComponent={WorkConferenceDetail}
+              />
             </div>
           ) : null}
         </DragOverlay>,
