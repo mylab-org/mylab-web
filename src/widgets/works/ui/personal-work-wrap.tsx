@@ -1,16 +1,13 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { WorkListItem, WorkMyProgress } from '@/entities/works'
-import { Tag } from '@/shared/ui/tag'
+import { WorkListItem } from '@/entities/works'
 import { Text } from '@/shared/ui/text'
 
 export const PersonalWorkWrap = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
-    <section className={'flex flex-col gap-[10px] p-[10px]'}>
-      <div
-        className={'flex min-w-0 flex-col items-center gap-[10px] overflow-x-auto border-b border-gray-200 py-[10px]'}
-      >
+    <section className={'flex flex-col gap-2.5 p-2.5'}>
+      <div className={'flex min-w-0 flex-col items-center gap-2.5 overflow-x-auto border-b border-gray-200 py-2.5'}>
         <div
           className={'flex w-full cursor-pointer items-center justify-between'}
           onClick={() => setIsOpen(prev => !prev)}
@@ -19,7 +16,7 @@ export const PersonalWorkWrap = () => {
           <Image src={'icon/icon_common_drop.svg'} alt={''} width={16} height={16} />
         </div>
         {isOpen && (
-          <div className={'flex w-full min-w-0 flex-1 flex-col items-center gap-[10px] md:flex-row md:overflow-x-auto'}>
+          <div className={'flex w-full min-w-0 flex-1 flex-col items-center gap-2.5 md:flex-row md:overflow-x-auto'}>
             <WorkListItem type={'MEET'} />
             <WorkListItem type={'PERSONAL'} />
             <WorkListItem />

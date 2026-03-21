@@ -1,4 +1,4 @@
-import { ChatItem } from '@/entities/work-side'
+import { ChatItem } from '@/entities/works'
 import { WorkChatForm } from '@/features/works'
 
 export const WorkSideChat = () => {

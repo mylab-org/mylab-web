@@ -1,6 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { WorkSideCardList } from './tab-list/work-side-card-list'
-import { WorkSideChat } from './tab-list/work-side-chat'
+import { WorkSideCardList } from '../side-tab-content/work-side-card-list'
+import { WorkSideChat } from '../side-tab-content/work-side-chat'
 import { Tab } from '@/shared/ui/tab'
 import { Tag } from '@/shared/ui/tag'
 import { Text } from '@/shared/ui/text'
