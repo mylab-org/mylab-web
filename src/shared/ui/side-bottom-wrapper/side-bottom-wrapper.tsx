@@ -7,7 +7,7 @@ interface SideModalWrapProps {
   isOpen: boolean
 }
 
-export const SideModalWrap = ({ activeBtn, children, onClose, isOpen }: SideModalWrapProps) => {
+export const SideBottomWrapper = ({ activeBtn, children, onClose, isOpen }: SideModalWrapProps) => {
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
       onClose?.()

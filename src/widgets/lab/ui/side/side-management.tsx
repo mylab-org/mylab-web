@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { SideManagenemtList } from '../side-tab-content/side-managenemt-list'
 import { SideRequestList } from '../side-tab-content/side-request-list'
 import { SideManagementPost } from '@/features/lab-side-modal'
+import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
 import { Tab } from '@/shared/ui/tab'
 import { Text } from '@/shared/ui/text'
-import { SideModalWrap } from '@/widgets/modal'
 
 export const SideManagement = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -35,9 +35,9 @@ export const SideManagement = () => {
           </Text>
         }
       />
-      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <SideBottomWrapper isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <SideManagementPost />
-      </SideModalWrap>
+      </SideBottomWrapper>
     </div>
   )
 }

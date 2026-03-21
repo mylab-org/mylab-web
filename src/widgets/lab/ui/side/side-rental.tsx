@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { LabRentalItem } from '@/entities/lab'
 import { SideRentalTime } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
+import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
 import { Text } from '@/shared/ui/text'
-import { SideModalWrap } from '@/widgets/modal'
 
 export const SideRental = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -31,9 +31,9 @@ export const SideRental = () => {
       <Button className={'mb-5'} onClick={() => setIsOpen(true)}>
         대여 시간 변경하기
       </Button>
-      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <SideBottomWrapper isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <SideRentalTime />
-      </SideModalWrap>
+      </SideBottomWrapper>
     </div>
   )
 }

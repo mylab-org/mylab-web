@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useLockBodyScroll } from '@/shared/model'
 import { useSideModalStore } from '@/shared/store'
 
-export const SideWrap = () => {
+export const SideWrapper = () => {
   const isSideOpen = useSideModalStore(state => state.isSideOpen)
   const closeSideModal = useSideModalStore(state => state.closeSideModal)
   const Content = useSideModalStore(state => state.selectedContent)

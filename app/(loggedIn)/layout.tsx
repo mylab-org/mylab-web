@@ -1,8 +1,8 @@
 import { headers } from 'next/headers'
+import { SideWrapper } from '@/shared/ui/side-wrapper'
 import { PageFooter } from '@/widgets/footer'
 import { MobileHeader, PcHeader } from '@/widgets/header'
 import { MobileBottomBar, PageGnb } from '@/widgets/menu'
-import { SideWrap } from '@/widgets/modal'
 
 export default async function MainLayout({
   children,
@@ -18,7 +18,7 @@ export default async function MainLayout({
           <MobileHeader />
           <main className={'scrollbar-hidden flex flex-1 flex-col gap-[10px] pb-[20px]'}>{children}</main>
           <PageFooter />
-          <SideWrap />
+          <SideWrapper />
         </div>
         <MobileBottomBar />
       </>
@@ -31,7 +31,7 @@ export default async function MainLayout({
           <PcHeader />
           {children}
           <PageFooter />
-          <SideWrap />
+          <SideWrapper />
         </div>
       </>
     )

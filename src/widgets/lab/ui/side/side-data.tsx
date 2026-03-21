@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { SideLabDataList } from '../side-tab-content/side-lab-data-list'
 import { SideDataPost } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/button'
+import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
 import { Tab } from '@/shared/ui/tab'
-import { SideModalWrap } from '@/widgets/modal'
 
 export const SideData = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -26,9 +26,9 @@ export const SideData = () => {
       <Button className={'mb-5'} onClick={() => setIsOpen(true)}>
         자료 등록하기
       </Button>
-      <SideModalWrap isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <SideBottomWrapper isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <SideDataPost />
-      </SideModalWrap>
+      </SideBottomWrapper>
     </div>
   )
 }
