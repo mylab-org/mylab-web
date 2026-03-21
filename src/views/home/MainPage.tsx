@@ -1,13 +1,17 @@
 'use client'
 
+import { useState } from 'react'
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
 import { LabInfo } from '@/entities/lab/ui/lab-info'
 import { UserInfo } from '@/entities/user'
 import { WorkListItem } from '@/entities/works'
 import { LabLink, LabMember } from '@/widgets/lab'
 import { LabMenuWrapper } from '@/widgets/menu'
+import { LabLinkModal } from '@/widgets/modal'
 
 export const MainPage = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
   return (
     <div className={'flex flex-1 flex-col justify-center gap-7.5 focus:outline-none'}>
       <div className={'flex flex-1 gap-7.5'}>
@@ -26,7 +30,7 @@ export const MainPage = () => {
           <div className={'flex min-h-0 flex-1 gap-7.5'}>
             <div className={'flex flex-1 flex-col gap-7.5'}>
               <LabInfo className={'p-5 md:p-6'} />
-              <LabLink />
+              <LabLink setIsOpen={setIsOpen} />
               <LabMember />
             </div>
             <div className={'flex min-h-0 flex-1 flex-col gap-3.5 rounded-[24px] bg-white p-5'}>
@@ -35,6 +39,7 @@ export const MainPage = () => {
               <WorkListItem className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
             </div>
           </div>
+          <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </section>
       </div>
     </div>

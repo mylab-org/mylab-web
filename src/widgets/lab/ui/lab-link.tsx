@@ -1,13 +1,14 @@
 'use client'
 
 import { Image } from 'next/dist/client/image-component'
-import { useState } from 'react'
 import { LabLinkItem } from '@/entities/lab'
-import { LabLinkModal } from '@/widgets/modal'
+import type { Dispatch, SetStateAction } from 'react'
 
-export const LabLink = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+interface LabLinkProps {
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
 
+export const LabLink = ({ setIsOpen }: LabLinkProps) => {
   return (
     <div className={'flex flex-col gap-3.5 rounded-[24px] bg-white p-5 md:p-6'}>
       <div className={'flex items-center justify-between'}>
@@ -27,7 +28,6 @@ export const LabLink = () => {
         <LabLinkItem href={'#'} name={'이것저것'} />
         <LabLinkItem href={'#'} name={'링크'} />
       </div>
-      <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   )
 }

@@ -1,6 +1,10 @@
+'use client'
+
 import { motion, AnimatePresence } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
 
+import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { Text } from '@/shared/ui/text'
@@ -16,6 +20,14 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
       onClose?.()
     }
   }
+
+  useLockBodyScroll(isOpen)
+
+  useEffect(() => {
+    return () => {
+      onClose?.()
+    }
+  }, [])
 
   return (
     <AnimatePresence>
