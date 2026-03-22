@@ -2,7 +2,7 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { AlarmWrapper } from '@/widgets/alram'
+import { AlarmWrapper } from '@/entities/alarm'
 
 export const PcHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

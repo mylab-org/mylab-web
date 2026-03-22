@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
 import { useEffect, useRef } from 'react'
+import { AlarmListItem } from './alarm-list-item'
 import { useLockBodyScroll } from '@/shared/model'
-import { AlarmListItem } from '@/widgets/alram/ui/alarm-list-item'
 
 interface AlarmWrapperProps {
   isOpen: boolean
@@ -35,7 +35,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
         <motion.section
           ref={modalRef}
           className={
-            'fixed top-0 right-0 z-[10] flex h-dvh w-full flex-col gap-[14px] bg-white p-[24px] shadow-md md:top-20 md:right-5 md:h-[600px] md:w-[400px] md:rounded-[24px]'
+            'fixed top-0 right-0 z-10 flex h-dvh w-full flex-col gap-3.5 bg-white p-6 shadow-md md:top-20 md:right-5 md:h-[600px] md:w-[400px] md:rounded-[24px]'
           }
           key="alarm-modal"
           initial={{ opacity: 0, y: -12 }}
@@ -47,7 +47,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
           }}
         >
           <div className={'flex items-center justify-between'}>
-            <h3 className={'text-[20px] leading-[32px] font-bold lg:text-[24px]'}>알림</h3>
+            <h3 className={'text-[20px] leading-8 font-bold lg:text-[24px]'}>알림</h3>
             <Image
               src={'icon/x.svg'}
               alt={''}
@@ -57,7 +57,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
               onClick={onClose}
             />
           </div>
-          <ul className={'flex flex-col gap-[10px] overflow-auto px-[10px]'}>
+          <ul className={'flex flex-col gap-2.5 overflow-auto px-2.5'}>
             <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
             <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
             <AlarmListItem type={'미팅 알림'} dateAt={'방금'} title={'이번주 미팅이 사라졌어요!'} />
