@@ -1,11 +1,21 @@
 import { Image } from 'next/dist/client/image-component'
+import { Avatar } from '@/shared/ui/avatar'
 import { Text } from '@/shared/ui/text'
 
 export const BoardCommentItem = () => {
   return (
     <div className={'flex flex-col gap-1 py-1.25'}>
       <div className={'flex items-center gap-1.25'}>
-        <Text className={'text-[12px] font-bold text-slate-600 lg:text-[14px]'}>김땡땡</Text>
+        <Avatar
+          src={'/test.png'}
+          alt={'profile'}
+          width={16}
+          height={16}
+          className={'gap-1.25'}
+          imgClassName={'rounded-full h-4 w-4 lg:h-5 lg:w-5'}
+        >
+          <Text className={'text-[12px] font-bold text-slate-600 lg:text-[14px]'}>김땡땡</Text>
+        </Avatar>
         <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>BIT Lab · 컴퓨터 통신</Text>
       </div>
       <div className={'flex flex-col gap-2.5'}>
