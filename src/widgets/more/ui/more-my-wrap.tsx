@@ -4,8 +4,7 @@ import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreUserUpdate } from './side/more-user-update'
 import { UserInfo } from '@/entities/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
-import { useDialogStore } from '@/shared/store/useDialogStore'
-import { useSideModalStore } from '@/shared/store/useSideModalStore'
+import { useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
 
 interface WrapProps {

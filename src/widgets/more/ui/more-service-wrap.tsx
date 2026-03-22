@@ -5,9 +5,7 @@ import { MoreToggleWrap } from './more-toggle-wrap'
 import { MoreServiceUse } from './side/more-service-use'
 import { MoreUserPw } from './side/more-user-pw'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
-import { useConfirmStore } from '@/shared/store'
-import { useDialogStore } from '@/shared/store/useDialogStore'
-import { useSideModalStore } from '@/shared/store/useSideModalStore'
+import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
 
 interface WrapProps {

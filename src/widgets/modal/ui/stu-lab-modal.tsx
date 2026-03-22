@@ -14,8 +14,8 @@ export const StuLabModal = () => {
   }, [])
 
   return (
-    <section className={'absolute inset-0 z-[1100] flex h-full w-full items-center justify-center bg-black/10'}>
-      <div className={'flex flex-col gap-[30px] rounded-[24px] bg-white px-[40px] py-[64px] shadow-lg'}>
+    <section className={'absolute inset-0 z-1100 flex h-full w-full items-center justify-center bg-black/10'}>
+      <div className={'flex flex-col gap-7.5 rounded-[24px] bg-white px-10 py-16 shadow-lg'}>
         <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'참여 전,\n연구실을 다시 확인하세요'}</Text>
         <div>
           <Text className={'text-[14px] font-medium'}>학교 이름</Text>

@@ -15,8 +15,8 @@ import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Container } from './container'
+import { WorkConferenceDetail } from './side/work-conference-detail'
 import { ConferenceCard } from '@/entities/works'
-import { WorkConferenceDetail } from '@/widgets/works/ui/side/work-conference-detail'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {

@@ -1,8 +1,8 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { WorkConferenceDetail } from './side/work-conference-detail'
 import { WorkEmptyCard } from './work-Empty-card'
 import { ConferenceCard, MeetEtcCard } from '@/entities/works'
-import { WorkConferenceDetail } from '@/widgets/works/ui/side/work-conference-detail'
 
 export const Container = ({ id, items, isDragging, isConference = false, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
