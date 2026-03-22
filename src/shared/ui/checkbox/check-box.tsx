@@ -11,7 +11,7 @@ export const CheckBox = ({ title, className, after = false }: CheckBoxProps) => 
     <label
       htmlFor="checkbox"
       className={cn(
-        'flex items-center gap-[12px] text-[12px] font-medium md:text-[14px]',
+        'flex items-center gap-3 text-[12px] font-medium md:text-[14px]',
         after && 'after:ml-2 after:text-gray-300 after:content-["|"]',
         className,
       )}

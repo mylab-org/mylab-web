@@ -15,7 +15,7 @@ export const FloatingLabel = forwardRef<HTMLInputElement, Props>(
     const inputId = id ?? props.name
 
     return (
-      <div className="relative z-0">
+      <div className={cn('relative z-0', className)}>
         <Input
           {...props}
           ref={ref}

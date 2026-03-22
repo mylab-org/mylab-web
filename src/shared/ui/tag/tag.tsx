@@ -38,10 +38,7 @@ const WORK_TAG_COLOR: Record<keyof typeof WORK_TYPE, string> = {
 const LabTag = ({ children, Icon, className }: LabTagProps) => {
   return (
     <span
-      className={clsx(
-        'rounded-full bg-gray-100 px-[12px] py-[4px] text-[12px] leading-[20px] font-medium md:text-[14px]',
-        className,
-      )}
+      className={clsx('rounded-full bg-gray-100 px-3 py-1 text-[12px] leading-5 font-medium md:text-[14px]', className)}
     >
       # {children}
       {Icon && Icon}
@@ -53,7 +50,7 @@ const RollTag = ({ variant }: RollTagProps) => {
   const { bg, text, label } = ROLL_TAG[variant]
   return (
     <span
-      className={`w-fit rounded-full ${bg} ${text} px-[10px] py-[3px] text-[12px] leading-[22px] font-medium md:text-[14px]`}
+      className={`w-fit rounded-full ${bg} ${text} px-2.5 py-0.75 text-[12px] leading-5.5 font-medium md:text-[14px]`}
     >
       {label}
     </span>
@@ -63,7 +60,7 @@ const RollTag = ({ variant }: RollTagProps) => {
 const ETCTag = ({ variant }: ETCTagProps) => {
   const { BG, NAME, TC } = ETC_TYPE[variant]
   return (
-    <span className={`w-fit rounded-[15px] ${BG} ${TC} px-[8px] py-[2px] text-[12px] font-semibold lg:text-[14px]`}>
+    <span className={`w-fit rounded-[15px] ${BG} ${TC} px-2 py-0.5 text-[12px] font-semibold lg:text-[14px]`}>
       {NAME}
     </span>
   )
@@ -73,7 +70,7 @@ const WorkTag = ({ isActive, children, type = 'CONFERENCE' }: WorkTagProps) => {
   return (
     <span
       className={clsx(
-        'rounded-[20px] px-[8px] py-[4px] text-[10px] lg:text-[12px]',
+        'rounded-[20px] px-2 py-1 text-[10px] lg:text-[12px]',
         isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-gray-100 text-gray-400',
       )}
     >
@@ -85,18 +82,14 @@ const WorkTag = ({ isActive, children, type = 'CONFERENCE' }: WorkTagProps) => {
 const WorkTypeTag = ({ type }: WorkTypeProps) => {
   const { NAME, BG } = WORK_TYPE[type]
   return (
-    <span className={clsx('w-fit rounded-[20px] px-[8px] py-[4px] text-[10px] text-white lg:text-[12px]', BG)}>
-      {NAME}
-    </span>
+    <span className={clsx('w-fit rounded-[20px] px-2 py-1 text-[10px] text-white lg:text-[12px]', BG)}>{NAME}</span>
   )
 }
 
 const WorkMemberTag = ({ name }: MemberTagProps) => {
   return (
     <span
-      className={
-        'w-fit rounded-[20px] bg-blue-100 px-[8px] py-[4px] text-[10px] font-semibold text-blue-800 lg:text-[12px]'
-      }
+      className={'w-fit rounded-[20px] bg-blue-100 px-2 py-1 text-[10px] font-semibold text-blue-800 lg:text-[12px]'}
     >
       {name}
     </span>
@@ -104,11 +97,11 @@ const WorkMemberTag = ({ name }: MemberTagProps) => {
 }
 
 const TagBlue = () => {
-  return <span className={'bg-tag1 h-[10px] w-[10px] rounded-full'} />
+  return <span className={'bg-tag1 h-2.5 w-2.5 rounded-full'} />
 }
 
 const TagRed = () => {
-  return <span className={'bg-tag2 h-[10px] w-[10px] rounded-full'} />
+  return <span className={'bg-tag2 h-2.5 w-2.5 rounded-full'} />
 }
 
 export const Tag = Object.assign(() => null, {

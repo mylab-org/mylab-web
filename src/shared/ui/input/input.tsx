@@ -12,7 +12,7 @@ export const Input = ({ ref, className, ...rest }: BaseInputProps) => {
       {...rest}
       ref={ref}
       className={cn(
-        'border-b-2 border-b-gray-300 py-[10px] text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
+        'border-b-2 border-b-gray-300 py-2.5 text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
         className,
       )}
       autoComplete="off"

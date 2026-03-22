@@ -10,11 +10,11 @@ type Props = {
 
 export const IconInput = ({ state, basicSvgName, effectSvgName, ...props }: Props) => {
   return (
-    <div className={clsx('flex gap-[10px] border-b-2', state ? 'border-b-success' : 'border-b-gray-300')}>
+    <div className={clsx('flex gap-2.5 border-b-2', state ? 'border-b-success' : 'border-b-gray-300')}>
       <input
         {...props}
         className={clsx(
-          'flex-1 py-[10px] text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
+          'flex-1 py-2.5 text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
           props.className,
         )}
         autoComplete="off"

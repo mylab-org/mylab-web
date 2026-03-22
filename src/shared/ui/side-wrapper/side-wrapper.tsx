@@ -43,8 +43,8 @@ export const SideWrapper = () => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className={'flex items-center justify-between px-[20px] py-[20px] lg:px-[30px]'}>
-              <h3 className={'text-[18px] leading-[32px] font-bold lg:text-[24px]'}>{Title}</h3>
+            <div className={'flex items-center justify-between px-5 py-5 lg:px-7.5'}>
+              <h3 className={'text-[18px] leading-8 font-bold lg:text-[24px]'}>{Title}</h3>
               <Image
                 src={'icon/x.svg'}
                 alt={''}

@@ -1,30 +1,9 @@
 'use client'
 
-// import Link from 'next/link'
 import Link from 'next/link'
 import React from 'react'
 import { cn } from '@/shared/lib'
-import { Button } from '@/shared/ui/button/index'
 import type { ButtonHTMLAttributes } from 'react'
-
-// type Props = {
-//   children?: React.ReactNode
-//   variant?: 'primary' | 'error' | 'noActive'
-// } & ComponentProps<'button'>
-//
-// export const Button = ({ children, variant = 'primary', ...props }: Props) => {
-//   const base = ' rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px]'
-//   const variants = {
-//     primary: 'bg-gray-700 cursor-pointer',
-//     error: 'bg-error',
-//     noActive: 'bg-gray-300',
-//   }
-//   return (
-//     <button {...props} className={clsx(base, variants[variant], props.className)} disabled={variant === 'noActive'}>
-//       {children}
-//     </button>
-//   )
-// }
 
 type Color = 'black' | 'main' | 'secondary' | 'error' | 'none'
 type IconPosition = 'before' | 'after'
@@ -132,7 +111,7 @@ export const ButtonLink = ({
       href={href}
       target={target}
       aria-disabled={disabled}
-      className={cn('font-medium', icon && 'flex items-center gap-[5px]', rest.className)}
+      className={cn('font-medium', icon && 'flex items-center gap-1.25', rest.className)}
       style={width ? { width } : undefined}
     >
       {content}
@@ -161,7 +140,7 @@ export const ButtonSetup = ({ children, isActive = false, ...rest }: SetupButton
     <button
       {...rest}
       className={cn(
-        'min-w-[80px] cursor-pointer rounded-[10px] px-[10px] py-[5px] text-center text-[12px] font-semibold md:text-[16px]',
+        'min-w-[80px] cursor-pointer rounded-[10px] px-2.5 py-1.25 text-center text-[12px] font-semibold md:text-[16px]',
         isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-400',
         rest.className,
       )}
