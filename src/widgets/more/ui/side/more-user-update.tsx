@@ -5,12 +5,8 @@ import { Text } from '@/shared/ui/text'
 
 export const MoreUserUpdate = () => {
   return (
-    <div
-      className={
-        'flex min-h-0 w-full flex-1 flex-col gap-[10px] overflow-auto px-[20px] pb-[20px] lg:w-[550px] lg:px-[30px]'
-      }
-    >
-      <div className={'flex flex-col items-center gap-[10px] py-[10px]'}>
+    <div className={'flex min-h-0 w-full flex-1 flex-col gap-2.5 overflow-auto px-5 pb-5 lg:w-[550px] lg:px-7.5'}>
+      <div className={'flex flex-col items-center gap-2.5 py-2.5'}>
         <div className={'h-[80px] w-[80px] rounded-full bg-gray-300 md:h-[120px] md:w-[120px]'}></div>
         <div className={'w-full'}>
           <Text className={'text-[14px] text-gray-600!'}>이름</Text>
@@ -47,7 +43,7 @@ export const MoreUserUpdate = () => {
           </Select>
         </div>
       </div>
-      {/*<Button className={'mt-[30px] text-[12px]! md:text-[16px]!'}>회원정보 수정하기</Button>*/}
+      {/*<Button className={'mt-7.5 text-[12px]! md:text-[16px]!'}>회원정보 수정하기</Button>*/}
     </div>
   )
 }
