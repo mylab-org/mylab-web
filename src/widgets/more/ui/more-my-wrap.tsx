@@ -1,6 +1,7 @@
 'use client'
 
 import { MoreMenuWrap } from './more-menu-wrap'
+import { MoreUserUpdate } from './side/more-user-update'
 import { UserInfo } from '@/entities/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore } from '@/shared/store/useDialogStore'
@@ -9,10 +10,9 @@ import { Button } from '@/shared/ui/button'
 
 interface WrapProps {
   isMaxWidth?: boolean
-  UserUpdate: () => React.JSX.Element
 }
 
-export const MoreMyWrap = ({ isMaxWidth = false, UserUpdate }: WrapProps) => {
+export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
@@ -26,7 +26,10 @@ export const MoreMyWrap = ({ isMaxWidth = false, UserUpdate }: WrapProps) => {
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
       <div className={'flex flex-col gap-2.5 rounded-[12px] bg-white md:p-5'}>
         <UserInfo />
-        <Button className={'text-[12px]! md:text-[16px]!'} onClick={() => openSideModal(UserUpdate, '내 정보 수정')}>
+        <Button
+          className={'text-[12px]! md:text-[16px]!'}
+          onClick={() => openSideModal(MoreUserUpdate, '내 정보 수정')}
+        >
           내 정보 수정
         </Button>
       </div>

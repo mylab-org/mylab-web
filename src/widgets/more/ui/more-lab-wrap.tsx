@@ -1,12 +1,13 @@
 'use client'
 
 import { MoreMenuWrap } from './more-menu-wrap'
+import { MoreLabMember } from './side/more-lab-member'
+import { MoreLabUpdate } from './side/more-lab-update'
 import { LabInfo } from '@/entities/lab'
 import { useConfirmStore } from '@/shared/store'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
-import { MoreLabMember, MoreLabUpdate } from '@/widgets/more-side-content'
 
 interface WrapProps {
   isMaxWidth?: boolean

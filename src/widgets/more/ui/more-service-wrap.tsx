@@ -2,12 +2,13 @@
 
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreToggleWrap } from './more-toggle-wrap'
+import { MoreServiceUse } from './side/more-service-use'
+import { MoreUserPw } from './side/more-user-pw'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useConfirmStore } from '@/shared/store'
 import { useDialogStore } from '@/shared/store/useDialogStore'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { Button } from '@/shared/ui/button'
-import { MoreServiceUse, MoreUserPw } from '@/widgets/more-side-content'
 
 interface WrapProps {
   isMaxWidth?: boolean
