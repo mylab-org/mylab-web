@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import { pretendard } from '../public/fonts/pretendard'
-import { Alert, Confirm } from '@/widgets/modal'
+import { Alert, Confirm, Dialog } from '@/widgets/modal'
 
 export const metadata: Metadata = {
   title: 'MyLab',
@@ -19,6 +19,7 @@ export default function RootLayout({
         {children}
         <Confirm />
         <Alert />
+        <Dialog />
       </body>
     </html>
   )
