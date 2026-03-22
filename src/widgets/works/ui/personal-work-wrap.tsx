@@ -1,6 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { WorkListItem } from '@/entities/works'
+import { Avatar } from '@/shared/ui/avatar'
 import { Text } from '@/shared/ui/text'
 
 export const PersonalWorkWrap = () => {
@@ -12,7 +13,9 @@ export const PersonalWorkWrap = () => {
           className={'flex w-full cursor-pointer items-center justify-between'}
           onClick={() => setIsOpen(prev => !prev)}
         >
-          <Text className={'text-[16px] font-semibold md:text-[20px]'}>김철수</Text>
+          <Avatar src={'/test.png'} alt={'profile'} width={24} height={24} imgClassName={'rounded-full'}>
+            <Text className={'text-[16px] font-semibold md:text-[20px]'}>김철수</Text>
+          </Avatar>
           <Image src={'icon/icon_common_drop.svg'} alt={''} width={16} height={16} />
         </div>
         {isOpen && (
