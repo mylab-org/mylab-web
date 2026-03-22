@@ -1,4 +1,4 @@
-import { Image } from 'next/dist/client/image-component'
+import { Avatar } from '@/shared/ui/avatar'
 import { Text } from '@/shared/ui/text'
 
 export const LabRentalItem = () => {
@@ -8,20 +8,12 @@ export const LabRentalItem = () => {
       <div className={'flex flex-1 flex-col justify-between gap-2.5 lg:px-2.5 lg:py-1.25'}>
         <div className={'flex flex-1 flex-col gap-2.5'}>
           <Text className={'text-[14px] font-bold lg:text-[24px]'}>공용 모니터</Text>
-          <div className={'flex items-center gap-1.25'}>
-            <Image
-              src={'/icon_example.png'}
-              alt={''}
-              width={20}
-              height={20}
-              className={'h-[16px] w-[16px] rounded-full lg:h-[20px] lg:w-[20px]'}
-            />
+          <Avatar src={'/test.png'} alt={'profile'} width={20} height={20} imgClassName={'rounded-full'}>
             <Text className={'text-[10px] font-semibold text-gray-500 lg:text-[14px]'}>
               김철수 대여 | 26.01.05 15:00 ~ 26.01.10 13:00
             </Text>
-          </div>
+          </Avatar>
         </div>
-
         <div className={'flex flex-col gap-1'}>
           <div className={'relative flex h-2.5 overflow-hidden rounded-[24px] bg-gray-400'}>
             <div className={'absolute flex h-2.5 w-1/2 rounded-[24px] bg-blue-500'}></div>

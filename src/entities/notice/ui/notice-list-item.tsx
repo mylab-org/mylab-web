@@ -1,4 +1,4 @@
-import { Image } from 'next/dist/client/image-component'
+import { Avatar } from '@/shared/ui/avatar'
 import { Tag } from '@/shared/ui/tag'
 import { Text } from '@/shared/ui/text'
 
@@ -14,16 +14,9 @@ export const NoticeListItem = () => {
       </Text>
       <div className={'flex items-center justify-between text-[10px] lg:text-[14px]'}>
         <Text className={'text-[#1a1a1a]!'}>2025.12.04(수) 12:31</Text>
-        <div className={'flex items-center gap-1.25'}>
-          <Image
-            src={'/icon_example.png'}
-            alt={''}
-            width={20}
-            height={20}
-            className={'h-[20px] w-[20px] rounded-full bg-gray-300'}
-          />
+        <Avatar src={'/test.png'} width={20} height={20} imgClassName={'rounded-full'}>
           <Text className={'text-[#1a1a1a]!'}>김교수</Text>
-        </div>
+        </Avatar>
       </div>
     </div>
   )
