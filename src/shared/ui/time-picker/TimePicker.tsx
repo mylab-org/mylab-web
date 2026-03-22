@@ -123,7 +123,7 @@ function Wheel({
 }
 
 /* ---------- 메인 컴포넌트 ---------- */
-export default function TimePicker() {
+export const TimePicker = () => {
   const dates = useMemo(() => createDates(), [])
   const hours = useMemo(() => createHours(), [])
   const minutes = useMemo(() => createMinutes(), [])

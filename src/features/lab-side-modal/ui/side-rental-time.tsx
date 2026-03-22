@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
-import TimePicker from '@/widgets/lab/ui/side/TimePicker'
+import { TimePicker } from '@/shared/ui/time-picker'
 
 export const SideRentalTime = () => {
   return (
