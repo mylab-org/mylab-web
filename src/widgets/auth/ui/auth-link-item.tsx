@@ -11,7 +11,7 @@ export const AuthLinkItem = ({ text, title, href }: Props) => {
   return (
     <div>
       <Text className={'text-[12px]'}>{text}</Text>
-      <Button.Link href={href} className={'text-[12px] text-blue-400 lg:text-[12px]'}>
+      <Button.Link href={href} target={'_self'} className={'text-[12px] text-blue-400 lg:text-[12px]'}>
         {title}
       </Button.Link>
     </div>

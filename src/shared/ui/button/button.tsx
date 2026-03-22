@@ -23,7 +23,7 @@ interface ButtonRootProps
 
 interface LinkButtonProps extends BaseButtonProps {
   href: string
-  target?: '_black'
+  target?: '_black' | '_self'
   onClick?: (e: React.MouseEvent) => void
 }
 
@@ -111,6 +111,7 @@ export const ButtonLink = ({
       href={href}
       target={target}
       aria-disabled={disabled}
+      rel="noopener noreferrer"
       className={cn('font-medium', icon && 'flex items-center gap-1.25', rest.className)}
       style={width ? { width } : undefined}
     >
