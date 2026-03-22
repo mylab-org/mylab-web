@@ -7,16 +7,16 @@ interface UserInfoProps {
 
 export const UserInfo = ({ isMain = false }: UserInfoProps) => {
   return (
-    <div className={'flex items-center gap-[10px] rounded-[24px] bg-white p-[20px] md:p-[24px]'}>
+    <div className={'flex items-center gap-2.5 rounded-[24px] bg-white p-5 md:p-6'}>
       {/*<Image src={'icon/icon_main_logo.svg'} alt={'프로필'} width={100} height={100} />*/}
       <div className={'h-[70px] w-[70px] rounded-full bg-gray-300 md:h-[100px] md:w-[100px]'}></div>
-      <div className={`flex flex-col gap-[10px] p-[10px]`}>
-        <div className={`flex gap-[10px] ${isMain ? 'flex-col' : 'flex-row'}`}>
+      <div className={`flex flex-col gap-2.5 p-2.5`}>
+        <div className={`flex gap-2.5 ${isMain ? 'flex-col' : 'flex-row'}`}>
           <div>
             <Text className={'text-[16px] font-bold md:text-[20px]'}>{`홍길동님`}</Text>
             {isMain && <Text className={'text-[16px] font-bold md:text-[20px]'}>{`좋은 아침이에요!`}</Text>}
           </div>
-          <div className={'flex gap-[5px]'}>
+          <div className={'flex gap-1.25'}>
             <Tag.Roll variant={'leader'} />
             <Tag.Roll variant={'doctoral'} />
           </div>

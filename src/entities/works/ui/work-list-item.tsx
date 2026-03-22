@@ -11,11 +11,11 @@ interface WorkListItemProps {
 
 export const WorkListItem = ({ className, type = 'CONFERENCE' }: WorkListItemProps) => {
   return (
-    <div className={cn('flex w-full flex-col gap-[10px] md:w-[373px] md:flex-shrink-0', className)}>
-      <div className={'flex flex-col gap-[5px]'}>
+    <div className={cn('flex w-full flex-col gap-2.5 md:w-[373px] md:shrink-0', className)}>
+      <div className={'flex flex-col gap-1.25'}>
         <Tag.WorkType type={type} />
-        <div className={'flex flex-col gap-[5px]'}>
-          <div className={'flex items-center gap-[5px]'}>
+        <div className={'flex flex-col gap-1.25'}>
+          <div className={'flex items-center gap-1.25'}>
             <Text className={'text-[14px] font-bold lg:text-[18px]'}>2025 한국통신학회 동계종합학술발표회</Text>
           </div>
           <div>
@@ -26,7 +26,7 @@ export const WorkListItem = ({ className, type = 'CONFERENCE' }: WorkListItemPro
           </div>
         </div>
       </div>
-      <div className={'flex flex-col gap-[5px]'}>
+      <div className={'flex flex-col gap-1.25'}>
         <WorkMyProgress type={type} />
       </div>
     </div>

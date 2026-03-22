@@ -32,7 +32,7 @@ export const CalendarWeek = () => {
         {weekDates.map(date => (
           <div key={date.toISOString()} className="flex justify-center">
             <Text
-              className={`flex h-[30px] w-[30px] items-center justify-center rounded-full text-[18px] font-medium ${
+              className={`flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium ${
                 isToday(date) ? 'bg-dark text-white' : 'text-gray-900'
               } `}
             >
