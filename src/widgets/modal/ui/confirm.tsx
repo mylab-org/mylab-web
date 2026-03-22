@@ -2,14 +2,18 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
 import { useConfirmStore } from '@/shared/store'
-import { Button, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 export const Confirm = () => {
   const isOpen = useConfirmStore(state => state.isConfirm)
   const msg = useConfirmStore(state => state.msg)
   const onTrue = useConfirmStore(state => state.onTrue)
   const onFalse = useConfirmStore(state => state.onFalse)
+
+  useLockBodyScroll(isOpen)
 
   useEffect(() => {
     return () => {
@@ -21,7 +25,7 @@ export const Confirm = () => {
     <AnimatePresence>
       {isOpen && (
         <motion.section
-          className={'fixed inset-0 z-10 flex h-dvh w-full items-center justify-center bg-black/10'}
+          className={'fixed inset-0 z-50 flex h-dvh w-full items-center justify-center bg-black/10'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -37,14 +41,14 @@ export const Confirm = () => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className="flex w-full flex-1 items-center justify-center p-[50px]">
+            <div className="flex w-full flex-1 items-center justify-center p-12.5">
               <Text className="font-semibold text-black">{msg}</Text>
             </div>
             <div className="flex w-full">
               <Button className="w-full rounded-none rounded-bl-[20px]" onClick={onTrue}>
                 확 인
               </Button>
-              <Button className="w-full rounded-none rounded-br-[20px]" variant="error" onClick={onFalse}>
+              <Button className="w-full rounded-none rounded-br-[20px]" color="error" onClick={onFalse}>
                 닫 기
               </Button>
             </div>

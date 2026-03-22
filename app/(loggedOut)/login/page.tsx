@@ -1,4 +1,4 @@
-import { LoginPage } from '@/views'
+import { LoginPage } from '@/views/auth/login'
 
 const Login = () => {
   return <LoginPage />

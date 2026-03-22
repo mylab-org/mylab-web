@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import { pretendard } from '../public/fonts/pretendard'
+import { Alert, Confirm, Dialog } from '@/widgets/modal'
 
 export const metadata: Metadata = {
   title: 'MyLab',
@@ -14,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body className="bg-background flex min-h-dvh w-full">{children}</body>
+      <body className="flex min-h-dvh w-full bg-[#f9f9f9]">
+        {children}
+        <Confirm />
+        <Alert />
+        <Dialog />
+      </body>
     </html>
   )
 }

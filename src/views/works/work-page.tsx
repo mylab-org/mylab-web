@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab } from '@/widgets/tab'
+import { Tab } from '@/shared/ui/tab'
 import { ConferenceWorkWrap, MeetingEtcWorkWrap, PersonalWorkWrap } from '@/widgets/works'
 
 const tabs = [
@@ -20,7 +20,7 @@ const tabs = [
 
 export const WorkPage = () => {
   return (
-    <div className={'flex flex-1 flex-col gap-[10px] rounded-[12px] bg-white px-[30px] py-[10px] focus:outline-none'}>
+    <div className={'flex flex-1 flex-col gap-2.5 rounded-[12px] bg-white px-7.5 py-2.5 focus:outline-none'}>
       <Tab tabs={tabs} />
     </div>
   )

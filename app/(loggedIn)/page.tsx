@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { MainPage, MobileMainPage } from '@/views'
+import { MainPage, MobileMainPage } from '@/views/home'
 
 export default async function Home() {
   const h = await headers()

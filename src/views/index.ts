@@ -1,7 +1,0 @@
-export { LoginPage } from './auth/LoginPage'
-export { RegistPage } from './auth/RegistPage'
-export { SurveyPage } from './auth/SurveyPage'
-export { InviteLabPage } from './auth/InviteLabPage'
-export { EmailValidatePage } from './auth/EmailValidatePage'
-export { MainPage } from './MainPage'
-export { MobileMainPage } from './mobile-main-page'

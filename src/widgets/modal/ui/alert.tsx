@@ -1,15 +1,18 @@
 'use client'
 
-import clsx from 'clsx'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
 import { useAlertStore } from '@/shared/store'
-import { Button, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 export const Alert = () => {
   const isOpen = useAlertStore(state => state.isAlert)
   const msg = useAlertStore(state => state.msg)
   const onCloseAlert = useAlertStore(state => state.onCloseAlert)
+
+  useLockBodyScroll(isOpen)
 
   useEffect(() => {
     return () => {
@@ -22,7 +25,7 @@ export const Alert = () => {
       {isOpen && (
         <motion.section
           // className={clsx('fixed inset-0 z-[2000] flex h-[100dvh] w-full items-center justify-center bg-black/50')}
-          className={'fixed inset-0 z-10 flex h-dvh w-full items-center justify-center bg-black/10'}
+          className={'fixed inset-0 z-50 flex h-dvh w-full items-center justify-center bg-black/10'}
           onClick={onCloseAlert}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -39,7 +42,7 @@ export const Alert = () => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className="flex w-full flex-1 items-center justify-center p-[30px]">
+            <div className="flex w-full flex-1 items-center justify-center p-7.5">
               <Text className="text-center font-semibold whitespace-pre-line text-black">{msg}</Text>
             </div>
             <Button className="w-full rounded-none rounded-b-[20px]">확인</Button>

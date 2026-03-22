@@ -2,9 +2,10 @@
 
 import { type ChangeEvent, useActionState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { handleRegistAction } from '@/features/auth/regist/model/regist-action'
-import type { Regist } from '@/features/auth/regist/model/types'
-import { Button, FloatingLabel } from '@/shared/ui'
+import { handleRegistAction } from '../model/regist-action'
+import { Button } from '@/shared/ui/button'
+import { FloatingLabel } from '@/shared/ui/floating-label'
+import type { Regist } from '../model/types'
 
 type Props = {
   data: Regist
@@ -27,13 +28,13 @@ export const RegistForm = ({ data, onChange }: Props) => {
 
   return (
     <form
-      id={'regist-form'}
+      id={'signup-form'}
       // onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
       //   e.preventDefault()
       //   dispatch(new FormData(e.currentTarget))
       // }}
       onSubmit={handleSubmit(onSubmit)}
-      className={'flex w-[400px] flex-col gap-[30px]'}
+      className={'flex w-[400px] flex-col gap-7.5'}
     >
       <FloatingLabel
         labelName={'이름'}
@@ -65,7 +66,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
         isError={!!errors.passwordCheck}
         errorMsg={errors.passwordCheck?.message}
       />
-      <Button form={'regist-form'}>가입하기</Button>
+      <Button form={'signup-form'}>가입하기</Button>
     </form>
   )
 }

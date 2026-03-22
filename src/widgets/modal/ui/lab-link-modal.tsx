@@ -1,6 +1,13 @@
+'use client'
+
 import { motion, AnimatePresence } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
-import { Button, Input, Text } from '@/shared/ui'
+
+import { useEffect } from 'react'
+import { useLockBodyScroll } from '@/shared/model'
+import { Button } from '@/shared/ui/button'
+import { Input } from '@/shared/ui/input'
+import { Text } from '@/shared/ui/text'
 
 interface LabLinkModal {
   onClose?: () => void
@@ -14,12 +21,20 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
     }
   }
 
+  useLockBodyScroll(isOpen)
+
+  useEffect(() => {
+    return () => {
+      onClose?.()
+    }
+  }, [])
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.section
           onClick={handleClose}
-          className={'fixed inset-0 z-10 flex h-dvh w-full items-center justify-center bg-black/10'}
+          className={'fixed inset-0 z-50 flex h-dvh w-full items-center justify-center bg-black/10'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -35,9 +50,9 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className={'flex w-[300px] flex-col gap-[10px] p-[30px] md:w-[600px]'}>
+            <div className={'flex w-[300px] flex-col gap-2.5 p-7.5 md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
-                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
+                <h3 className={'text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
                 <Image
                   src={'icon/x.svg'}
                   alt={''}
@@ -47,8 +62,8 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
                   onClick={onClose}
                 />
               </div>
-              <form className={'flex flex-col gap-[10px]'}>
-                <Text className={'text-[12px] font-medium text-gray-600! md:text-[14px]'}>
+              <form className={'flex flex-col gap-2.5'}>
+                <Text className={'text-[12px] font-medium text-gray-600 md:text-[14px]'}>
                   추가할 링크 정보를 입력해주세요
                 </Text>
                 <Input placeholder={'링크 제목'} />

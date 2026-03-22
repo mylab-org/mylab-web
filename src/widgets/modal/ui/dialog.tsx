@@ -1,7 +1,11 @@
+'use client'
+
 import { AnimatePresence, motion } from 'framer-motion'
 import { Image } from 'next/dist/client/image-component'
+import { useLockBodyScroll } from '@/shared/model'
 import { useDialogStore } from '@/shared/store/useDialogStore'
-import { Button, Input, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 export const Dialog = () => {
   const btnText = useDialogStore(state => state.btnText)
@@ -9,6 +13,8 @@ export const Dialog = () => {
   const isOpen = useDialogStore(state => state.isOpen)
   const closeDialogModal = useDialogStore(state => state.closeDialogModal)
   const callback = useDialogStore(state => state.callback)
+
+  useLockBodyScroll(isOpen)
 
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
@@ -37,9 +43,9 @@ export const Dialog = () => {
               ease: [0.22, 1, 0.36, 1], // iOS 느낌
             }}
           >
-            <div className={'flex w-[300px] flex-col p-[20px] md:w-[600px]'}>
+            <div className={'flex w-[300px] flex-col p-5 md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
-                <h3 className={'font-pretendard text-[16px] font-bold lg:text-[20px]'}>{item.title}</h3>
+                <h3 className={'text-[16px] font-bold lg:text-[20px]'}>{item.title}</h3>
                 <Image
                   src={'icon/x.svg'}
                   alt={''}
@@ -49,7 +55,7 @@ export const Dialog = () => {
                   onClick={handleClose}
                 />
               </div>
-              <div className={'flex flex-col gap-[10px] py-[20px]'}>
+              <div className={'flex flex-col gap-2.5 py-5'}>
                 <Text className={'text-[12px] font-medium whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
                   {item.description}
                 </Text>

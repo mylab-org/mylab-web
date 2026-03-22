@@ -2,7 +2,7 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Text } from '@/shared/ui'
+import { Text } from '@/shared/ui/text'
 
 interface MeetEtcCardProps {
   id: string
@@ -28,13 +28,11 @@ export const MeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
       {...listeners}
       className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px] ${type === 'MEET' ? 'border-red-500' : 'border-violet-500'}`}
     >
-      <div className={'flex w-full flex-col gap-[5px]'}>
+      <div className={'flex w-full flex-col gap-1.25'}>
         {/*<Tag.WorkType type={type} />*/}
-        <h5 className={'font-pretendard text-[14px] font-semibold md:text-[18px]'}>
-          주어진 오토인코더 논문 리뷰 PPT 제작
-        </h5>
+        <h5 className={'text-[14px] font-semibold md:text-[18px]'}>주어진 오토인코더 논문 리뷰 PPT 제작</h5>
       </div>
-      <div className={'flex w-full flex-col gap-[5px]'}>
+      <div className={'flex w-full flex-col gap-1.25'}>
         <Text className={'text-[12px] font-normal md:text-[16px]'}>26.02.04(수) ~ 26.02.06(금)</Text>
         <Text className={'text-[12px] font-normal md:text-[16px]'}>설명</Text>
       </div>

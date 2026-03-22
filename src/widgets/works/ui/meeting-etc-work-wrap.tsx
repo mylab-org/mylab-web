@@ -15,10 +15,10 @@ import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { Image } from 'next/dist/client/image-component'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { Container } from './container'
+import { WorkCreateContent } from './side/work-create-content'
 import { MeetEtcCard } from '@/entities/works'
 import { useSideModalStore } from '@/shared/store'
-import { WorkCreateContent } from '@/widgets/work-side-content'
-import { Container } from '@/widgets/works/ui/container'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
@@ -150,7 +150,7 @@ export const MeetingEtcWorkWrap = () => {
       onDragEnd={handleDragEnd}
     >
       {/* 반응형 레이아웃: 기본 flex-col(모바일), md 이상 flex-row(PC) */}
-      <section className="relative flex flex-1 flex-col gap-[30px] overflow-x-auto p-[10px] md:flex-row md:items-start md:justify-start">
+      <section className="relative flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
         {/* 드래그 중 배경 어둡게 */}
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
@@ -162,7 +162,7 @@ export const MeetingEtcWorkWrap = () => {
           <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={false}>
             <div className="flex items-center justify-between">
               <h4
-                className={`font-pretendard text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
+                className={`text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
                   isDragging ? 'text-white' : 'text-black'
                 }`}
               >
@@ -174,9 +174,7 @@ export const MeetingEtcWorkWrap = () => {
                   alt="add"
                   width={30}
                   height={30}
-                  className={`h-[24px] w-[24px] cursor-pointer md:h-[30px] md:w-[30px] ${
-                    isDragging ? 'opacity-0' : 'opacity-100'
-                  }`}
+                  className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
                   onClick={() => openSideModal(WorkCreateContent, '업무 생성')}
                 />
               )}

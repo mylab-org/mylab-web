@@ -14,8 +14,9 @@ import {
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { Container } from './container'
+import { WorkConferenceDetail } from './side/work-conference-detail'
 import { ConferenceCard } from '@/entities/works'
-import { Container } from '@/widgets/works/ui/container'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
@@ -150,7 +151,7 @@ export const ConferenceWorkWrap = () => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <section className="relative flex flex-1 flex-col gap-[30px] overflow-x-auto p-[10px] md:flex-row md:items-start md:justify-start">
+      <section className="relative flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
         {/* 드래그 배경 오버레이 */}
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
@@ -160,7 +161,7 @@ export const ConferenceWorkWrap = () => {
 
         {Object.entries(data).map(([columnId, items]) => (
           <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
-            <h4 className={`font-pretendard text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
+            <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
               {columnId === 'READY' && '연구 준비'}
               {columnId === 'PROGRESS' && '실험 진행'}
               {columnId === 'DRAFT' && '초안 작성'}
@@ -176,7 +177,12 @@ export const ConferenceWorkWrap = () => {
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               {/* Conference 전용 카드 렌더링 */}
-              <ConferenceCard id={'eee'} isDeadLine={activeItem.isDeadLine} isEnd={activeItem.isEnd} />
+              <ConferenceCard
+                id={'eee'}
+                isDeadLine={activeItem.isDeadLine}
+                isEnd={activeItem.isEnd}
+                detailComponent={WorkConferenceDetail}
+              />
             </div>
           ) : null}
         </DragOverlay>,

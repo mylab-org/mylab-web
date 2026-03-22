@@ -1,0 +1,1 @@
+export { InviteLabPage } from './InviteLabPage'

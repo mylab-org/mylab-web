@@ -4,9 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useActionState } from 'react'
 import { useForm } from 'react-hook-form'
+import { type LoginFormValues, LoginSchema } from '../model/login.schema'
 import { handleLoginAction } from '@/features/auth/login/model/login-action'
-import { type LoginFormValues, LoginSchema } from '@/features/auth/login/model/login.schema'
-import { Button, FloatingLabel } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { FloatingLabel } from '@/shared/ui/floating-label'
 
 type LoginFormState = {
   email: string
@@ -58,7 +59,7 @@ export const LoginForm = () => {
       //   dispatch(new FormData(e.currentTarget))
       // }}
       onSubmit={handleSubmit(onSubmit)}
-      className={'border-red flex w-[400px] flex-col gap-[30px]'}
+      className={'border-red flex w-[400px] flex-col gap-7.5'}
     >
       <FloatingLabel
         labelName={'이메일'}
@@ -84,7 +85,7 @@ export const LoginForm = () => {
         isError={!!errors.password}
         errorMsg={errors.password?.message}
       />
-      <Button variant={'primary'}>로그인</Button>
+      <Button>로그인</Button>
     </form>
   )
 }

@@ -1,4 +1,5 @@
-import { LinkText, Text } from '@/shared/ui'
+import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
 
 type Props = {
   title: string
@@ -10,9 +11,9 @@ export const AuthLinkItem = ({ text, title, href }: Props) => {
   return (
     <div>
       <Text className={'text-[12px]'}>{text}</Text>
-      <LinkText href={href} className={'text-[12px]'}>
+      <Button.Link href={href} target={'_self'} className={'text-[12px] text-blue-400 lg:text-[12px]'}>
         {title}
-      </LinkText>
+      </Button.Link>
     </div>
   )
 }

@@ -8,7 +8,7 @@ import {
   SideWeek,
   SideWork,
   SideMember,
-} from '@/widgets/lab-side-content'
+} from '@/widgets/lab'
 import type { ComponentType, SVGProps } from 'react'
 import BoardIcon from '@/../public/icon/icon_gnb_board.svg'
 import CalenderIcon from '@/../public/icon/icon_gnb_calendar.svg'

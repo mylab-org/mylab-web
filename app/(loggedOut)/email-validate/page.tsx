@@ -1,4 +1,4 @@
-import { EmailValidatePage } from '@/views'
+import { EmailValidatePage } from '@/views/auth/email-validate'
 
 const EmailValidate = () => {
   return <EmailValidatePage />
