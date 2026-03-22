@@ -1,12 +1,13 @@
 'use client'
 
 import { MoreMenuWrap } from './more-menu-wrap'
-import { MoreToggleWrap } from './more-toggle-wrap'
 import { MoreServiceUse } from './side/more-service-use'
 import { MoreUserPw } from './side/more-user-pw'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
+import { Text } from '@/shared/ui/text'
+import { ToggleSwitch } from '@/shared/ui/toggle-switch'
 
 interface WrapProps {
   isMaxWidth?: boolean
@@ -36,13 +37,27 @@ export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
             </div>
           </div>
           <div className={'flex flex-col gap-2.5'}>
-            <MoreToggleWrap
-              title={'업무 시간 외 알림 금지 설정'}
-              description={'9시 ~ 18시 외 발생하는 푸시알림 유무를 선택합니다.'}
+            <ToggleSwitch
+              isSwitch={true}
+              onSwitch={() => {}}
+              isBetween
+              title={<Text className={'text-[12px] font-bold md:text-[16px]'}>업무 시간 외 알림 금지 설정</Text>}
+              description={
+                <Text className={'text-[10px] font-medium text-gray-600! md:text-[14px]'}>
+                  9시 ~ 18시 외 발생하는 푸시알림 유무를 선택합니다.
+                </Text>
+              }
             />
-            <MoreToggleWrap
-              title={'자정 시간 알림 금지 설정'}
-              description={'0시 ~ 6시까지 발생하는 푸시알림 유무를 선택합니다.'}
+            <ToggleSwitch
+              isSwitch={true}
+              onSwitch={() => {}}
+              isBetween
+              title={<Text className={'text-[12px] font-bold md:text-[16px]'}>자정 시간 알림 금지 설정</Text>}
+              description={
+                <Text className={'text-[10px] font-medium text-gray-600! md:text-[14px]'}>
+                  0시 ~ 6시까지 발생하는 푸시알림 유무를 선택합니다.
+                </Text>
+              }
             />
           </div>
         </div>
