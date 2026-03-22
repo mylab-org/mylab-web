@@ -2,10 +2,10 @@
 
 import { type ChangeEvent, useActionState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { handleRegistAction } from '@/features/auth/regist/model/regist-action'
-import type { Regist } from '@/features/auth/regist/model/types'
+import { handleRegistAction } from '../model/regist-action'
 import { Button } from '@/shared/ui/button'
 import { FloatingLabel } from '@/shared/ui/floating-label'
+import type { Regist } from '../model/types'
 
 type Props = {
   data: Regist
@@ -34,7 +34,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
       //   dispatch(new FormData(e.currentTarget))
       // }}
       onSubmit={handleSubmit(onSubmit)}
-      className={'flex w-[400px] flex-col gap-[30px]'}
+      className={'flex w-[400px] flex-col gap-7.5'}
     >
       <FloatingLabel
         labelName={'이름'}

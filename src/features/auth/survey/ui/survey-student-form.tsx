@@ -2,13 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import type { SurveyStudentValues } from '@/features/auth/survey/model/survey.schema'
-import { SurveyStudentSchema } from '@/features/auth/survey/model/survey.schema'
+import { SurveyStudentSchema } from '../model/survey.schema'
 import { useModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/button'
 import { FloatingLabel } from '@/shared/ui/floating-label'
 import { Text } from '@/shared/ui/text'
 import { StuLabModal } from '@/widgets/modal'
+import type { SurveyStudentValues } from '../model/survey.schema'
 
 export const StudentForm = () => {
   const isStuModal = useModalStore(state => state.isStuModal)
@@ -35,7 +35,7 @@ export const StudentForm = () => {
       <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실에 참여하세요'}</Text>
       <form
         id={'join-lab-form'}
-        className={'flex w-[400px] flex-col gap-[20px]'}
+        className={'flex w-[400px] flex-col gap-5'}
         onSubmit={handleSubmit(data => {
           console.log(data)
           setError('labCode', {

@@ -8,8 +8,8 @@ import { Text } from '@/shared/ui/text'
 export const SideDataPost = () => {
   return (
     <div className={'flex flex-1 flex-col'}>
-      <form action="" className={'flex flex-col gap-[10px] py-[20px]'}>
-        <div className={'flex gap-[20px]'}>
+      <form action="" className={'flex flex-col gap-2.5 py-5'}>
+        <div className={'flex gap-5'}>
           <Radio id={'type1'} value={'professor'} title={'논문 및 저널'} />
           <Radio id={'type2'} value={'student'} title={'연구 참고 자료'} />
         </div>
@@ -17,7 +17,7 @@ export const SideDataPost = () => {
         <Input placeholder={'자료 링크'} />
         <div
           className={
-            'flex h-[165px] flex-col items-center justify-center gap-[10px] rounded-[16px] border border-4 border-dotted border-gray-300 bg-gray-100'
+            'flex h-[165px] flex-col items-center justify-center gap-2.5 rounded-[16px] border-4 border-dotted border-gray-300 bg-gray-100'
           }
         >
           <Image src={'/icon/icon_main_file.svg'} alt={''} width={30} height={30} />
@@ -26,7 +26,7 @@ export const SideDataPost = () => {
           </Text>
         </div>
       </form>
-      <Button className={'mt-[10px] mb-[20px]'}>비품 신청하기</Button>
+      <Button className={'mt-2.5 mb-5'}>비품 신청하기</Button>
     </div>
   )
 }

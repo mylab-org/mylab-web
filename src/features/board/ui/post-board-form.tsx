@@ -5,20 +5,20 @@ import { Textarea } from '@/shared/ui/textarea'
 
 export const PostBoardForm = () => {
   return (
-    <form className={'flex flex-col gap-[10px] border border-gray-300'}>
+    <form className={'flex flex-col gap-2.5 border border-gray-300'}>
       <input
         type="text"
         className={
-          'border-b border-b-gray-300 p-[10px] text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
+          'border-b border-b-gray-300 p-2.5 text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
         }
         placeholder={'제목'}
       />
       <Textarea
-        className={'h-[100px] px-[10px] text-[12px] lg:h-[200px] lg:text-[16px]'}
+        className={'h-[100px] px-2.5 text-[12px] lg:h-[200px] lg:text-[16px]'}
         placeholder={'홍길동 님의 소식을 전해주세요'}
       />
       <div className={'flex flex-col border-t border-t-gray-300'}>
-        <div className={'flex gap-[5px] px-[10px] pt-[10px]'}>
+        <div className={'flex gap-1.25 px-2.5 pt-2.5'}>
           <div className={'h-[40px] w-[40px] border border-gray-300 lg:h-[80px] lg:w-[80px]'}></div>
           <div
             className={
@@ -28,7 +28,7 @@ export const PostBoardForm = () => {
             <Image src={'/icon/icon_board_add.svg'} alt={''} width={24} height={24} />
           </div>
         </div>
-        <div className={'flex gap-[20px] p-[10px]'}>
+        <div className={'flex gap-5 p-2.5'}>
           <CheckBox title="익명" />
           <Image
             src={'/icon/icon_main_img.svg'}
