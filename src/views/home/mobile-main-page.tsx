@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { LabInfo } from '@/entities/lab/ui/lab-info'
+import { LabInfo } from '@/entities/lab'
 import { UserInfo } from '@/entities/user'
 import { LabLink } from '@/widgets/lab'
 import { LabMenuWrapper } from '@/widgets/menu'

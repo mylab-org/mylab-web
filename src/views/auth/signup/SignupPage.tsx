@@ -24,7 +24,7 @@ export const SignupPage = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className={'flex flex-col gap-[30px]'}>
+      <div className={'flex flex-col gap-7.5'}>
         <RegistRole />
         <RegistForm data={data} onChange={handleChangeData} />
         <footer>

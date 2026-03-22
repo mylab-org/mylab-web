@@ -3,7 +3,7 @@ import { AuthLinkItem } from '@/widgets/auth'
 
 export const LoginPage = () => {
   return (
-    <div className={'flex flex-col gap-[20px]'}>
+    <div className={'flex flex-col gap-5'}>
       <LoginForm />
       <footer>
         <AuthLinkItem title={'회원가입하러 가기'} text={'MyLab이 처음이신가요?'} href={'/signup'} />

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
-import { LabInfo } from '@/entities/lab/ui/lab-info'
+import { LabInfo } from '@/entities/lab'
 import { UserInfo } from '@/entities/user'
 import { WorkListItem } from '@/entities/works'
 import { LabLink, LabMember } from '@/widgets/lab'

@@ -3,7 +3,7 @@ import { AuthLinkItem } from '@/widgets/auth'
 
 export const SurveyPage = () => {
   return (
-    <div className={'flex flex-col gap-[20px]'}>
+    <div className={'flex flex-col gap-4'}>
       <StudentForm />
       {/*<ProfessorForm />*/}
       <footer>
