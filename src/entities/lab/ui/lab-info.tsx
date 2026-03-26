@@ -3,11 +3,14 @@ import { Text } from '@/shared/ui/text'
 
 interface LabIntroProps {
   className?: string
+  isShadow?: boolean
 }
 
-export const LabInfo = ({ className }: LabIntroProps) => {
+export const LabInfo = ({ className, isShadow = false }: LabIntroProps) => {
   return (
-    <div className={`flex flex-col gap-3.5 rounded-[24px] bg-white ${className}`}>
+    <div
+      className={`flex flex-col gap-3.5 rounded-[24px] bg-white ${isShadow && 'shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]'} ${className} `}
+    >
       <h3 className={'text-[18px] leading-8 font-bold text-blue-600 md:text-[24px]'}>마이랩 연구실</h3>
       <div className={'flex flex-wrap gap-1.5'}>
         <Tag.Lab>무선 네트워크</Tag.Lab>

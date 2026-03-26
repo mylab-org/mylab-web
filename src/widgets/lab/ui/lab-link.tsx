@@ -10,7 +10,11 @@ interface LabLinkProps {
 
 export const LabLink = ({ setIsOpen }: LabLinkProps) => {
   return (
-    <div className={'flex flex-col gap-3.5 rounded-[24px] bg-white p-5 md:p-6'}>
+    <div
+      className={
+        'flex flex-col gap-3.5 rounded-[24px] bg-white p-5 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] md:p-6'
+      }
+    >
       <div className={'flex items-center justify-between'}>
         <h3 className={'text-[18px] leading-8 font-bold md:text-[24px]'}>링크</h3>
         <Image

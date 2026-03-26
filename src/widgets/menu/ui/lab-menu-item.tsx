@@ -10,7 +10,7 @@ export const LabTopMenu = ({ children, name, onClick }: LabTopMenu) => {
   return (
     <div
       className={
-        'flex w-[150px] flex-1 cursor-pointer flex-col items-center justify-center gap-1.25 rounded-[8px] bg-white p-1.25 md:rounded-[24px] md:px-5 md:py-2.5'
+        'flex w-[150px] flex-1 cursor-pointer flex-col items-center justify-center gap-1.25 rounded-[8px] bg-white p-1.25 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] md:rounded-[24px] md:px-5 md:py-2.5'
       }
       onClick={onClick}
     >
