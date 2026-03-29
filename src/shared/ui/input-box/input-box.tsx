@@ -29,7 +29,6 @@ export const InputBox = forwardRef<HTMLInputElement, InputBoxProps>(
           {...props}
           ref={ref}
           id={inputId}
-          type="text"
           className={cn(
             'w-full rounded-2xl border-2 px-5 py-4.5 text-sm font-medium transition-all outline-none focus:ring-0',
             isError

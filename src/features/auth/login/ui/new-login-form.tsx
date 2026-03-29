@@ -1,41 +1,12 @@
 import React from 'react'
 import { Button } from '@/shared/ui/button'
+import { InputBox } from '@/shared/ui/input-box'
 
 export const NewLoginForm = () => {
   return (
-    <form className="space-y-6" onSubmit={e => e.preventDefault()}>
-      <div className="group relative">
-        <label
-          htmlFor="id"
-          className="group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors"
-        >
-          이메일
-        </label>
-        <input
-          type="text"
-          id="id"
-          name="id"
-          placeholder="학번 또는 아이디를 입력하세요"
-          className="focus:border-main w-full rounded-2xl border-2 border-gray-100 px-5 py-4.5 text-sm font-medium transition-all outline-none placeholder:text-gray-300 focus:ring-0"
-        />
-      </div>
-
-      <div className="group relative">
-        <label
-          htmlFor="password"
-          className="group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors"
-        >
-          비밀번호
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="비밀번호를 입력하세요"
-          className="focus:border-main w-full rounded-2xl border-2 border-gray-100 px-5 py-4.5 text-sm font-medium transition-all outline-none placeholder:text-gray-300 focus:ring-0"
-        />
-      </div>
-
+    <form id={'login-form'} className="space-y-6" onSubmit={e => e.preventDefault()}>
+      <InputBox labelName={'이메일'} placeholder={'이메일을 입력하세요'} />
+      <InputBox type={'password'} labelName={'비밀번호'} placeholder={'비밀번호를 입력하세요'} />
       <Button
         type="submit"
         color={'main'}

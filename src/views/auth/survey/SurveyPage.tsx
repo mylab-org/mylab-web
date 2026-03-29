@@ -1,16 +1,12 @@
 import { NewSurveyProfessorForm, NewSurveyStudentForm, ProfessorForm, StudentForm } from '@/features/auth/survey'
-import { AuthLinkItem } from '@/widgets/auth'
 
 export const SurveyPage = () => {
   return (
-    <div className={'flex flex-col gap-4'}>
+    <div className={'flex h-full flex-col gap-4'}>
       {/*<StudentForm />*/}
       {/*<ProfessorForm />*/}
       {/*<NewSurveyStudentForm />*/}
       <NewSurveyProfessorForm />
-      {/*<footer>*/}
-      {/*  <AuthLinkItem title={'로그인하러 가기'} text={'이미 계정이 있으신가요?'} href={'/login'} />*/}
-      {/*</footer>*/}
     </div>
   )
 }

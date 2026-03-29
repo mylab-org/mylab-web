@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { SurveyProfessorSchema } from '../model/survey.schema'
 import { Button } from '@/shared/ui/button'
-import { FloatingLabel } from '@/shared/ui/floating-label'
+import { InputBox } from '@/shared/ui/input-box'
 import { Text } from '@/shared/ui/text'
 import type { SurveyProfessorValues } from '../model/survey.schema'
 
@@ -20,57 +20,30 @@ export const NewSurveyProfessorForm = () => {
   return (
     <>
       <Text className={'text-[24px] font-bold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실을 생성하세요'}</Text>
-      <form id={'create-lab-form'} action="" className={'flex w-full flex-col gap-5'}>
-        {/*<FloatingLabel labelName={'학교 이름'} {...register('schoolName')} />*/}
-        {/*<FloatingLabel labelName={'학과 이름'} {...register('departmentName')} />*/}
-        {/*<FloatingLabel labelName={'연구실 이름'} {...register('labName')} />*/}
-        <div className="group relative">
-          <label
-            htmlFor="id"
-            className="group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors"
-          >
-            학교명
-          </label>
-          <input
-            type="text"
-            {...register('schoolName')}
-            placeholder="학교명을 입력하세요"
-            className="focus:border-main w-full rounded-2xl border-2 border-gray-100 px-5 py-4.5 text-sm font-medium transition-all outline-none placeholder:text-gray-300 focus:ring-0"
-          />
-        </div>
-        <div className="group relative">
-          <label
-            htmlFor="id"
-            className="group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors"
-          >
-            학과명
-          </label>
-          <input
-            type="text"
-            {...register('departmentName')}
-            placeholder="학과명을 입력하세요"
-            className="focus:border-main w-full rounded-2xl border-2 border-gray-100 px-5 py-4.5 text-sm font-medium transition-all outline-none placeholder:text-gray-300 focus:ring-0"
-          />
-        </div>
-        <div className="group relative">
-          <label
-            htmlFor="id"
-            className="group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase transition-colors"
-          >
-            연구실명
-          </label>
-          <input
-            type="text"
-            {...register('labName')}
-            placeholder="연구실명을 입력하세요"
-            className="focus:border-main w-full rounded-2xl border-2 border-gray-100 px-5 py-4.5 text-sm font-medium transition-all outline-none placeholder:text-gray-300 focus:ring-0"
-          />
-        </div>
+      <form id={'create-lab-form'} action="" className={'flex h-full w-full flex-col gap-5'}>
+        <Text className={'text-[14px] font-semibold'}>연구실 검토는 평균 2일 이내에 처리됩니다.</Text>
+        <InputBox labelName={'학교명'} {...register('schoolName')} placeholder={'학교명을 입력하세요'} />
+        <InputBox labelName={'학과명'} {...register('departmentName')} placeholder={'학과명을 입력하세요'} />
+        <InputBox labelName={'연구실명'} {...register('labName')} placeholder={'연구실명을 입력하세요'} />
+        <Button
+          form={'create-lab-form'}
+          disabled={!isValid}
+          className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
+          icon={
+            <svg
+              className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          }
+          iconPosition={'after'}
+        >
+          연구실 참여하기
+        </Button>
       </form>
-      <Button form={'create-lab-form'} disabled={!isValid}>
-        연구실 생성하기
-      </Button>
-      <Text className={'text-[14px] font-semibold'}>연구실 검토는 평균 2일 이내에 처리됩니다.</Text>
     </>
   )
 }

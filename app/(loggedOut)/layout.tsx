@@ -17,12 +17,10 @@ export default async function AuthLayout({
 }>) {
   const h = await headers()
   const ua = h.get('user-agent') ?? ''
-  // console.log('eee', ua, /Android|iPhone|iPad|iPod|Mobile/i.test(ua))
   if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
     return (
-      <main className={'flex w-full flex-1 flex-col items-center justify-center gap-[30px] overscroll-auto bg-white'}>
-        <h1 className={'w-[400px] text-[48px] font-bold text-gray-900'}>MyLab</h1>
-        {children}
+      <main className={'flex w-full flex-col items-center justify-center overscroll-auto bg-white'}>
+        <div className={'flex h-full w-full flex-col lg:w-4xl'}>{children}</div>
       </main>
     )
   } else {
@@ -84,12 +82,12 @@ export default async function AuthLayout({
           </div>
 
           {/* 오른쪽 섹션: 로그인 폼 */}
-          <div className="flex flex-col justify-center bg-white p-10 md:w-[55%] md:p-20">
+          <div className="flex flex-col justify-center bg-white p-10 md:relative md:w-[55%] md:p-20">
             <div className="mb-14 flex flex-col">
               <div className="mb-2 flex items-center space-x-3">
                 <Image src={'/MyLab_Logo.png'} alt={'MyLab'} width={40} height={40} />
                 <span className="text-2xl font-black tracking-tighter text-gray-900">
-                  My<b className={'text-blue-700'}>Lab</b>
+                  My<b className={'text-[#2562CD]'}>Lab</b>
                 </span>
               </div>
               <p className="ml-1 flex items-center text-xs font-medium text-gray-600">
