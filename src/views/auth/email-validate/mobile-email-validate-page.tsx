@@ -1,10 +1,11 @@
 import { Button } from '@/shared/ui/button'
 import { Text } from '@/shared/ui/text'
+import { MobileAuthHeader } from '@/widgets/header'
 
 export const MobileEmailValidatePage = () => {
   return (
     <>
-      <header className={'h-[60px] px-4 py-2.5'}></header>
+      <MobileAuthHeader />
       <div className={'flex flex-1 flex-col gap-7.5 px-7.5 pb-5'}>
         <h1 className={'text-[22px] font-bold'}>인증메일 발송</h1>
         <div className={'flex h-full w-full flex-col gap-5'}>
