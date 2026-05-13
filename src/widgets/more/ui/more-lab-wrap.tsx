@@ -10,15 +10,18 @@ import { Text } from '@/shared/ui/text'
 
 interface WrapProps {
   isMaxWidth?: boolean
+  isMobile?: boolean
 }
 
-export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
+export const MoreLabWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
 
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
-      <div className={'flex flex-col gap-5 rounded-[12px] bg-white md:p-6'}>
+      <div
+        className={`flex flex-col gap-5 rounded-[12px] bg-white ${isMobile ? 'p-3' : 'p-5'} shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]`}
+      >
         <div className={'flex flex-col gap-3.5'}>
           <LabInfo />
           <Button
@@ -43,7 +46,7 @@ export const MoreLabWrap = ({ isMaxWidth = false }: WrapProps) => {
           </Button>
         </div>
       </div>
-      <MoreMenuWrap title={'연구원 관리'}>
+      <MoreMenuWrap title={'연구원 관리'} isMobile={isMobile}>
         <>
           <Text className={'text-[10px] font-medium whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
             {`연구실에 가입된 인원들을 관리할 수 있어요.\n랩장 권한 설정, 학적 변경이 가능합니다.`}

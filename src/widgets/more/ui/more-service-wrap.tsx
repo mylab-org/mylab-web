@@ -11,9 +11,10 @@ import { ToggleSwitch } from '@/shared/ui/toggle-switch'
 
 interface WrapProps {
   isMaxWidth?: boolean
+  isMobile?: boolean
 }
 
-export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
+export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
@@ -26,7 +27,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
 
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
-      <MoreMenuWrap title={'서비스 설정'}>
+      <MoreMenuWrap title={'서비스 설정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <div>
             <h5 className={'text-[12px] font-bold md:text-[16px]'}>테마 설정</h5>
@@ -62,13 +63,13 @@ export const MoreServiceWrap = ({ isMaxWidth = false }: WrapProps) => {
           </div>
         </div>
       </MoreMenuWrap>
-      <MoreMenuWrap title={'이용 안내'}>
+      <MoreMenuWrap title={'이용 안내'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu onClick={() => openSideModal(MoreServiceUse, '서비스 이용약관')}>서비스 이용약관</Button.Menu>
           <Button.Menu>1:1 문의내역</Button.Menu>
         </div>
       </MoreMenuWrap>
-      <MoreMenuWrap title={'계정'}>
+      <MoreMenuWrap title={'계정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu onClick={() => openSideModal(MoreUserPw, '비밀번호 변경')}>비밀번호 변경</Button.Menu>
           <Button.Menu onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => console.log('로그아웃'))}>

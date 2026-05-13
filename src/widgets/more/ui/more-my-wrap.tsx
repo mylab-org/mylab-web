@@ -9,9 +9,10 @@ import { Button } from '@/shared/ui/button'
 
 interface WrapProps {
   isMaxWidth?: boolean
+  isMobile?: boolean
 }
 
-export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
+export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
@@ -23,7 +24,9 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
 
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
-      <div className={'flex flex-col gap-2.5 rounded-[12px] bg-white md:p-5'}>
+      <div
+        className={`flex flex-col gap-2.5 rounded-[12px] bg-white ${isMobile ? 'p-3' : 'p-5'} shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]`}
+      >
         <UserInfo />
         <Button
           className={'text-[12px]! md:text-[16px]!'}
@@ -32,7 +35,7 @@ export const MoreMyWrap = ({ isMaxWidth = false }: WrapProps) => {
           내 정보 수정
         </Button>
       </div>
-      <MoreMenuWrap title={'나의 활동'}>
+      <MoreMenuWrap title={'나의 활동'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu>내 비품 대여 내역</Button.Menu>
           <Button.Menu>내 비품 신청 내역</Button.Menu>

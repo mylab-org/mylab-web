@@ -13,8 +13,8 @@ export const MobileMainPage = () => {
   return (
     <section className={'flex flex-1 flex-col gap-2.5 px-5'}>
       <LabMenuWrapper type={'top'} />
-      <UserInfo isMain />
-      <LabInfo className={'p-5 md:p-6'} />
+      <UserInfo isMain isShadow />
+      <LabInfo className={'p-5 md:p-6'} isShadow />
       <LabMenuWrapper type={'center'} />
       <LabLink setIsOpen={setIsOpen} />
       <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />

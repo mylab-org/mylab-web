@@ -1,7 +1,14 @@
-import { SignupPage } from '@/views/auth/signup'
+import { headers } from 'next/headers'
+import { MobileSignupPage, SignupPage } from '@/views/auth/signup'
 
-const Regist = () => {
-  return <SignupPage />
+const Regist = async () => {
+  const h = await headers()
+  const ua = h.get('user-agent') ?? ''
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
+    return <MobileSignupPage />
+  } else {
+    return <SignupPage />
+  }
 }
 
 export default Regist
