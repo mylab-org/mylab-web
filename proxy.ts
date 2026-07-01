@@ -16,7 +16,7 @@ function isMatch(pathname: string, urls: string[]) {
   return urls.map(url => pathname.startsWith(url.replace('/*', '')))
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   // const { pathname, searchParams } = request.nextUrl
   //
