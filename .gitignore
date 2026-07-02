@@ -47,3 +47,5 @@ next-env.d.ts
 *.ipr
 cmake-build-*/
 .idea_modules/
+*storybook.log
+storybook-static
