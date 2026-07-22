@@ -1,5 +1,5 @@
 import { Image } from 'next/dist/client/image-component'
-import { Avatar } from '@/shared/ui/avatar'
+import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/text'
 
 export const BoardCommentItem = () => {

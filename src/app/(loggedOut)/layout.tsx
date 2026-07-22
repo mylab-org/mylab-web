@@ -1,9 +1,9 @@
 import { Image } from 'next/dist/client/image-component'
 import { headers } from 'next/headers'
 import React from 'react'
-import LabIcon from '../../public/icon/icon_gnb_lab.svg'
 import { AuthBackground } from '@/shared/ui/auth-background'
 import type { Metadata } from 'next'
+import LabIcon from '@/../public/icon/icon_gnb_lab.svg'
 
 export const metadata: Metadata = {
   title: 'MyLab',

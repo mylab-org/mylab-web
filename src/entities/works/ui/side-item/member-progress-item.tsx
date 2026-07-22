@@ -1,5 +1,5 @@
 import { WorkMyProgress } from '@/entities/works'
-import { Avatar } from '@/shared/ui/avatar'
+import { Avatar } from '@/shared/ui/override/avatar'
 import { Tag } from '@/shared/ui/tag'
 import { Text } from '@/shared/ui/text'
 

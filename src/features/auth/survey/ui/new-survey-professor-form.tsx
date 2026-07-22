@@ -3,8 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { SurveyProfessorSchema } from '../model/survey.schema'
-import { Button } from '@/shared/ui/button'
 import { InputBox } from '@/shared/ui/input-box'
+import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/text'
 import type { SurveyProfessorValues } from '../model/survey.schema'
 

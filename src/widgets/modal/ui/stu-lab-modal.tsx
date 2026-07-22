@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react'
 import { useModalStore } from '@/shared/store'
-import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
 import { InputBox } from '@/shared/ui/input-box'
+import { Button } from '@/shared/ui/override/button'
+import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/text'
 
 export const StuLabModal = () => {

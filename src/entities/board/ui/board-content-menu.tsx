@@ -1,4 +1,4 @@
-import { Avatar } from '@/shared/ui/avatar'
+import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/text'
 
 export const BoardContentMenu = () => {

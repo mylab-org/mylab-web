@@ -1,5 +1,5 @@
-import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input/input'
+import { Button } from '@/shared/ui/override/button'
+import { Input } from '@/shared/ui/override/input/input'
 import { Text } from '@/shared/ui/text/Text'
 
 const AuthSearch = () => {

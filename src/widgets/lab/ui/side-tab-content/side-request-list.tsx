@@ -1,6 +1,6 @@
 import { LabRequestItem } from '@/entities/lab'
-import { Button } from '@/shared/ui/button'
-import { CheckBox } from '@/shared/ui/checkbox'
+import { Button } from '@/shared/ui/override/button'
+import { CheckBox } from '@/shared/ui/override/checkbox'
 
 export const SideRequestList = ({ isBottom }: { isBottom: boolean }) => {
   return (

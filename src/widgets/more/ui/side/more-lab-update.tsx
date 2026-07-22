@@ -1,6 +1,6 @@
 import { Image } from 'next/dist/client/image-component'
-import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/override/button'
+import { Input } from '@/shared/ui/override/input'
 import { Tag } from '@/shared/ui/tag'
 import { Text } from '@/shared/ui/text'
 

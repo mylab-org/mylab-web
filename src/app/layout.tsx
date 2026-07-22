@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
-import { pretendard } from '../public/fonts/pretendard'
 import { Alert, Confirm, Dialog } from '@/widgets/modal'
+import { pretendard } from '@/../public/fonts/pretendard'
 
 export const metadata: Metadata = {
   title: 'MyLab',

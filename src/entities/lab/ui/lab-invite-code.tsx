@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/shared/ui/button'
 import { IconInput } from '@/shared/ui/icon-input'
+import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/text'
 
 export const LabInviteCode = () => {

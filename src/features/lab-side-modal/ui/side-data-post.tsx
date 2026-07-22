@@ -1,18 +1,18 @@
 import { Image } from 'next/dist/client/image-component'
 
-import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
-import { Radio } from '@/shared/ui/radio'
+import { Button } from '@/shared/ui/override/button'
+import { Input } from '@/shared/ui/override/input'
+import { Radio, RadioGroup } from '@/shared/ui/override/radio'
 import { Text } from '@/shared/ui/text'
 
 export const SideDataPost = () => {
   return (
     <div className={'flex flex-1 flex-col'}>
       <form action="" className={'flex flex-col gap-2.5 py-5'}>
-        <div className={'flex gap-5'}>
+        <RadioGroup>
           <Radio id={'type1'} value={'professor'} title={'논문 및 저널'} />
           <Radio id={'type2'} value={'student'} title={'연구 참고 자료'} />
-        </div>
+        </RadioGroup>
         <Input placeholder={'자료 제목'} />
         <Input placeholder={'자료 링크'} />
         <div

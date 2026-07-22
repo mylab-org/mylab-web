@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button } from '@/shared/ui/button'
 import { InputBox } from '@/shared/ui/input-box'
+import { Button } from '@/shared/ui/override/button'
 
 export const NewLoginForm = () => {
   return (

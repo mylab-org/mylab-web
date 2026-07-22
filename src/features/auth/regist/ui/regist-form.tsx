@@ -3,8 +3,8 @@
 import { type ChangeEvent, useActionState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { handleRegistAction } from '../model/regist-action'
-import { Button } from '@/shared/ui/button'
 import { FloatingLabel } from '@/shared/ui/floating-label'
+import { Button } from '@/shared/ui/override/button'
 import type { Regist } from '../model/types'
 
 type Props = {
@@ -22,9 +22,9 @@ export const RegistForm = ({ data, onChange }: Props) => {
     formState: { errors },
   } = useFormContext<Regist>()
 
-  const onSubmit = (data: Regist) => {
+  const onSubmit = handleSubmit((data: Regist) => {
     console.log('제출', data)
-  }
+  })
 
   return (
     <form
@@ -33,7 +33,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
       //   e.preventDefault()
       //   dispatch(new FormData(e.currentTarget))
       // }}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={onSubmit}
       className={'flex w-[400px] flex-col gap-7.5'}
     >
       <FloatingLabel
@@ -66,7 +66,7 @@ export const RegistForm = ({ data, onChange }: Props) => {
         isError={!!errors.passwordCheck}
         errorMsg={errors.passwordCheck?.message}
       />
-      <Button form={'signup-form'}>가입하기</Button>
+      <Button type="submit">가입하기</Button>
     </form>
   )
 }

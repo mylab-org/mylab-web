@@ -1,5 +1,5 @@
+import { Textarea } from '@/shared/ui/override/textarea'
 import { Text } from '@/shared/ui/text'
-import { Textarea } from '@/shared/ui/textarea'
 
 export const WorkChatForm = () => {
   return (

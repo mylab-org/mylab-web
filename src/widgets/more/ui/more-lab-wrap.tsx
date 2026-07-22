@@ -5,7 +5,7 @@ import { MoreLabMember } from './side/more-lab-member'
 import { MoreLabUpdate } from './side/more-lab-update'
 import { LabInfo } from '@/entities/lab'
 import { useConfirmStore, useSideModalStore } from '@/shared/store'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/text'
 
 interface WrapProps {

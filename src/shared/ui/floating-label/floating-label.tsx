@@ -1,6 +1,6 @@
 import { type ComponentProps, forwardRef } from 'react'
 import { cn } from '@/shared/lib'
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/text'
 
 type Props = {

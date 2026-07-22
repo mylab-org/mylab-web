@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useLockBodyScroll } from '@/shared/model'
 import { useConfirmStore } from '@/shared/store'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/text'
 
 export const Confirm = () => {

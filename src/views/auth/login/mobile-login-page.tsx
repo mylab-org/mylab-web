@@ -3,7 +3,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { NewLoginForm } from '@/features/auth/login'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { AuthLinkItem } from '@/widgets/auth'
 import { MobileAuthHeader } from '@/widgets/header'
 

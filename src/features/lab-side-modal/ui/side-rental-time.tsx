@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/text'
 import { TimePicker } from '@/shared/ui/time-picker'
 

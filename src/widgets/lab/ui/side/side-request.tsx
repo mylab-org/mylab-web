@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { SideStuRequestList } from '../side-tab-content/side-stu-request-list'
 import { SideRequestPost } from '@/features/lab-side-modal'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
 import { Tab } from '@/shared/ui/tab'
 
