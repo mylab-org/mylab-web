@@ -2,7 +2,7 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { NewLoginForm } from '@/features/auth/login'
+import { LoginForm } from '@/features/auth/login'
 import { Button } from '@/shared/ui/override/button'
 import { AuthLinkItem } from '@/widgets/auth'
 import { MobileAuthHeader } from '@/widgets/header'
@@ -25,7 +25,7 @@ export const MobileLoginPage = () => {
       <div className={'flex flex-1 flex-col gap-7.5 px-7.5 pb-5'}>
         <h1 className={'text-[22px] font-bold'}>로그인하기</h1>
         <div className={'flex flex-1 flex-col gap-[30px]'}>
-          <NewLoginForm />
+          <LoginForm />
           <div className={'mt-3 space-y-3'}>
             <AuthLinkItem title={'회원가입하러 가기'} text={'MyLab이 처음이신가요?'} href={'/signup'} />
             <AuthLinkItem title={'비밀번호 재설정하기'} text={'비밀번호를 잊으셨나요?'} href={'#'} />

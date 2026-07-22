@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { BoardPage, MobileBoardPage } from '@/views/board'
+import { BoardPage, MobileBoardPage } from '@/views/(loggedIn)/board'
 
 export default async function Board() {
   const h = await headers()

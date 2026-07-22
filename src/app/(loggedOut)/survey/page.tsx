@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { MobileSurveyPage, SurveyPage } from '@/views/auth/survey'
+import { MobileSurveyPage, SurveyPage } from '@/views/(loggedOut)/survey'
 
 const AuthSurvey = async () => {
   const h = await headers()

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers'
-import { WorkPage } from '@/views/works'
-import { MobileWorkPage } from '@/views/works/mobile-work-page'
+import { WorkPage } from '@/views/(loggedIn)/works'
+import { MobileWorkPage } from '@/views/(loggedIn)/works/mobile-work-page'
 
 export default async function Works() {
   const h = await headers()

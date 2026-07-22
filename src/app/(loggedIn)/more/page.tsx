@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { MobileMorePage, MorePage } from '@/views/more'
+import { MobileMorePage, MorePage } from '@/views/(loggedIn)/more'
 
 export default async function User() {
   const h = await headers()

@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { MobileSignupPage, SignupPage } from '@/views/auth/signup'
+import { MobileSignupPage, SignupPage } from '@/views/(loggedOut)/signup'
 
 const Regist = async () => {
   const h = await headers()

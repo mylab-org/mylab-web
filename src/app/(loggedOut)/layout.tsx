@@ -25,19 +25,6 @@ export default async function AuthLayout({
     )
   } else {
     return (
-      // <main className={'flex w-full flex-1 bg-white'}>
-      //   {/*<div className={'h-full flex-1 bg-[url("/MyLab_Logo.png")] bg-center bg-no-repeat'} />*/}
-      //   <div className={'flex flex-1 items-center justify-center'}>
-      //     <Image src={'/MyLab_Logo.png'} alt={'MyLab'} width={600} height={600} />
-      //   </div>
-      //   <div
-      //     className={'relative flex h-full w-[730px] flex-col items-center justify-center gap-[30px] overscroll-auto'}
-      //   >
-      //     <h1 className={'w-[400px] text-[48px] font-bold text-gray-900'}>MyLab</h1>
-      //     {children}
-      //   </div>
-      // </main>
-      // <main className={'w-full bg-white'}>{children}</main>
       <main className="flex min-h-screen w-full flex-col items-center justify-center bg-[#f9f9f9] p-4">
         <div className="flex min-h-3/4 w-full max-w-6xl flex-col overflow-hidden rounded-[40px] bg-white shadow-[0_40px_100px_-20px_rgba(37,98,205,0.3)] md:flex-row">
           {/* 왼쪽 섹션 */}

@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { EmailValidatePage, MobileEmailValidatePage } from '@/views/auth/email-validate'
+import { EmailValidatePage, MobileEmailValidatePage } from '@/views/(loggedOut)/email-validate'
 
 const EmailValidate = async () => {
   const h = await headers()

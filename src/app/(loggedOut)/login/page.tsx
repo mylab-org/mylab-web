@@ -1,16 +1,13 @@
 import { headers } from 'next/headers'
-import { LoginPage, MobileLoginPage } from '@/views/auth/login'
-import TestPage from '@/views/auth/login/TestPage'
+import { LoginPage, MobileLoginPage } from '@/views/(loggedOut)/login'
 
 const Login = async () => {
-  // return <LoginPage />
-  // return <TestPage />
-  const h = await headers()
-  const ua = h.get('user-agent') ?? ''
-  if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
+  const header = await headers()
+  const userAgent = header.get('user-agent') ?? ''
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(userAgent)) {
     return <MobileLoginPage />
   } else {
-    return <TestPage />
+    return <LoginPage />
   }
 }
 

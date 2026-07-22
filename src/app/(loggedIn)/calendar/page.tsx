@@ -1,5 +1,5 @@
 import { headers } from 'next/headers'
-import { CalendarPage, MobileCalendarPage } from '@/views/calendar'
+import { CalendarPage, MobileCalendarPage } from '@/views/(loggedIn)/calendar'
 
 export default async function Calendar() {
   const h = await headers()

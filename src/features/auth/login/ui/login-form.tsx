@@ -2,35 +2,26 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { useActionState } from 'react'
 import { useForm } from 'react-hook-form'
-import { type LoginFormValues, LoginSchema } from '../model/login.schema'
-import { handleLoginAction } from '@/features/auth/login/model/login-action'
-import { FloatingLabel } from '@/shared/ui/floating-label'
+import { LoginSchema } from '../model/login.schema'
+import { InputBox } from '@/shared/ui/input-box'
 import { Button } from '@/shared/ui/override/button'
-
-type LoginFormState = {
-  email: string
-  password: string
-}
+import type { LoginPayload } from '../model/types'
 
 export const LoginForm = () => {
-  // const initialState = { success: false, idMsg: '', pwMsg: '' }
-  // const [state, dispatch] = useActionState(handleLoginAction, initialState)
-
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
+    formState: { isValid, errors, isSubmitting },
+  } = useForm<LoginPayload>({
     mode: 'onSubmit',
     resolver: zodResolver(LoginSchema),
   })
 
-  const onSubmit = async (data: LoginFormState) => {
+  const onSubmit = handleSubmit(async (values: LoginPayload) => {
     try {
-      await axios.post('/api/login', data)
+      await axios.post('/api/login', values)
 
       // 성공 시 처리
       console.log('로그인 성공')
@@ -50,42 +41,50 @@ export const LoginForm = () => {
         alert('로그인에 실패했습니다.')
       }
     }
-  }
+  })
 
   return (
-    <form
-      // onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-      //   e.preventDefault()
-      //   dispatch(new FormData(e.currentTarget))
-      // }}
-      onSubmit={handleSubmit(onSubmit)}
-      className={'border-red flex w-[400px] flex-col gap-7.5'}
-    >
-      <FloatingLabel
+    <form className="space-y-6" onSubmit={onSubmit}>
+      <InputBox
         labelName={'이메일'}
+        placeholder={'이메일을 입력하세요'}
         {...register('email', {
           required: '이메일을 입력해주세요.',
         })}
         disabled={isSubmitting}
-        type={'text'}
-        // isError={!!state.idMsg}
-        // errorMsg={state.idMsg}
         isError={!!errors.email}
         errorMsg={errors.email?.message}
       />
-      <FloatingLabel
+      <InputBox
+        type={'password'}
         labelName={'비밀번호'}
+        placeholder={'비밀번호를 입력하세요'}
         {...register('password', {
           required: '비밀번호를 입력해주세요.',
         })}
-        type={'password'}
         disabled={isSubmitting}
-        // isError={!!state.pwMsg}
-        // errorMsg={state.pwMsg}
         isError={!!errors.password}
         errorMsg={errors.password?.message}
       />
-      <Button>로그인</Button>
+      <Button
+        type="submit"
+        color={'main'}
+        className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
+        icon={
+          <svg
+            className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        }
+        iconPosition={'after'}
+        disabled={!isValid || isSubmitting}
+      >
+        로그인하기
+      </Button>
     </form>
   )
 }
