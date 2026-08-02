@@ -63,7 +63,10 @@ input::-webkit-inner-spin-button {
 }
 
 html {
-  /* 스크롤바가 있든 없든 공간을 미리 확보하여 레이아웃 밀림을 방지합니다. */
+  /* 스크롤바가 있든 없든 공간을 미리 확보하여 레이아웃 밀림을 방지합니다.
+     scrollbar-gutter 는 스크롤 컨테이너에만 적용되므로 overflow-y 를 함께 지정해야 합니다.
+     (미지정 시 Select/Modal 이 열리며 body 스크롤을 잠글 때 화면이 스크롤바 너비만큼 흔들립니다.) */
+  overflow-y: scroll;
   scrollbar-gutter: stable;
   font-family: Pretendard;
 }
