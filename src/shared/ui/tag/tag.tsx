@@ -96,6 +96,16 @@ const WorkMemberTag = ({ name }: MemberTagProps) => {
   )
 }
 
+const CalendarMemberTag = ({ name }: MemberTagProps) => {
+  return (
+    <span
+      className={'w-fit rounded-[20px] border border-[#E2E3E5] px-2 py-0.5 text-[10px] text-gray-500 lg:text-[12px]'}
+    >
+      {name}
+    </span>
+  )
+}
+
 const TagBlue = () => {
   return <span className={'bg-tag1 h-2.5 w-2.5 rounded-full'} />
 }
@@ -111,6 +121,7 @@ export const Tag = Object.assign(() => null, {
   WorkType: WorkTypeTag,
   Etc: ETCTag,
   Member: WorkMemberTag,
+  CalendarMember: CalendarMemberTag,
   Blue: TagBlue,
   Red: TagRed,
 })
