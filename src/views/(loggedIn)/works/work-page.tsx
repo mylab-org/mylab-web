@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab } from '@/shared/ui/tab'
+import { Tab } from '@/shared/ui/override/tab'
 import { ConferenceWorkWrap, MeetingEtcWorkWrap, PersonalWorkWrap } from '@/widgets/works'
 
 const tabs = [

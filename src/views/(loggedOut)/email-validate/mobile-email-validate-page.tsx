@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/override/button'
-import { Text } from '@/shared/ui/text'
-import { MobileAuthHeader } from '@/widgets/header'
+import { Text } from '@/shared/ui/override/text'
+import { MobileAuthHeader } from '@/widgets/layout/header'
 
 export const MobileEmailValidatePage = () => {
   return (

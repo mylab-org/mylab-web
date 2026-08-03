@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Switch } from '@/shared/ui/override/switch'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const LabManagementItem = () => {
   const [enabled, setEnabled] = useState<boolean>(false)

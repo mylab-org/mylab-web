@@ -1,8 +1,8 @@
 import { headers } from 'next/headers'
-import { SideWrapper } from '@/shared/ui/side-wrapper'
-import { PageFooter } from '@/widgets/footer'
-import { MobileHeader, PcHeader } from '@/widgets/header'
-import { MobileBottomBar, PageGnb } from '@/widgets/menu'
+import { SideWrapper } from '@/shared/ui/template/side-wrapper'
+import { PageFooter } from '@/widgets/layout/footer'
+import { MobileHeader, PcHeader } from '@/widgets/layout/header'
+import { MobileBottomBar, PageGnb } from '@/widgets/layout/menu'
 
 export default async function MainLayout({
   children,

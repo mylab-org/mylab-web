@@ -1,6 +1,6 @@
 import { Avatar } from '@/shared/ui/override/avatar'
-import { Tag } from '@/shared/ui/tag'
-import { Text } from '@/shared/ui/text'
+import { Tag } from '@/shared/ui/override/tag'
+import { Text } from '@/shared/ui/override/text'
 
 export const NoticeListItem = () => {
   return (

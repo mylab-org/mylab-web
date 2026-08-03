@@ -12,6 +12,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    title: '대여 활성화',
+    isSwitch: false,
+    onSwitch: () => {},
+  },
   render: function DefaultRender() {
     const [isSwitch, setIsSwitch] = useState(false)
 
@@ -26,6 +31,11 @@ export const Default: Story = {
 }
 
 export const WithDescription: Story = {
+  args: {
+    title: '업무 시간 외 알림 금지 설정',
+    isSwitch: true,
+    onSwitch: () => {},
+  },
   render: function WithDescriptionRender() {
     const [isSwitch, setIsSwitch] = useState(true)
 

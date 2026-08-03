@@ -1,8 +1,8 @@
 import { formatEventPeriod } from '../lib/date'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
-import { Tag } from '@/shared/ui/tag'
-import { Text } from '@/shared/ui/text'
+import { Tag } from '@/shared/ui/override/tag'
+import { Text } from '@/shared/ui/override/text'
 import type { CalendarEvent } from '../model/types'
 
 interface CalendarListItemProps {

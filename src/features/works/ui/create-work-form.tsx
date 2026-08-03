@@ -2,7 +2,7 @@ import { useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const CreateWorkForm = () => {
   const closeSideModal = useSideModalStore(state => state.closeSideModal)

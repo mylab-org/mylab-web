@@ -1,7 +1,7 @@
 'use client'
 
-import { NewSurveyProfessorForm, NewSurveyStudentForm } from '@/features/auth/survey'
-import { MobileAuthHeader } from '@/widgets/header'
+import { NewSurveyProfessorForm, NewSurveyStudentForm } from '@/features/survey'
+import { MobileAuthHeader } from '@/widgets/layout/header'
 
 export const MobileSurveyPage = () => {
   return (

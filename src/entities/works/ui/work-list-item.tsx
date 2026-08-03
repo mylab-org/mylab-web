@@ -1,8 +1,8 @@
 import { WorkMyProgress } from './work-my-progress'
 import type { WORK_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
-import { Tag } from '@/shared/ui/tag'
-import { Text } from '@/shared/ui/text'
+import { Tag } from '@/shared/ui/override/tag'
+import { Text } from '@/shared/ui/override/text'
 
 interface WorkListItemProps {
   type?: keyof typeof WORK_TYPE

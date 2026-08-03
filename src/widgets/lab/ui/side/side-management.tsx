@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { SideManagenemtList } from '../side-tab-content/side-managenemt-list'
 import { SideRequestList } from '../side-tab-content/side-request-list'
 import { SideManagementPost } from '@/features/lab-side-modal'
-import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
-import { Tab } from '@/shared/ui/tab'
-import { Text } from '@/shared/ui/text'
+import { Tab } from '@/shared/ui/override/tab'
+import { Text } from '@/shared/ui/override/text'
+import { SideBottomWrapper } from '@/shared/ui/template/side-bottom-wrapper'
 
 export const SideManagement = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

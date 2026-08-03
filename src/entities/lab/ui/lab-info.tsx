@@ -1,5 +1,5 @@
-import { Tag } from '@/shared/ui/tag'
-import { Text } from '@/shared/ui/text'
+import { Tag } from '@/shared/ui/override/tag'
+import { Text } from '@/shared/ui/override/text'
 
 interface LabIntroProps {
   className?: string

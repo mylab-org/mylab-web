@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { LabInfo } from '@/entities/lab'
 import { UserInfo } from '@/entities/user'
 import { LabLink } from '@/widgets/lab'
-import { LabMenuWrapper } from '@/widgets/menu'
-import { LabLinkModal } from '@/widgets/modal'
+import { LabMenuWrapper } from '@/widgets/layout/menu'
+import { LabLinkModal } from '@/widgets/layout/modal'
 
 export const MobileMainPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

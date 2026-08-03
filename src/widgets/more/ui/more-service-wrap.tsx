@@ -7,7 +7,7 @@ import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Switch } from '@/shared/ui/override/switch'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 interface WrapProps {
   isMaxWidth?: boolean

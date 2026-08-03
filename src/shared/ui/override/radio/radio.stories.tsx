@@ -12,6 +12,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    title: '교수',
+    value: 'professor',
+  },
   render: function DefaultRender() {
     const [value, setValue] = useState('professor')
 
@@ -25,6 +29,10 @@ export const Default: Story = {
 }
 
 export const Grade: Story = {
+  args: {
+    title: '학부생',
+    value: '1',
+  },
   render: function GradeRender() {
     const [value, setValue] = useState('1')
 

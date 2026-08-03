@@ -1,7 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { CheckBox } from '@/shared/ui/override/checkbox'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const MoreLabMember = () => {
   return (

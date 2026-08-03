@@ -1,7 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { BoardItemWrap } from './board-item-wrap'
 import { PostBoardForm } from '@/features/board'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const BoardContentWrap = () => {
   return (

@@ -6,7 +6,7 @@ import { MoreLabUpdate } from './side/more-lab-update'
 import { LabInfo } from '@/entities/lab'
 import { useConfirmStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 interface WrapProps {
   isMaxWidth?: boolean

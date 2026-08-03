@@ -1,5 +1,5 @@
-import { LoginForm } from '@/features/auth/login'
-import { AuthLinkItem } from '@/widgets/auth'
+import { LoginForm } from '@/features/login'
+import { AuthLinkItem } from '@/shared/ui/template/auth-link-item'
 
 export const LoginPage = () => {
   return (

@@ -2,25 +2,15 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { LoginForm } from '@/features/auth/login'
+import { LoginForm } from '@/features/login'
 import { Button } from '@/shared/ui/override/button'
-import { AuthLinkItem } from '@/widgets/auth'
-import { MobileAuthHeader } from '@/widgets/header'
+import { AuthLinkItem } from '@/shared/ui/template/auth-link-item'
+import { MobileAuthHeader } from '@/widgets/layout/header'
 
 export const MobileLoginPage = () => {
   const [isLogin, setIsLogin] = useState(false)
   return isLogin ? (
     <>
-      {/*<header className={'h-[60px] px-4 py-2.5'}>*/}
-      {/*  <Image*/}
-      {/*    src={'/icon/move.svg'}*/}
-      {/*    alt={'prev'}*/}
-      {/*    width={24}*/}
-      {/*    height={24}*/}
-      {/*    className={'rotate-180'}*/}
-      {/*    onClick={() => setIsLogin(false)}*/}
-      {/*  />*/}
-      {/*</header>*/}
       <MobileAuthHeader isPrev onPrev={() => setIsLogin(false)} />
       <div className={'flex flex-1 flex-col gap-7.5 px-7.5 pb-5'}>
         <h1 className={'text-[22px] font-bold'}>로그인하기</h1>

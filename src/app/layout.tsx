@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
-import { Alert, Confirm, Dialog } from '@/widgets/modal'
+import { Alert, Confirm, Dialog } from '@/widgets/layout/modal'
 import { pretendard } from '@/../public/fonts/pretendard'
 
 export const metadata: Metadata = {

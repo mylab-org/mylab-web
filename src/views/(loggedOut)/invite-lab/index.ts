@@ -1,1 +1,1 @@
-export { InviteLabPage } from './InviteLabPage'
+export { InviteLabPage } from './invite-lab-page'

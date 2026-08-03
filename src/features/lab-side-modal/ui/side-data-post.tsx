@@ -3,7 +3,7 @@ import { Image } from 'next/dist/client/image-component'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const SideDataPost = () => {
   return (

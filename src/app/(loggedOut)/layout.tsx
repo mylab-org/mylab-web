@@ -1,7 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
 import { headers } from 'next/headers'
 import React from 'react'
-import { AuthBackground } from '@/shared/ui/auth-background'
+import { AuthBackground } from '@/shared/ui/template/auth-background'
 import type { Metadata } from 'next'
 import LabIcon from '@/../public/icon/icon_gnb_lab.svg'
 

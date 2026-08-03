@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { IconInput } from '@/shared/ui/icon-input'
 import { Button } from '@/shared/ui/override/button'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
+import { IconInput } from '@/shared/ui/template/icon-input'
 
 export const LabInviteCode = () => {
   const [isCopy, setIsCopy] = useState<boolean>(false)
