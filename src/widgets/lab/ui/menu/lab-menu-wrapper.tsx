@@ -1,5 +1,7 @@
-import { LabTopMenu } from './lab-menu-item'
-import { LAB_NAV, MOBILE_LAB_DETAIL_NAV } from '@/shared/constant/nav'
+'use client'
+
+import { LabMenuItem } from './lab-menu-item'
+import { LAB_NAV, MOBILE_LAB_DETAIL_NAV } from '../../config/lab-nav-config'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 
 export const LabMenuWrapper = ({ type }: { type: 'top' | 'center' }) => {
@@ -9,14 +11,14 @@ export const LabMenuWrapper = ({ type }: { type: 'top' | 'center' }) => {
     <div className={'flex gap-2.5 md:gap-7.5'}>
       {type === 'top'
         ? LAB_NAV.map(({ name, Icon, isAdmin, content }) => (
-            <LabTopMenu key={name} name={name} onClick={() => openSideModal(content, name)}>
+            <LabMenuItem key={name} name={name} onClick={() => openSideModal(content, name)}>
               <Icon className={'h-full w-full'} />
-            </LabTopMenu>
+            </LabMenuItem>
           ))
         : MOBILE_LAB_DETAIL_NAV.map(({ name, Icon, content }) => (
-            <LabTopMenu key={name} name={name} onClick={() => openSideModal(content, name)}>
+            <LabMenuItem key={name} name={name} onClick={() => openSideModal(content, name)}>
               <Icon className={'h-full w-full'} />
-            </LabTopMenu>
+            </LabMenuItem>
           ))}
     </div>
   )

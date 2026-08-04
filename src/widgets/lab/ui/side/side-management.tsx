@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { SideManagenemtList } from '../side-tab-content/side-managenemt-list'
-import { SideRequestList } from '../side-tab-content/side-request-list'
+import { SideManagenemtList } from './side-tab-content/side-managenemt-list'
+import { SideRequestList } from './side-tab-content/side-request-list'
 import { SideManagementPost } from '@/features/lab-side-modal'
 import { Tab } from '@/shared/ui/override/tab'
 import { Text } from '@/shared/ui/override/text'

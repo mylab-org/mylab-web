@@ -6,7 +6,7 @@ type LabTopMenu = {
   onClick: () => void
 }
 
-export const LabTopMenu = ({ children, name, onClick }: LabTopMenu) => {
+export const LabMenuItem = ({ children, name, onClick }: LabTopMenu) => {
   return (
     <div
       className={
