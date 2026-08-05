@@ -48,3 +48,29 @@ export const ETC_TYPE = {
     TC: 'text-red-500',
   },
 }
+
+/**
+ * 캘린더 일정 종류
+ * DOT: 일정 카드 / 월간 그리드에 찍히는 점 색상
+ * BG, TC: 필터 칩 색상
+ */
+export const CALENDAR_TYPE = {
+  CONFERENCE: {
+    NAME: '학회',
+    DOT: 'bg-[#1E75F8]',
+    BG: 'bg-[#E1F4FF]',
+    TC: 'text-[#1E75F8]',
+  },
+  MEETING: {
+    NAME: '미팅',
+    DOT: 'bg-[#1BAD20]',
+    BG: 'bg-[#ECF9DB]',
+    TC: 'text-[#1BAD20]',
+  },
+  DINNER: {
+    NAME: '회식',
+    DOT: 'bg-[#E35C67]',
+    BG: 'bg-[#FFEBEC]',
+    TC: 'text-[#E35C67]',
+  },
+} as const
