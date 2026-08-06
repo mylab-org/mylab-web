@@ -1,7 +1,7 @@
 import { getMonthCells, isDateInEvent, isSameDate, toDateKey, WEEK_LABEL } from '../lib/date'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 import type { CalendarEvent } from '../model/types'
 
 interface CalendarMonthProps {

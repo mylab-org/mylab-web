@@ -14,7 +14,7 @@ import {
 import type { CalendarEvent, CalendarFilter } from '@/entities/calendar'
 import { CalendarTypeFilter, MonthPicker } from '@/features/calendar'
 import { cn } from '@/shared/lib'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 import type { ReactNode } from 'react'
 
 interface CalendarWrapProps {

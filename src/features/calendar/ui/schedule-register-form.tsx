@@ -5,9 +5,9 @@ import { MemberSelect } from './member-select'
 import type { CalendarType } from '@/entities/calendar'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
-import { Button } from '@/shared/ui/button'
-import { FloatingLabel } from '@/shared/ui/floating-label'
-import { Text } from '@/shared/ui/text'
+import { Button } from '@/shared/ui/override/button'
+import { Text } from '@/shared/ui/override/text'
+import { FloatingLabel } from '@/shared/ui/template/floating-label'
 
 interface ScheduleRegisterFormProps {
   type: CalendarType
