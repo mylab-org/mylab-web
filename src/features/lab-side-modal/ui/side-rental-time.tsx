@@ -1,6 +1,6 @@
-import { Button } from '@/shared/ui/button'
-import { Text } from '@/shared/ui/text'
-import { TimePicker } from '@/shared/ui/time-picker'
+import { Button } from '@/shared/ui/override/button'
+import { Text } from '@/shared/ui/override/text'
+import { TimePicker } from '@/shared/ui/template/time-picker'
 
 export const SideRentalTime = () => {
   return (

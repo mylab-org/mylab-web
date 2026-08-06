@@ -1,5 +1,5 @@
 import { Image } from 'next/dist/client/image-component'
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui/override/input'
 
 export const PostBoardCommentForm = () => {
   return (

@@ -1,5 +1,5 @@
 import { Image } from 'next/dist/client/image-component'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 interface AlarmItemProps {
   type: string

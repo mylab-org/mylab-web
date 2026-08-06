@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 
 interface BoardMenuWrapProps {
   isDevice?: boolean

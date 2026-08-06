@@ -1,5 +1,5 @@
-import { Avatar } from '@/shared/ui/avatar'
-import { Text } from '@/shared/ui/text'
+import { Avatar } from '@/shared/ui/override/avatar'
+import { Text } from '@/shared/ui/override/text'
 
 export const BoardContentMenu = () => {
   return (

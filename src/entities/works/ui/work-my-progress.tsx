@@ -1,5 +1,5 @@
 import type { WORK_TYPE } from '@/shared/constant/tag'
-import { Tag } from '@/shared/ui/tag'
+import { Tag } from '@/shared/ui/override/tag'
 
 interface WorkProgressProps {
   type?: keyof typeof WORK_TYPE

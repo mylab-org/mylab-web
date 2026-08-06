@@ -5,7 +5,7 @@ import { MoreUserUpdate } from './side/more-user-update'
 import { UserInfo } from '@/entities/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore, useSideModalStore } from '@/shared/store'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 
 interface WrapProps {
   isMaxWidth?: boolean

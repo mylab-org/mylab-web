@@ -1,7 +1,7 @@
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui/override/input'
+import { Text } from '@/shared/ui/override/text'
 import { Select, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/shadcn'
 import { SelectContent } from '@/shared/ui/shadcn/select'
-import { Text } from '@/shared/ui/text'
 
 export const MoreUserUpdate = () => {
   return (

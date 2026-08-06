@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui/override/button'
 import { ITEM_HEIGHT, Wheel, WHEEL_CENTER_OFFSET } from '@/shared/ui/wheel'
 
 interface MonthPickerProps {

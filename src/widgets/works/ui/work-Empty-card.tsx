@@ -1,4 +1,4 @@
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 export const WorkEmptyCard = () => {
   return (

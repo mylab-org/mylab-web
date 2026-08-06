@@ -5,9 +5,9 @@ import { MoreServiceUse } from './side/more-service-use'
 import { MoreUserPw } from './side/more-user-pw'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
-import { Button } from '@/shared/ui/button'
-import { Text } from '@/shared/ui/text'
-import { ToggleSwitch } from '@/shared/ui/toggle-switch'
+import { Button } from '@/shared/ui/override/button'
+import { Switch } from '@/shared/ui/override/switch'
+import { Text } from '@/shared/ui/override/text'
 
 interface WrapProps {
   isMaxWidth?: boolean
@@ -38,7 +38,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
             </div>
           </div>
           <div className={'flex flex-col gap-2.5'}>
-            <ToggleSwitch
+            <Switch
               isSwitch={true}
               onSwitch={() => {}}
               isBetween
@@ -49,7 +49,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
                 </Text>
               }
             />
-            <ToggleSwitch
+            <Switch
               isSwitch={true}
               onSwitch={() => {}}
               isBetween

@@ -4,9 +4,9 @@ import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
 import { LabRentalItem } from '@/entities/lab'
 import { SideRentalTime } from '@/features/lab-side-modal'
-import { Button } from '@/shared/ui/button'
-import { SideBottomWrapper } from '@/shared/ui/side-bottom-wrapper'
-import { Text } from '@/shared/ui/text'
+import { Button } from '@/shared/ui/override/button'
+import { Text } from '@/shared/ui/override/text'
+import { SideBottomWrapper } from '@/shared/ui/template/side-bottom-wrapper'
 
 export const SideRental = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

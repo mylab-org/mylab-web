@@ -1,5 +1,5 @@
 import { NoticeListItem } from '@/entities/notice'
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui/override/input'
 
 export const SideNotice = () => {
   return (

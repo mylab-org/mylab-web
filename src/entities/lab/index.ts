@@ -2,6 +2,8 @@ export { LabInviteCode } from './ui/lab-invite-code'
 export { LabMemberItem } from './ui/lab-member-item'
 export { LabLinkItem } from './ui/lab-link-item'
 export { LabInfo } from './ui/lab-info'
+export { LabLink } from './ui/lab-link'
+export { LabMember } from './ui/lab-member'
 
 export { LabManagementItem } from './ui/side-item/lab-management-item'
 export { LabDataItem } from './ui/side-item/lab-data-item'

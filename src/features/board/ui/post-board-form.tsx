@@ -1,7 +1,7 @@
 import { Image } from 'next/dist/client/image-component'
-import { Button } from '@/shared/ui/button'
-import { CheckBox } from '@/shared/ui/checkbox'
-import { Textarea } from '@/shared/ui/textarea'
+import { Button } from '@/shared/ui/override/button'
+import { CheckBox } from '@/shared/ui/override/checkbox'
+import { Textarea } from '@/shared/ui/override/textarea'
 
 export const PostBoardForm = () => {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/shared/lib'
-import { Text } from '@/shared/ui/text'
+import { Text } from '@/shared/ui/override/text'
 
 interface MemberSelectProps {
   /** 선택 가능한 연구실 구성원 이름 */
