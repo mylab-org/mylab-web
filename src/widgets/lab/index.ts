@@ -1,6 +1,7 @@
 export { LabMenuWrapper } from './ui/menu/lab-menu-wrapper'
-export { LabLabInfoSection } from './ui/pc/section/lab-lab-info-section'
-export { LabUserDataSection } from './ui/pc/section/lab-user-data-section'
-export { LabWorkingSection } from './ui/pc/section/lab-working-section'
 export { LabMobileTopSection } from './ui/mobile/section/lab-mobile-top-section'
 export { LabMobileCenterSection } from './ui/mobile/section/lab-mobile-center-section'
+
+export { LabLabInfoServerSection } from './ui/pc/server-section/lab-lab-info-server-section'
+export { LabUserDataServerSection } from './ui/pc/server-section/lab-user-data-server-section'
+export { LabWorkingServerSection } from './ui/pc/server-section/lab-working-server-section'
