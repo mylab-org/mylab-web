@@ -1,1 +1,2 @@
-export { axiosPost, axiosPatch, axiosDelete, axiosGet } from './axios-instance'
+export { axiosPost, axiosPatch, axiosPut, axiosDelete, axiosGet } from './axios-client'
+export { serverGet, serverPost, serverPut, serverPatch, serverDelete } from './api-server'
