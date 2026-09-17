@@ -1,7 +1,7 @@
 import { BoardCommentItem, BoardContentMenu, BoardItem } from '@/entities/board'
 import { PostBoardCommentForm } from '@/features/board'
 
-export const BoardItemWrap = () => {
+export const BoardItemSection = () => {
   return (
     <div className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
       <BoardItem />

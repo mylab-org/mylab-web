@@ -1,6 +1,6 @@
 import { Text } from '@/shared/ui/override/text'
 
-export const BoardSideWrap = () => {
+export const BoardSideSection = () => {
   return (
     <section className={'flex w-[400px] flex-col gap-5 p-2.5'}>
       <h3 className={'text-[25px] font-bold'}>공지사항</h3>

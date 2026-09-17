@@ -1,9 +1,9 @@
 import { Image } from 'next/dist/client/image-component'
-import { BoardItemWrap } from './board-item-wrap'
+import { BoardItemSection } from './board-item-section'
 import { PostBoardForm } from '@/features/board'
 import { Text } from '@/shared/ui/override/text'
 
-export const BoardContentWrap = () => {
+export const BoardContentSection = () => {
   return (
     <section className={'flex flex-1 flex-col gap-2.5 lg:p-2.5'}>
       <div
@@ -16,7 +16,7 @@ export const BoardContentWrap = () => {
       </div>
       <PostBoardForm />
       <div className={'flex flex-1 flex-col gap-5 py-2.5'}>
-        <BoardItemWrap />
+        <BoardItemSection />
       </div>
     </section>
   )

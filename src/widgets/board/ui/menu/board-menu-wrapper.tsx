@@ -1,13 +1,15 @@
 import clsx from 'clsx'
 import { Button } from '@/shared/ui/override/button'
 
-interface BoardMenuWrapProps {
-  isDevice?: boolean
+interface BoardMenuWrapperProps {
+  variant?: 'pc' | 'mobile'
 }
 
-export const BoardMenuWrap = ({ isDevice = false }: BoardMenuWrapProps) => {
+export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
+  const isMobile = variant === 'mobile'
+
   return (
-    <section className={clsx('flex flex-col gap-2.5', isDevice ? 'flex-1 p-0' : 'w-[200px] p-2.5')}>
+    <section className={clsx('flex flex-col gap-2.5', isMobile ? 'flex-1 p-0' : 'w-[200px] p-2.5')}>
       <div className={'flex flex-col gap-2.5 border-b border-b-gray-200 pb-3.75'}>
         <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>우리 연구실 메뉴</h3>
         <Button.Setup className={'rounded-[8px] text-left text-[14px]'} isActive>
