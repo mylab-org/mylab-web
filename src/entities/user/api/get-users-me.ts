@@ -1,4 +1,4 @@
-import { axiosGet } from '@/shared/api'
+import { axiosGet } from '@/shared/api/axios-client'
 import { ENDPOINTS } from '@/shared/api/endpoint'
 import type { UsersMeResponseType } from '../model/types'
 

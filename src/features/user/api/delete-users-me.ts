@@ -1,4 +1,4 @@
-import { axiosDelete } from '@/shared/api'
+import { axiosDelete } from '@/shared/api/axios-client'
 import { ENDPOINTS } from '@/shared/api/endpoint'
 
 export const deleteUsersMe = async () => {

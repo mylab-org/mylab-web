@@ -1,4 +1,4 @@
-import { axiosPost } from '@/shared/api'
+import { axiosPost } from '@/shared/api/axios-client'
 import { ENDPOINTS } from '@/shared/api/endpoint'
 import type { PostAuthRegisterPayloadType } from '../model/types'
 

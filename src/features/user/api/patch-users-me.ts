@@ -1,5 +1,5 @@
 import type { UsersMeResponseType } from '@/entities/user/model/types'
-import { axiosPatch } from '@/shared/api'
+import { axiosPatch } from '@/shared/api/axios-client'
 import { ENDPOINTS } from '@/shared/api/endpoint'
 import type { PatchUsersMePayloadType } from '../model/types'
 
