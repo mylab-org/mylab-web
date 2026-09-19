@@ -13,6 +13,17 @@ export type PostAuthLoginPayloadType = {
   password: string
 }
 
+export type PostAuthLoginResponseType = {
+  accessToken: string
+  refreshToken: string
+  user: {
+    id: string
+    email: string
+    name: string
+    degree: UserDegreeType
+  }
+}
+
 export type PostAuthResendVerificationPayloadType = {
   email: string
 }

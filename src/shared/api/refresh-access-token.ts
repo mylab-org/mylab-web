@@ -17,7 +17,7 @@ export async function refreshAccessToken(instance: AxiosInstance) {
 
   refreshPromise = (async () => {
     const response = await instance.post<ApiResponseType<RefreshAccessTokenApiResult>>(
-      ENDPOINTS.USER.REFRESH,
+      ENDPOINTS.AUTH.REFRESH,
       undefined,
       {
         // refresh 요청 자체는 401/403이 와도 다시 refresh하지 않고 즉시 로그아웃 분기로 내려가야 합니다.

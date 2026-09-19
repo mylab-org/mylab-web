@@ -1,89 +1,54 @@
 import { type NextRequest, NextResponse } from 'next/server'
+import { hasEmailValidateAccessFromRequest } from './shared/lib/email-validate-access'
+import { getAccessTokenFromRequest } from './shared/lib/token/server-access-tokne-cookies'
 
-const matchersForAuthUser = ['/']
-const matchersForSignIn = ['/login/*', '/signup/*']
+/** (loggedOut) 공개 라우트 — 비로그인만 접근 가능 */
+const GUEST_ONLY_ROUTES = ['/login', '/signup', '/survey'] as const
 
-// function parseUserAgent(userAgent: string) {
-//   const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
-//
-//   // 💡 단순히 !isMobile이 아니라, Windows나 Mac 같은 PC 환경인지 직접 확인합니다.
-//   const isDesktop = /Windows|Macintosh|Linux/i.test(userAgent) && !isMobile
-//
-//   return { isMobile, isDesktop }
-// }
-
-function isMatch(pathname: string, urls: string[]) {
-  return urls.map(url => pathname.startsWith(url.replace('/*', '')))
+function isMatchRoute(pathname: string, route: string) {
+  return pathname === route || pathname.startsWith(`${route}/`)
 }
 
-export async function proxy(request: NextRequest) {
+function isGuestOnlyRoute(pathname: string) {
+  return GUEST_ONLY_ROUTES.some(route => isMatchRoute(pathname, route))
+}
+
+function isEmailValidateRoute(pathname: string) {
+  return isMatchRoute(pathname, '/email-validate')
+}
+
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  // const { pathname, searchParams } = request.nextUrl
-  //
-  // const userAgent = request.headers.get('user-agent') || ''
-  // const device = parseUserAgent(userAgent)
-  //
-  // //mo 제거 함수 (rental 경로 고려)
-  // const getBasePath = (path: string) => {
-  //   // mount 경로는 그대로 반환
-  //   if (path.startsWith('/mount')) {
-  //     return path
-  //   } else if (path === '/mo') {
-  //     // 추가: 루트 경로 처리
-  //     return '/'
-  //   } else {
-  //     return path.replace('/mo', '')
-  //   }
-  // }
-  //
-  // const basePath = getBasePath(pathname)
-  //
-  // // 현재 경로가 이미 모바일 버전인지 확인
-  // const isMobilePath = (path: string) => {
-  //   return path.includes('/mo')
-  // }
-  //
-  // // 기본 경로 추출
-  //
-  // // 디바이스에 따른 경로 변환 함수
-  // const getMobilePath = (path: string) => {
-  //   return `/mo${path}`
-  // }
-  //
-  // // 디바이스별 경로 리다이렉션
-  // // 모바일 디바이스에서 /mo 아닌경로 접근시
-  // if (device.isMobile && !isMobilePath(pathname)) {
-  //   const mobilePath = getMobilePath(basePath)
-  //
-  //   // URL 파라미터를 유지하면서 리다이렉션
-  //   const newUrl = new URL(mobilePath, request.url)
-  //
-  //   // 기존 URL의 모든 검색 파라미터를 새 URL에 복사
-  //   request.nextUrl.searchParams.forEach((value, key) => {
-  //     newUrl.searchParams.set(key, value)
-  //   })
-  //
-  //   return NextResponse.redirect(newUrl)
-  // }
-  //
-  // // 데스크톱 디바이스에서 /mo 경로 접근시
-  // if (device.isDesktop && isMobilePath(pathname)) {
-  //   const newUrl = new URL(basePath, request.url)
-  //
-  //   // 기존 URL의 모든 검색 파라미터를 새 URL에 복사
-  //   request.nextUrl.searchParams.forEach((value, key) => {
-  //     newUrl.searchParams.set(key, value)
-  //   })
-  //
-  //   return NextResponse.redirect(newUrl)
-  // }
+  const accessToken = getAccessTokenFromRequest(request)
+
+  // 이메일 인증 안내: 로그인 A010 / 회원가입 완료 직후에만 접근 가능
+  if (isEmailValidateRoute(pathname)) {
+    if (accessToken) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+
+    if (!hasEmailValidateAccessFromRequest(request)) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    return NextResponse.next()
+  }
+
+  // 로그인 상태에서 loggedOut 공개 경로 접근 → 홈으로
+  if (accessToken && isGuestOnlyRoute(pathname)) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // 비로그인 상태에서 loggedIn 경로 접근 → 로그인으로
+  if (!accessToken && !isGuestOnlyRoute(pathname)) {
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('redirect', pathname)
+    return NextResponse.redirect(loginUrl)
+  }
 
   return NextResponse.next()
 }
 
-// export const config = {
-//   matcher: [
-//     // 전체 경로 매칭
-//     '/((?!api|_next/static|_next/image|favicon.ico).*)',
-//   ],
-// }
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
+}
