@@ -45,15 +45,15 @@ export function applyResponseInterceptor(instance: AxiosInstance) {
     async (error: AxiosError) => {
       const originalRequest = error.config
       const status = error.response?.status
-      const isRefreshRequest = originalRequest?.url === ENDPOINTS.USER.REFRESH
+      const isRefreshRequest = originalRequest?.url === ENDPOINTS.AUTH.REFRESH
 
       // 기본적으로는 401만 인증 만료 플로우로 보지만,
       // refresh 요청의 403은 refresh token 무효/만료 케이스로 간주해 아래 로그아웃 분기까지 내려보냅니다.
-      if (!originalRequest || (status !== 401 && !(isRefreshRequest && status === 403))) {
+      if (originalRequest?.skipAuth || !originalRequest || (status !== 401 && !(isRefreshRequest && status === 403))) {
         return Promise.reject(error)
       }
 
-      // refresh 자체가 401/403이면 세션을 복구할 수 없으므로 즉시 로그아웃합니다.
+      // refresh 자체가 401/403이거나 이미 재시도한 경우 세션을 복구할 수 없으므로 로그아웃합니다.
       if (originalRequest.skipRefresh || originalRequest._retry) {
         clearAccessToken()
         await runLogoutHandler()

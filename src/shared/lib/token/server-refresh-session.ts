@@ -27,7 +27,7 @@ function getRefreshEndpointUrl() {
     throw new Error('서버 refresh 요청에 사용할 NEXT_PUBLIC_API_BASE_URL이 필요합니다.')
   }
 
-  return `${process.env.NEXT_PUBLIC_BASE_URL}${ENDPOINTS.USER.REFRESH}`
+  return `${process.env.NEXT_PUBLIC_BASE_URL}${ENDPOINTS.AUTH.REFRESH}`
 }
 
 // 서버 컴포넌트가 직접 refresh token 쿠키를 읽을 수는 없으므로,
