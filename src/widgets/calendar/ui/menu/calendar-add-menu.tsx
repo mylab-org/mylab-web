@@ -5,13 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import type { CalendarType } from '@/entities/calendar'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 
-interface ScheduleAddButtonProps {
+interface CalendarAddMenuProps {
   onSelect: (type: CalendarType) => void
 }
 
 const TYPES = Object.keys(CALENDAR_TYPE) as CalendarType[]
 
-export const ScheduleAddButton = ({ onSelect }: ScheduleAddButtonProps) => {
+export const CalendarAddMenu = ({ onSelect }: CalendarAddMenuProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null)
 

@@ -17,16 +17,18 @@ import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 import type { ReactNode } from 'react'
 
-interface CalendarWrapProps {
+interface CalendarMonthWrapperProps {
   events: CalendarEvent[]
   /** 모바일은 타이틀을 좌측 정렬하고 일정 목록을 1열로 쌓는다 */
-  isDevice?: boolean
-  /** 헤더 우측 영역 (모바일 일정 등록 버튼 등) */
+  variant?: 'pc' | 'mobile'
+  /** 헤더 우측 영역 (모바일 일정 등록 메뉴 등) */
   headerRight?: ReactNode
   className?: string
 }
 
-export const CalendarWrap = ({ events, isDevice = false, headerRight, className }: CalendarWrapProps) => {
+export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, className }: CalendarMonthWrapperProps) => {
+  const isMobile = variant === 'mobile'
+
   const [currentDate, setCurrentDate] = useState(() => {
     const today = new Date()
     return new Date(today.getFullYear(), today.getMonth(), 1)
@@ -64,8 +66,16 @@ export const CalendarWrap = ({ events, isDevice = false, headerRight, className 
   }, [currentDate.getFullYear(), currentDate.getMonth()])
 
   return (
-    <div className={cn('flex flex-col gap-3.75', className)}>
-      <div className={cn('flex items-center gap-2.5', isDevice ? 'justify-between' : 'justify-center')}>
+    <section
+      className={cn(
+        'flex flex-col gap-3.75',
+        isMobile
+          ? 'flex-1 px-5'
+          : 'min-w-0 flex-1 rounded-[24px] bg-white p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]',
+        className,
+      )}
+    >
+      <div className={cn('flex items-center gap-2.5', isMobile ? 'justify-between' : 'justify-center')}>
         {/* '오늘' 버튼이 생겨도 타이틀·피커 위치가 밀리지 않도록 relative + absolute 로 띄운다 */}
         <div className={'relative flex items-center gap-2.5'}>
           <button
@@ -116,7 +126,7 @@ export const CalendarWrap = ({ events, isDevice = false, headerRight, className 
         {headerRight}
       </div>
 
-      <CalendarTypeFilter selected={filter} onSelect={setFilter} className={isDevice ? '' : 'justify-end'} />
+      <CalendarTypeFilter selected={filter} onSelect={setFilter} className={isMobile ? '' : 'justify-end'} />
 
       <CalendarMonth
         currentDate={currentDate}
@@ -141,7 +151,7 @@ export const CalendarWrap = ({ events, isDevice = false, headerRight, className 
       {selectedDate && listEvents.length === 0 ? (
         <Text className={'py-5 text-center text-[14px] text-gray-400'}>등록된 일정이 없습니다</Text>
       ) : (
-        <ul className={cn('grid gap-2.5', isDevice ? 'grid-cols-1' : 'grid-cols-2')}>
+        <ul className={cn('grid gap-2.5', isMobile ? 'grid-cols-1' : 'grid-cols-2')}>
           {listEvents.map(event => (
             <li key={event.id}>
               <CalendarListItem event={event} />
@@ -149,6 +159,6 @@ export const CalendarWrap = ({ events, isDevice = false, headerRight, className 
           ))}
         </ul>
       )}
-    </div>
+    </section>
   )
 }
