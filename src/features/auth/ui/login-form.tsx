@@ -45,7 +45,7 @@ export const LoginForm = () => {
           </svg>
         }
         iconPosition={'after'}
-        disabled={!isValid || !isSubmitting}
+        disabled={!isValid || isSubmitting}
       >
         {isSubmitting ? '진행중' : '로그인하기'}
         {/* 로그인하기 */}

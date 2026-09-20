@@ -33,7 +33,7 @@ function applyAuthorizationHeader(config: InternalAxiosRequestConfig) {
 
   console.log('헤더 추가', accessToken)
 
-  config.headers.set('Authorization', `${accessToken}`)
+  config.headers.set('Authorization', `Bearer ${accessToken}`)
   return config
 }
 // Axios 공통 응답 처리 규칙을 연결하는 예시입니다.

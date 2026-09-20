@@ -1,5 +1,5 @@
 import { cookies, headers } from 'next/headers'
-import { ACCESS_TOKEN_COOKIE_KEY, CURRENT_ACCESS_TOKEN_HEADER } from '@/shared/constant/token'
+import { ACCESS_TOKEN_COOKIE_KEY, CURRENT_ACCESS_TOKEN_HEADER, REFRESH_TOKEN_COOKIE_KEY } from '@/shared/constant/token'
 import type { NextRequest } from 'next/server'
 
 type CookieReader = {
@@ -37,4 +37,8 @@ export function getAccessTokenFromRequest(request: NextRequest | RequestLikeWith
   // proxy나 route handler처럼 NextRequest를 직접 받는 곳에서는 request.cookies에서 같은 키를 읽습니다.
   // 서버 컴포넌트용 cookies() 호출과 읽는 기준을 맞춰 인증 진입 판단을 일관되게 유지합니다.
   return request.cookies.get(ACCESS_TOKEN_COOKIE_KEY)?.value ?? null
+}
+
+export function getRefreshTokenFromRequest(request: NextRequest | RequestLikeWithCookies) {
+  return request.cookies.get(REFRESH_TOKEN_COOKIE_KEY)?.value ?? null
 }

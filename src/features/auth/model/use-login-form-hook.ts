@@ -2,13 +2,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { LoginSchema } from '../../login/model/login.schema'
+import { LoginSchema } from './login.schema'
 import { postAuthLogin } from '@/features/auth/api/post-auth-login'
 import { postAuthResendVerification } from '@/features/auth/api/post-auth-resend-verification'
 import { ALERT_CONFIRM_TYPE, ALERT_MESSAGE } from '@/shared/constant/alert'
 import { AUTH_ERROR_CODE } from '@/shared/constant/auth'
 import { ROUTES } from '@/shared/constant/routes'
-import { setAccessToken } from '@/shared/lib/token/client-access-token-store'
+import { setAccessToken, setRefreshToken } from '@/shared/lib/token/client-access-token-store'
 import { useAlertStore } from '@/shared/store'
 import type { PostAuthLoginPayloadType, PostAuthLoginResponseType } from './types'
 import type { AxiosError } from 'axios'
@@ -47,7 +47,9 @@ export const useLoginFormHook = () => {
     mutationFn: postAuthLogin,
     onSuccess: (response: ApiResponseType<PostAuthLoginResponseType>) => {
       const accessToken = response.data.accessToken
+      const refreshToken = response.data.refreshToken
       setAccessToken(accessToken)
+      setRefreshToken(refreshToken)
       router.push(ROUTES.HOME)
     },
     onError: (error: AxiosError<LoginErrorBody>) => {

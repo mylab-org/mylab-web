@@ -2,7 +2,7 @@
 // - 평소 요청 인터셉터에서는 메모리 값을 우선 사용해 빠르게 읽고
 // - 새로고침 직후에는 쿠키에서 값을 복구해 다시 메모리에 올립니다.
 
-import { ACCESS_TOKEN_COOKIE_KEY } from '@/shared/constant/token'
+import { ACCESS_TOKEN_COOKIE_KEY, REFRESH_TOKEN_COOKIE_KEY } from '@/shared/constant/token'
 
 // refresh token은 백엔드가 HttpOnly 쿠키로 관리하므로 여기서 다루지 않습니다.
 let accessToken: string | null = null
@@ -16,13 +16,13 @@ function canUseBrowserCookie() {
 }
 
 // 쿠키의 AT 반환
-function readAccessTokenFromCookie() {
+function readAccessTokenFromCookie(key: string) {
   if (!canUseBrowserCookie()) {
     return null
   }
 
   // 프론트가 직접 저장한 access token 쿠키만 읽습니다.
-  const cookie = document.cookie.split('; ').find(item => item.startsWith(`${ACCESS_TOKEN_COOKIE_KEY}=`))
+  const cookie = document.cookie.split('; ').find(item => item.startsWith(`${key}=`))
 
   if (!cookie) {
     return null
@@ -32,7 +32,7 @@ function readAccessTokenFromCookie() {
   return value ? decodeURIComponent(value) : null
 }
 
-function writeAccessTokenToCookie(token: string | null) {
+function writeAccessTokenToCookie(token: string | null, key: string) {
   if (!canUseBrowserCookie()) {
     return
   }
@@ -43,7 +43,7 @@ function writeAccessTokenToCookie(token: string | null) {
   if (token) {
     // access token은 페이지 요청 시 Next 서버도 읽을 수 있도록 일반 쿠키로 저장합니다.
     // 서버가 발급한 HttpOnly refresh token과는 목적이 다르므로 프론트에서 직접 관리합니다.
-    const cookieOptions = [`${ACCESS_TOKEN_COOKIE_KEY}=${encodeURIComponent(token)}`, 'Path=/', 'SameSite=Lax']
+    const cookieOptions = [`${key}=${encodeURIComponent(token)}`, 'Path=/', 'SameSite=Lax']
 
     if (isSecureContext) {
       cookieOptions.push('Secure')
@@ -54,13 +54,7 @@ function writeAccessTokenToCookie(token: string | null) {
   }
 
   // 로그아웃/재발급 실패 시에는 같은 속성으로 만료 쿠키를 써서 기존 값을 확실히 제거합니다.
-  const cookieOptions = [
-    `${ACCESS_TOKEN_COOKIE_KEY}=`,
-    'Path=/',
-    'Max-Age=0',
-    'Expires=Thu, 01 Jan 1970 00:00:00 GMT',
-    'SameSite=Lax',
-  ]
+  const cookieOptions = [`${key}=`, 'Path=/', 'Max-Age=0', 'Expires=Thu, 01 Jan 1970 00:00:00 GMT', 'SameSite=Lax']
 
   if (isSecureContext) {
     cookieOptions.push('Secure')
@@ -71,20 +65,31 @@ function writeAccessTokenToCookie(token: string | null) {
 
 // CSR에서 사용할 AT를 반환
 export function getAccessToken() {
-  accessToken = readAccessTokenFromCookie()
+  accessToken = readAccessTokenFromCookie(ACCESS_TOKEN_COOKIE_KEY)
   return accessToken
+}
+
+export function getRefreshToken() {
+  return readAccessTokenFromCookie(REFRESH_TOKEN_COOKIE_KEY)
+}
+
+// 리프레시 토큰 저장
+export function setRefreshToken(token: string) {
+  // 로그인/재발급 성공 시 메모리와 쿠키를 동시에 갱신합니다.
+  writeAccessTokenToCookie(token, REFRESH_TOKEN_COOKIE_KEY)
 }
 
 export function setAccessToken(token: string) {
   // 로그인/재발급 성공 시 메모리와 쿠키를 동시에 갱신합니다.
   accessToken = token
-  writeAccessTokenToCookie(token)
+  writeAccessTokenToCookie(token, ACCESS_TOKEN_COOKIE_KEY)
 }
 
 export function clearAccessToken() {
   // 로그아웃 또는 재발급 실패 시 메모리와 쿠키를 함께 지워 이후 요청이 인증 헤더를 붙이지 않게 합니다.
   accessToken = null
-  writeAccessTokenToCookie(null)
+  writeAccessTokenToCookie(null, ACCESS_TOKEN_COOKIE_KEY)
+  writeAccessTokenToCookie(null, REFRESH_TOKEN_COOKIE_KEY)
 }
 
 export function registerLogoutHandler(handler: (() => void | Promise<void>) | null) {
