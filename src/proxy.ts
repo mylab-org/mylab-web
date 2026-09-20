@@ -1,9 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { hasEmailValidateAccessFromRequest } from './shared/lib/email-validate-access'
 import { getAccessTokenFromRequest } from './shared/lib/token/server-access-tokne-cookies'
 
 /** (loggedOut) 공개 라우트 — 비로그인만 접근 가능 */
-const GUEST_ONLY_ROUTES = ['/login', '/signup', '/survey'] as const
+const GUEST_ONLY_ROUTES = ['/login', '/signup', '/survey', '/email-validate'] as const
 
 function isMatchRoute(pathname: string, route: string) {
   return pathname === route || pathname.startsWith(`${route}/`)
@@ -13,26 +12,9 @@ function isGuestOnlyRoute(pathname: string) {
   return GUEST_ONLY_ROUTES.some(route => isMatchRoute(pathname, route))
 }
 
-function isEmailValidateRoute(pathname: string) {
-  return isMatchRoute(pathname, '/email-validate')
-}
-
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const accessToken = getAccessTokenFromRequest(request)
-
-  // 이메일 인증 안내: 로그인 A010 / 회원가입 완료 직후에만 접근 가능
-  if (isEmailValidateRoute(pathname)) {
-    if (accessToken) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-
-    if (!hasEmailValidateAccessFromRequest(request)) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
-
-    return NextResponse.next()
-  }
 
   // 로그인 상태에서 loggedOut 공개 경로 접근 → 홈으로
   if (accessToken && isGuestOnlyRoute(pathname)) {
