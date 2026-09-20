@@ -5,3 +5,10 @@ interface ApiResponseType<T = unknown> {
   message: string
   data: T
 }
+
+type PageType = {
+  currentPage: number
+  pageSize: number
+  totalCount: number
+  totalPages: number
+}

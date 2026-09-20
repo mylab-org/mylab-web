@@ -20,4 +20,9 @@ export const ENDPOINTS = {
     MEMBERS: (labId: number) => `/api/labs/${labId}/members`,
     CHANGE_ROLE: (labId: number, userId: number) => `/api/labs/${labId}/members/${userId}/change-role`,
   },
+  BOARD: {
+    CATEGORY: (labId: number) => `/api/board/${labId}/category`,
+    CATEGORY_ID: (categoryId: number) => `/api/board/${categoryId}`,
+    BOARD_PID: (pid: number) => `/api/board/${pid}`,
+  },
 }
