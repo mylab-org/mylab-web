@@ -2,7 +2,7 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { LabRentalItem } from '@/entities/lab'
+import { LabRentalItem } from '@/entities/labs'
 import { SideRentalTime } from '@/features/lab-side-modal'
 import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'

@@ -1,6 +1,6 @@
 'use client'
 
-import { LabInfo } from '@/entities/lab'
+import { LabInfo } from '@/entities/labs'
 import { UserInfo } from '@/entities/user'
 
 export const LabMobileTopSection = () => {

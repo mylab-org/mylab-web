@@ -1,4 +1,4 @@
-import { LabInviteCode } from '@/entities/lab'
+import { LabInviteCode } from '@/entities/labs'
 
 export const InviteLabPage = () => {
   return (

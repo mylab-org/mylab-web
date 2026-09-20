@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { LabLinkModal } from '../../modal/lab-link-modal'
-import { LabInfo } from '@/entities/lab'
-import { LabLink } from '@/entities/lab/ui/lab-link'
-import { LabMember } from '@/entities/lab/ui/lab-member'
+import { LabInfo } from '@/entities/labs'
+import { LabLink } from '@/entities/labs/ui/lab-link'
+import { LabMember } from '@/entities/labs/ui/lab-member'
 
 export const LabLabInfoSection = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
