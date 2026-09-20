@@ -1,7 +1,7 @@
 'use client'
 
 import { CalendarAddMenu } from '../../menu/calendar-add-menu'
-import { CalendarMonthSection } from '../../pc/section/calendar-month-section'
+import { CalendarMonthWrapper } from '../../month/calendar-month-wrapper'
 import type { CalendarEvent, CalendarType } from '@/entities/calendar'
 
 interface CalendarMobileMonthSectionProps {
@@ -12,7 +12,7 @@ interface CalendarMobileMonthSectionProps {
 
 export const CalendarMobileMonthSection = ({ events, onAddSchedule }: CalendarMobileMonthSectionProps) => {
   return (
-    <CalendarMonthSection
+    <CalendarMonthWrapper
       variant={'mobile'}
       events={events}
       headerRight={<CalendarAddMenu onSelect={onAddSchedule} />}

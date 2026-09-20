@@ -17,7 +17,7 @@ import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 import type { ReactNode } from 'react'
 
-interface CalendarMonthSectionProps {
+interface CalendarMonthWrapperProps {
   events: CalendarEvent[]
   /** 모바일은 타이틀을 좌측 정렬하고 일정 목록을 1열로 쌓는다 */
   variant?: 'pc' | 'mobile'
@@ -26,7 +26,7 @@ interface CalendarMonthSectionProps {
   className?: string
 }
 
-export const CalendarMonthSection = ({ events, variant = 'pc', headerRight, className }: CalendarMonthSectionProps) => {
+export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, className }: CalendarMonthWrapperProps) => {
   const isMobile = variant === 'mobile'
 
   const [currentDate, setCurrentDate] = useState(() => {
