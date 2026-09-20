@@ -38,7 +38,7 @@ interface SetupButtonProps extends BaseButtonProps {
 }
 
 const colorVariants: Record<Color, string> = {
-  main: 'bg-main',
+  main: 'bg-main hover:bg-gray-900 disabled:hover:bg-gray-300',
   secondary: 'bg-secondary',
   black: 'bg-black',
   error: 'bg-error',

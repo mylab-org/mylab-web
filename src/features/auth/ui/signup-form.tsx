@@ -25,7 +25,7 @@ export const SignUpForm = () => {
       />
       <Button
         type="submit"
-        color={'main'}
+        color="main"
         disabled={!isValid}
         className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
         icon={

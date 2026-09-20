@@ -15,7 +15,7 @@ export const MobileEmailValidatePage = () => {
         <Button.Link
           href={'/login'}
           target={'_self'}
-          color={'main'}
+          color="main"
           icon={
             <svg
               className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1"
