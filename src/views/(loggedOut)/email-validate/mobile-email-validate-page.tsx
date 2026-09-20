@@ -2,15 +2,21 @@ import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'
 import { MobileAuthHeader } from '@/widgets/layout/header'
 
-export const MobileEmailValidatePage = () => {
+type Props = {
+  token: string
+}
+
+export const MobileEmailValidatePage = ({ token: _token }: Props) => {
   return (
     <>
       <MobileAuthHeader />
       <div className={'flex flex-1 flex-col gap-7.5 px-7.5 pb-5'}>
-        <h1 className={'text-[22px] font-bold'}>인증메일 발송</h1>
+        <h1 className={'text-[22px] font-bold'}>이메일 인증 완료</h1>
         <div className={'flex h-full w-full flex-col gap-5'}>
-          <Text className={'text-[24px] font-bold whitespace-pre-wrap'}>{'김땡땡 님,\n이메일을 확인해주세요'}</Text>
-          <Text className={'text-[14px] font-semibold whitespace-pre-wrap'}>{'인증 메일이 발송되었습니다.'}</Text>
+          <Text className={'text-[24px] font-bold whitespace-pre-wrap'}>
+            {'환영합니다.\n서비스 이용이 가능합니다.'}
+          </Text>
+          <Text className={'text-[14px] font-semibold whitespace-pre-wrap'}>{'이메일 인증이 완료되었습니다.'}</Text>
         </div>
         <Button.Link
           href={'/login'}
@@ -28,7 +34,7 @@ export const MobileEmailValidatePage = () => {
           }
           iconPosition={'after'}
         >
-          처음으로
+          로그인하러 가기
         </Button.Link>
       </div>
     </>

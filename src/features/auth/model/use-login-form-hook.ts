@@ -24,7 +24,7 @@ export const useLoginFormHook = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { isValid, errors, isSubmitting },
+    formState: { isValid, errors },
   } = useForm<PostAuthLoginPayloadType>({
     mode: 'onSubmit',
     resolver: zodResolver(LoginSchema),
