@@ -1,21 +1,35 @@
-import { create } from 'zustand'
+'use client'
 
-type AlertProps = {
-  isAlert: boolean
-  msg: string
-  onOpenAlert: (text: string, onCloseCallback?: () => void) => void
-  onCloseAlert: () => void
-  _onCloseCallback?: () => void
+import { create } from 'zustand'
+import { ALERT_CONFIRM_TYPE, type AlertConfirmType } from '@/shared/constant/alert'
+
+type OpenAlertParams = {
+  message: string
+  confirmType?: AlertConfirmType
 }
 
-export const useAlertStore = create<AlertProps>()(set => ({
+type AlertState = {
+  isAlert: boolean
+  msg: string
+  confirmType: AlertConfirmType
+  onOpenAlert: (params: OpenAlertParams) => void
+  onCloseAlert: () => void
+}
+
+export const useAlertStore = create<AlertState>()(set => ({
   isAlert: false,
   msg: '',
-  _onCloseCallback: undefined,
-  onOpenAlert: (text, onCloseCallback) => set({ isAlert: true, msg: text, _onCloseCallback: onCloseCallback }),
+  confirmType: ALERT_CONFIRM_TYPE.CLOSE,
+  onOpenAlert: ({ message, confirmType = ALERT_CONFIRM_TYPE.CLOSE }) =>
+    set({
+      isAlert: true,
+      msg: message,
+      confirmType,
+    }),
   onCloseAlert: () =>
-    set(state => {
-      state._onCloseCallback?.()
-      return { isAlert: false, msg: '', _onCloseCallback: undefined }
+    set({
+      isAlert: false,
+      msg: '',
+      confirmType: ALERT_CONFIRM_TYPE.CLOSE,
     }),
 }))

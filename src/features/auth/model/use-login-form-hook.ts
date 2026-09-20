@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form'
 import { LoginSchema } from '../../login/model/login.schema'
 import { postAuthLogin } from '@/features/auth/api/post-auth-login'
 import { postAuthResendVerification } from '@/features/auth/api/post-auth-resend-verification'
+import { ALERT_CONFIRM_TYPE, ALERT_MESSAGE } from '@/shared/constant/alert'
 import { AUTH_ERROR_CODE } from '@/shared/constant/auth'
 import { ROUTES } from '@/shared/constant/routes'
-import { allowEmailValidateAccess } from '@/shared/lib/email-validate-access'
 import { setAccessToken } from '@/shared/lib/token/client-access-token-store'
+import { useAlertStore } from '@/shared/store'
 import type { PostAuthLoginPayloadType, PostAuthLoginResponseType } from './types'
 import type { AxiosError } from 'axios'
 
@@ -18,6 +19,7 @@ type LoginErrorBody = ApiResponseType<void> & {
 
 export const useLoginFormHook = () => {
   const router = useRouter()
+  const onOpenAlert = useAlertStore(state => state.onOpenAlert)
   const {
     register,
     handleSubmit,
@@ -30,8 +32,11 @@ export const useLoginFormHook = () => {
 
   const postResendEmailValidateMutation = useMutation({
     mutationFn: postAuthResendVerification,
-    onSuccess: response => {
-      console.log('이메일 인증 메일 재발송 성공', response)
+    onSuccess: () => {
+      onOpenAlert({
+        message: ALERT_MESSAGE.EMAIL_VERIFY,
+        confirmType: ALERT_CONFIRM_TYPE.CLOSE,
+      })
     },
     onError: (error: AxiosError<LoginErrorBody>) => {
       console.log('이메일 인증 메일 재발송 실패', error)
@@ -42,8 +47,6 @@ export const useLoginFormHook = () => {
     mutationFn: postAuthLogin,
     onSuccess: (response: ApiResponseType<PostAuthLoginResponseType>) => {
       const accessToken = response.data.accessToken
-      const refreshToken = response.data.refreshToken
-      const user = response.data.user
       setAccessToken(accessToken)
       router.push(ROUTES.HOME)
     },
@@ -51,14 +54,12 @@ export const useLoginFormHook = () => {
       const data = error.response?.data
       const status = error.response?.status ?? data?.status
 
-      console.log('로그인 실패 응답', data)
-
       if (status === 403 && data?.code === AUTH_ERROR_CODE.EMAIL_NOT_VERIFIED) {
-        const email = getValues('email')
-        postResendEmailValidateMutation.mutate({ email })
-        allowEmailValidateAccess({ email })
-        router.push(ROUTES.AUTH.EMAIL_VALIDATE.LINK)
+        postResendEmailValidateMutation.mutate({ email: getValues('email') })
+        return
       }
+
+      console.log('로그인 실패 응답', data)
     },
   })
 
@@ -71,6 +72,6 @@ export const useLoginFormHook = () => {
     onSubmit,
     isValid,
     errors,
-    isSubmitting,
+    isSubmitting: postLoginMutation.isPending || postResendEmailValidateMutation.isPending,
   }
 }
