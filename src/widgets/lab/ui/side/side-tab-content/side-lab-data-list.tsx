@@ -1,4 +1,4 @@
-import { LabDataItem } from '@/entities/lab'
+import { LabDataItem } from '@/entities/labs'
 import { Input } from '@/shared/ui/override/input'
 
 export const SideLabDataList = ({ isBottom }: { isBottom: boolean }) => {

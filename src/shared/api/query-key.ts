@@ -5,4 +5,8 @@ export const QUERY_KEYS = {
   AUTH: {
     VERIFY_EMAIL: ['auth', 'verify-email'],
   },
+  LABS: {
+    CHK_VALIDATE: (code: string) => ['labs', 'invite-codes', 'chk-validate', code],
+    MEMBERS: (labId: number) => ['labs', 'members', labId],
+  },
 }

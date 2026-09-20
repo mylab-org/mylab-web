@@ -1,4 +1,4 @@
-import { LabRequestItem } from '@/entities/lab'
+import { LabRequestItem } from '@/entities/labs'
 
 export const SideStuRequestList = ({ isBottom }: { isBottom: boolean }) => {
   return (

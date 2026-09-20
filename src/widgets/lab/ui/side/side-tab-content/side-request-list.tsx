@@ -1,4 +1,4 @@
-import { LabRequestItem } from '@/entities/lab'
+import { LabRequestItem } from '@/entities/labs'
 import { Button } from '@/shared/ui/override/button'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 

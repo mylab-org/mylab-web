@@ -3,7 +3,7 @@
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreLabMember } from './side/more-lab-member'
 import { MoreLabUpdate } from './side/more-lab-update'
-import { LabInfo } from '@/entities/lab'
+import { LabInfo } from '@/entities/labs'
 import { useConfirmStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'

@@ -1,4 +1,4 @@
-import { LabMemberItem } from '@/entities/lab'
+import { LabMemberItem } from '@/entities/labs'
 
 export const LabMember = () => {
   return (

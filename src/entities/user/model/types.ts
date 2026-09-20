@@ -1,5 +1,3 @@
-export type UserDegreeType = 'BACHELOR' | 'MASTER' | 'DOCTOR' | 'PROFESSOR'
-
 export type UsersMeResponseType = {
   id: number
   email: string

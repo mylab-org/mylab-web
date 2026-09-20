@@ -1,7 +1,7 @@
 'use client'
 
 import { Image } from 'next/dist/client/image-component'
-import { LabLinkItem } from '@/entities/lab'
+import { LabLinkItem } from '@/entities/labs'
 import type { Dispatch, SetStateAction } from 'react'
 
 interface LabLinkProps {
