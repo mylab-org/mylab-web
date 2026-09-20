@@ -32,8 +32,8 @@ export const LoginForm = () => {
       />
       <Button
         type="submit"
-        color={'main'}
-        className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
+        color="main"
+        className="group flex w-full transform py-5 transition-all duration-300 active:scale-[0.98]"
         icon={
           <svg
             className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1"
@@ -47,7 +47,8 @@ export const LoginForm = () => {
         iconPosition={'after'}
         disabled={!isValid || isSubmitting}
       >
-        로그인하기
+        {isSubmitting ? '진행중' : '로그인하기'}
+        {/* 로그인하기 */}
       </Button>
     </form>
   )

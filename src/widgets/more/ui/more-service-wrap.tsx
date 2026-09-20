@@ -1,9 +1,12 @@
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreServiceUse } from './side/more-service-use'
 import { MoreUserPw } from './side/more-user-pw'
+import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
+import { clearAccessToken, runLogoutHandler } from '@/shared/lib/token/client-access-token-store'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Switch } from '@/shared/ui/override/switch'
@@ -24,6 +27,17 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
       console.log('탈퇴')
     })
   }
+
+  const postAuthLogoutMutation = useMutation({
+    mutationFn: postAuthLogout,
+    onSuccess: async () => {
+      clearAccessToken()
+      await runLogoutHandler()
+    },
+    onError: () => {
+      console.log('로그아웃 실패')
+    },
+  })
 
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
@@ -72,7 +86,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
       <MoreMenuWrap title={'계정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu onClick={() => openSideModal(MoreUserPw, '비밀번호 변경')}>비밀번호 변경</Button.Menu>
-          <Button.Menu onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => console.log('로그아웃'))}>
+          <Button.Menu onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => postAuthLogoutMutation.mutate())}>
             로그아웃
           </Button.Menu>
           <Button.Menu onClick={handleServiceLeave} isGray>

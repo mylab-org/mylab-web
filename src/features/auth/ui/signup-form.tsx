@@ -1,38 +1,32 @@
-import { useFormContext } from 'react-hook-form'
-import type { Regist } from '@/features/regist/model/types'
+'use client'
+
+import { useSignupFormHook } from '../model/use-signup-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { InputBox } from '@/shared/ui/template/input-box'
 
-export const NewSignUpForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useFormContext<Regist>()
-
-  const onSubmit = handleSubmit((data: Regist) => {
-    console.log('제출', data)
-  })
+export const SignUpForm = () => {
+  const { register, onSubmit, isValid } = useSignupFormHook()
 
   return (
     <form id={'signup-form'} onSubmit={onSubmit} className={'flex w-full flex-col gap-5'}>
-      <InputBox labelName={'이름'} placeholder={'이름을 입력하세요'} {...register('username')} />
-      <InputBox labelName={'이메일'} placeholder={'이메일을 입력하세요'} {...register('email')} />
+      <InputBox labelName={'이름'} placeholder={'이름을 입력하세요'} {...register('name', { required: true })} />
+      <InputBox labelName={'이메일'} placeholder={'이메일을 입력하세요'} {...register('email', { required: true })} />
       <InputBox
         type={'password'}
         labelName={'비밀번호'}
         placeholder={'비밀번호를 입력하세요'}
-        {...register('password')}
+        {...register('password', { required: true })}
       />
       <InputBox
         type={'password'}
         labelName={'비밀번호 확인'}
         placeholder={'비밀번호를 다시 입력하세요'}
-        {...register('passwordCheck')}
+        {...register('passwordConfirm', { required: true })}
       />
       <Button
         type="submit"
-        color={'main'}
+        color="main"
+        disabled={!isValid}
         className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
         icon={
           <svg

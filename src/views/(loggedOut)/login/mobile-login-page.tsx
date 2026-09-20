@@ -2,7 +2,7 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { LoginForm } from '@/features/login'
+import { LoginForm } from '@/features/auth'
 import { Button } from '@/shared/ui/override/button'
 import { AuthLinkItem } from '@/shared/ui/template/auth-link-item'
 import { MobileAuthHeader } from '@/widgets/layout/header'

@@ -1,4 +1,4 @@
-import { LoginForm } from '@/features/login'
+import { LoginForm } from '@/features/auth'
 import { AuthLinkItem } from '@/shared/ui/template/auth-link-item'
 
 export const LoginPage = () => {
