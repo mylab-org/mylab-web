@@ -40,6 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+#IDE - Claude Code
+.claude/
+
 #IDE - JetBrains (WebStorm, IntelliJ)
 .idea/
 *.iws
