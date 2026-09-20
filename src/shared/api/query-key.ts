@@ -13,4 +13,7 @@ export const QUERY_KEYS = {
     CATEGORY: (labId: number) => ['board', 'category', labId],
     LIST: (categoryId: number) => ['board', 'list', categoryId],
   },
+  COMMENT: {
+    LIST: (pid: number) => ['comment', 'list', pid],
+  },
 }
