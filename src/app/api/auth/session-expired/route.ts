@@ -13,7 +13,7 @@ function expireCookie(response: NextResponse, name: string) {
 }
 
 export async function GET(request: Request) {
-  const loginUrl = new URL('/', request.url)
+  const loginUrl = new URL('/login', request.url)
   const response = NextResponse.redirect(loginUrl)
 
   expireCookie(response, ACCESS_TOKEN_COOKIE_KEY)
