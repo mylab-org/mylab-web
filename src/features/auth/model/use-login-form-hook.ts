@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { LoginSchema } from './login.schema'
 import { postAuthLogin } from '@/features/auth/api/post-auth-login'
@@ -17,8 +17,16 @@ type LoginErrorBody = ApiResponseType<void> & {
   status?: number
 }
 
+const getSafeRedirectPath = (redirect: string | null) => {
+  if (!redirect) return ROUTES.HOME
+  // 외부 URL / 프로토콜 상대 경로 차단
+  if (!redirect.startsWith('/') || redirect.startsWith('//')) return ROUTES.HOME
+  return redirect
+}
+
 export const useLoginFormHook = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const onOpenAlert = useAlertStore(state => state.onOpenAlert)
   const {
     register,
@@ -50,7 +58,7 @@ export const useLoginFormHook = () => {
       const refreshToken = response.data.refreshToken
       setAccessToken(accessToken)
       setRefreshToken(refreshToken)
-      router.push(ROUTES.HOME)
+      router.push(getSafeRedirectPath(searchParams.get('redirect')))
     },
     onError: (error: AxiosError<LoginErrorBody>) => {
       const data = error.response?.data

@@ -1,10 +1,11 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useLoginFormHook } from '../model/use-login-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { InputBox } from '@/shared/ui/template/input-box'
 
-export const LoginForm = () => {
+const LoginFormContent = () => {
   const { register, onSubmit, isValid, errors, isSubmitting } = useLoginFormHook()
 
   return (
@@ -48,8 +49,15 @@ export const LoginForm = () => {
         disabled={!isValid || isSubmitting}
       >
         {isSubmitting ? '진행중' : '로그인하기'}
-        {/* 로그인하기 */}
       </Button>
     </form>
+  )
+}
+
+export const LoginForm = () => {
+  return (
+    <Suspense fallback={null}>
+      <LoginFormContent />
+    </Suspense>
   )
 }

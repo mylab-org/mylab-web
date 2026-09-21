@@ -16,7 +16,7 @@ export function AppProviders({ children }: AppProvidersProps) {
   useEffect(() => {
     // interceptor 에서 세션 만료 시 앱 라우터로 메인 이동
     registerLogoutHandler(() => {
-      router.replace('/')
+      router.replace('/login')
     })
 
     return () => {
