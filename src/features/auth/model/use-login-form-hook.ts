@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { LoginSchema } from './login.schema'
 import { postAuthLogin } from '@/features/auth/api/post-auth-login'
@@ -17,6 +18,11 @@ type LoginErrorBody = ApiResponseType<void> & {
   status?: number
 }
 
+type LabModalState = {
+  open: boolean
+  type: 'create' | 'join'
+}
+
 const getSafeRedirectPath = (redirect: string | null) => {
   if (!redirect) return ROUTES.HOME
   // 외부 URL / 프로토콜 상대 경로 차단
@@ -28,6 +34,7 @@ export const useLoginFormHook = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const onOpenAlert = useAlertStore(state => state.onOpenAlert)
+  const [labModal, setLabModal] = useState<LabModalState>({ open: false, type: 'join' })
   const {
     register,
     handleSubmit,
@@ -56,9 +63,10 @@ export const useLoginFormHook = () => {
     onSuccess: (response: ApiResponseType<PostAuthLoginResponseType>) => {
       const accessToken = response.data.accessToken
       const refreshToken = response.data.refreshToken
-      setAccessToken(accessToken)
-      setRefreshToken(refreshToken)
-      router.push(getSafeRedirectPath(searchParams.get('redirect')))
+      // setAccessToken(accessToken)
+      // setRefreshToken(refreshToken)
+      // router.push(getSafeRedirectPath(searchParams.get('redirect')))
+      setLabModal({ open: true, type: 'join' })
     },
     onError: (error: AxiosError<LoginErrorBody>) => {
       const data = error.response?.data
@@ -77,11 +85,19 @@ export const useLoginFormHook = () => {
     postLoginMutation.mutate(values)
   })
 
+  const closeLabModal = () => {
+    // type은 유지해 닫힘 애니메이션 중 create로 깜빡이지 않게 함
+    setLabModal(prev => ({ ...prev, open: false }))
+  }
+
   return {
     register,
     onSubmit,
     isValid,
     errors,
     isSubmitting: postLoginMutation.isPending || postResendEmailValidateMutation.isPending,
+    labModal,
+    setLabModal,
+    closeLabModal,
   }
 }
