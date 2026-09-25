@@ -36,7 +36,7 @@ type ProvisionalTokens = {
  * - false → 소속 랩 없음: 생성/참여 온보딩 모달
  * 백엔드 연동 후에는 응답의 hasLab을 우선하고, 이 값은 fallback으로만 쓰면 됩니다.
  */
-const TEMP_HAS_LAB = false
+const TEMP_HAS_LAB = true
 
 const getSafeRedirectPath = (redirect: string | null) => {
   if (!redirect) return ROUTES.HOME
