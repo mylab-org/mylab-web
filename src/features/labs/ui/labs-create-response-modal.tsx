@@ -3,21 +3,24 @@
 import { Button } from '@/shared/ui/override/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/shared/ui/override/dialog'
 import { Text } from '@/shared/ui/override/text'
+import type { PostLabsCreateResponseType } from '../model/types'
 
 type Props = {
   open: boolean
-  onOpenChange: (open: boolean) => void
+  createLabResponse: PostLabsCreateResponseType | null
   onEnterLab?: () => void
+  onOpenChange?: (open: boolean) => void
 }
 
 const INFO_ROWS = [
-  { key: 'universityName', label: '학교명', value: '' },
-  { key: 'departmentName', label: '학과명', value: '' },
-  { key: 'labName', label: '연구실명', value: '' },
-  { key: 'professorName', label: '지도교수', value: '' },
+  { key: 'universityName', label: '학교명' },
+  { key: 'departmentName', label: '학과명' },
+  { key: 'labName', label: '연구실명' },
 ] as const
 
-export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab }: Props) => {
+export const LabsCreateResponseModal = ({ open, createLabResponse, onEnterLab, onOpenChange }: Props) => {
+  if (createLabResponse === null) return null
+
   const handleJoinLab = () => {
     onEnterLab?.()
   }
@@ -26,14 +29,14 @@ export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab }: Props)
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="whitespace-pre-wrap">{'참여 전,\n연구실을 다시 확인하세요'}</DialogTitle>
-          <DialogDescription>참여할 연구실 정보를 확인합니다.</DialogDescription>
+          <DialogTitle className="whitespace-pre-wrap">{'생성 된,\n연구실 정보입니다.'}</DialogTitle>
+          <DialogDescription>그럼 마이랩과 즐거운 연구 생활을 시작하세요.</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col overflow-hidden rounded-2xl bg-gray-50">
-          {INFO_ROWS.map(({ key, label, value }) => (
+          {INFO_ROWS.map(({ key, label }) => (
             <div key={key} className="flex flex-col gap-1 px-5 py-4">
               <Text className="text-[12px] font-medium text-gray-500!">{label}</Text>
-              <Text className="text-[16px] font-semibold">{value}</Text>
+              <Text className="text-[16px] font-semibold">{createLabResponse[key]}</Text>
             </div>
           ))}
         </div>

@@ -9,15 +9,25 @@ import { InputBox } from '@/shared/ui/template/input-box'
 
 type Props = {
   hideTitle?: boolean
+  ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
+  onLabFlowSuccess?: () => void
+  /** 로그인 온보딩처럼 상위가 확인 모달을 띄울 때 사용 */
+  onJoinPrevInfoOpen?: () => void
 }
 
-export const LabsJoinForm = ({ hideTitle = false }: Props) => {
+export const LabsJoinForm = ({ hideTitle = false, ensureAccessToken, onLabFlowSuccess, onJoinPrevInfoOpen }: Props) => {
   const { code, register, onSubmit, errors, isPending, isJoinPrevInfoModalOpen, setIsJoinPrevInfoModalOpen } =
-    useLabsJoinFormHook()
+    useLabsJoinFormHook({ ensureAccessToken, onJoinPrevInfoOpen })
 
   return (
     <>
-      <LabsJoinPrevInfoModal open={isJoinPrevInfoModalOpen} onOpenChange={setIsJoinPrevInfoModalOpen} />
+      {!onJoinPrevInfoOpen && (
+        <LabsJoinPrevInfoModal
+          open={isJoinPrevInfoModalOpen}
+          onOpenChange={setIsJoinPrevInfoModalOpen}
+          onEnterLab={onLabFlowSuccess}
+        />
+      )}
       {!hideTitle && (
         <Text className={'text-[24px] font-bold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실에 참여하세요'}</Text>
       )}

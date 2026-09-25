@@ -8,7 +8,10 @@ import { InputBox } from '@/shared/ui/template/input-box'
 type LabModalProps = {
   open: boolean
   onClose: () => void
+  onHide: () => void
   type: 'create' | 'join'
+  ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
+  onLabFlowSuccess?: () => void
 }
 
 type Props = {
@@ -16,7 +19,18 @@ type Props = {
 }
 
 const LoginFormContent = ({ LabModal }: Props) => {
-  const { register, onSubmit, isValid, errors, isSubmitting, labModal, closeLabModal } = useLoginFormHook()
+  const {
+    register,
+    onSubmit,
+    isValid,
+    errors,
+    isSubmitting,
+    labModal,
+    ensureProvisionalAccessToken,
+    closeLabModal,
+    hideLabFormModal,
+    persistProvisionalSession,
+  } = useLoginFormHook()
 
   return (
     <>
@@ -62,7 +76,14 @@ const LoginFormContent = ({ LabModal }: Props) => {
           {isSubmitting ? '진행중' : '로그인하기'}
         </Button>
       </form>
-      <LabModal open={labModal.open} onClose={closeLabModal} type={labModal.type} />
+      <LabModal
+        open={labModal.open}
+        onClose={closeLabModal}
+        onHide={hideLabFormModal}
+        type={labModal.type}
+        ensureAccessToken={ensureProvisionalAccessToken}
+        onLabFlowSuccess={persistProvisionalSession}
+      />
     </>
   )
 }

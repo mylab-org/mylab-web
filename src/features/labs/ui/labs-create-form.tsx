@@ -1,23 +1,45 @@
 'use client'
 'use no memo'
 
+import { LabsCreateResponseModal } from './labs-create-response-modal'
 import { useLabsCreateFormHook } from '../model/use-labs-create-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'
 import { InputBox } from '@/shared/ui/template/input-box'
+import type { PostLabsCreateResponseType } from '../model/types'
 
-export const LabsCreateForm = ({ hideTitle = false }: { hideTitle?: boolean }) => {
-  const { register, isValid, isPending } = useLabsCreateFormHook({
-    onclose: () => {
-      console.log('close')
-    },
+type Props = {
+  hideTitle?: boolean
+  ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
+  onLabFlowSuccess?: () => void
+  /** 로그인 온보딩처럼 상위가 결과 모달을 띄울 때 사용 */
+  onCreateSuccess?: (data: PostLabsCreateResponseType) => void
+}
+
+export const LabsCreateForm = ({ hideTitle = false, ensureAccessToken, onLabFlowSuccess, onCreateSuccess }: Props) => {
+  const { register, isValid, isPending, onSubmit, createLabResponse, clearCreateLabResponse } = useLabsCreateFormHook({
+    ensureAccessToken,
+    onCreateSuccess,
   })
+
   return (
     <>
+      {!onCreateSuccess && (
+        <LabsCreateResponseModal
+          open={createLabResponse !== null}
+          createLabResponse={createLabResponse}
+          onEnterLab={onLabFlowSuccess}
+          onOpenChange={open => {
+            if (!open) {
+              clearCreateLabResponse()
+            }
+          }}
+        />
+      )}
       {!hideTitle && (
         <Text className={'text-[24px] font-bold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실을 생성하세요'}</Text>
       )}
-      <form id={'create-lab-form'} action="" className={'flex h-full w-full flex-col gap-5'}>
+      <form className={'flex h-full w-full flex-col gap-5'}>
         <Text className={'text-[14px] font-semibold'}>연구실 검토는 평균 2일 이내에 처리됩니다.</Text>
         <InputBox
           labelName={'학교명'}
@@ -35,7 +57,6 @@ export const LabsCreateForm = ({ hideTitle = false }: { hideTitle?: boolean }) =
           placeholder={'연구실명을 입력하세요'}
         />
         <Button
-          form={'create-lab-form'}
           disabled={!isValid || isPending}
           className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
           icon={
@@ -49,6 +70,7 @@ export const LabsCreateForm = ({ hideTitle = false }: { hideTitle?: boolean }) =
             </svg>
           }
           iconPosition={'after'}
+          onClick={onSubmit}
         >
           연구실 참여하기
         </Button>
