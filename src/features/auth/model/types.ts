@@ -16,6 +16,8 @@ export type PostAuthLoginPayloadType = {
 export type PostAuthLoginResponseType = {
   accessToken: string
   refreshToken: string
+  /** 소속 랩 여부. 백엔드 미구현 구간에서는 로그인 훅의 TEMP_HAS_LAB로 대체합니다. */
+  hasLab?: boolean
   user: {
     id: string
     email: string

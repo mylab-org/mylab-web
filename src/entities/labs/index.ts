@@ -9,3 +9,5 @@ export { LabManagementItem } from './ui/side-item/lab-management-item'
 export { LabDataItem } from './ui/side-item/lab-data-item'
 export { LabRequestItem } from './ui/side-item/lab-request-item'
 export { LabRentalItem } from './ui/side-item/lab-rental-item'
+
+export { LabsJoinPrevInfoModal } from './ui/labs-join-prev-info-modal'
