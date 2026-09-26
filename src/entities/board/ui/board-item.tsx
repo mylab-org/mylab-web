@@ -23,7 +23,9 @@ export const BoardItem = ({ post }: Props) => {
         </Text>
       </Avatar>
 
-      <Text className={'mt-2 text-[12px] font-normal whitespace-pre-wrap lg:text-[14px]'}>{post.content}</Text>
+      <Text className={'mt-2 min-h-[50px] text-[12px] font-normal whitespace-pre-wrap lg:text-[14px]'}>
+        {post.content}
+      </Text>
     </div>
   )
 }

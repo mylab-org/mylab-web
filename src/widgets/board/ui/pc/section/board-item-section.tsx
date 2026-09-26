@@ -1,13 +1,16 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { Suspense } from 'react'
-import { BoardCommentItem, BoardContentMenu, BoardItem } from '@/entities/board'
+import { Suspense, useState } from 'react'
+import { BoardUpdateModal } from '../../modal/board-update-modal'
+import { BoardCommentItem, BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { getCommentList } from '@/entities/comment/api/get-comment-list'
-import { PostBoardCommentForm, useBoardCategoryId } from '@/features/board'
+import { BoardContentMenu, PostBoardCommentForm, useBoardCategoryId } from '@/features/board'
+import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { formatDateTime } from '@/shared/lib/format'
 import { Text } from '@/shared/ui/override/text'
 
 type BoardPostCommentsProps = {
@@ -32,7 +35,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
             <BoardCommentItem
               authorName={comment.author.name}
               content={comment.content}
-              createdAt={comment.created_at}
+              createdAt={formatDateTime(comment.created_at)}
               labName={post.lab.name}
             />
             {/* 대댓글 영역 */}
@@ -58,6 +61,8 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 
 const BoardItemSectionContent = () => {
   const { categoryId } = useBoardCategoryId()
+  const { handleDeleteBoardItem, isDeletePending } = useBoardItemMenuHook()
+  const [editingPost, setEditingPost] = useState<PostType | null>(null)
 
   const { data: boardList, isPending } = useQuery({
     queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
@@ -78,10 +83,23 @@ const BoardItemSectionContent = () => {
         <div key={post.id} className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
           <BoardItem post={post} />
           {/* 댓글 영역 */}
-          <BoardContentMenu commentCount={post.commentCount} createdAt={post.created_at} />
+          <BoardContentMenu
+            commentCount={post.commentCount}
+            createdAt={post.created_at}
+            updateFn={() => setEditingPost(post)}
+            deleteFn={() => handleDeleteBoardItem(Number(post.id))}
+            isDeletePending={isDeletePending}
+          />
           <BoardPostComments post={post} />
         </div>
       ))}
+      <BoardUpdateModal
+        open={editingPost !== null}
+        post={editingPost}
+        onOpenChange={open => {
+          if (!open) setEditingPost(null)
+        }}
+      />
     </>
   )
 }
