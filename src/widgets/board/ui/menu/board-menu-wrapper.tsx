@@ -26,9 +26,9 @@ const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
 
   return (
     <section className={clsx('flex flex-col gap-2.5', isMobile ? 'flex-1 p-0' : 'w-[200px] p-2.5')}>
-      <div className={'flex flex-col gap-2.5 border-b border-b-gray-200 pb-3.75'}>
-        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>우리 연구실 메뉴</h3>
-        {boardCategory?.lab.map(menu => (
+      <div className={'flex flex-col gap-2.5 border-b border-b-gray-200 pt-3.75'}>
+        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>공유 카테고리</h3>
+        {boardCategory?.service.map(menu => (
           <Button.Setup
             key={menu.category_id}
             className={'rounded-[8px] text-left text-[14px]'}
@@ -39,9 +39,9 @@ const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
           </Button.Setup>
         ))}
       </div>
-      <div className={'flex flex-col gap-2.5 pt-3.75'}>
-        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>공유 카테고리</h3>
-        {boardCategory?.service.map(menu => (
+      <div className={'flex flex-col gap-2.5 pb-3.75'}>
+        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400! md:text-[14px]'}>우리 연구실 메뉴</h3>
+        {boardCategory?.lab.map(menu => (
           <Button.Setup
             key={menu.category_id}
             className={'rounded-[8px] text-left text-[14px]'}
