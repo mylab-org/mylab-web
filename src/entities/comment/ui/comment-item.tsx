@@ -3,16 +3,31 @@ import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
 import type { CommentItemType } from '../model/types'
+import type { ReactNode } from 'react'
 
 type Props = {
   comment: CommentItemType
   labName: string
   replyFn?: () => void
+  /** 수정 모드 진입/취소 토글 */
+  updateFn?: () => void
+  isEditing?: boolean
+  /** 수정 모드일 때 댓글 내용 자리에 렌더할 폼 */
+  updateForm?: ReactNode
   deleteFn?: () => void
   isDeletePending?: boolean
 }
 
-export const CommentItem = ({ comment, labName, replyFn, deleteFn, isDeletePending }: Props) => {
+export const CommentItem = ({
+  comment,
+  labName,
+  replyFn,
+  updateFn,
+  isEditing = false,
+  updateForm,
+  deleteFn,
+  isDeletePending,
+}: Props) => {
   return (
     <div className={'flex flex-col gap-1 py-1.25'}>
       {comment.author.name && (
@@ -30,19 +45,24 @@ export const CommentItem = ({ comment, labName, replyFn, deleteFn, isDeletePendi
             </Avatar>
             {comment && <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>{labName}</Text>}
           </div>
-          <button
-            type="button"
-            onClick={deleteFn}
-            disabled={isDeletePending}
-            className="flex cursor-pointer items-center gap-1.25"
-          >
-            <Image src={'/icon/icon_board_delete.svg'} alt={''} width={12} height={12} />
-            <Text className={'text-[12px] text-gray-400 lg:text-[12px]'}>삭제</Text>
-          </button>
+          <div className={'flex items-center gap-1.25'}>
+            <button type="button" onClick={updateFn} className="flex cursor-pointer items-center gap-1.25">
+              <Text className={'text-[12px] text-gray-400 lg:text-[12px]'}>수정</Text>
+            </button>
+            <button
+              type="button"
+              onClick={deleteFn}
+              disabled={isDeletePending}
+              className="flex cursor-pointer items-center gap-1.25"
+            >
+              <Image src={'/icon/icon_board_delete.svg'} alt={''} width={12} height={12} />
+              <Text className={'text-[12px] text-gray-400 lg:text-[12px]'}>삭제</Text>
+            </button>
+          </div>
         </div>
       )}
       <div className={'flex flex-col gap-2.5'}>
-        <Text className={'text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>
+        {isEditing ? updateForm : <Text className={'text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>}
         <div className={'flex items-center gap-1.25'}>
           <div className={'flex items-center gap-1.25'}>
             <Image src={'/icon/icon_board_time.svg'} alt={''} width={12} height={12} />

@@ -9,7 +9,7 @@ import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
 import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
-import { CommentAddForm } from '@/features/comment'
+import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { Text } from '@/shared/ui/override/text'
 import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
@@ -19,8 +19,18 @@ type BoardPostCommentsProps = {
 }
 
 const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
-  const { postId, comments, handleDeleteComment, isDeletePending, replyTarget, setReplyTarget, clearReplyTarget } =
-    useBoardCommentHook({ post })
+  const {
+    postId,
+    comments,
+    handleDeleteComment,
+    isDeletePending,
+    replyTarget,
+    setReplyTarget,
+    clearReplyTarget,
+    editingCommentId,
+    toggleEditComment,
+    closeEditComment,
+  } = useBoardCommentHook({ post })
 
   return (
     <div className={'flex flex-col gap-1.25'}>
@@ -32,6 +42,16 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
               comment={comment}
               labName={post.lab.name}
               replyFn={() => setReplyTarget({ parentId: comment.id, name: comment.author.name })}
+              updateFn={() => toggleEditComment(comment.id)}
+              isEditing={editingCommentId === comment.id}
+              updateForm={
+                <CommentUpdateForm
+                  postId={postId}
+                  commentId={comment.id}
+                  defaultContent={comment.content}
+                  onClose={closeEditComment}
+                />
+              }
               deleteFn={() => handleDeleteComment(comment.id)}
               isDeletePending={isDeletePending}
             />
@@ -44,6 +64,17 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
                     comment={reply}
                     labName={post.lab.name}
                     replyFn={() => setReplyTarget({ parentId: comment.id, name: reply.author.name })}
+                    updateFn={() => toggleEditComment(reply.id)}
+                    isEditing={editingCommentId === reply.id}
+                    updateForm={
+                      <CommentUpdateForm
+                        postId={postId}
+                        commentId={reply.id}
+                        parentId={comment.id}
+                        defaultContent={reply.content}
+                        onClose={closeEditComment}
+                      />
+                    }
                     deleteFn={() => handleDeleteComment(reply.id)}
                     isDeletePending={isDeletePending}
                   />

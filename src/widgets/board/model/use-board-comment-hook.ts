@@ -36,6 +36,16 @@ export const useBoardCommentHook = ({ post }: Props) => {
   const [replyTarget, setReplyTarget] = useState<CommentReplyTargetType | null>(null)
   const clearReplyTarget = useCallback(() => setReplyTarget(null), [])
 
+  // 수정 중인 댓글 id — 한 번에 하나만 수정 모드
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null)
+
+  /** 수정 버튼 — 수정 모드가 아니면 진입, 수정 모드면 취소 */
+  const toggleEditComment = (commentId: number) => {
+    setEditingCommentId(prev => (prev === commentId ? null : commentId))
+  }
+
+  const closeEditComment = () => setEditingCommentId(null)
+
   return {
     postId,
     comments,
@@ -44,5 +54,8 @@ export const useBoardCommentHook = ({ post }: Props) => {
     replyTarget,
     setReplyTarget,
     clearReplyTarget,
+    editingCommentId,
+    toggleEditComment,
+    closeEditComment,
   }
 }
