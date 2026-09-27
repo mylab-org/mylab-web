@@ -1,4 +1,4 @@
-import { Image } from 'next/dist/client/image-component'
+import { Clock, Trash } from 'lucide-react'
 import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
@@ -55,7 +55,7 @@ export const CommentItem = ({
               disabled={isDeletePending}
               className="flex cursor-pointer items-center gap-1.25"
             >
-              <Image src={'/icon/icon_board_delete.svg'} alt={''} width={12} height={12} />
+              <Trash className="text-gray-400" size={14} />
               <Text className={'text-[12px] text-gray-400 lg:text-[12px]'}>삭제</Text>
             </button>
           </div>
@@ -65,7 +65,7 @@ export const CommentItem = ({
         {isEditing ? updateForm : <Text className={'text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>}
         <div className={'flex items-center gap-1.25'}>
           <div className={'flex items-center gap-1.25'}>
-            <Image src={'/icon/icon_board_time.svg'} alt={''} width={12} height={12} />
+            <Clock className="text-gray-400" size={14} />
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
               {formatRelativeDate(comment.created_at)}
             </Text>
