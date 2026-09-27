@@ -1,4 +1,5 @@
-import { Clock, Trash } from 'lucide-react'
+import { Clock, CornerDownRight, Trash } from 'lucide-react'
+import { cn } from '@/shared/lib'
 import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
@@ -62,19 +63,24 @@ export const CommentItem = ({
         </div>
       )}
       <div className={'flex flex-col gap-2.5'}>
-        {isEditing ? updateForm : <Text className={'text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>}
-        <div className={'flex items-center gap-1.25'}>
+        {isEditing ? (
+          updateForm
+        ) : (
+          <Text className={'py-2 text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>
+        )}
+        <div className={cn('flex items-center gap-2', comment.author.name !== '' ? 'justify-between' : 'justify-end')}>
+          {comment.author.name !== '' && (
+            <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1">
+              <CornerDownRight className="text-gray-400" size={14} />
+              <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
+            </button>
+          )}
           <div className={'flex items-center gap-1.25'}>
             <Clock className="text-gray-400" size={14} />
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
               {formatRelativeDate(comment.created_at)}
             </Text>
           </div>
-          {comment.author.name !== '' && (
-            <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1.25">
-              <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
-            </button>
-          )}
         </div>
       </div>
     </div>
