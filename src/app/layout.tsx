@@ -3,6 +3,7 @@ import '@/app/globals.css'
 import { pretendard } from '@/../public/fonts/pretendard'
 import { Alert, Confirm, Dialog } from '@/widgets/layout/modal'
 import { AppProviders } from '@/shared/provider/app-proviers'
+import { Toast } from '@/shared/ui/template/toast'
 
 export const metadata: Metadata = {
   title: 'MyLab',
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Confirm />
           <Alert />
           <Dialog />
+          <Toast />
         </AppProviders>
       </body>
     </html>

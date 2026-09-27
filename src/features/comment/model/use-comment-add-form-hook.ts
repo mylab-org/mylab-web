@@ -1,10 +1,10 @@
 'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { postCommentCreate } from '../api/post-comment-create'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { CommentReplyTargetType, PostCommentCreatePayloadType } from './types'
 
 type Props = {
@@ -15,8 +15,6 @@ type Props = {
 }
 
 export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onClearReplyTarget }: Props) => {
-  const queryClient = useQueryClient()
-
   const {
     register,
     handleSubmit,
@@ -72,16 +70,15 @@ export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onCle
     return () => subscription.unsubscribe()
   }, [replyTag, watch, setValue, onClearReplyTarget])
 
-  const postCommentMutation = useMutation({
+  const postCommentMutation = useApiMutation({
     mutationFn: (content: string) =>
       postCommentCreate(postId, { parentId: Number(replyTarget?.parentId ?? parentId), content }),
+    invalidateQueryKeys: [QUERY_KEYS.COMMENT.LIST(postId)],
     onSuccess: () => {
       reset()
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.COMMENT.LIST(postId) })
     },
-    onError: () => {
-      console.error('Failed to create comment')
-    },
+    successMessage: '댓글이 등록되었습니다.',
+    defaultErrorMessage: '댓글 등록에 실패했습니다.',
   })
 
   const onSubmit = handleSubmit((data: PostCommentCreatePayloadType) => {

@@ -1,11 +1,11 @@
 'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useBoardCategoryIdHook } from './use-board-category-id-hook'
 import { patchBoardUpdate } from '../api/patch-board-update'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { PatchBoardUpdatePayloadType } from './types'
 
 type Props = {
@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Props) => {
-  const queryClient = useQueryClient()
   const { categoryId } = useBoardCategoryIdHook()
 
   const {
@@ -40,14 +39,13 @@ export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Pro
     })
   }, [defaultValues.content, defaultValues.title, reset])
 
-  const patchBoardUpdateMutation = useMutation({
+  const patchBoardUpdateMutation = useApiMutation({
     mutationFn: (payload: PatchBoardUpdatePayloadType) => patchBoardUpdate(postId, payload),
+    invalidateQueryKeys: [QUERY_KEYS.BOARD.LIST(categoryId)],
+    defaultErrorMessage: '소식 수정에 실패했습니다.',
+    successMessage: '소식이 수정되었습니다.',
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.BOARD.LIST(categoryId) })
       onSuccess?.()
-    },
-    onError: () => {
-      console.error('소식 수정에 실패했습니다.')
     },
   })
 
