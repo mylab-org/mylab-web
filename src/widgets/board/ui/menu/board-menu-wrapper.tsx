@@ -6,10 +6,8 @@ import { Suspense } from 'react'
 import { getBoardCategory } from '@/entities/board/api/get-board-category'
 import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { TEST_LAB_ID } from '@/shared/constant/test'
 import { Button } from '@/shared/ui/override/button'
-
-/** 테스트용 labId */
-const TEST_LAB_ID = 1
 
 type BoardMenuWrapperProps = {
   variant?: 'pc' | 'mobile'

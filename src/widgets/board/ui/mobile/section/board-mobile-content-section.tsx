@@ -8,10 +8,8 @@ import { getBoardCategory } from '@/entities/board/api/get-board-category'
 import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { BASE_PATHS } from '@/shared/constant/routes'
+import { TEST_LAB_ID } from '@/shared/constant/test'
 import { Text } from '@/shared/ui/override/text'
-
-/** 테스트용 labId */
-const TEST_LAB_ID = 1
 
 export const BoardMobileContentSection = () => {
   const { categoryId } = useBoardCategoryIdHook()

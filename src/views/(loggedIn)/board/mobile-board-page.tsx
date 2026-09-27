@@ -2,10 +2,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { getBoardCategoryServer } from '@/entities/board/api/get-board-category-server'
 import { getBoardListServer } from '@/entities/board/api/get-board-list-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { TEST_LAB_ID } from '@/shared/constant/test'
 import { BoardMobileContentSection, BoardMobileMenuSection } from '@/widgets/board'
-
-/** 테스트용 labId */
-const TEST_LAB_ID = 1
 
 type MobileBoardPageProps = {
   categoryId?: number
