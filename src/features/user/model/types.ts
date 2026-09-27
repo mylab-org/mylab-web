@@ -1,5 +1,3 @@
-import type { UserDegreeType } from '@/entities/user/model/types'
-
 export type PatchUsersMePayloadType = {
   degree: UserDegreeType
 }
