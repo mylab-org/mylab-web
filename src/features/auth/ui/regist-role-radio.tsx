@@ -1,7 +1,6 @@
 'use client'
 
 import { useSignupRoleRadioHook } from '../model/use-signup-role-radio-hook'
-import type { UserDegreeType } from '@/entities/user/model/types'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
 
 export const RegistRoleRadio = () => {

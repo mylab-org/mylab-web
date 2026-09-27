@@ -1,21 +1,29 @@
+'use client'
+'use no memo'
+
 import { Image } from 'next/dist/client/image-component'
+import { useBoardCreateFormHook } from '../model/use-board-create-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Textarea } from '@/shared/ui/override/textarea'
 
-export const PostBoardForm = () => {
+export const BoardCreateForm = () => {
+  const { register, onSubmit, isValid, isPending } = useBoardCreateFormHook()
+
   return (
     <form className={'flex flex-col gap-2.5 border border-gray-300'}>
       <input
         type="text"
         className={
-          'border-b border-b-gray-300 p-2.5 text-[12px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
+          'border-b border-b-gray-300 p-2.5 text-[10px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
         }
         placeholder={'제목'}
+        {...register('title', { required: true })}
       />
       <Textarea
-        className={'h-[100px] px-2.5 text-[12px] lg:h-[200px] lg:text-[16px]'}
+        className={'h-[100px] px-2.5 text-[10px] lg:h-[200px] lg:text-[16px]'}
         placeholder={'홍길동 님의 소식을 전해주세요'}
+        {...register('content', { required: true })}
       />
       <div className={'flex flex-col border-t border-t-gray-300'}>
         <div className={'flex gap-1.25 px-2.5 pt-2.5'}>
@@ -38,7 +46,13 @@ export const PostBoardForm = () => {
             className={'h-[16px] w-[16px] lg:h-[24px] lg:w-[24px]'}
           />
         </div>
-        <Button className={'rounded-t-[6px] rounded-b-none text-[12px]! lg:text-[16px]'}>게시</Button>
+        <Button
+          disabled={!isValid || isPending}
+          className={'rounded-t-[6px] rounded-b-none text-[12px]! lg:text-[16px]'}
+          onClick={onSubmit}
+        >
+          게시
+        </Button>
       </div>
     </form>
   )

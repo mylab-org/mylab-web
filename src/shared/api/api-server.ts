@@ -82,7 +82,7 @@ function buildRequestHeaders<TReq>({
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    ...(!skipAuth && accessToken && !authorizationHeader ? { Authorization: `${accessToken}` } : {}),
+    ...(!skipAuth && accessToken && !authorizationHeader ? { Authorization: `Bearer ${accessToken}` } : {}),
     ...headers,
   }
 }

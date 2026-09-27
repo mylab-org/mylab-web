@@ -1,12 +1,7 @@
-import { headers } from 'next/headers'
-import { BoardPage, MobileBoardPage } from '@/views/(loggedIn)/board'
+import { MobileBoardPage } from '@/views/(loggedIn)/board'
 
+// PC의 /board 접근은 proxy.ts에서 /board/{기본 카테고리}로 리다이렉트되므로,
+// 이 페이지에는 모바일(카테고리 목록 화면) 요청만 도달
 export default async function Board() {
-  const h = await headers()
-  const ua = h.get('user-agent') ?? ''
-  if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
-    return <MobileBoardPage />
-  } else {
-    return <BoardPage />
-  }
+  return <MobileBoardPage />
 }

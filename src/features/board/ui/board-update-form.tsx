@@ -1,0 +1,70 @@
+'use client'
+'use no memo'
+
+import { Image } from 'next/dist/client/image-component'
+import { useBoardUpdateFormHook } from '../model/use-board-update-form-hook'
+import { Button } from '@/shared/ui/override/button'
+import { CheckBox } from '@/shared/ui/override/checkbox'
+import { Textarea } from '@/shared/ui/override/textarea'
+
+type Props = {
+  postId: number
+  title: string
+  content: string
+  onSuccess?: () => void
+}
+
+export const BoardUpdateForm = ({ postId, title, content, onSuccess }: Props) => {
+  const { register, onSubmit, isValid, isPending } = useBoardUpdateFormHook({
+    postId,
+    defaultValues: { title, content },
+    onSuccess,
+  })
+
+  return (
+    <form className={'flex flex-col gap-2.5 border border-gray-300'}>
+      <input
+        type="text"
+        className={
+          'border-b border-b-gray-300 p-2.5 text-[10px] font-medium outline-0 placeholder:text-gray-400 lg:text-[16px]'
+        }
+        placeholder={'제목'}
+        {...register('title', { required: true })}
+      />
+      <Textarea
+        className={'h-[100px] px-2.5 text-[10px] lg:h-[200px] lg:text-[16px]'}
+        placeholder={'홍길동 님의 소식을 전해주세요'}
+        {...register('content', { required: true })}
+      />
+      <div className={'flex flex-col border-t border-t-gray-300'}>
+        <div className={'flex gap-1.25 px-2.5 pt-2.5'}>
+          <div className={'h-[40px] w-[40px] border border-gray-300 lg:h-[80px] lg:w-[80px]'}></div>
+          <div
+            className={
+              'flex h-[40px] w-[40px] items-center justify-center border border-gray-300 lg:h-[80px] lg:w-[80px]'
+            }
+          >
+            <Image src={'/icon/icon_board_add.svg'} alt={''} width={24} height={24} />
+          </div>
+        </div>
+        <div className={'flex gap-5 p-2.5'}>
+          <CheckBox title="익명" />
+          <Image
+            src={'/icon/icon_main_img.svg'}
+            alt={''}
+            width={24}
+            height={24}
+            className={'h-[16px] w-[16px] lg:h-[24px] lg:w-[24px]'}
+          />
+        </div>
+        <Button
+          disabled={!isValid || isPending}
+          className={'rounded-t-[6px] rounded-b-none text-[12px]! lg:text-[16px]'}
+          onClick={onSubmit}
+        >
+          수정
+        </Button>
+      </div>
+    </form>
+  )
+}
