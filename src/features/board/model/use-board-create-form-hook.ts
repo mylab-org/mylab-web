@@ -2,12 +2,12 @@
 
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useBoardCategoryId } from './use-board-category-id'
+import { useBoardCategoryIdHook } from './use-board-category-id-hook'
 import { postBoardCreate } from '../api/post-board-create'
 import type { PostBoardCreatePayloadType } from './types'
 
 export const useBoardCreateFormHook = () => {
-  const { categoryId } = useBoardCategoryId()
+  const { categoryId } = useBoardCategoryIdHook()
 
   const {
     register,

@@ -1,14 +1,17 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getBoardCategoryServer } from '@/entities/board/api/get-board-category-server'
 import { getBoardListServer } from '@/entities/board/api/get-board-list-server'
-import { DEFAULT_BOARD_CATEGORY_ID } from '@/features/board/model/constants'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { BoardContentSection, BoardMenuWrapper, BoardSideSection } from '@/widgets/board'
 
 /** 테스트용 labId */
 const TEST_LAB_ID = 1
 
-export const BoardPage = async () => {
+type BoardPageProps = {
+  categoryId: number
+}
+
+export const BoardPage = async ({ categoryId }: BoardPageProps) => {
   const queryClient = new QueryClient()
 
   await Promise.all([
@@ -17,8 +20,8 @@ export const BoardPage = async () => {
       queryFn: () => getBoardCategoryServer(TEST_LAB_ID),
     }),
     queryClient.prefetchQuery({
-      queryKey: QUERY_KEYS.BOARD.LIST(DEFAULT_BOARD_CATEGORY_ID),
-      queryFn: () => getBoardListServer(DEFAULT_BOARD_CATEGORY_ID),
+      queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
+      queryFn: () => getBoardListServer(categoryId),
     }),
   ])
 

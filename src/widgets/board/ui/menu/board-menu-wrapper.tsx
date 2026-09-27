@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { Suspense } from 'react'
 import { getBoardCategory } from '@/entities/board/api/get-board-category'
-import { useBoardCategoryId } from '@/features/board'
+import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { Button } from '@/shared/ui/override/button'
 
@@ -17,7 +17,7 @@ type BoardMenuWrapperProps = {
 
 const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
   const isMobile = variant === 'mobile'
-  const { categoryId, setCategoryId } = useBoardCategoryId()
+  const { categoryId, isCategorySelected, setCategoryId } = useBoardCategoryIdHook()
 
   const { data: boardCategory } = useQuery({
     queryKey: QUERY_KEYS.BOARD.CATEGORY(TEST_LAB_ID),
@@ -32,7 +32,7 @@ const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
           <Button.Setup
             key={menu.category_id}
             className={'rounded-[8px] text-left text-[14px]'}
-            isActive={Number(menu.category_id) === categoryId}
+            isActive={isCategorySelected && Number(menu.category_id) === categoryId}
             onClick={() => setCategoryId(menu.category_id)}
           >
             {menu.category_name}
@@ -45,7 +45,7 @@ const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
           <Button.Setup
             key={menu.category_id}
             className={'rounded-[8px] text-left text-[14px]'}
-            isActive={Number(menu.category_id) === categoryId}
+            isActive={isCategorySelected && Number(menu.category_id) === categoryId}
             onClick={() => setCategoryId(menu.category_id)}
           >
             {menu.category_name}

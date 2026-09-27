@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useBoardCategoryId } from './use-board-category-id'
+import { useBoardCategoryIdHook } from './use-board-category-id-hook'
 import { patchBoardUpdate } from '../api/patch-board-update'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import type { PatchBoardUpdatePayloadType } from './types'
@@ -16,7 +16,7 @@ type Props = {
 
 export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Props) => {
   const queryClient = useQueryClient()
-  const { categoryId } = useBoardCategoryId()
+  const { categoryId } = useBoardCategoryIdHook()
 
   const {
     register,

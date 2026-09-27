@@ -1,4 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
+import { DEFAULT_BOARD_CATEGORY_ID } from './features/board/model/constants'
+import { BASE_PATHS } from './shared/constant/routes'
 import {
   ACCESS_TOKEN_COOKIE_KEY,
   CURRENT_ACCESS_TOKEN_HEADER,
@@ -14,6 +16,9 @@ const GUEST_ONLY_ROUTES = ['/login', '/signup', '/survey', '/email-validate'] as
 
 /** (loggedIn) 보호 라우트 — 비로그인이면 로그인으로 */
 const AUTH_REQUIRED_ROUTES = ['/board', '/calendar', '/works', '/more'] as const
+
+/** 모바일 기기 판별용 User-Agent 패턴 (app/(loggedIn)/board 페이지들과 동일) */
+const MOBILE_USER_AGENT_REGEX = /Android|iPhone|iPad|iPod|Mobile/i
 
 function isMatchRoute(pathname: string, route: string) {
   return pathname === route || pathname.startsWith(`${route}/`)
@@ -104,6 +109,15 @@ export async function proxy(request: NextRequest) {
     const loginUrl = new URL('/login', request.url)
     loginUrl.searchParams.set('redirect', pathname)
     return NextResponse.redirect(loginUrl)
+  }
+
+  // PC에서 /board 접근 → 기본 카테고리(/board/1)로
+  // - 모바일의 /board는 카테고리 목록 화면이라 그대로 통과
+  // - 페이지(서버 컴포넌트)에서 redirect()를 호출하면 렌더가 중간에 끊겨
+  //   개발 모드에서 "cannot have a negative time stamp" 성능 측정 오류가 발생하므로,
+  //   렌더 전 요청 단계인 proxy에서 처리
+  if (pathname === BASE_PATHS.BOARD && !MOBILE_USER_AGENT_REGEX.test(request.headers.get('user-agent') ?? '')) {
+    return NextResponse.redirect(new URL(`${BASE_PATHS.BOARD}/${DEFAULT_BOARD_CATEGORY_ID}`, request.url))
   }
 
   // 토큰이 없으면 refresh/헤더 갱신 로직은 건너뛰고 그대로 통과

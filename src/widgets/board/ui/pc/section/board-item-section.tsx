@@ -7,7 +7,7 @@ import { BoardCommentItem, BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { getCommentList } from '@/entities/comment/api/get-comment-list'
-import { BoardContentMenu, PostBoardCommentForm, useBoardCategoryId } from '@/features/board'
+import { BoardContentMenu, PostBoardCommentForm, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { formatDateTime } from '@/shared/lib/format'
@@ -60,7 +60,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 }
 
 const BoardItemSectionContent = () => {
-  const { categoryId } = useBoardCategoryId()
+  const { categoryId } = useBoardCategoryIdHook()
   const { handleDeleteBoardItem, isDeletePending } = useBoardItemMenuHook()
   const [editingPost, setEditingPost] = useState<PostType | null>(null)
 
