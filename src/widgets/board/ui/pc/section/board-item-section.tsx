@@ -7,8 +7,9 @@ import { BoardCommentItem, BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { getCommentList } from '@/entities/comment/api/get-comment-list'
-import { BoardContentMenu, PostBoardCommentForm, useBoardCategoryIdHook } from '@/features/board'
+import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
+import { CommentAddForm } from '@/features/comment'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { formatDateTime } from '@/shared/lib/format'
 import { Text } from '@/shared/ui/override/text'
@@ -28,7 +29,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 
   return (
     <div className={'flex flex-col gap-1.25'}>
-      <PostBoardCommentForm postId={postId} />
+      <CommentAddForm postId={postId} />
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
           <div key={comment.id} className={'flex flex-col gap-1'}>

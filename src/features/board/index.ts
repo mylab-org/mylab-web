@@ -1,5 +1,4 @@
 export { BoardCreateForm } from './ui/board-create-form'
-export { PostBoardCommentForm } from './ui/post-board-comment-form'
 export { useBoardCategoryIdHook } from './model/use-board-category-id-hook'
 export { DEFAULT_BOARD_CATEGORY_ID } from './model/constants'
 export { BoardContentMenu } from './ui/board-content-menu'
