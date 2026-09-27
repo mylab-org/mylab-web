@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { Suspense, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
@@ -10,7 +10,7 @@ import { CommentItem } from '@/entities/comment'
 import { getCommentList } from '@/entities/comment/api/get-comment-list'
 import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
-import { CommentAddForm } from '@/features/comment'
+import { CommentAddForm, type CommentReplyTargetType } from '@/features/comment'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { Text } from '@/shared/ui/override/text'
 
@@ -27,18 +27,30 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
     enabled: Number.isFinite(postId),
   })
 
+  const [replyTarget, setReplyTarget] = useState<CommentReplyTargetType | null>(null)
+  const clearReplyTarget = useCallback(() => setReplyTarget(null), [])
+
   return (
     <div className={'flex flex-col gap-1.25'}>
-      <CommentAddForm postId={postId} />
+      <CommentAddForm postId={postId} replyTarget={replyTarget} onClearReplyTarget={clearReplyTarget} />
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
           <div key={comment.id} className={'flex flex-col gap-1'}>
-            <CommentItem comment={comment} labName={post.lab.name} />
+            <CommentItem
+              comment={comment}
+              labName={post.lab.name}
+              replyFn={() => setReplyTarget({ parentId: comment.id, name: comment.author.name })}
+            />
             {/* 대댓글 영역 */}
             {comment.replies.length > 0 && (
               <div className={'flex flex-col gap-2.5 rounded-[12px] bg-gray-50 px-5 py-2.5'}>
                 {comment.replies.map(reply => (
-                  <CommentItem key={reply.id} comment={comment} labName={post.lab.name} />
+                  <CommentItem
+                    key={reply.id}
+                    comment={reply}
+                    labName={post.lab.name}
+                    replyFn={() => setReplyTarget({ parentId: comment.id, name: reply.author.name })}
+                  />
                 ))}
               </div>
             )}

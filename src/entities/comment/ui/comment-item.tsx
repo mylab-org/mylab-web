@@ -7,9 +7,10 @@ import type { CommentItemType } from '../model/types'
 type Props = {
   comment: CommentItemType
   labName: string
+  replyFn?: () => void
 }
 
-export const CommentItem = ({ comment, labName }: Props) => {
+export const CommentItem = ({ comment, labName, replyFn }: Props) => {
   return (
     <div className={'flex flex-col gap-1 py-1.25'}>
       {comment.author.name && (
@@ -35,14 +36,17 @@ export const CommentItem = ({ comment, labName }: Props) => {
       )}
       <div className={'flex flex-col gap-2.5'}>
         <Text className={'text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>
-        {comment.created_at && (
+        <div className={'flex items-center gap-1.25'}>
           <div className={'flex items-center gap-1.25'}>
             <Image src={'/icon/icon_board_time.svg'} alt={''} width={12} height={12} />
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
               {formatRelativeDate(comment.created_at)}
             </Text>
           </div>
-        )}
+          <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1.25">
+            <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
+          </button>
+        </div>
       </div>
     </div>
   )
