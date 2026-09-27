@@ -1,34 +1,26 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { Suspense, useCallback, useState } from 'react'
+import { Suspense, useState } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
-import { getCommentList } from '@/entities/comment/api/get-comment-list'
 import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
-import { CommentAddForm, type CommentReplyTargetType } from '@/features/comment'
+import { CommentAddForm } from '@/features/comment'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { Text } from '@/shared/ui/override/text'
+import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
 
 type BoardPostCommentsProps = {
   post: PostType
 }
 
 const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
-  const postId = Number(post.id)
-
-  const { data: comments = [] } = useQuery({
-    queryKey: QUERY_KEYS.COMMENT.LIST(postId),
-    queryFn: () => getCommentList(postId),
-    enabled: Number.isFinite(postId),
-  })
-
-  const [replyTarget, setReplyTarget] = useState<CommentReplyTargetType | null>(null)
-  const clearReplyTarget = useCallback(() => setReplyTarget(null), [])
+  const { postId, comments, handleDeleteComment, isDeletePending, replyTarget, setReplyTarget, clearReplyTarget } =
+    useBoardCommentHook({ post })
 
   return (
     <div className={'flex flex-col gap-1.25'}>
@@ -40,6 +32,8 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
               comment={comment}
               labName={post.lab.name}
               replyFn={() => setReplyTarget({ parentId: comment.id, name: comment.author.name })}
+              deleteFn={() => handleDeleteComment(comment.id)}
+              isDeletePending={isDeletePending}
             />
             {/* 대댓글 영역 */}
             {comment.replies.length > 0 && (
@@ -50,6 +44,8 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
                     comment={reply}
                     labName={post.lab.name}
                     replyFn={() => setReplyTarget({ parentId: comment.id, name: reply.author.name })}
+                    deleteFn={() => handleDeleteComment(reply.id)}
+                    isDeletePending={isDeletePending}
                   />
                 ))}
               </div>

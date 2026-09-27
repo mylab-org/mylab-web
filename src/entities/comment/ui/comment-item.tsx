@@ -8,9 +8,11 @@ type Props = {
   comment: CommentItemType
   labName: string
   replyFn?: () => void
+  deleteFn?: () => void
+  isDeletePending?: boolean
 }
 
-export const CommentItem = ({ comment, labName, replyFn }: Props) => {
+export const CommentItem = ({ comment, labName, replyFn, deleteFn, isDeletePending }: Props) => {
   return (
     <div className={'flex flex-col gap-1 py-1.25'}>
       {comment.author.name && (
@@ -28,7 +30,12 @@ export const CommentItem = ({ comment, labName, replyFn }: Props) => {
             </Avatar>
             {comment && <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>{labName}</Text>}
           </div>
-          <button type="button" className="flex cursor-pointer items-center gap-1.25">
+          <button
+            type="button"
+            onClick={deleteFn}
+            disabled={isDeletePending}
+            className="flex cursor-pointer items-center gap-1.25"
+          >
             <Image src={'/icon/icon_board_delete.svg'} alt={''} width={12} height={12} />
             <Text className={'text-[12px] text-gray-400 lg:text-[12px]'}>삭제</Text>
           </button>
@@ -43,9 +50,11 @@ export const CommentItem = ({ comment, labName, replyFn }: Props) => {
               {formatRelativeDate(comment.created_at)}
             </Text>
           </div>
-          <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1.25">
-            <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
-          </button>
+          {comment.author.name !== '' && (
+            <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1.25">
+              <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
+            </button>
+          )}
         </div>
       </div>
     </div>
