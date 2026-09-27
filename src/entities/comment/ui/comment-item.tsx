@@ -1,5 +1,5 @@
 import { Image } from 'next/dist/client/image-component'
-import { formatDateTime } from '@/shared/lib/format'
+import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
 import type { CommentItemType } from '../model/types'
@@ -39,7 +39,7 @@ export const CommentItem = ({ comment, labName }: Props) => {
           <div className={'flex items-center gap-1.25'}>
             <Image src={'/icon/icon_board_time.svg'} alt={''} width={12} height={12} />
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
-              {formatDateTime(comment.created_at)}
+              {formatRelativeDate(comment.created_at)}
             </Text>
           </div>
         )}

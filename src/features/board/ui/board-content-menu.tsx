@@ -1,4 +1,4 @@
-import { formatDateTime } from '@/shared/lib/format'
+import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
 
@@ -75,7 +75,7 @@ export const BoardContentMenu = ({
         </button>
       </div>
       {createdAt && (
-        <Text className={'text-[10px] font-medium text-gray-400 lg:text-[12px]'}>{formatDateTime(createdAt)}</Text>
+        <Text className={'text-[10px] font-medium text-gray-400 lg:text-[12px]'}>{formatRelativeDate(createdAt)}</Text>
       )}
     </div>
   )
