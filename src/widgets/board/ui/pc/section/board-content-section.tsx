@@ -10,7 +10,7 @@ export const BoardContentSection = () => {
   const [isPostFormOpen, setIsPostFormOpen] = useState(false)
 
   return (
-    <section className={'flex flex-1 flex-col gap-2.5 lg:p-2.5'}>
+    <section className={'mt-3.75 flex flex-1 flex-col gap-2.5 lg:p-2.5'}>
       <button
         type="button"
         className={
