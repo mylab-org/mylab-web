@@ -3,15 +3,15 @@
 import { useQuery } from '@tanstack/react-query'
 import { Suspense, useState } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
-import { BoardCommentItem, BoardItem } from '@/entities/board'
+import { BoardItem } from '@/entities/board'
 import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
+import { CommentItem } from '@/entities/comment'
 import { getCommentList } from '@/entities/comment/api/get-comment-list'
 import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
 import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
 import { CommentAddForm } from '@/features/comment'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { formatDateTime } from '@/shared/lib/format'
 import { Text } from '@/shared/ui/override/text'
 
 type BoardPostCommentsProps = {
@@ -33,23 +33,12 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
           <div key={comment.id} className={'flex flex-col gap-1'}>
-            <BoardCommentItem
-              authorName={comment.author.name}
-              content={comment.content}
-              createdAt={formatDateTime(comment.created_at)}
-              labName={post.lab.name}
-            />
+            <CommentItem comment={comment} labName={post.lab.name} />
             {/* 대댓글 영역 */}
             {comment.replies.length > 0 && (
               <div className={'flex flex-col gap-2.5 rounded-[12px] bg-gray-50 px-5 py-2.5'}>
                 {comment.replies.map(reply => (
-                  <BoardCommentItem
-                    key={reply.id}
-                    authorName={reply.author.name}
-                    content={reply.content}
-                    createdAt={reply.created_at}
-                    labName={post.lab.name}
-                  />
+                  <CommentItem key={reply.id} comment={comment} labName={post.lab.name} />
                 ))}
               </div>
             )}
@@ -64,6 +53,11 @@ const BoardItemSectionContent = () => {
   const { categoryId } = useBoardCategoryIdHook()
   const { handleDeleteBoardItem, isDeletePending } = useBoardItemMenuHook()
   const [editingPost, setEditingPost] = useState<PostType | null>(null)
+  const [openCommentPostIds, setOpenCommentPostIds] = useState<PostType['id'][]>([])
+
+  const toggleComment = (postId: PostType['id']) => {
+    setOpenCommentPostIds(prev => (prev.includes(postId) ? prev.filter(id => id !== postId) : [...prev, postId]))
+  }
 
   const { data: boardList, isPending } = useQuery({
     queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
@@ -87,11 +81,12 @@ const BoardItemSectionContent = () => {
           <BoardContentMenu
             commentCount={post.commentCount}
             createdAt={post.created_at}
+            commentFn={() => toggleComment(post.id)}
             updateFn={() => setEditingPost(post)}
             deleteFn={() => handleDeleteBoardItem(Number(post.id))}
             isDeletePending={isDeletePending}
           />
-          <BoardPostComments post={post} />
+          {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
         </div>
       ))}
       <BoardUpdateModal
