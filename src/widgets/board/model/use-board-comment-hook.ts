@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const useBoardCommentHook = ({ post }: Props) => {
-  const postId = Number(post.id)
+  const postId = post.id
 
   const { data: comments = [] } = useQuery({
     queryKey: QUERY_KEYS.COMMENT.LIST(postId),
@@ -30,7 +30,7 @@ export const useBoardCommentHook = ({ post }: Props) => {
   })
 
   const handleDeleteComment = (commentId: number) => {
-    deleteCommentMutation.mutate(Number(commentId))
+    deleteCommentMutation.mutate(commentId)
   }
 
   const [replyTarget, setReplyTarget] = useState<CommentReplyTargetType | null>(null)

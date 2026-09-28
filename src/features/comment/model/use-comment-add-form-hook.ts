@@ -72,7 +72,7 @@ export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onCle
 
   const postCommentMutation = useApiMutation({
     mutationFn: (content: string) =>
-      postCommentCreate(postId, { parentId: Number(replyTarget?.parentId ?? parentId), content }),
+      postCommentCreate(postId, { parentId: replyTarget?.parentId ?? parentId, content }),
     invalidateQueryKeys: [QUERY_KEYS.COMMENT.LIST(postId)],
     onSuccess: () => {
       reset()

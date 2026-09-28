@@ -28,7 +28,7 @@ export const useCommentUpdateFormHook = ({ postId, commentId, parentId = 0, defa
   })
 
   const patchCommentUpdateMutation = useApiMutation({
-    mutationFn: (content: string) => patchCommentUpdate(Number(commentId), { parentId: Number(parentId), content }),
+    mutationFn: (content: string) => patchCommentUpdate(commentId, { parentId, content }),
     invalidateQueryKeys: [QUERY_KEYS.COMMENT.LIST(postId)],
     defaultErrorMessage: '댓글 수정에 실패했습니다.',
     successMessage: '댓글이 수정되었습니다.',

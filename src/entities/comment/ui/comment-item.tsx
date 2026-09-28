@@ -3,12 +3,11 @@ import { cn } from '@/shared/lib'
 import { formatRelativeDate } from '@/shared/lib/format'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
-import type { CommentItemType } from '../model/types'
+import type { CommentType } from '../model/types'
 import type { ReactNode } from 'react'
 
 type Props = {
-  comment: CommentItemType
-  labName: string
+  comment: CommentType
   replyFn?: () => void
   /** 수정 모드 진입/취소 토글 */
   updateFn?: () => void
@@ -21,7 +20,6 @@ type Props = {
 
 export const CommentItem = ({
   comment,
-  labName,
   replyFn,
   updateFn,
   isEditing = false,
@@ -44,7 +42,7 @@ export const CommentItem = ({
             >
               <Text className={'text-[12px] font-bold text-slate-600 lg:text-[14px]'}>{comment.author.name}</Text>
             </Avatar>
-            {comment && <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>{labName}</Text>}
+            <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>{comment.author.labName}</Text>
           </div>
           <div className={'flex items-center gap-1.25'}>
             <button type="button" onClick={updateFn} className="flex cursor-pointer items-center gap-1.25">
@@ -78,7 +76,7 @@ export const CommentItem = ({
           <div className={'flex items-center gap-1.25'}>
             <Clock className="text-gray-400" size={14} />
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
-              {formatRelativeDate(comment.created_at)}
+              {formatRelativeDate(comment.createdAt)}
             </Text>
           </div>
         </div>

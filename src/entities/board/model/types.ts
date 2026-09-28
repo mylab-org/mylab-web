@@ -9,23 +9,21 @@ export type BoardCategoryResponseType = {
 }
 
 export type AuthorType = {
-  id: string
+  uid: number
   name: string
   degree: UserDegreeType
-}
-
-export type LabType = {
-  id: number
-  name: string
+  labId: number
+  labName: string
 }
 
 export type PostType = {
-  id: string
+  id: number
   title: string
   content: string
-  created_at: string
+  createdAt: string
   author: AuthorType
-  lab: LabType
+  likeCount: number
+  isLiked: boolean
   commentCount: number
 }
 

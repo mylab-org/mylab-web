@@ -22,7 +22,7 @@ export const BoardUpdateModal = ({ open, post, onOpenChange }: Props) => {
         </DialogHeader>
         <BoardUpdateForm
           key={post.id}
-          postId={Number(post.id)}
+          postId={post.id}
           title={post.title}
           content={post.content}
           onSuccess={() => onOpenChange(false)}

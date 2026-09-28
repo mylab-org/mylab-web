@@ -37,22 +37,21 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
       <CommentAddForm postId={postId} replyTarget={replyTarget} onClearReplyTarget={clearReplyTarget} />
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
-          <div key={comment.id} className={'flex flex-col gap-1'}>
+          <div key={comment.cid} className={'flex flex-col gap-1'}>
             <CommentItem
               comment={comment}
-              labName={post.lab.name}
-              replyFn={() => setReplyTarget({ parentId: comment.id, name: comment.author.name })}
-              updateFn={() => toggleEditComment(comment.id)}
-              isEditing={editingCommentId === comment.id}
+              replyFn={() => setReplyTarget({ parentId: comment.cid, name: comment.author.name })}
+              updateFn={() => toggleEditComment(comment.cid)}
+              isEditing={editingCommentId === comment.cid}
               updateForm={
                 <CommentUpdateForm
                   postId={postId}
-                  commentId={comment.id}
+                  commentId={comment.cid}
                   defaultContent={comment.content}
                   onClose={closeEditComment}
                 />
               }
-              deleteFn={() => handleDeleteComment(comment.id)}
+              deleteFn={() => handleDeleteComment(comment.cid)}
               isDeletePending={isDeletePending}
             />
             {/* 대댓글 영역 */}
@@ -60,22 +59,21 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
               <div className={'flex flex-col gap-2.5 rounded-[12px] bg-gray-50 px-5 py-2.5'}>
                 {comment.replies.map(reply => (
                   <CommentItem
-                    key={reply.id}
+                    key={reply.cid}
                     comment={reply}
-                    labName={post.lab.name}
-                    replyFn={() => setReplyTarget({ parentId: comment.id, name: reply.author.name })}
-                    updateFn={() => toggleEditComment(reply.id)}
-                    isEditing={editingCommentId === reply.id}
+                    replyFn={() => setReplyTarget({ parentId: comment.cid, name: reply.author.name })}
+                    updateFn={() => toggleEditComment(reply.cid)}
+                    isEditing={editingCommentId === reply.cid}
                     updateForm={
                       <CommentUpdateForm
                         postId={postId}
-                        commentId={reply.id}
-                        parentId={comment.id}
+                        commentId={reply.cid}
+                        parentId={comment.cid}
                         defaultContent={reply.content}
                         onClose={closeEditComment}
                       />
                     }
-                    deleteFn={() => handleDeleteComment(reply.id)}
+                    deleteFn={() => handleDeleteComment(reply.cid)}
                     isDeletePending={isDeletePending}
                   />
                 ))}
@@ -119,10 +117,10 @@ const BoardItemSectionContent = () => {
           {/* 댓글 영역 */}
           <BoardContentMenu
             commentCount={post.commentCount}
-            createdAt={post.created_at}
+            createdAt={post.createdAt}
             commentFn={() => toggleComment(post.id)}
             updateFn={() => setEditingPost(post)}
-            deleteFn={() => handleDeleteBoardItem(Number(post.id))}
+            deleteFn={() => handleDeleteBoardItem(post.id)}
             isDeletePending={isDeletePending}
           />
           {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
