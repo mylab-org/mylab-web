@@ -26,6 +26,6 @@ export const ENDPOINTS = {
     BOARD_PID: (pid: number) => `/api/board/${pid}`,
   },
   COMMENT: {
-    ROOT: (pid: number) => `/api/comment/${pid}`,
+    ROOT: (id: number) => `/api/comment/${id}`,
   },
 }

@@ -1,11 +1,13 @@
-export type CommentItemType = {
-  id: number
+export type CommentType = {
+  cid: number
   content: string
-  created_at: string
+  createdAt: string
   author: {
     name: string
+    labName: string
   }
-  replies: CommentItemType[]
 }
 
-export type CommentListResponseType = CommentItemType[]
+export type CommentListResponseType = {
+  replies: CommentType[]
+} & CommentType
