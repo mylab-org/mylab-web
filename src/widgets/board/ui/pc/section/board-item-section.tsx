@@ -1,18 +1,15 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
-import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
-import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
-import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
+import { BoardItemNav } from '@/features/board'
 import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
-import { QUERY_KEYS } from '@/shared/api/query-key'
 import { Text } from '@/shared/ui/override/text'
 import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
+import { useBoardListHook } from '@/widgets/board/model/use-board-list-hook'
 
 type BoardPostCommentsProps = {
   post: PostType
@@ -87,19 +84,19 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 }
 
 const BoardItemSectionContent = () => {
-  const { categoryId } = useBoardCategoryIdHook()
-  const { handleDeleteBoardItem, isDeletePending } = useBoardItemMenuHook()
-  const [editingPost, setEditingPost] = useState<PostType | null>(null)
-  const [openCommentPostIds, setOpenCommentPostIds] = useState<PostType['id'][]>([])
-
-  const toggleComment = (postId: PostType['id']) => {
-    setOpenCommentPostIds(prev => (prev.includes(postId) ? prev.filter(id => id !== postId) : [...prev, postId]))
-  }
-
-  const { data: boardList, isPending } = useQuery({
-    queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
-    queryFn: () => getBoardList(categoryId),
-  })
+  const {
+    boardList,
+    isPending,
+    isDeletePending,
+    editingPost,
+    setEditingPost,
+    openCommentPostIds,
+    toggleComment,
+    handleDeleteBoardItem,
+    handlePostBoardItemLike,
+    handleDeleteBoardItemLike,
+    isLikePending,
+  } = useBoardListHook()
 
   if (isPending) {
     return <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>
@@ -115,13 +112,14 @@ const BoardItemSectionContent = () => {
         <div key={post.id} className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
           <BoardItem post={post} />
           {/* 댓글 영역 */}
-          <BoardContentMenu
-            commentCount={post.commentCount}
-            createdAt={post.createdAt}
+          <BoardItemNav
+            post={post}
             commentFn={() => toggleComment(post.id)}
             updateFn={() => setEditingPost(post)}
             deleteFn={() => handleDeleteBoardItem(post.id)}
             isDeletePending={isDeletePending}
+            likeFn={post.isLiked ? () => handleDeleteBoardItemLike(post.id) : () => handlePostBoardItemLike(post.id)}
+            isLikePending={isLikePending}
           />
           {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
         </div>
