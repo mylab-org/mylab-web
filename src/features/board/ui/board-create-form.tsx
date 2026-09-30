@@ -2,13 +2,14 @@
 'use no memo'
 
 import { Image } from 'next/dist/client/image-component'
+import { Controller } from 'react-hook-form'
 import { useBoardCreateFormHook } from '../model/use-board-create-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Textarea } from '@/shared/ui/override/textarea'
 
 export const BoardCreateForm = () => {
-  const { register, onSubmit, isValid, isPending } = useBoardCreateFormHook()
+  const { register, control, onSubmit, isValid, isPending } = useBoardCreateFormHook()
 
   return (
     <form className={'flex flex-col gap-2.5 border border-gray-300'}>
@@ -37,7 +38,17 @@ export const BoardCreateForm = () => {
           </div>
         </div>
         <div className={'flex gap-5 p-2.5'}>
-          <CheckBox title="익명" />
+          <Controller
+            name="isAnonymous"
+            control={control}
+            render={({ field }) => (
+              <CheckBox
+                title="익명"
+                checked={field.value}
+                onCheckedChange={checked => field.onChange(checked === true)}
+              />
+            )}
+          />
           <Image
             src={'/icon/icon_main_img.svg'}
             alt={''}

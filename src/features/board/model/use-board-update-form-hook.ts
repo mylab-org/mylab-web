@@ -12,7 +12,7 @@ import type { PatchBoardUpdatePayloadType } from './types'
 
 type Props = {
   postId: number
-  defaultValues: Pick<PatchBoardUpdatePayloadType, 'title' | 'content'>
+  defaultValues: Pick<PatchBoardUpdatePayloadType, 'title' | 'content' | 'isAnonymous'>
   onSuccess?: () => void
 }
 
@@ -23,12 +23,14 @@ export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Pro
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { isValid },
   } = useForm<PatchBoardUpdatePayloadType>({
     defaultValues: {
       title: defaultValues.title,
       content: defaultValues.content,
+      isAnonymous: defaultValues.isAnonymous,
       Img: [],
     },
     mode: 'onChange',
@@ -71,6 +73,7 @@ export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Pro
 
   return {
     register,
+    control,
     onSubmit,
     isValid,
     isPending: patchBoardUpdateMutation.isPending,

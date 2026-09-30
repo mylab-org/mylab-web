@@ -11,12 +11,14 @@ export const useBoardCreateFormHook = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { isValid },
   } = useForm<PostBoardCreatePayloadType>({
     defaultValues: {
       title: '',
       content: '',
+      isAnonymous: false,
     },
     mode: 'onChange',
   })
@@ -37,6 +39,7 @@ export const useBoardCreateFormHook = () => {
 
   return {
     register,
+    control,
     onSubmit,
     isValid,
     isPending: postBoardCreateMutation.isPending,

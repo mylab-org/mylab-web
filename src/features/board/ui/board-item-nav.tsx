@@ -43,20 +43,24 @@ export const BoardItemNav = ({
           <Text className={'text-[10px] text-slate-400 lg:text-[12px]'}>{post.commentCount}</Text>
         </button>
 
-        <button type="button" onClick={updateFn} className={'flex cursor-pointer items-center gap-1.25'}>
-          <SquarePen className={'h-4 w-4 text-slate-400 lg:h-5 lg:w-5'} />
-          <Text className={'text-[10px] text-slate-400 lg:text-[12px]'}>수정</Text>
-        </button>
+        {post.isMine && (
+          <>
+            <button type="button" onClick={updateFn} className={'flex cursor-pointer items-center gap-1.25'}>
+              <SquarePen className={'h-4 w-4 text-slate-400 lg:h-5 lg:w-5'} />
+              <Text className={'text-[10px] text-slate-400 lg:text-[12px]'}>수정</Text>
+            </button>
 
-        <button
-          onClick={deleteFn}
-          disabled={isDeletePending}
-          type="button"
-          className={'flex cursor-pointer items-center gap-1.25'}
-        >
-          <Trash2 className={'h-4 w-4 text-slate-400 lg:h-5 lg:w-5'} />
-          <Text className={'text-[10px] text-slate-400 lg:text-[12px]'}>삭제</Text>
-        </button>
+            <button
+              onClick={deleteFn}
+              disabled={isDeletePending}
+              type="button"
+              className={'flex cursor-pointer items-center gap-1.25'}
+            >
+              <Trash2 className={'h-4 w-4 text-slate-400 lg:h-5 lg:w-5'} />
+              <Text className={'text-[10px] text-slate-400 lg:text-[12px]'}>삭제</Text>
+            </button>
+          </>
+        )}
       </div>
       {post.createdAt && (
         <Text className={'text-[10px] font-medium text-gray-400 lg:text-[12px]'}>
