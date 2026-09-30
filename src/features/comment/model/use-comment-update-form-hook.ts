@@ -2,33 +2,38 @@
 
 import { useForm } from 'react-hook-form'
 import { patchCommentUpdate } from '../api/patch-comment-update'
+import type { CommentType } from '@/entities/comment/model/types'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { PatchCommentUpdatePayloadType } from './types'
 
+type PatchCommentFormValuesType = Pick<PatchCommentUpdatePayloadType, 'content'>
+
 type Props = {
   postId: number
-  commentId: number
   /** 대댓글인 경우 부모 댓글 id. 없으면 최상위 댓글 */
   parentId?: number
-  defaultContent: string
+  comment: CommentType
   onSuccess?: () => void
 }
 
-export const useCommentUpdateFormHook = ({ postId, commentId, parentId = 0, defaultContent, onSuccess }: Props) => {
+export const useCommentUpdateFormHook = ({ postId, comment, parentId = 0, onSuccess }: Props) => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { isValid },
-  } = useForm<Pick<PatchCommentUpdatePayloadType, 'content'>>({
+  } = useForm<PatchCommentFormValuesType>({
     defaultValues: {
-      content: defaultContent,
+      content: comment.content,
+      // isAnonymous: comment.isAnonymous,
     },
     mode: 'onChange',
   })
 
   const patchCommentUpdateMutation = useApiMutation({
-    mutationFn: (content: string) => patchCommentUpdate(commentId, { parentId, content }),
+    mutationFn: (data: PatchCommentFormValuesType) =>
+      patchCommentUpdate(comment.cid, { parentId, content: data.content }),
     invalidateQueryKeys: [QUERY_KEYS.COMMENT.LIST(postId)],
     defaultErrorMessage: '댓글 수정에 실패했습니다.',
     successMessage: '댓글이 수정되었습니다.',
@@ -37,11 +42,11 @@ export const useCommentUpdateFormHook = ({ postId, commentId, parentId = 0, defa
     },
   })
 
-  const onSubmit = handleSubmit(({ content }) => {
-    const trimmed = content.trim()
+  const onSubmit = handleSubmit(data => {
+    const trimmed = data.content.trim()
     if (!trimmed || patchCommentUpdateMutation.isPending) return
-    patchCommentUpdateMutation.mutate(trimmed)
+    patchCommentUpdateMutation.mutate(data)
   })
 
-  return { register, onSubmit, isValid, isPending: patchCommentUpdateMutation.isPending }
+  return { register, control, onSubmit, isValid, isPending: patchCommentUpdateMutation.isPending }
 }

@@ -17,6 +17,7 @@ type Props = {
 export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onClearReplyTarget }: Props) => {
   const {
     register,
+    control,
     handleSubmit,
     reset,
     setValue,
@@ -26,6 +27,7 @@ export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onCle
   } = useForm<PostCommentCreatePayloadType>({
     defaultValues: {
       content: '',
+      isAnonymous: false,
     },
     mode: 'onChange',
   })
@@ -71,8 +73,12 @@ export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onCle
   }, [replyTag, watch, setValue, onClearReplyTarget])
 
   const postCommentMutation = useApiMutation({
-    mutationFn: (content: string) =>
-      postCommentCreate(postId, { parentId: replyTarget?.parentId ?? parentId, content }),
+    mutationFn: (data: PostCommentCreatePayloadType) =>
+      postCommentCreate(postId, {
+        parentId: replyTarget?.parentId ?? parentId,
+        content: data.content,
+        isAnonymous: data.isAnonymous,
+      }),
     invalidateQueryKeys: [QUERY_KEYS.COMMENT.LIST(postId)],
     onSuccess: () => {
       reset()
@@ -86,8 +92,8 @@ export const useCommentAddFormHook = ({ postId, parentId = 0, replyTarget, onCle
     const content = replyTag ? data.content.slice(replyTag.length).trim() : data.content
     const trimmed = content.trim()
     if (!trimmed || postCommentMutation.isPending) return
-    postCommentMutation.mutate(content)
+    postCommentMutation.mutate(data)
   })
 
-  return { register, onSubmit, isValid, isPending: postCommentMutation.isPending }
+  return { register, control, onSubmit, isValid, isPending: postCommentMutation.isPending }
 }

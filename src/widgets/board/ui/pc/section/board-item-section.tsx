@@ -38,17 +38,12 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
           <div key={comment.cid} className={'flex flex-col gap-1'}>
             <CommentItem
               comment={comment}
-              replyFn={() => setReplyTarget({ parentId: comment.cid, name: comment.author.name })}
+              replyFn={() =>
+                setReplyTarget({ parentId: comment.cid, name: comment.author.name, isAnonymous: comment.isAnonymous })
+              }
               updateFn={() => toggleEditComment(comment.cid)}
               isEditing={editingCommentId === comment.cid}
-              updateForm={
-                <CommentUpdateForm
-                  postId={postId}
-                  commentId={comment.cid}
-                  defaultContent={comment.content}
-                  onClose={closeEditComment}
-                />
-              }
+              updateForm={<CommentUpdateForm postId={postId} comment={comment} onClose={closeEditComment} />}
               deleteFn={() => handleDeleteComment(comment.cid)}
               isDeletePending={isDeletePending}
             />
@@ -59,16 +54,21 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
                   <CommentItem
                     key={reply.cid}
                     comment={reply}
-                    replyFn={() => setReplyTarget({ parentId: comment.cid, name: reply.author.name })}
+                    replyFn={() =>
+                      setReplyTarget({
+                        parentId: comment.cid,
+                        name: reply.author.name,
+                        isAnonymous: reply.isAnonymous,
+                      })
+                    }
                     updateFn={() => toggleEditComment(reply.cid)}
                     isEditing={editingCommentId === reply.cid}
                     updateForm={
                       <CommentUpdateForm
                         postId={postId}
-                        commentId={reply.cid}
                         parentId={comment.cid}
-                        defaultContent={reply.content}
                         onClose={closeEditComment}
+                        comment={reply}
                       />
                     }
                     deleteFn={() => handleDeleteComment(reply.cid)}

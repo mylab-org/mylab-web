@@ -1,26 +1,27 @@
 'use client'
 'use no memo'
 
+import { Controller } from 'react-hook-form'
 import { useCommentUpdateFormHook } from '../model/use-comment-update-form-hook'
+import type { CommentType } from '@/entities/comment/model/types'
+import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/override/text'
 
 type Props = {
   postId: number
-  commentId: number
   /** 대댓글인 경우 부모 댓글 id. 없으면 최상위 댓글 */
   parentId?: number
-  defaultContent: string
   /** 취소 또는 저장 성공 시 호출 */
   onClose: () => void
+  comment: CommentType
 }
 
-export const CommentUpdateForm = ({ postId, commentId, parentId = 0, defaultContent, onClose }: Props) => {
+export const CommentUpdateForm = ({ postId, comment, parentId = 0, onClose }: Props) => {
   const { register, onSubmit, isValid, isPending } = useCommentUpdateFormHook({
     postId,
-    commentId,
     parentId,
-    defaultContent,
+    comment,
     onSuccess: onClose,
   })
 
