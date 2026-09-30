@@ -18,9 +18,10 @@ export const MobileBoardPage = async ({ categoryId }: MobileBoardPageProps) => {
       queryFn: () => getBoardCategoryServer(TEST_LAB_ID),
     }),
     categoryId !== undefined &&
-      queryClient.prefetchQuery({
+      queryClient.prefetchInfiniteQuery({
         queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
-        queryFn: () => getBoardListServer(categoryId),
+        queryFn: ({ pageParam }) => getBoardListServer(categoryId, pageParam),
+        initialPageParam: 1,
       }),
   ])
 

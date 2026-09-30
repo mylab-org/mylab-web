@@ -7,6 +7,7 @@ import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
 import { BoardItemNav } from '@/features/board'
 import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
+import { useIntersectionObserver } from '@/shared/model'
 import { Text } from '@/shared/ui/override/text'
 import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
 import { useBoardListHook } from '@/widgets/board/model/use-board-list-hook'
@@ -85,8 +86,11 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 
 const BoardItemSectionContent = () => {
   const {
-    boardList,
+    posts,
     isPending,
+    handleFetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isDeletePending,
     editingPost,
     setEditingPost,
@@ -98,17 +102,24 @@ const BoardItemSectionContent = () => {
     isLikePending,
   } = useBoardListHook()
 
+  // 목록 끝 요소가 보이면 다음 페이지 요청
+  const nextPageTriggerRef = useIntersectionObserver<HTMLDivElement>({
+    onIntersect: handleFetchNextPage,
+    enabled: hasNextPage && !isFetchingNextPage,
+    rootMargin: '200px',
+  })
+
   if (isPending) {
     return <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>
   }
 
-  if (!boardList?.posts.length) {
+  if (!posts.length) {
     return <Text className={'text-[14px] text-gray-400!'}>게시글이 없습니다.</Text>
   }
 
   return (
     <>
-      {boardList.posts.map(post => (
+      {posts.map(post => (
         <div key={post.id} className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
           <BoardItem post={post} />
           {/* 댓글 영역 */}
@@ -124,6 +135,8 @@ const BoardItemSectionContent = () => {
           {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
         </div>
       ))}
+      <div ref={nextPageTriggerRef} />
+      {isFetchingNextPage && <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>}
       <BoardUpdateModal
         open={editingPost !== null}
         post={editingPost}

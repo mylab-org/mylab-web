@@ -17,9 +17,10 @@ export const BoardPage = async ({ categoryId }: BoardPageProps) => {
       queryKey: QUERY_KEYS.BOARD.CATEGORY(TEST_LAB_ID),
       queryFn: () => getBoardCategoryServer(TEST_LAB_ID),
     }),
-    queryClient.prefetchQuery({
+    queryClient.prefetchInfiniteQuery({
       queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
-      queryFn: () => getBoardListServer(categoryId),
+      queryFn: ({ pageParam }) => getBoardListServer(categoryId, pageParam),
+      initialPageParam: 1,
     }),
   ])
 
