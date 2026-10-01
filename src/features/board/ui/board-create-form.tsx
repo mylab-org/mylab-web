@@ -8,8 +8,12 @@ import { Button } from '@/shared/ui/override/button'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Textarea } from '@/shared/ui/override/textarea'
 
-export const BoardCreateForm = () => {
-  const { register, control, onSubmit, isValid, isPending } = useBoardCreateFormHook()
+type Props = {
+  onClose: () => void
+}
+
+export const BoardCreateForm = ({ onClose }: Props) => {
+  const { register, control, onSubmit, isValid, isPending } = useBoardCreateFormHook({ onClose })
 
   return (
     <form className={'flex flex-col gap-2.5 border border-gray-300'}>
