@@ -31,5 +31,5 @@ export type PostType = {
 
 export type BoardListResponseType = {
   posts: PostType[]
-  page: PageType
+  page: CursorType
 }

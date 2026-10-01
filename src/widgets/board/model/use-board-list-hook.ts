@@ -31,8 +31,8 @@ export const useBoardListHook = () => {
   } = useInfiniteQuery({
     queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
     queryFn: ({ pageParam }) => getBoardList(categoryId, pageParam),
-    initialPageParam: 1,
-    getNextPageParam: ({ page }) => (page.currentPage < page.totalPages ? page.currentPage + 1 : undefined),
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: ({ page }) => (page.hasNext ? page.nextCursor : undefined),
   })
 
   const posts = boardList?.pages.flatMap(page => page.posts) ?? []

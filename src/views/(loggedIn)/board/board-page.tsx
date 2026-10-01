@@ -20,7 +20,7 @@ export const BoardPage = async ({ categoryId }: BoardPageProps) => {
     queryClient.prefetchInfiniteQuery({
       queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
       queryFn: ({ pageParam }) => getBoardListServer(categoryId, pageParam),
-      initialPageParam: 1,
+      initialPageParam: undefined as number | undefined,
     }),
   ])
 

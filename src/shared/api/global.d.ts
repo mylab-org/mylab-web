@@ -12,3 +12,8 @@ type PageType = {
   totalCount: number
   totalPages: number
 }
+
+type CursorType = {
+  nextCursor: number
+  hasNext: boolean
+}
