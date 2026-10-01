@@ -1,10 +1,8 @@
 'use client'
 'use no memo'
 
-import { Controller } from 'react-hook-form'
 import { useCommentUpdateFormHook } from '../model/use-comment-update-form-hook'
 import type { CommentType } from '@/entities/comment/model/types'
-import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/override/text'
 

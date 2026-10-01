@@ -47,8 +47,8 @@ export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Pro
 
   const patchBoardUpdateMutation = useApiMutation({
     mutationFn: (payload: PatchBoardUpdatePayloadType) => patchBoardUpdate(postId, payload),
-    defaultErrorMessage: '소식 수정에 실패했습니다.',
-    successMessage: '소식이 수정되었습니다.',
+    defaultErrorMessage: '게시글 수정에 실패했습니다.',
+    successMessage: '게시글이 수정되었습니다.',
     onSuccess: updatedPost => {
       // 무한 쿼리는 무효화 시 불러온 모든 페이지를 재요청하므로, 캐시의 해당 게시글만 서버가 돌려준 값으로 교체
       // (익명 해제 시 실제 작성자 정보는 서버 응답에만 있음)
