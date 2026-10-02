@@ -1,18 +1,16 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
-import { getBoardList } from '@/entities/board/api/get-board-list'
 import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
-import { BoardContentMenu, useBoardCategoryIdHook } from '@/features/board'
-import { useBoardItemMenuHook } from '@/features/board/model/use-board-item-menu-hook'
+import { BoardItemNav } from '@/features/board'
 import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
-import { QUERY_KEYS } from '@/shared/api/query-key'
+import { useIntersectionObserver } from '@/shared/model'
 import { Text } from '@/shared/ui/override/text'
 import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
+import { useBoardListHook } from '@/widgets/board/model/use-board-list-hook'
 
 type BoardPostCommentsProps = {
   post: PostType
@@ -40,17 +38,12 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
           <div key={comment.cid} className={'flex flex-col gap-1'}>
             <CommentItem
               comment={comment}
-              replyFn={() => setReplyTarget({ parentId: comment.cid, name: comment.author.name })}
+              replyFn={() =>
+                setReplyTarget({ parentId: comment.cid, name: comment.author.name, isAnonymous: comment.isAnonymous })
+              }
               updateFn={() => toggleEditComment(comment.cid)}
               isEditing={editingCommentId === comment.cid}
-              updateForm={
-                <CommentUpdateForm
-                  postId={postId}
-                  commentId={comment.cid}
-                  defaultContent={comment.content}
-                  onClose={closeEditComment}
-                />
-              }
+              updateForm={<CommentUpdateForm postId={postId} comment={comment} onClose={closeEditComment} />}
               deleteFn={() => handleDeleteComment(comment.cid)}
               isDeletePending={isDeletePending}
             />
@@ -61,16 +54,21 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
                   <CommentItem
                     key={reply.cid}
                     comment={reply}
-                    replyFn={() => setReplyTarget({ parentId: comment.cid, name: reply.author.name })}
+                    replyFn={() =>
+                      setReplyTarget({
+                        parentId: comment.cid,
+                        name: reply.author.name,
+                        isAnonymous: reply.isAnonymous,
+                      })
+                    }
                     updateFn={() => toggleEditComment(reply.cid)}
                     isEditing={editingCommentId === reply.cid}
                     updateForm={
                       <CommentUpdateForm
                         postId={postId}
-                        commentId={reply.cid}
                         parentId={comment.cid}
-                        defaultContent={reply.content}
                         onClose={closeEditComment}
+                        comment={reply}
                       />
                     }
                     deleteFn={() => handleDeleteComment(reply.cid)}
@@ -87,45 +85,58 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 }
 
 const BoardItemSectionContent = () => {
-  const { categoryId } = useBoardCategoryIdHook()
-  const { handleDeleteBoardItem, isDeletePending } = useBoardItemMenuHook()
-  const [editingPost, setEditingPost] = useState<PostType | null>(null)
-  const [openCommentPostIds, setOpenCommentPostIds] = useState<PostType['id'][]>([])
+  const {
+    posts,
+    isPending,
+    handleFetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isDeletePending,
+    editingPost,
+    setEditingPost,
+    openCommentPostIds,
+    toggleComment,
+    handleDeleteBoardItem,
+    handlePostBoardItemLike,
+    handleDeleteBoardItemLike,
+    isLikePending,
+  } = useBoardListHook()
 
-  const toggleComment = (postId: PostType['id']) => {
-    setOpenCommentPostIds(prev => (prev.includes(postId) ? prev.filter(id => id !== postId) : [...prev, postId]))
-  }
-
-  const { data: boardList, isPending } = useQuery({
-    queryKey: QUERY_KEYS.BOARD.LIST(categoryId),
-    queryFn: () => getBoardList(categoryId),
+  // 목록 끝 요소가 보이면 다음 페이지 요청
+  const nextPageTriggerRef = useIntersectionObserver<HTMLDivElement>({
+    onIntersect: handleFetchNextPage,
+    enabled: hasNextPage && !isFetchingNextPage,
+    rootMargin: '200px',
   })
 
   if (isPending) {
     return <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>
   }
 
-  if (!boardList?.posts.length) {
+  if (!posts.length) {
     return <Text className={'text-[14px] text-gray-400!'}>게시글이 없습니다.</Text>
   }
 
   return (
     <>
-      {boardList.posts.map(post => (
+      {posts.map(post => (
         <div key={post.id} className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
           <BoardItem post={post} />
           {/* 댓글 영역 */}
-          <BoardContentMenu
-            commentCount={post.commentCount}
-            createdAt={post.createdAt}
+          <BoardItemNav
+            post={post}
             commentFn={() => toggleComment(post.id)}
             updateFn={() => setEditingPost(post)}
             deleteFn={() => handleDeleteBoardItem(post.id)}
             isDeletePending={isDeletePending}
+            likeFn={post.isLiked ? () => handleDeleteBoardItemLike(post.id) : () => handlePostBoardItemLike(post.id)}
+            isLikePending={isLikePending}
           />
           {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
         </div>
       ))}
+      <div ref={nextPageTriggerRef} />
+      {isFetchingNextPage && <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>}
       <BoardUpdateModal
         open={editingPost !== null}
         post={editingPost}

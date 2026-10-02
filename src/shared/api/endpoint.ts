@@ -24,6 +24,7 @@ export const ENDPOINTS = {
     CATEGORY: (labId: number) => `/api/board/${labId}/category`,
     CATEGORY_ID: (categoryId: number) => `/api/board/${categoryId}`,
     BOARD_PID: (pid: number) => `/api/board/${pid}`,
+    LIKE_PID: (pid: number) => `/api/board/${pid}/like`,
   },
   COMMENT: {
     ROOT: (id: number) => `/api/comment/${id}`,

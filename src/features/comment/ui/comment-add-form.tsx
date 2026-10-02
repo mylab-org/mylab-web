@@ -2,7 +2,9 @@
 'use no memo'
 
 import { Image } from 'next/dist/client/image-component'
+import { Controller } from 'react-hook-form'
 import { useCommentAddFormHook } from '../model/use-comment-add-form-hook'
+import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Input } from '@/shared/ui/override/input'
 import type { CommentReplyTargetType } from '../model/types'
 
@@ -17,7 +19,7 @@ type Props = {
 }
 
 export const CommentAddForm = ({ postId, parentId = 0, replyTarget, onClearReplyTarget }: Props) => {
-  const { register, onSubmit, isValid, isPending } = useCommentAddFormHook({
+  const { register, control, onSubmit, isValid, isPending } = useCommentAddFormHook({
     postId,
     parentId,
     replyTarget,
@@ -33,8 +35,20 @@ export const CommentAddForm = ({ postId, parentId = 0, replyTarget, onClearReply
         {...register('content', { required: true })}
         disabled={isPending}
       />
+      <Controller
+        name="isAnonymous"
+        control={control}
+        render={({ field }) => (
+          <CheckBox
+            title="익명"
+            checked={field.value}
+            onCheckedChange={checked => field.onChange(checked === true)}
+            className="shrink-0 gap-1 text-[10px]! text-gray-400"
+          />
+        )}
+      />
       <button type="submit" disabled={isPending || !isValid} className={'shrink-0 cursor-pointer'} onClick={onSubmit}>
-        <Image src={'/icon/icon_board_reply.svg'} alt={'댓글 등록'} width={16} height={16} />
+        <Image src={'/icon/icon_board_reply.svg'} alt={'댓글 등록'} width={14} height={14} />
       </button>
     </form>
   )

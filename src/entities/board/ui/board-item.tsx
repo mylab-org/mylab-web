@@ -19,7 +19,7 @@ export const BoardItem = ({ post }: Props) => {
         imgClassName={'rounded-full h-4 w-4 lg:h-5 lg:w-5'}
       >
         <Text className={'text-[10px] font-medium text-gray-400! lg:text-[12px]'}>
-          {post.author.name} 님이 남긴 글 · {post.author.labName}
+          {post.author.name} 님이 남긴 글 {!post.isAnonymous && `· ${post.author.labName}`}
         </Text>
       </Avatar>
 

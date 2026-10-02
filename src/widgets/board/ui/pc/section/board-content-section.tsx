@@ -21,7 +21,7 @@ export const BoardContentSection = () => {
         <Text className={'w-full text-left text-[12px] text-gray-500! lg:text-[16px]'}>새 소식을 전해보세요!</Text>
         <Pencil className="h-4 w-4 text-gray-400 lg:h-6 lg:w-6" size={24} />
       </button>
-      {isPostFormOpen && <BoardCreateForm />}
+      {isPostFormOpen && <BoardCreateForm onClose={() => setIsPostFormOpen(false)} />}
       <div className={'flex flex-1 flex-col gap-5 py-2.5'}>
         <BoardItemSection />
       </div>

@@ -2,22 +2,22 @@
 'use no memo'
 
 import { Image } from 'next/dist/client/image-component'
+import { Controller } from 'react-hook-form'
 import { useBoardUpdateFormHook } from '../model/use-board-update-form-hook'
+import type { PostType } from '@/entities/board/model/types'
 import { Button } from '@/shared/ui/override/button'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Textarea } from '@/shared/ui/override/textarea'
 
 type Props = {
-  postId: number
-  title: string
-  content: string
+  post: PostType
   onSuccess?: () => void
 }
 
-export const BoardUpdateForm = ({ postId, title, content, onSuccess }: Props) => {
-  const { register, onSubmit, isValid, isPending } = useBoardUpdateFormHook({
-    postId,
-    defaultValues: { title, content },
+export const BoardUpdateForm = ({ post, onSuccess }: Props) => {
+  const { register, control, onSubmit, isValid, isPending } = useBoardUpdateFormHook({
+    postId: post.id,
+    defaultValues: { title: post.title, content: post.content, isAnonymous: post.isAnonymous },
     onSuccess,
   })
 
@@ -48,7 +48,18 @@ export const BoardUpdateForm = ({ postId, title, content, onSuccess }: Props) =>
           </div>
         </div>
         <div className={'flex gap-5 p-2.5'}>
-          <CheckBox title="익명" />
+          {/* <CheckBox title="익명" /> */}
+          <Controller
+            name="isAnonymous"
+            control={control}
+            render={({ field }) => (
+              <CheckBox
+                title="익명"
+                checked={field.value}
+                onCheckedChange={checked => field.onChange(checked === true)}
+              />
+            )}
+          />
           <Image
             src={'/icon/icon_main_img.svg'}
             alt={''}

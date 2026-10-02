@@ -6,6 +6,8 @@ export type CommentType = {
     name: string
     labName: string
   }
+  isAnonymous: boolean
+  isMine: boolean
 }
 
 export type CommentListResponseType = {

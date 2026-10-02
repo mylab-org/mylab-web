@@ -20,13 +20,7 @@ export const BoardUpdateModal = ({ open, post, onOpenChange }: Props) => {
           <DialogTitle>게시글 수정</DialogTitle>
           <DialogDescription className="sr-only">게시글 제목과 내용을 수정합니다.</DialogDescription>
         </DialogHeader>
-        <BoardUpdateForm
-          key={post.id}
-          postId={post.id}
-          title={post.title}
-          content={post.content}
-          onSuccess={() => onOpenChange(false)}
-        />
+        <BoardUpdateForm post={post} onSuccess={() => onOpenChange(false)} />
       </DialogContent>
     </Dialog>
   )

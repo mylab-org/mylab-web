@@ -24,10 +24,12 @@ export type PostType = {
   author: AuthorType
   likeCount: number
   isLiked: boolean
+  isAnonymous: boolean
+  isMine: boolean
   commentCount: number
 }
 
 export type BoardListResponseType = {
   posts: PostType[]
-  page: PageType
+  page: CursorType
 }
