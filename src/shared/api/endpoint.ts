@@ -29,4 +29,13 @@ export const ENDPOINTS = {
   COMMENT: {
     ROOT: (id: number) => `/api/comment/${id}`,
   },
+  // works (업무 관련)
+  PAPER: {
+    ROOT: (labId: number) => `/api/labs/${labId}/papers`,
+    PAPER_ID: (labId: number, paperId: number) => `/api/labs/${labId}/papers/${paperId}`,
+    STATUS: (labId: number, paperId: number) => `/api/labs/${labId}/papers/${paperId}/status`,
+    MEMBERS: (labId: number, paperId: number) => `/api/labs/${labId}/papers/${paperId}/members`,
+    MEMBER_USER_ID: (labId: number, paperId: number, memberUserId: number) =>
+      `/api/labs/${labId}/papers/${paperId}/members/${memberUserId}`,
+  },
 }
