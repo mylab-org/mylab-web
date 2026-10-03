@@ -16,4 +16,8 @@ export const QUERY_KEYS = {
   COMMENT: {
     LIST: (pid: number) => ['comment', 'list', pid],
   },
+  PAPER: {
+    LIST: (labId: number) => ['paper', 'list', labId],
+    DETAIL: (labId: number, paperId: number) => ['paper', 'detail', labId, paperId],
+  },
 }
