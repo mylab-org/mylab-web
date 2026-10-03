@@ -7,6 +7,7 @@ import type { CommentType } from '../model/types'
 import type { ReactNode } from 'react'
 
 type Props = {
+  isWriter: boolean
   comment: CommentType
   replyFn?: () => void
   /** 수정 모드 진입/취소 토글 */
@@ -19,6 +20,7 @@ type Props = {
 }
 
 export const CommentItem = ({
+  isWriter,
   comment,
   replyFn,
   updateFn,
@@ -40,7 +42,11 @@ export const CommentItem = ({
               className={'gap-1.25'}
               imgClassName={'rounded-full h-4 w-4 lg:h-5 lg:w-5'}
             >
-              <Text className={'text-[12px] font-bold text-slate-600 lg:text-[14px]'}>{comment.author.name}</Text>
+              <Text
+                className={cn('text-[12px] font-bold lg:text-[14px]', isWriter ? 'text-[#2c8bed]' : 'text-slate-600')}
+              >
+                {comment.author.name}
+              </Text>
             </Avatar>
             <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>{comment.author.labName}</Text>
           </div>
