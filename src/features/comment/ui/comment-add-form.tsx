@@ -16,14 +16,17 @@ type Props = {
   replyTarget?: CommentReplyTargetType | null
   /** 입력창에서 태그가 지워지거나 등록이 끝났을 때 호출 */
   onClearReplyTarget?: () => void
+  /** 댓글 등록 성공 시 호출 */
+  onSuccess?: () => void
 }
 
-export const CommentAddForm = ({ postId, parentId = 0, replyTarget, onClearReplyTarget }: Props) => {
+export const CommentAddForm = ({ postId, parentId = 0, replyTarget, onClearReplyTarget, onSuccess }: Props) => {
   const { register, control, onSubmit, isValid, isPending } = useCommentAddFormHook({
     postId,
     parentId,
     replyTarget,
     onClearReplyTarget,
+    onSuccess,
   })
 
   return (

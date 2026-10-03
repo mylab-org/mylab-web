@@ -63,6 +63,10 @@ export const useBoardUpdateFormHook = ({ postId, defaultValues, onSuccess }: Pro
             })),
           },
       )
+      // 댓글 작성자 표시(익명(글쓴이) 등)는 서버가 게시글 익명 여부로 계산하므로, 익명 설정이 바뀌면 댓글 목록 재요청
+      if (updatedPost.isAnonymous !== defaultValues.isAnonymous) {
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.COMMENT.LIST(postId) })
+      }
       onSuccess?.()
     },
   })

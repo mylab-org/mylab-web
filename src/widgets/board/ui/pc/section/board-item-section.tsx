@@ -5,6 +5,7 @@ import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
 import type { PostType } from '@/entities/board/model/types'
 import { CommentItem } from '@/entities/comment'
+import type { CommentType } from '@/entities/comment/model/types'
 import { BoardItemNav } from '@/features/board'
 import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
 import { useIntersectionObserver } from '@/shared/model'
@@ -20,6 +21,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
   const {
     postId,
     comments,
+    handleCommentAdded,
     handleDeleteComment,
     isDeletePending,
     replyTarget,
@@ -30,13 +32,24 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
     closeEditComment,
   } = useBoardCommentHook({ post })
 
+  // 글쓴이 댓글 표시 — 내 게시글에 내가 단 댓글이고, 게시글과 댓글의 익명 여부가 같을 때만
+  // (실명 게시글엔 실명 댓글, 익명 게시글엔 익명 댓글)
+  const isWriterComment = (target: CommentType) =>
+    post.isMine && target.isMine && post.isAnonymous === target.isAnonymous
+
   return (
     <div className={'flex flex-col gap-1.25'}>
-      <CommentAddForm postId={postId} replyTarget={replyTarget} onClearReplyTarget={clearReplyTarget} />
+      <CommentAddForm
+        postId={postId}
+        replyTarget={replyTarget}
+        onClearReplyTarget={clearReplyTarget}
+        onSuccess={handleCommentAdded}
+      />
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
           <div key={comment.cid} className={'flex flex-col gap-1'}>
             <CommentItem
+              isWriter={isWriterComment(comment)}
               comment={comment}
               replyFn={() =>
                 setReplyTarget({ parentId: comment.cid, name: comment.author.name, isAnonymous: comment.isAnonymous })
@@ -52,6 +65,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
               <div className={'flex flex-col gap-2.5 rounded-[12px] bg-gray-50 px-5 py-2.5'}>
                 {comment.replies.map(reply => (
                   <CommentItem
+                    isWriter={isWriterComment(reply)}
                     key={reply.cid}
                     comment={reply}
                     replyFn={() =>
