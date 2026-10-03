@@ -21,6 +21,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
   const {
     postId,
     comments,
+    handleCommentAdded,
     handleDeleteComment,
     isDeletePending,
     replyTarget,
@@ -38,7 +39,12 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
 
   return (
     <div className={'flex flex-col gap-1.25'}>
-      <CommentAddForm postId={postId} replyTarget={replyTarget} onClearReplyTarget={clearReplyTarget} />
+      <CommentAddForm
+        postId={postId}
+        replyTarget={replyTarget}
+        onClearReplyTarget={clearReplyTarget}
+        onSuccess={handleCommentAdded}
+      />
       <div className={'flex flex-col gap-1'}>
         {comments.map(comment => (
           <div key={comment.cid} className={'flex flex-col gap-1'}>
