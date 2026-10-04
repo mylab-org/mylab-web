@@ -1,12 +1,13 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreServiceUse } from './side/more-service-use'
-import { MoreUserPw } from './side/more-user-pw'
 import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
+import { UserPasswordUpdateForm } from '@/features/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { clearAccessToken, runLogoutHandler } from '@/shared/lib/token/client-access-token-store'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Switch } from '@/shared/ui/override/switch'
@@ -24,18 +25,17 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
 
   const handleServiceLeave = () => {
     openDialogModal(DIALOG_MAP['SERVICE_LEAVE'], '회원 탈퇴', () => {
-      console.log('탈퇴')
+      toast.success('회원 탈퇴가 완료되었습니다.', { icon: false })
     })
   }
 
-  const postAuthLogoutMutation = useMutation({
+  const postAuthLogoutMutation = useApiMutation({
     mutationFn: postAuthLogout,
+    successMessage: '로그아웃이 완료되었습니다.',
+    defaultErrorMessage: '로그아웃에 실패했습니다.',
     onSuccess: async () => {
       clearAccessToken()
       await runLogoutHandler()
-    },
-    onError: () => {
-      console.log('로그아웃 실패')
     },
   })
 
@@ -85,7 +85,9 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
       </MoreMenuWrap>
       <MoreMenuWrap title={'계정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
-          <Button.Menu onClick={() => openSideModal(MoreUserPw, '비밀번호 변경')}>비밀번호 변경</Button.Menu>
+          <Button.Menu onClick={() => openSideModal(UserPasswordUpdateForm, '비밀번호 변경')}>
+            비밀번호 변경
+          </Button.Menu>
           <Button.Menu onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => postAuthLogoutMutation.mutate())}>
             로그아웃
           </Button.Menu>
