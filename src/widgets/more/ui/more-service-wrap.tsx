@@ -1,10 +1,10 @@
 'use client'
 
-import { toast } from 'react-toastify'
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreServiceUse } from './side/more-service-use'
 import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
 import { UserPasswordUpdateForm } from '@/features/user'
+import { deleteUsersMe } from '@/features/user/api/delete-users-me'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { clearAccessToken, runLogoutHandler } from '@/shared/lib/token/client-access-token-store'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
@@ -23,9 +23,19 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
 
+  const deleteUsersMeMutation = useApiMutation({
+    mutationFn: deleteUsersMe,
+    successMessage: '회원 탈퇴가 완료되었습니다.',
+    defaultErrorMessage: '회원 탈퇴에 실패했습니다.',
+    onSuccess: async () => {
+      clearAccessToken()
+      await runLogoutHandler()
+    },
+  })
+
   const handleServiceLeave = () => {
     openDialogModal(DIALOG_MAP['SERVICE_LEAVE'], '회원 탈퇴', () => {
-      toast.success('회원 탈퇴가 완료되었습니다.', { icon: false })
+      deleteUsersMeMutation.mutate()
     })
   }
 

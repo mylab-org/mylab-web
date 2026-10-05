@@ -18,6 +18,11 @@ export const Dialog = () => {
     if (!open) closeDialogModal()
   }
 
+  const handleConfirm = () => {
+    callback?.()
+    closeDialogModal()
+  }
+
   return (
     <DialogRoot open={isOpen} onOpenChange={handleOpenChange}>
       <DialogPortal>
@@ -47,7 +52,7 @@ export const Dialog = () => {
                 </Text>
               )}
             </div>
-            <Button onClick={callback}>{btnText}</Button>
+            <Button onClick={handleConfirm}>{btnText}</Button>
           </div>
         </DialogPrimitive.Content>
       </DialogPortal>
