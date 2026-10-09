@@ -1,15 +1,15 @@
-import { WorkMyProgress } from './work-my-progress'
+import { WorksMyProgress } from './works-my-progress'
 import type { WORK_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
 
-interface WorkListItemProps {
+interface Props {
   type?: keyof typeof WORK_TYPE
   className?: string
 }
 
-export const WorkListItem = ({ className, type = 'CONFERENCE' }: WorkListItemProps) => {
+export const WorksLabCard = ({ className, type = 'CONFERENCE' }: Props) => {
   return (
     <div className={cn('flex w-full flex-col gap-2.5 md:w-[373px] md:shrink-0', className)}>
       <div className={'flex flex-col gap-1.25'}>
@@ -27,7 +27,7 @@ export const WorkListItem = ({ className, type = 'CONFERENCE' }: WorkListItemPro
         </div>
       </div>
       <div className={'flex flex-col gap-1.25'}>
-        <WorkMyProgress type={type} />
+        <WorksMyProgress type={type} />
       </div>
     </div>
   )

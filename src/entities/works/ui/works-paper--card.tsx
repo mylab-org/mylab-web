@@ -6,14 +6,14 @@ import { useSideModalStore } from '@/shared/store'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
 
-interface ConferenceCardProps {
+interface Props {
   id: string
   isDeadLine?: boolean
   isEnd?: boolean
   detailComponent: () => React.JSX.Element
 }
 
-export const ConferenceCard = ({ id, isDeadLine = false, isEnd = false, detailComponent }: ConferenceCardProps) => {
+export const WorksPaperCard = ({ id, isDeadLine = false, isEnd = false, detailComponent }: Props) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
