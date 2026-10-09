@@ -14,7 +14,7 @@ import {
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { WorkConferenceDetail } from '../side/work-conference-detail'
+import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksPaperCard } from '@/entities/works'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
@@ -181,7 +181,7 @@ export const WorksPaperSection = () => {
                 id={'eee'}
                 isDeadLine={activeItem.isDeadLine}
                 isEnd={activeItem.isEnd}
-                detailComponent={WorkConferenceDetail}
+                detailComponent={WorkPaperDetail}
               />
             </div>
           ) : null}

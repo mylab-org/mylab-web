@@ -1,2 +1,2 @@
-export { CreateWorkForm } from './ui/create-work-form'
+export { WorksCreateMeetEtcForm } from './ui/works-create-meet-etc-form'
 export { WorkChatForm } from './ui/work-chat-form'
