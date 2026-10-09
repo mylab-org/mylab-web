@@ -9,7 +9,7 @@ interface MeetEtcCardProps {
   type: 'MEET' | 'PERSONAL'
 }
 
-export const MeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
+export const WorksMeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 
   const style = {

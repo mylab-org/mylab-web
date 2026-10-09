@@ -1,10 +1,9 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { WorkConferenceDetail } from './side/work-conference-detail'
-import { WorkEmptyCard } from './work-Empty-card'
-import { ConferenceCard, MeetEtcCard } from '@/entities/works'
+import { WorksPaperCard, WorksMeetEtcCard, WorksEmptyCard } from '@/entities/works'
 
-export const Container = ({ id, items, isDragging, isConference = false, children }: any) => {
+export const WorksDragContainer = ({ id, items, isDragging, isConference = false, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
 
   return (
@@ -23,14 +22,14 @@ export const Container = ({ id, items, isDragging, isConference = false, childre
             /* [중요] 가로 배열 시 아이템이 부모 너비에 맞춰 줄어들지 않도록 고정 너비 부여 */
             <div key={item.id} className="shrink-0 md:w-full md:shrink">
               {isConference ? (
-                <ConferenceCard id={item.id} isDeadLine detailComponent={WorkConferenceDetail} />
+                <WorksPaperCard id={item.id} isDeadLine detailComponent={WorkConferenceDetail} />
               ) : (
-                <MeetEtcCard id={item.id} type={item.type} />
+                <WorksMeetEtcCard id={item.id} type={item.type} />
               )}
             </div>
           ))}
 
-          {items.length === 0 && !isDragging && <WorkEmptyCard />}
+          {items.length === 0 && !isDragging && <WorksEmptyCard />}
         </div>
       </SortableContext>
     </section>

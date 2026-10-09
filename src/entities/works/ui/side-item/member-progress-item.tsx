@@ -1,4 +1,4 @@
-import { WorkMyProgress } from '@/entities/works'
+import { WorksMyProgress } from '../works-my-progress'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
@@ -15,7 +15,7 @@ export const MemberProgressItem = () => {
           <Tag.Roll variant={'doctoral'} />
         </div>
       </div>
-      <WorkMyProgress />
+      <WorksMyProgress />
     </div>
   )
 }

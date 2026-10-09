@@ -12,33 +12,35 @@ import {
   pointerWithin,
 } from '@dnd-kit/core'
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
-import React, { useState, useEffect } from 'react'
+import { Image } from 'next/dist/client/image-component'
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Container } from './container'
-import { WorkConferenceDetail } from './side/work-conference-detail'
-import { ConferenceCard } from '@/entities/works'
+import { WorkCreateContent } from '../side/work-create-content'
+import { WorksDragContainer } from '../works-drag-container'
+import { WorksMeetEtcCard } from '@/entities/works'
+import { useSideModalStore } from '@/shared/store'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
-  READY: [
-    { id: 'conf-1', type: 'CONFERENCE' },
-    { id: 'conf-2', type: 'CONFERENCE' },
-    { id: 'conf-3', type: 'CONFERENCE' },
-    { id: 'conf-4', type: 'CONFERENCE' },
-    { id: 'conf-5', type: 'CONFERENCE' },
-    { id: 'conf-6', type: 'CONFERENCE' },
+  todo: [{ id: '1', title: '업무 1', type: 'MEET' }],
+  doing: [
+    { id: '2', title: '업무 2', type: 'PERSONAL' },
+    { id: '3', title: '업무 3', type: 'PERSONAL' },
+    { id: '4', title: '업무 4', type: 'PERSONAL' },
+    { id: '5', title: '업무 5', type: 'PERSONAL' },
+    { id: '6', title: '업무 6', type: 'PERSONAL' },
+    { id: '7', title: '업무 7', type: 'PERSONAL' },
+    { id: '8', title: '업무 8', type: 'PERSONAL' },
   ],
-  PROGRESS: [{ id: 'conf-7', type: 'CONFERENCE', isDeadLine: true }],
-  DRAFT: [],
-  REVIEW: [{ id: 'conf-8', type: 'CONFERENCE', isDeadLine: true }],
-  DONE: [{ id: 'conf-9', type: 'CONFERENCE', isEnd: true }],
+  done: [],
 }
 
-export const ConferenceWorkWrap = () => {
+export const WorksMeetingEtcSection = () => {
   const [data, setData] = useState(initialData)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [enabled, setEnabled] = useState(false)
+  const openSideModal = useSideModalStore(state => state.openSideModal)
 
   useEffect(() => {
     setEnabled(true)
@@ -47,12 +49,12 @@ export const ConferenceWorkWrap = () => {
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {
-        distance: 10, // PC: 클릭 실수 방지
+        distance: 10, // PC: 미세한 클릭에는 반응하지 않고 10px 이동 시 드래그 시작
       },
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 250, // 모바일: 스크롤과 드래그 구분
+        delay: 250, // 모바일: 0.25초 꾹 눌러야 드래그 (스크롤 방해 금지)
         tolerance: 5,
       },
     }),
@@ -61,12 +63,15 @@ export const ConferenceWorkWrap = () => {
     }),
   )
 
-  // PC row 레이아웃에서 컬럼 간 이동을 부드럽게 만드는 충돌 전략
+  // [핵심] PC 가로 배치 레이아웃에서 컬럼 인식을 정확하게 하는 전략
   const collisionDetectionStrategy = (args: any) => {
+    // 1. 먼저 포인터(마우스/터치)가 직접적으로 올라가 있는 컨테이너를 찾습니다.
     const pointerCollisions = pointerWithin(args)
     if (pointerCollisions.length > 0) {
       return pointerCollisions
     }
+
+    // 2. 포인터 아래에 아무것도 없다면(간격 사이 등), 가장 가까운 모서리를 계산합니다.
     return closestCorners(args)
   }
 
@@ -136,13 +141,6 @@ export const ConferenceWorkWrap = () => {
 
   if (!enabled) return null
 
-  // 드래그 중인 아이템 데이터 찾기
-  const activeItem = activeId
-    ? Object.values(data)
-        .flat()
-        .find(i => i.id === activeId)
-    : null
-
   return (
     <DndContext
       sensors={sensors}
@@ -151,8 +149,9 @@ export const ConferenceWorkWrap = () => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
+      {/* 반응형 레이아웃: 기본 flex-col(모바일), md 이상 flex-row(PC) */}
       <section className="relative flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
-        {/* 드래그 배경 오버레이 */}
+        {/* 드래그 중 배경 어둡게 */}
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
             isDragging ? 'bg-black/40 opacity-100' : 'bg-transparent opacity-0'
@@ -160,28 +159,42 @@ export const ConferenceWorkWrap = () => {
         />
 
         {Object.entries(data).map(([columnId, items]) => (
-          <Container key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
-            <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
-              {columnId === 'READY' && '연구 준비'}
-              {columnId === 'PROGRESS' && '실험 진행'}
-              {columnId === 'DRAFT' && '초안 작성'}
-              {columnId === 'REVIEW' && '교수 검토'}
-              {columnId === 'DONE' && '완료'}
-            </h4>
-          </Container>
+          <WorksDragContainer key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={false}>
+            <div className="flex items-center justify-between">
+              <h4
+                className={`text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
+                  isDragging ? 'text-white' : 'text-black'
+                }`}
+              >
+                {columnId === 'todo' ? '시작 전' : columnId === 'doing' ? '진행 중' : '완료'}
+              </h4>
+              {columnId !== 'done' && (
+                <Image
+                  src="/icon/icon_main_add.svg"
+                  alt="add"
+                  width={30}
+                  height={30}
+                  className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
+                  onClick={() => openSideModal(WorkCreateContent, '업무 생성')}
+                />
+              )}
+            </div>
+          </WorksDragContainer>
         ))}
       </section>
 
+      {/* 드래그 중인 카드 미리보기 (Portal) */}
       {createPortal(
         <DragOverlay zIndex={1000}>
-          {activeId && activeItem ? (
+          {activeId ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              {/* Conference 전용 카드 렌더링 */}
-              <ConferenceCard
-                id={'eee'}
-                isDeadLine={activeItem.isDeadLine}
-                isEnd={activeItem.isEnd}
-                detailComponent={WorkConferenceDetail}
+              <WorksMeetEtcCard
+                id={'test'}
+                type={
+                  Object.values(data)
+                    .flat()
+                    .find(i => i.id === activeId)?.type
+                }
               />
             </div>
           ) : null}

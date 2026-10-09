@@ -1,10 +1,10 @@
 import { Image } from 'next/dist/client/image-component'
 import { useState } from 'react'
-import { WorkListItem } from '@/entities/works'
+import { WorksLabCard } from '@/entities/works'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { Text } from '@/shared/ui/override/text'
 
-export const PersonalWorkWrap = () => {
+export const WorksLabSection = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <section className={'flex flex-col gap-2.5 p-2.5'}>
@@ -20,10 +20,10 @@ export const PersonalWorkWrap = () => {
         </div>
         {isOpen && (
           <div className={'flex w-full min-w-0 flex-1 flex-col items-center gap-2.5 md:flex-row md:overflow-x-auto'}>
-            <WorkListItem type={'MEET'} />
-            <WorkListItem type={'PERSONAL'} />
-            <WorkListItem />
-            <WorkListItem />
+            <WorksLabCard type={'MEET'} />
+            <WorksLabCard type={'PERSONAL'} />
+            <WorksLabCard />
+            <WorksLabCard />
           </div>
         )}
       </div>

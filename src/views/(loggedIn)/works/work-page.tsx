@@ -1,20 +1,20 @@
 'use client'
 
 import { Tab } from '@/shared/ui/override/tab'
-import { ConferenceWorkWrap, MeetingEtcWorkWrap, PersonalWorkWrap } from '@/widgets/works'
+import { WorksMeetingEtcSection, WorksPaperSection, WorksLabSection } from '@/widgets/works'
 
 const tabs = [
   {
     name: '연구실 전체',
-    content: <PersonalWorkWrap />,
+    content: <WorksLabSection />,
   },
   {
-    name: '학회 업무',
-    content: <ConferenceWorkWrap />,
+    name: '논문 업무',
+    content: <WorksPaperSection />,
   },
   {
     name: '미팅 & 개인',
-    content: <MeetingEtcWorkWrap />,
+    content: <WorksMeetingEtcSection />,
   },
 ]
 

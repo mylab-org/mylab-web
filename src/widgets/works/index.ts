@@ -1,3 +1,3 @@
-export { PersonalWorkWrap } from './ui/personal-work-wrap'
-export { ConferenceWorkWrap } from './ui/conference-work-wrap'
-export { MeetingEtcWorkWrap } from './ui/meeting-etc-work-wrap'
+export { WorksLabSection } from './ui/section/works-lab-section'
+export { WorksPaperSection } from './ui/section/works-paper-section'
+export { WorksMeetingEtcSection } from './ui/section/works-meeting-etc-section'
