@@ -15,7 +15,7 @@ import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { Image } from 'next/dist/client/image-component'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { WorkCreateContent } from '../side/work-create-content'
+import { WorksCreateMeetEtc } from '../side/works-create-meet-etc'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksMeetEtcCard } from '@/entities/works'
 import { useSideModalStore } from '@/shared/store'
@@ -175,7 +175,7 @@ export const WorksMeetingEtcSection = () => {
                   width={30}
                   height={30}
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
-                  onClick={() => openSideModal(WorkCreateContent, '업무 생성')}
+                  onClick={() => openSideModal(WorksCreateMeetEtc, '업무 생성')}
                 />
               )}
             </div>

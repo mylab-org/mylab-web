@@ -33,15 +33,18 @@ export const WorksPaperCard = ({ id, isDeadLine = false, isEnd = false, detailCo
       {...attributes}
       {...listeners}
       className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex cursor-pointer flex-col items-center gap-5 rounded-[12px] p-2.5 shadow-lg md:min-h-[165px] md:p-5 ${isEnd ? 'bg-gray-200' : 'bg-white'} ${isDeadLine && 'border-error border-3'}`}
-      onClick={() => openSideModal(detailComponent, '2026 한국통신학회 추계종합학술발표회')}
+      onClick={() => openSideModal(detailComponent, '논문 제목')}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
-        <h5 className={'text-[14px] font-bold md:text-[18px]'}>2026 한국통신학회 추계종합학술발표회</h5>
-        <div className={'flex flex-col'}>
-          <Text className={'text-[12px] font-normal md:text-[16px]'}>
-            26.02.04(수) ~ 26.02.06(금), <b className={`font-bold ${isDeadLine && 'text-error'}`}>마감 D-27</b>
+        <h5 className={'text-[14px] font-bold md:text-[18px]'}>논문 제목</h5>
+        <div className={'flex flex-col gap-1.25'}>
+          <Text className={'text-[10px] font-normal md:text-[14px]'}>
+            2026.02.04(수) ~ 2026.02.06(금), <b className={`font-bold ${isDeadLine && 'text-error'}`}>마감 D-27</b>
           </Text>
-          <Text className={'text-[12px] font-normal md:text-[16px]'}>모나 용평(용평리조트)</Text>
+          <div>
+            <Text className={'text-[10px] font-normal md:text-[14px]'}>2025 한국통신학회 동계종합학술발표회</Text>
+            <Text className={'text-[10px] font-normal md:text-[14px]'}>모나 용평(용평리조트)</Text>
+          </div>
         </div>
       </div>
       <div className={'flex w-full flex-wrap gap-2.5'}>

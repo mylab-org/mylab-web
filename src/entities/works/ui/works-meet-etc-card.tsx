@@ -33,8 +33,8 @@ export const WorksMeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
         <h5 className={'text-[14px] font-semibold md:text-[18px]'}>주어진 오토인코더 논문 리뷰 PPT 제작</h5>
       </div>
       <div className={'flex w-full flex-col gap-1.25'}>
-        <Text className={'text-[12px] font-normal md:text-[16px]'}>26.02.04(수) ~ 26.02.06(금)</Text>
-        <Text className={'text-[12px] font-normal md:text-[16px]'}>설명</Text>
+        <Text className={'text-[10px] font-normal md:text-[14px]'}>2026.02.04(수) ~ 2026.02.06(금)</Text>
+        <Text className={'text-[10px] font-normal md:text-[14px]'}>설명</Text>
       </div>
     </div>
   )
