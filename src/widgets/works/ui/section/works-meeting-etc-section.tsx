@@ -1,25 +1,13 @@
 'use client'
 
-import {
-  DndContext,
-  DragOverlay,
-  closestCorners,
-  KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-  pointerWithin,
-} from '@dnd-kit/core'
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import { DndContext, DragOverlay } from '@dnd-kit/core'
 import { SquarePlus } from 'lucide-react'
-import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorksCreateMeetEtc } from '../side/works-create-meet-etc'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksMeetEtcCard } from '@/entities/works'
 import { useSideModalStore } from '@/shared/store'
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
   todo: [{ id: '1', title: '업무 1', type: 'MEET' }],
@@ -36,108 +24,20 @@ const initialData: Record<string, any[]> = {
 }
 
 export const WorksMeetingEtcSection = () => {
-  const [data, setData] = useState(initialData)
-  const [activeId, setActiveId] = useState<string | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [enabled, setEnabled] = useState(false)
   const openSideModal = useSideModalStore(state => state.openSideModal)
 
-  useEffect(() => {
-    setEnabled(true)
-  }, [])
-
-  const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10, // PC: 미세한 클릭에는 반응하지 않고 10px 이동 시 드래그 시작
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 250, // 모바일: 0.25초 꾹 눌러야 드래그 (스크롤 방해 금지)
-        tolerance: 5,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  )
-
-  // [핵심] PC 가로 배치 레이아웃에서 컬럼 인식을 정확하게 하는 전략
-  const collisionDetectionStrategy = (args: any) => {
-    // 1. 먼저 포인터(마우스/터치)가 직접적으로 올라가 있는 컨테이너를 찾습니다.
-    const pointerCollisions = pointerWithin(args)
-    if (pointerCollisions.length > 0) {
-      return pointerCollisions
-    }
-
-    // 2. 포인터 아래에 아무것도 없다면(간격 사이 등), 가장 가까운 모서리를 계산합니다.
-    return closestCorners(args)
-  }
-
-  const findContainer = (id: string) => {
-    if (id in data) return id
-    return Object.keys(data).find(key => data[key].some(item => item.id === id))
-  }
-
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-    setIsDragging(true)
-    if (window.navigator.vibrate) window.navigator.vibrate(50)
-  }
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { active, over } = event
-    if (!over) return
-
-    const activeId = active.id as string
-    const overId = over.id as string
-
-    const activeContainer = findContainer(activeId)
-    const overContainer = findContainer(overId)
-
-    if (!activeContainer || !overContainer || activeContainer === overContainer) return
-
-    setData(prev => {
-      const activeItems = prev[activeContainer]
-      const overItems = prev[overContainer]
-      const activeIndex = activeItems.findIndex(i => i.id === activeId)
-      const overIndex = overItems.findIndex(i => i.id === overId)
-
-      let newIndex: number
-      if (overId in prev) {
-        newIndex = overItems.length
-      } else {
-        newIndex = overIndex >= 0 ? overIndex : overItems.length
-      }
-
-      return {
-        ...prev,
-        [activeContainer]: activeItems.filter(i => i.id !== activeId),
-        [overContainer]: [...overItems.slice(0, newIndex), activeItems[activeIndex], ...overItems.slice(newIndex)],
-      }
-    })
-  }
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    const activeContainer = findContainer(active.id as string)
-    const overContainer = over ? findContainer(over.id as string) : null
-
-    if (activeContainer && overContainer && activeContainer === overContainer) {
-      const activeIndex = data[activeContainer].findIndex(i => i.id === active.id)
-      const overIndex = data[overContainer].findIndex(i => i.id === over!.id)
-
-      if (activeIndex !== overIndex) {
-        setData(prev => ({
-          ...prev,
-          [overContainer]: arrayMove(prev[overContainer], activeIndex, overIndex),
-        }))
-      }
-    }
-    setActiveId(null)
-    setIsDragging(false)
-  }
+  const {
+    columns,
+    activeId,
+    activeItem,
+    isDragging,
+    enabled,
+    sensors,
+    collisionDetectionStrategy,
+    handleDragStart,
+    handleDragOver,
+    handleDragEnd,
+  } = useWorksKanbanHook({ initialColumns: initialData })
 
   if (!enabled) return null
 
@@ -158,7 +58,7 @@ export const WorksMeetingEtcSection = () => {
           }`}
         />
 
-        {Object.entries(data).map(([columnId, items]) => (
+        {Object.entries(columns).map(([columnId, items]) => (
           <WorksDragContainer key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={false}>
             <div className="flex items-center justify-between">
               <h4
@@ -184,14 +84,7 @@ export const WorksMeetingEtcSection = () => {
         <DragOverlay zIndex={1000}>
           {activeId ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              <WorksMeetEtcCard
-                id={'test'}
-                type={
-                  Object.values(data)
-                    .flat()
-                    .find(i => i.id === activeId)?.type
-                }
-              />
+              <WorksMeetEtcCard id={'test'} type={activeItem?.type} />
             </div>
           ) : null}
         </DragOverlay>,

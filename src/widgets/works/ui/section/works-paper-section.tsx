@@ -1,151 +1,80 @@
 'use client'
 
-import {
-  DndContext,
-  DragOverlay,
-  closestCorners,
-  KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-  pointerWithin,
-} from '@dnd-kit/core'
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { SquarePlus } from 'lucide-react'
-import React, { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { WOROS_PAPER_COLUMNS } from '../../config/const'
+import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorksCreatePaper } from '../side/works-create-paper'
 import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksPaperCard } from '@/entities/works'
+import { getWorksPaperList } from '@/entities/works/api/get-works-paper-list'
+import type { WorksPaperListResponseType } from '@/entities/works/model/types'
+import { patchWorksPaperStatus } from '@/features/works/api/patch-works-paper-status'
+import { QUERY_KEYS } from '@/shared/api/query-key'
+import { TEST_LAB_ID } from '@/shared/constant/test'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
-const initialData: Record<string, any[]> = {
-  READY: [
-    { id: 'conf-1', type: 'CONFERENCE' },
-    { id: 'conf-2', type: 'CONFERENCE' },
-    { id: 'conf-3', type: 'CONFERENCE' },
-    { id: 'conf-4', type: 'CONFERENCE' },
-    { id: 'conf-5', type: 'CONFERENCE' },
-    { id: 'conf-6', type: 'CONFERENCE' },
-  ],
-  PROGRESS: [{ id: 'conf-7', type: 'CONFERENCE', isDeadLine: true }],
-  DRAFT: [],
-  REVIEW: [{ id: 'conf-8', type: 'CONFERENCE', isDeadLine: true }],
-  DONE: [{ id: 'conf-9', type: 'CONFERENCE', isEnd: true }],
-}
-
-export const WorksPaperSection = () => {
-  const [data, setData] = useState(initialData)
-  const [activeId, setActiveId] = useState<string | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [enabled, setEnabled] = useState(false)
-  const openSideModal = useSideModalStore(state => state.openSideModal)
-
-  useEffect(() => {
-    setEnabled(true)
-  }, [])
-
-  const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10, // PC: 클릭 실수 방지
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 250, // 모바일: 스크롤과 드래그 구분
-        tolerance: 5,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
+const groupPapersByStatus = (papers: WorksPaperListResponseType[]) =>
+  WOROS_PAPER_COLUMNS.reduce(
+    (columns, { status }) => ({ ...columns, [status]: papers.filter(paper => paper.status === status) }),
+    {} as Record<PaperStatusType, WorksPaperListResponseType[]>,
   )
 
-  // PC row 레이아웃에서 컬럼 간 이동을 부드럽게 만드는 충돌 전략
-  const collisionDetectionStrategy = (args: any) => {
-    const pointerCollisions = pointerWithin(args)
-    if (pointerCollisions.length > 0) {
-      return pointerCollisions
-    }
-    return closestCorners(args)
-  }
+export const WorksPaperSection = () => {
+  const queryClient = useQueryClient()
+  const paperListQueryKey = QUERY_KEYS.PAPER.LIST(TEST_LAB_ID)
+  const openSideModal = useSideModalStore(state => state.openSideModal)
 
-  const findContainer = (id: string) => {
-    if (id in data) return id
-    return Object.keys(data).find(key => data[key].some(item => item.id === id))
-  }
+  const { data: papers } = useQuery({
+    queryKey: paperListQueryKey,
+    queryFn: () => getWorksPaperList(TEST_LAB_ID),
+  })
 
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-    setIsDragging(true)
-    if (window.navigator.vibrate) window.navigator.vibrate(50)
-  }
+  // 카드는 드롭 즉시 옮겨 보여주고, 실패하면 서버 목록 기준으로 되돌림
+  const patchWorksPaperStatusMutation = useApiMutation({
+    mutationFn: ({ paperId, status }: { paperId: number; status: PaperStatusType }) =>
+      patchWorksPaperStatus(TEST_LAB_ID, paperId, { status }),
+    defaultErrorMessage: '논문 상태 변경에 실패했습니다.',
+    onSuccess: updatedPaper => {
+      queryClient.setQueryData<WorksPaperListResponseType[]>(paperListQueryKey, prev =>
+        prev?.map(paper => (paper.id === updatedPaper.id ? updatedPaper : paper)),
+      )
+    },
+    onError: () => {
+      const cachedPapers = queryClient.getQueryData<WorksPaperListResponseType[]>(paperListQueryKey)
+      if (cachedPapers) setColumns(groupPapersByStatus(cachedPapers))
+    },
+  })
 
-  const handleDragOver = (event: DragOverEvent) => {
-    const { active, over } = event
-    if (!over) return
+  const {
+    columns,
+    setColumns,
+    activeId,
+    activeItem,
+    isDragging,
+    enabled,
+    sensors,
+    collisionDetectionStrategy,
+    handleDragStart,
+    handleDragOver,
+    handleDragEnd,
+  } = useWorksKanbanHook<PaperStatusType, WorksPaperListResponseType>({
+    initialColumns: () => groupPapersByStatus(papers ?? []),
+    onColumnChange: ({ itemId, to }) => {
+      patchWorksPaperStatusMutation.mutate({ paperId: Number(itemId), status: to })
+    },
+  })
 
-    const activeId = active.id as string
-    const overId = over.id as string
-
-    const activeContainer = findContainer(activeId)
-    const overContainer = findContainer(overId)
-
-    if (!activeContainer || !overContainer || activeContainer === overContainer) return
-
-    setData(prev => {
-      const activeItems = prev[activeContainer]
-      const overItems = prev[overContainer]
-      const activeIndex = activeItems.findIndex(i => i.id === activeId)
-      const overIndex = overItems.findIndex(i => i.id === overId)
-
-      let newIndex: number
-      if (overId in prev) {
-        newIndex = overItems.length
-      } else {
-        newIndex = overIndex >= 0 ? overIndex : overItems.length
-      }
-
-      return {
-        ...prev,
-        [activeContainer]: activeItems.filter(i => i.id !== activeId),
-        [overContainer]: [...overItems.slice(0, newIndex), activeItems[activeIndex], ...overItems.slice(newIndex)],
-      }
-    })
-  }
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    const activeContainer = findContainer(active.id as string)
-    const overContainer = over ? findContainer(over.id as string) : null
-
-    if (activeContainer && overContainer && activeContainer === overContainer) {
-      const activeIndex = data[activeContainer].findIndex(i => i.id === active.id)
-      const overIndex = data[overContainer].findIndex(i => i.id === over!.id)
-
-      if (activeIndex !== overIndex) {
-        setData(prev => ({
-          ...prev,
-          [overContainer]: arrayMove(prev[overContainer], activeIndex, overIndex),
-        }))
-      }
-    }
-    setActiveId(null)
-    setIsDragging(false)
-  }
+  useEffect(() => {
+    if (papers) setColumns(groupPapersByStatus(papers))
+  }, [papers, setColumns])
 
   if (!enabled) return null
-
-  // 드래그 중인 아이템 데이터 찾기
-  const activeItem = activeId
-    ? Object.values(data)
-        .flat()
-        .find(i => i.id === activeId)
-    : null
 
   return (
     <DndContext
@@ -163,18 +92,18 @@ export const WorksPaperSection = () => {
           }`}
         />
 
-        {Object.entries(data).map(([columnId, items]) => (
-          <WorksDragContainer key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
+        {WOROS_PAPER_COLUMNS.map(({ status, label }) => (
+          <WorksDragContainer
+            key={status}
+            id={status}
+            items={columns[status]}
+            isDragging={isDragging}
+            isConference={true}
+          >
             <div className="flex items-center justify-between">
-              <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
-                {columnId === 'READY' && '연구 준비'}
-                {columnId === 'PROGRESS' && '실험 진행'}
-                {columnId === 'DRAFT' && '초안 작성'}
-                {columnId === 'REVIEW' && '교수 검토'}
-                {columnId === 'DONE' && '완료'}
-              </h4>
+              <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>{label}</h4>
               {/* 서버가 신규 논문을 항상 연구 준비(RESEARCH_PREP) 단계로 생성하므로 연구 준비 컬럼에만 노출합니다. */}
-              {columnId === 'READY' && (
+              {status === 'RESEARCH_PREP' && (
                 <SquarePlus
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
                   onClick={() => openSideModal(WorksCreatePaper, '업무 생성')}
@@ -190,12 +119,7 @@ export const WorksPaperSection = () => {
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               {/* Conference 전용 카드 렌더링 */}
-              <WorksPaperCard
-                id={'eee'}
-                isDeadLine={activeItem.isDeadLine}
-                isEnd={activeItem.isEnd}
-                detailComponent={WorkPaperDetail}
-              />
+              <WorksPaperCard paper={activeItem} detailComponent={WorkPaperDetail} />
             </div>
           ) : null}
         </DragOverlay>,
