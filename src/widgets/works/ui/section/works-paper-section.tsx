@@ -84,7 +84,7 @@ export const WorksPaperSection = () => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <section className="relative flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
+      <section className="relative isolate flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
         {/* 드래그 배경 오버레이 */}
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
@@ -115,7 +115,7 @@ export const WorksPaperSection = () => {
       </section>
 
       {createPortal(
-        <DragOverlay zIndex={1000}>
+        <DragOverlay zIndex={5}>
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               {/* Conference 전용 카드 렌더링 */}

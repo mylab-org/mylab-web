@@ -50,7 +50,7 @@ export const WorksMeetingEtcSection = () => {
       onDragEnd={handleDragEnd}
     >
       {/* 반응형 레이아웃: 기본 flex-col(모바일), md 이상 flex-row(PC) */}
-      <section className="relative flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
+      <section className="relative isolate flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
         {/* 드래그 중 배경 어둡게 */}
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
@@ -81,7 +81,7 @@ export const WorksMeetingEtcSection = () => {
 
       {/* 드래그 중인 카드 미리보기 (Portal) */}
       {createPortal(
-        <DragOverlay zIndex={1000}>
+        <DragOverlay zIndex={5}>
           {activeId ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               <WorksMeetEtcCard id={'test'} type={activeItem?.type} />
