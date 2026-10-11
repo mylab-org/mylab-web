@@ -44,7 +44,7 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
         isEnd ? 'bg-gray-200' : 'bg-white',
         isDeadLine && 'border-error',
       )}
-      onClick={() => openSideModal(detailComponent, '논문 제목')}
+      onClick={() => openSideModal(detailComponent, title)}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
         <h5 className={'text-[14px] font-bold md:text-[18px]'}>{title}</h5>

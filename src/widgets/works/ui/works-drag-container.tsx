@@ -22,7 +22,7 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
             /* [중요] 가로 배열 시 아이템이 부모 너비에 맞춰 줄어들지 않도록 고정 너비 부여 */
             <div key={item.id} className="shrink-0 md:w-full md:shrink">
               {isConference ? (
-                <WorksPaperCard paper={item} detailComponent={WorkPaperDetail} />
+                <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
                 <WorksMeetEtcCard id={item.id} type={item.type} />
               )}

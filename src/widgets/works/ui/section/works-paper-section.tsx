@@ -119,7 +119,7 @@ export const WorksPaperSection = () => {
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
               {/* Conference 전용 카드 렌더링 */}
-              <WorksPaperCard paper={activeItem} detailComponent={WorkPaperDetail} />
+              <WorksPaperCard paper={activeItem} detailComponent={() => <WorkPaperDetail paperId={activeItem.id} />} />
             </div>
           ) : null}
         </DragOverlay>,
