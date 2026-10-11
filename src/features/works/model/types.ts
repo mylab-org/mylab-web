@@ -1,8 +1,8 @@
 export type PostWorksPaperCreatePayloadType = {
   title: string
-  scheduleId: number
-  leadAuthorUserId: number
-  participantUserIds: number[]
+  scheduleId?: number
+  leadAuthorUserId?: number
+  participantUserIds?: number[]
 }
 
 export type PatchWorksPaperUpdatePayloadType = {

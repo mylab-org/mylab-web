@@ -1,17 +1,24 @@
-import { useSideModalStore } from '@/shared/store'
+'use client'
+'use no memo'
+
+import { useWorksCreatePaperFormHook } from '../model/use-works-create-paper-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/override/text'
 
 export const WorksCreatePaperForm = () => {
-  const closeSideModal = useSideModalStore(state => state.closeSideModal)
+  const { register, onSubmit, isValid, isPending } = useWorksCreatePaperFormHook()
 
   return (
     <>
       <form className={'flex flex-col gap-7.5 py-5'}>
         <div className={'w-full'}>
           <Text className={'text-[14px] font-medium text-gray-600!'}>논문 제목</Text>
-          <Input placeholder={'제목'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
+          <Input
+            {...register('title', { required: true })}
+            placeholder={'제목'}
+            className={'w-full text-[14px] font-medium md:text-[18px]'}
+          />
         </div>
         <div className={'w-full'}>
           <Text className={'text-[14px] font-medium text-gray-600!'}>제출 학회 (선택)</Text>
@@ -26,7 +33,7 @@ export const WorksCreatePaperForm = () => {
           <Input placeholder={'공동저자'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
         </div>
       </form>
-      <Button className={'mb-5'} onClick={closeSideModal}>
+      <Button className={'mb-5'} disabled={!isValid || isPending} onClick={onSubmit}>
         업무 생성하기
       </Button>
     </>
