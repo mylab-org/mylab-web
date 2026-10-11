@@ -12,11 +12,14 @@ import {
   pointerWithin,
 } from '@dnd-kit/core'
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import { SquarePlus } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { WorksCreatePaper } from '../side/works-create-paper'
 import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksPaperCard } from '@/entities/works'
+import { useSideModalStore } from '@/shared/store'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 
 const initialData: Record<string, any[]> = {
@@ -39,6 +42,7 @@ export const WorksPaperSection = () => {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [enabled, setEnabled] = useState(false)
+  const openSideModal = useSideModalStore(state => state.openSideModal)
 
   useEffect(() => {
     setEnabled(true)
@@ -161,13 +165,22 @@ export const WorksPaperSection = () => {
 
         {Object.entries(data).map(([columnId, items]) => (
           <WorksDragContainer key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={true}>
-            <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
-              {columnId === 'READY' && '연구 준비'}
-              {columnId === 'PROGRESS' && '실험 진행'}
-              {columnId === 'DRAFT' && '초안 작성'}
-              {columnId === 'REVIEW' && '교수 검토'}
-              {columnId === 'DONE' && '완료'}
-            </h4>
+            <div className="flex items-center justify-between">
+              <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>
+                {columnId === 'READY' && '연구 준비'}
+                {columnId === 'PROGRESS' && '실험 진행'}
+                {columnId === 'DRAFT' && '초안 작성'}
+                {columnId === 'REVIEW' && '교수 검토'}
+                {columnId === 'DONE' && '완료'}
+              </h4>
+              {/* 서버가 신규 논문을 항상 연구 준비(RESEARCH_PREP) 단계로 생성하므로 연구 준비 컬럼에만 노출합니다. */}
+              {columnId === 'READY' && (
+                <SquarePlus
+                  className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
+                  onClick={() => openSideModal(WorksCreatePaper, '업무 생성')}
+                />
+              )}
+            </div>
           </WorksDragContainer>
         ))}
       </section>

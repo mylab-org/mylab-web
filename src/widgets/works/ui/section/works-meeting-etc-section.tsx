@@ -12,7 +12,7 @@ import {
   pointerWithin,
 } from '@dnd-kit/core'
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
-import { Image } from 'next/dist/client/image-component'
+import { SquarePlus } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { WorksCreateMeetEtc } from '../side/works-create-meet-etc'
@@ -169,11 +169,7 @@ export const WorksMeetingEtcSection = () => {
                 {columnId === 'todo' ? '시작 전' : columnId === 'doing' ? '진행 중' : '완료'}
               </h4>
               {columnId !== 'done' && (
-                <Image
-                  src="/icon/icon_main_add.svg"
-                  alt="add"
-                  width={30}
-                  height={30}
+                <SquarePlus
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
                   onClick={() => openSideModal(WorksCreateMeetEtc, '업무 생성')}
                 />
