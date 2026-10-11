@@ -2,19 +2,25 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { DEADLINE_WARNING_DAYS } from '../config/const'
+import { cn } from '@/shared/lib'
+import { formatDateWithWeekday, formatWorksDDay } from '@/shared/lib/format'
 import { useSideModalStore } from '@/shared/store'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
+import type { WorksPaperListResponseType } from '../model/types'
 
 interface Props {
-  id: string
-  isDeadLine?: boolean
-  isEnd?: boolean
+  paper: WorksPaperListResponseType
   detailComponent: () => React.JSX.Element
 }
 
-export const WorksPaperCard = ({ id, isDeadLine = false, isEnd = false, detailComponent }: Props) => {
+export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const { id, title, status, schedule, members } = paper
+
+  const isEnd = status === 'COMPLETED'
+  const isDeadLine = !isEnd && schedule?.dDay != null && schedule.dDay >= 0 && schedule.dDay <= DEADLINE_WARNING_DAYS
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 
@@ -32,23 +38,42 @@ export const WorksPaperCard = ({ id, isDeadLine = false, isEnd = false, detailCo
       style={style}
       {...attributes}
       {...listeners}
-      className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex cursor-pointer flex-col items-center gap-5 rounded-[12px] p-2.5 shadow-lg md:min-h-[165px] md:p-5 ${isEnd ? 'bg-gray-200' : 'bg-white'} ${isDeadLine && 'border-error border-3'}`}
+      className={cn(
+        'flex cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 p-2.5 shadow-lg md:min-h-[165px] md:p-5',
+        isDragging ? 'relative z-0' : 'relative z-10',
+        isEnd ? 'bg-gray-200' : 'bg-white',
+        isDeadLine && 'border-error',
+      )}
       onClick={() => openSideModal(detailComponent, '논문 제목')}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
-        <h5 className={'text-[14px] font-bold md:text-[18px]'}>논문 제목</h5>
-        <div className={'flex flex-col gap-1.25'}>
-          <Text className={'text-[10px] font-normal md:text-[14px]'}>
-            2026.02.04(수) ~ 2026.02.06(금), <b className={`font-bold ${isDeadLine && 'text-error'}`}>마감 D-27</b>
-          </Text>
-          <div>
-            <Text className={'text-[10px] font-normal md:text-[14px]'}>2025 한국통신학회 동계종합학술발표회</Text>
-            <Text className={'text-[10px] font-normal md:text-[14px]'}>모나 용평(용평리조트)</Text>
+        <h5 className={'text-[14px] font-bold md:text-[18px]'}>{title}</h5>
+        {schedule ? (
+          <div className={'flex flex-col gap-1.25'}>
+            <Text className={'text-[10px] font-normal md:text-[14px]'}>
+              {formatDateWithWeekday(schedule.startAt)}
+              {schedule.endAt && ` ~ ${formatDateWithWeekday(schedule.endAt)}`}
+              {schedule.dDay !== null && (
+                <>
+                  , <b className={`font-bold ${isDeadLine && 'text-error'}`}>마감 {formatWorksDDay(schedule.dDay)}</b>
+                </>
+              )}
+            </Text>
+            <div>
+              <Text className={'text-[10px] font-normal md:text-[14px]'}>{schedule.title}</Text>
+              {schedule.location && (
+                <Text className={'text-[10px] font-normal md:text-[14px]'}>{schedule.location}</Text>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <Text className={'text-[10px] font-normal md:text-[14px]'}>제출 학회 미정</Text>
+        )}
       </div>
       <div className={'flex w-full flex-wrap gap-2.5'}>
-        <Tag.Member name={'홍길동'} />
+        {members.map(member => (
+          <Tag.Member key={member.userId} name={member.name} />
+        ))}
       </div>
     </div>
   )

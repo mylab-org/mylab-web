@@ -5,3 +5,6 @@ export const PROGRESS_COLOR: Record<keyof typeof WORK_TYPE, string> = {
   PERSONAL: 'bg-gradient-to-r from-[#EDE9FE] to-[#8E51FF]',
   CONFERENCE: 'bg-gradient-to-r from-[#DBEAFE] to-[#2B7FFF]',
 }
+
+/** 제출 마감 강조 기준 (D-7 이내) */
+export const DEADLINE_WARNING_DAYS = 7

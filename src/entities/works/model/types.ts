@@ -7,7 +7,7 @@ export type PaperListMemberType = {
   userId: number
   name: string
   degree: UserDegreeType
-  role: string
+  role: string | null
   isLeadAuthor: boolean
 }
 
@@ -16,23 +16,23 @@ export type PaperListScheduleType = {
   scheduleType: PaperScheduleType
   title: string
   startAt: string
-  endAt: string
-  location: string
-  submissionDeadline: string
-  dDay: number
+  endAt: string | null
+  location: string | null
+  submissionDeadline: string | null
+  dDay: number | null
 }
 
 export type WorksPaperListResponseType = {
-  id: 1
-  labId: 1
+  id: number
+  labId: number
   title: string
   status: PaperStatusType
   statusLabel: string
-  statusStep: 3
-  totalSteps: 5
-  leadAuthor: PaperListLeadAuthorType
+  statusStep: number
+  totalSteps: number
+  leadAuthor: PaperListLeadAuthorType | null
   members: PaperListMemberType[]
-  schedule: PaperListScheduleType
+  schedule: PaperListScheduleType | null
   createdAt: string
 }
 

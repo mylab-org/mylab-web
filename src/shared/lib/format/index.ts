@@ -27,6 +27,15 @@ export const formatDateTime = (value: Date | string | number) => {
   return `${formatDate(date)} ${period} ${padTwo(hours12)}:${padTwo(date.getMinutes())}`
 }
 
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'] as const
+
+/** yyyy.mm.dd(요일) */
+export const formatDateWithWeekday = (value: Date | string | number) => {
+  const date = toValidDate(value)
+
+  return `${date.getFullYear()}.${padTwo(date.getMonth() + 1)}.${padTwo(date.getDate())}(${WEEKDAYS[date.getDay()]})`
+}
+
 const MINUTE_MS = 60 * 1000
 const HOUR_MS = 60 * MINUTE_MS
 const DAY_MS = 24 * HOUR_MS
@@ -44,4 +53,10 @@ export const formatRelativeDate = (value: Date | string | number) => {
   if (date.getFullYear() === now.getFullYear()) return `${date.getMonth() + 1}월 ${date.getDate()}일`
 
   return formatDate(date)
+}
+
+/** 업무 탭 D-Day 형식 변환 */
+export const formatWorksDDay = (dDay: number) => {
+  if (dDay === 0) return 'D-Day'
+  return dDay > 0 ? `D-${dDay}` : `D+${-dDay}`
 }
