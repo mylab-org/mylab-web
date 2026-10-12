@@ -1,6 +1,6 @@
 'use client'
 
-import { WorkListItem } from '@/entities/works'
+import { WorksLabCard } from '@/entities/works'
 
 export const LabWorkingSection = () => {
   return (
@@ -10,8 +10,8 @@ export const LabWorkingSection = () => {
       }
     >
       <h3 className={'text-[24px] leading-8 font-bold'}>진행 중인 업무 현황</h3>
-      <WorkListItem className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
-      <WorkListItem className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
+      <WorksLabCard className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
+      <WorksLabCard className={'rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { Text } from '@/shared/ui/override/text'
 
-export const WorkEmptyCard = () => {
+export const WorksEmptyCard = () => {
   return (
     <div
       className={
