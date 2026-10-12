@@ -1,3 +1,5 @@
 export { WorksCreateMeetEtcForm } from './ui/works-create-meet-etc-form'
 export { WorksCreatePaperForm } from './ui/works-create-paper-form'
 export { WorkChatForm } from './ui/work-chat-form'
+export { WorksPaperMoreMenu } from './ui/works-paper-more-menu'
+export { WorksUpdatePaperForm } from './ui/works-update-paper-form'

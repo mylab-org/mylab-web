@@ -30,6 +30,10 @@ export const SideWrapper = () => {
         />
         <DialogPrimitive.Content
           aria-describedby={undefined}
+          // 클릭 처리 중에 닫혀 DOM에서 사라진 요소(Confirm·Alert 버튼 등)는 바깥 클릭으로 보지 않음
+          onInteractOutside={e => {
+            if (e.target instanceof Node && !e.target.isConnected) e.preventDefault()
+          }}
           className={
             'fixed top-0 right-0 z-50 flex h-dvh w-full flex-col bg-white shadow-lg outline-none lg:w-fit lg:rounded-l-[20px] ' +
             'data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right duration-350 ease-[cubic-bezier(0.22,1,0.36,1)]'
