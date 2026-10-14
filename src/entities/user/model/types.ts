@@ -6,4 +6,9 @@ export type UsersMeResponseType = {
   is_email_verified: boolean
   created_at: string
   updated_at: string
+  lab: {
+    labId: number
+    labName: string
+    role: UserRoleType
+  }
 }

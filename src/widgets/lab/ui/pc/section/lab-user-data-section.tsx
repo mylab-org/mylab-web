@@ -1,12 +1,16 @@
 'use client'
 
 import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
-import { UserInfo } from '@/entities/user'
+import { UserInfo, useUsersMeHook } from '@/entities/user'
 
 export const LabUserDataSection = () => {
+  const { me, isError } = useUsersMeHook()
+
+  if (isError || !me) return null
+
   return (
     <section className={'flex w-[441px] flex-col gap-7.5'}>
-      <UserInfo isMain isShadow />
+      <UserInfo isMain isShadow user={me} />
       <div
         className={
           'flex flex-col gap-3.5 rounded-[24px] bg-white p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]'
