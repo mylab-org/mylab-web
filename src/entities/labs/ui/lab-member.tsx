@@ -1,6 +1,11 @@
 import { LabMemberItem } from '@/entities/labs'
+import type { LabsMembersResponseType } from '../model/types'
 
-export const LabMember = () => {
+interface LabMemberProps {
+  members: LabsMembersResponseType[]
+}
+
+export const LabMember = ({ members }: LabMemberProps) => {
   return (
     <div
       className={
@@ -8,11 +13,9 @@ export const LabMember = () => {
       }
     >
       <h3 className={'text-[24px] leading-8 font-bold'}>연구원</h3>
-      <LabMemberItem>김교수</LabMemberItem>
-      <LabMemberItem>김교수</LabMemberItem>
-      <LabMemberItem>김교수</LabMemberItem>
-      <LabMemberItem>김교수</LabMemberItem>
-      <LabMemberItem>김교수</LabMemberItem>
+      {members.map(member => (
+        <LabMemberItem key={member.name} user={member} />
+      ))}
     </div>
   )
 }
