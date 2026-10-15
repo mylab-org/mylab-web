@@ -1,24 +1,17 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { postLabsCreate } from '../api/post-labs-create'
+import { isUnauthorized } from '../lib'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { PostLabsCreatePayloadType, PostLabsCreateResponseType } from './types'
-import type { AxiosError } from 'axios'
 
 type Props = {
   ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
   onCreateSuccess?: (data: PostLabsCreateResponseType) => void
 }
 
-const isUnauthorized = (error: unknown) => {
-  return (error as AxiosError | undefined)?.response?.status === 401
-}
-
 export const useLabsCreateFormHook = ({ ensureAccessToken, onCreateSuccess }: Props) => {
-  const [createLabResponse, setCreateLabResponse] = useState<PostLabsCreateResponseType | null>(null)
-
   const {
     register,
     handleSubmit,
@@ -32,7 +25,7 @@ export const useLabsCreateFormHook = ({ ensureAccessToken, onCreateSuccess }: Pr
     mode: 'onChange',
   })
 
-  const postLabsCreateMutation = useMutation({
+  const postLabsCreateMutation = useApiMutation({
     mutationFn: async (payload: PostLabsCreatePayloadType) => {
       if (!ensureAccessToken) {
         return postLabsCreate(payload)
@@ -54,10 +47,6 @@ export const useLabsCreateFormHook = ({ ensureAccessToken, onCreateSuccess }: Pr
         onCreateSuccess(data)
         return
       }
-      setCreateLabResponse(data)
-    },
-    onError: () => {
-      console.error('Failed to create lab')
     },
   })
 
@@ -65,16 +54,10 @@ export const useLabsCreateFormHook = ({ ensureAccessToken, onCreateSuccess }: Pr
     postLabsCreateMutation.mutate(data)
   })
 
-  const clearCreateLabResponse = () => {
-    setCreateLabResponse(null)
-  }
-
   return {
     register,
     onSubmit,
     isValid,
     isPending: postLabsCreateMutation.isPending,
-    createLabResponse,
-    clearCreateLabResponse,
   }
 }
