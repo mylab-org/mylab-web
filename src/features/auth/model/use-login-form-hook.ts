@@ -163,6 +163,7 @@ export const useLoginFormHook = () => {
     setRefreshToken(current.refreshToken)
     provisionalTokensRef.current = null
     setProvisionalTokens(null)
+    router.push(getSafeRedirectPath(searchParams.get('redirect')))
   }
 
   return {
@@ -171,9 +172,9 @@ export const useLoginFormHook = () => {
     isValid,
     errors,
     isSubmitting: postLoginMutation.isPending || postResendEmailValidateMutation.isPending,
+    userName: postLoginMutation.data?.data.user.name,
     labModal,
     ensureProvisionalAccessToken,
-    setLabModal,
     closeLabModal,
     hideLabFormModal,
     persistProvisionalSession,
