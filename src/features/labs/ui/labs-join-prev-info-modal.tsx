@@ -1,5 +1,8 @@
 'use client'
 
+import { LABS_JOIN_MODAL_PREV_INFO_ROWS } from '../config/const'
+import { useLabsJoinHook } from '../model/use-labs-join-hook'
+import type { LabsInviteCodesCheckValidateResponseType } from '@/entities/labs/model/types'
 import { Button } from '@/shared/ui/override/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/shared/ui/override/dialog'
 import { Text } from '@/shared/ui/override/text'
@@ -8,18 +11,17 @@ type Props = {
   open: boolean
   onOpenChange: (open: boolean) => void
   onEnterLab?: () => void
+  code: string | null
+  labInfo: LabsInviteCodesCheckValidateResponseType | null
+  ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
 }
 
-const INFO_ROWS = [
-  { key: 'universityName', label: '학교명', value: '' },
-  { key: 'departmentName', label: '학과명', value: '' },
-  { key: 'labName', label: '연구실명', value: '' },
-  { key: 'professorName', label: '지도교수', value: '' },
-] as const
+export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab, code, labInfo, ensureAccessToken }: Props) => {
+  const { joinLab, isPending } = useLabsJoinHook({ ensureAccessToken, onJoinSuccess: onEnterLab })
 
-export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab }: Props) => {
   const handleJoinLab = () => {
-    onEnterLab?.()
+    if (code === null) return
+    joinLab(code)
   }
 
   return (
@@ -30,14 +32,16 @@ export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab }: Props)
           <DialogDescription>참여할 연구실 정보를 확인합니다.</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col overflow-hidden rounded-2xl bg-gray-50">
-          {INFO_ROWS.map(({ key, label, value }) => (
+          {LABS_JOIN_MODAL_PREV_INFO_ROWS.map(({ key, label }) => (
             <div key={key} className="flex flex-col gap-1 px-5 py-4">
               <Text className="text-[12px] font-medium text-gray-500!">{label}</Text>
-              <Text className="text-[16px] font-semibold">{value}</Text>
+              <Text className="text-[16px] font-semibold">{labInfo?.[key] ?? ''}</Text>
             </div>
           ))}
         </div>
-        <Button onClick={handleJoinLab}>연구실 입장하기</Button>
+        <Button onClick={handleJoinLab} disabled={isPending}>
+          연구실 입장하기
+        </Button>
       </DialogContent>
     </Dialog>
   )
