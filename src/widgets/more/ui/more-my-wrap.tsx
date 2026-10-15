@@ -2,7 +2,7 @@
 
 import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreUserUpdate } from './side/more-user-update'
-import { UserInfo } from '@/entities/user'
+import { UserInfo, useUsersMeHook } from '@/entities/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
@@ -22,12 +22,16 @@ export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) 
     })
   }
 
+  const { me, isError } = useUsersMeHook()
+
+  if (isError || !me) return null
+
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
       <div
         className={`flex flex-col gap-2.5 rounded-[12px] bg-white ${isMobile ? 'p-3' : 'p-5'} shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]`}
       >
-        <UserInfo />
+        <UserInfo user={me} />
         <Button
           className={'text-[12px]! md:text-[16px]!'}
           onClick={() => openSideModal(MoreUserUpdate, '내 정보 수정')}
