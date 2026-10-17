@@ -11,8 +11,8 @@ export const MemberProgressItem = () => {
           <Text className={'text-[14px] font-bold md:text-[18px]'}>홍길동</Text>
         </Avatar>
         <div className={'flex gap-1'}>
-          <Tag.Roll variant={'leader'} />
-          <Tag.Roll variant={'doctoral'} />
+          <Tag.Roll variant={'LAB_LEADER'} />
+          <Tag.Roll variant={'DOCTOR'} />
         </div>
       </div>
       <WorksMyProgress />
