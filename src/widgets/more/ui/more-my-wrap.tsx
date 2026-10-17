@@ -16,8 +16,8 @@ export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) 
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
-  const handleLabDelete = () => {
-    openDialogModal(DIALOG_MAP['LAB_DELETE'], '연구실 나가기', () => {
+  const handleLabExit = () => {
+    openDialogModal(DIALOG_MAP['LAB_EXIT'], '연구실 나가기', () => {
       console.log('나가기')
     })
   }
@@ -45,7 +45,7 @@ export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) 
           <Button.Menu>내 비품 신청 내역</Button.Menu>
           <Button.Menu>내가 작성한 글 확인</Button.Menu>
           <Button.Menu>내가 작성한 댓글 확인</Button.Menu>
-          <Button.Menu isGray onClick={handleLabDelete}>
+          <Button.Menu isGray onClick={handleLabExit}>
             연구실 나가기
           </Button.Menu>
         </div>
