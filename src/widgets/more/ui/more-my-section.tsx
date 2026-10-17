@@ -1,18 +1,18 @@
 'use client'
 
-import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreUserUpdate } from './side/more-user-update'
 import { UserInfo, useUsersMeHook } from '@/entities/user'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
+import { MoreMenuContentWrap } from '@/shared/ui/template/more-menu-content-wrap'
 
 interface WrapProps {
   isMaxWidth?: boolean
   isMobile?: boolean
 }
 
-export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
+export const MoreMySection = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
@@ -39,7 +39,7 @@ export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) 
           내 정보 수정
         </Button>
       </div>
-      <MoreMenuWrap title={'나의 활동'} isMobile={isMobile}>
+      <MoreMenuContentWrap title={'나의 활동'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu>내 비품 대여 내역</Button.Menu>
           <Button.Menu>내 비품 신청 내역</Button.Menu>
@@ -49,7 +49,7 @@ export const MoreMyWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) 
             연구실 나가기
           </Button.Menu>
         </div>
-      </MoreMenuWrap>
+      </MoreMenuContentWrap>
     </section>
   )
 }
