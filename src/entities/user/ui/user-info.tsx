@@ -1,3 +1,4 @@
+import { isRoleTag } from '@/shared/lib/lab'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
 import type { UsersMeResponseType } from '../model/types'
@@ -9,7 +10,6 @@ interface UserInfoProps {
 }
 
 export const UserInfo = ({ isMain = false, isShadow = false, user }: UserInfoProps) => {
-  const isRole = user.lab.role === 'LAB_LEADER' || user.lab.role === 'SUB_LEADER'
   return (
     <div
       className={`flex items-center gap-2.5 rounded-[24px] bg-white p-5 md:p-6 ${isShadow && 'shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]'}`}
@@ -23,7 +23,9 @@ export const UserInfo = ({ isMain = false, isShadow = false, user }: UserInfoPro
             {isMain && <Text className={'text-[16px] font-bold md:text-[20px]'}>{`좋은 아침이에요!`}</Text>}
           </div>
           <div className={'flex gap-1.25'}>
-            {isRole && <Tag.Roll variant={user.lab.role as Exclude<UserRoleType, 'MEMBER' | 'PROFESSOR'>} />}
+            {isRoleTag(user.lab.role) && (
+              <Tag.Roll variant={user.lab.role as Exclude<UserRoleType, 'MEMBER' | 'PROFESSOR'>} />
+            )}
             <Tag.Roll variant={user.degree} />
           </div>
         </div>
