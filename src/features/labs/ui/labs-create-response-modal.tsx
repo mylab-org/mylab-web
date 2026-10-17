@@ -81,8 +81,6 @@ export const LabsCreateResponseModal = ({
         {postLabsInviteCodesMutation.data?.code && (
           <form>
             <IconInput
-              basicSvgName={'/icon/clipboard.svg'}
-              effectSvgName={'/icon/success.svg'}
               state={isCopy}
               value={postLabsInviteCodesMutation.data?.code}
               readOnly

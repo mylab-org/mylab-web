@@ -15,15 +15,7 @@ export const LabInviteCode = () => {
     <>
       <Text className={'text-[32px] font-semibold whitespace-pre-wrap'}>{'김땡땡 님,\n연구실이 생성되었습니다'}</Text>
       <form>
-        <IconInput
-          basicSvgName={'/icon/clipboard.svg'}
-          effectSvgName={'/icon/success.svg'}
-          state={isCopy}
-          value={'123456'}
-          readOnly
-          onClick={handleCopy}
-          className={'cursor-pointer'}
-        />
+        <IconInput state={isCopy} value={'123456'} readOnly onClick={handleCopy} className={'cursor-pointer'} />
         {isCopy ? (
           <Text className={'text-success text-[12px]'}>초대코드가 복사되었습니다</Text>
         ) : (
