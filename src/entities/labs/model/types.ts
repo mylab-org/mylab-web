@@ -7,7 +7,8 @@ export type LabsInviteCodesCheckValidateResponseType = {
 }
 
 export type LabsMembersResponseType = {
+  userId: number
   name: string
   degree: UserDegreeType
-  role: string
+  role: UserRoleType
 }
