@@ -13,6 +13,7 @@ import { postLabsInviteCodes } from '@/features/labs/api/post-labs-invite-codes'
 import type { PostLabsInviteCodesResponseType } from '@/features/labs/model/types'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
+import { isProfessorOrLabLeader } from '@/shared/lib/lab'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
@@ -89,43 +90,48 @@ export const MoreLabSection = ({ isMaxWidth = false, isMobile = false }: WrapPro
           >
             수정하기
           </Button>
-          <Button className={'text-[12px]! md:text-[16px]!'} onClick={handleLabDelete}>
-            연구실 삭제
-          </Button>
+          {me?.lab.role === 'PROFESSOR' && (
+            <Button className={'text-[12px]! md:text-[16px]!'} onClick={handleLabDelete}>
+              연구실 삭제
+            </Button>
+          )}
         </div>
       </div>
-      <MoreMenuContentWrap title={'연구실 초대코드'} isMobile={isMobile}>
-        <div className="flex flex-col gap-2">
-          {labInviteCode && (
-            <IconInput
-              value={labInviteCode}
-              readOnly
-              onClick={() => handleCopy(labInviteCode)}
-              className={'cursor-pointer'}
-            />
-          )}
-          <div className="flex gap-2.5">
-            <Button
-              className={
-                'flex w-full items-center justify-center gap-1 bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
-              }
-              disabled={!labInviteCode || deleteLabsRevokeInviteCodesMutation.isPending}
-              onClick={handleDeleteLabsRevokeInviteCodes}
-            >
-              코드 비활성화
-            </Button>
-            <Button
-              className={
-                'flex w-full items-center justify-center gap-1 bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
-              }
-              disabled={postLabsInviteCodesMutation.isPending}
-              onClick={handlePostLabsInviteCodes}
-            >
-              새 코드 생성
-            </Button>
+      {isProfessorOrLabLeader(me?.lab.role as UserRoleType) && (
+        <MoreMenuContentWrap title={'연구실 초대코드'} isMobile={isMobile}>
+          <div className="flex flex-col gap-2">
+            {labInviteCode && (
+              <IconInput
+                value={labInviteCode}
+                readOnly
+                onClick={() => handleCopy(labInviteCode)}
+                className={'cursor-pointer'}
+              />
+            )}
+            <div className="flex gap-2.5">
+              <Button
+                className={
+                  'flex w-full items-center justify-center gap-1 bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
+                }
+                disabled={!labInviteCode || deleteLabsRevokeInviteCodesMutation.isPending}
+                onClick={handleDeleteLabsRevokeInviteCodes}
+              >
+                코드 비활성화
+              </Button>
+              <Button
+                className={
+                  'flex w-full items-center justify-center gap-1 bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
+                }
+                disabled={postLabsInviteCodesMutation.isPending}
+                onClick={handlePostLabsInviteCodes}
+              >
+                새 코드 생성
+              </Button>
+            </div>
           </div>
-        </div>
-      </MoreMenuContentWrap>
+        </MoreMenuContentWrap>
+      )}
+
       <MoreMenuContentWrap title={'연구원 관리'} isMobile={isMobile}>
         <>
           <Text className={'text-[10px] font-medium whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
@@ -135,7 +141,9 @@ export const MoreLabSection = ({ isMaxWidth = false, isMobile = false }: WrapPro
             className={
               'flex items-center justify-center gap-1 bg-gray-100! text-[12px]! text-gray-900! md:text-[16px]!'
             }
-            onClick={() => openSideModal(() => <MoreLabMember labId={labId} />, '연구원 관리')}
+            onClick={() =>
+              openSideModal(() => <MoreLabMember role={me?.lab.role as UserRoleType} labId={labId} />, '연구원 관리')
+            }
           >
             {members.length >= 2 && (
               <div className={'flex items-center gap-1'}>

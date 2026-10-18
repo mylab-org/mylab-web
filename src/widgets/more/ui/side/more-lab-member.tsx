@@ -3,16 +3,18 @@ import { LogOut } from 'lucide-react'
 import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useLabsMemberChangeRoleHook } from '@/features/labs'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { isSubLeaderOrMember } from '@/shared/lib/lab'
 import { Avatar } from '@/shared/ui/override/avatar'
 import { CheckBox } from '@/shared/ui/override/checkbox'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
 
 type Props = {
+  role: UserRoleType
   labId: number
 }
 
-export const MoreLabMember = ({ labId }: Props) => {
+export const MoreLabMember = ({ role, labId }: Props) => {
   const { changeRole, isPending } = useLabsMemberChangeRoleHook(labId)
   const { data: members } = useQuery({
     queryKey: QUERY_KEYS.LABS.MEMBERS(labId),
@@ -43,14 +45,14 @@ export const MoreLabMember = ({ labId }: Props) => {
                 title={'랩장'}
                 checked={m.role === 'LAB_LEADER'}
                 after
-                disabled={m.role === 'PROFESSOR' || isPending}
+                disabled={role !== 'PROFESSOR' || m.role === 'PROFESSOR' || isPending}
                 onCheckedChange={checked => changeRole(m.userId, checked === true ? 'LAB_LEADER' : 'MEMBER')}
               />
               <CheckBox
                 title={'부랩장'}
                 after
                 checked={m.role === 'SUB_LEADER'}
-                disabled={m.role === 'PROFESSOR' || isPending}
+                disabled={isSubLeaderOrMember(role) || m.role === 'PROFESSOR' || isPending}
                 onCheckedChange={checked => changeRole(m.userId, checked === true ? 'SUB_LEADER' : 'MEMBER')}
               />
               <div className={'flex cursor-pointer gap-1'}>
