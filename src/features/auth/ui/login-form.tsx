@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowRight } from 'lucide-react'
 import { Suspense, type ComponentType } from 'react'
 import { useLoginFormHook } from '../model/use-login-form-hook'
 import { Button } from '@/shared/ui/override/button'
@@ -12,6 +13,7 @@ type LabModalProps = {
   type: 'create' | 'join'
   ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
   onLabFlowSuccess?: () => void
+  userName: string
 }
 
 type Props = {
@@ -30,11 +32,12 @@ const LoginFormContent = ({ LabModal }: Props) => {
     closeLabModal,
     hideLabFormModal,
     persistProvisionalSession,
+    userName = '',
   } = useLoginFormHook()
 
   return (
     <>
-      <form className="space-y-6" onSubmit={onSubmit}>
+      <form className="space-y-6">
         <InputBox
           labelName={'이메일'}
           placeholder={'이메일을 입력하세요'}
@@ -57,18 +60,11 @@ const LoginFormContent = ({ LabModal }: Props) => {
           errorMsg={errors.password?.message}
         />
         <Button
-          type="submit"
           color="main"
+          onClick={onSubmit}
           className="group flex w-full transform py-5 transition-all duration-300 active:scale-[0.98]"
           icon={
-            <svg
-              className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            <ArrowRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" strokeWidth={3} />
           }
           iconPosition={'after'}
           disabled={!isValid || isSubmitting}
@@ -83,6 +79,7 @@ const LoginFormContent = ({ LabModal }: Props) => {
         type={labModal.type}
         ensureAccessToken={ensureProvisionalAccessToken}
         onLabFlowSuccess={persistProvisionalSession}
+        userName={userName}
       />
     </>
   )

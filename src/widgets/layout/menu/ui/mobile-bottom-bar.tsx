@@ -14,7 +14,7 @@ export const MobileBottomBar = () => {
     >
       <ul className={'flex w-full items-center justify-around'}>
         {GNB_ITEM.map(({ name, path, Icon }) => (
-          <PageGnbItem device={'mobile'} itemName={name} path={path} onItemClick={() => router.push(path)}>
+          <PageGnbItem key={name} device={'mobile'} itemName={name} path={path} onItemClick={() => router.push(path)}>
             <Icon />
           </PageGnbItem>
         ))}

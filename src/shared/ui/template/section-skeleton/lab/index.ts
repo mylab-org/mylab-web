@@ -1,3 +1,5 @@
 export { LabLabInfoSkeleton } from './lab-info-skeleton'
+export { LabMobileCenterSkeleton } from './lab-mobile-center-skeleton'
+export { LabMobileTopSkeleton } from './lab-mobile-top-skeleton'
 export { LabUserDataSkeleton } from './lab-user-data-skeleton'
 export { LabWorkingSkeleton } from './lab-working-skeleton'

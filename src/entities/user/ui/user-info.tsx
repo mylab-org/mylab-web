@@ -1,12 +1,15 @@
+import { isRoleTag } from '@/shared/lib/lab'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
+import type { UsersMeResponseType } from '../model/types'
 
 interface UserInfoProps {
   isMain?: boolean
   isShadow?: boolean
+  user: UsersMeResponseType
 }
 
-export const UserInfo = ({ isMain = false, isShadow = false }: UserInfoProps) => {
+export const UserInfo = ({ isMain = false, isShadow = false, user }: UserInfoProps) => {
   return (
     <div
       className={`flex items-center gap-2.5 rounded-[24px] bg-white p-5 md:p-6 ${isShadow && 'shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]'}`}
@@ -16,17 +19,20 @@ export const UserInfo = ({ isMain = false, isShadow = false }: UserInfoProps) =>
       <div className={`flex flex-col gap-2.5 p-2.5`}>
         <div className={`flex gap-2.5 ${isMain ? 'flex-col' : 'flex-row'}`}>
           <div>
-            <Text className={'text-[16px] font-bold md:text-[20px]'}>{`홍길동님`}</Text>
+            <Text className={'text-[16px] font-bold md:text-[20px]'}>{user.name}</Text>
             {isMain && <Text className={'text-[16px] font-bold md:text-[20px]'}>{`좋은 아침이에요!`}</Text>}
           </div>
           <div className={'flex gap-1.25'}>
-            <Tag.Roll variant={'leader'} />
-            <Tag.Roll variant={'doctoral'} />
+            {isRoleTag(user.lab.role) && (
+              <Tag.Roll variant={user.lab.role as Exclude<UserRoleType, 'MEMBER' | 'PROFESSOR'>} />
+            )}
+            <Tag.Roll variant={user.degree} />
           </div>
         </div>
         <div className={'text-[10px] font-medium md:text-[14px]'}>
-          <Text className={'text-gray-600!'}>BIT Lab · 컴퓨터 통신</Text>
-          <Text className={'text-gray-600!'}>wlsdud6221@naver.com</Text>
+          {/* <Text className={'text-gray-600!'}>BIT Lab · 컴퓨터 통신</Text> */}
+          <Text className={'text-gray-600!'}>{user.lab.labName}</Text>
+          <Text className={'text-gray-600!'}>{user.email}</Text>
         </div>
       </div>
     </div>

@@ -1,24 +1,16 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import { postLabsJoin } from '../api/post-labs-join'
+import { getLabsInviteCodesCheckValidate } from '@/entities/labs/api/get-labs-invite-codes-check-validate'
+import type { LabsInviteCodesCheckValidateResponseType } from '@/entities/labs/model/types'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { PostLabsJoinPayloadType } from './types'
-import type { AxiosError } from 'axios'
 
 type Props = {
-  ensureAccessToken?: (options?: { force?: boolean }) => Promise<string>
-  onJoinPrevInfoOpen?: () => void
+  onJoinPrevInfoOpen?: (code: string, labInfo: LabsInviteCodesCheckValidateResponseType) => void
 }
 
-const isUnauthorized = (error: unknown) => {
-  return (error as AxiosError | undefined)?.response?.status === 401
-}
-
-export const useLabsJoinFormHook = ({ ensureAccessToken, onJoinPrevInfoOpen }: Props = {}) => {
-  const [isJoinPrevInfoModalOpen, setIsJoinPrevInfoModalOpen] = useState(false)
-
+export const useLabsJoinFormHook = ({ onJoinPrevInfoOpen }: Props = {}) => {
   const {
     register,
     handleSubmit,
@@ -33,46 +25,15 @@ export const useLabsJoinFormHook = ({ ensureAccessToken, onJoinPrevInfoOpen }: P
 
   const code = useWatch({ control, name: 'code' })
 
-  const openJoinPrevInfo = () => {
-    if (onJoinPrevInfoOpen) {
-      onJoinPrevInfoOpen()
-      return
-    }
-    setIsJoinPrevInfoModalOpen(true)
-  }
-
-  const postLabsJoinMutation = useMutation({
-    mutationFn: async (payload: PostLabsJoinPayloadType) => {
-      if (!ensureAccessToken) {
-        return postLabsJoin(payload)
-      }
-
-      const accessToken = await ensureAccessToken()
-      try {
-        return await postLabsJoin(payload, { accessToken })
-      } catch (error) {
-        if (!isUnauthorized(error)) {
-          throw error
-        }
-        const nextAccessToken = await ensureAccessToken({ force: true })
-        return postLabsJoin(payload, { accessToken: nextAccessToken })
-      }
-    },
-    onSuccess: () => {
-      openJoinPrevInfo()
-    },
-    onError: (error: Error) => {
-      console.error('Failed to join lab')
-      // 세션 만료로 온보딩 모달이 이미 닫힌 경우 확인 모달을 열지 않음
-      if (error.message === '온보딩 세션이 만료되었습니다.' || error.message === '온보딩 임시 세션이 없습니다.') {
-        return
-      }
-      openJoinPrevInfo()
+  const getLabsInviteCodesCheckValidateMutation = useApiMutation({
+    mutationFn: getLabsInviteCodesCheckValidate,
+    onSuccess: (data, code) => {
+      onJoinPrevInfoOpen?.(code, data)
     },
   })
 
   const onSubmit = handleSubmit(() => {
-    postLabsJoinMutation.mutate({ code })
+    getLabsInviteCodesCheckValidateMutation.mutate(code)
   })
 
   return {
@@ -80,8 +41,6 @@ export const useLabsJoinFormHook = ({ ensureAccessToken, onJoinPrevInfoOpen }: P
     register,
     onSubmit,
     errors,
-    isPending: postLabsJoinMutation.isPending,
-    isJoinPrevInfoModalOpen,
-    setIsJoinPrevInfoModalOpen,
+    isPending: getLabsInviteCodesCheckValidateMutation.isPending,
   }
 }

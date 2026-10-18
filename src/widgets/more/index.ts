@@ -1,3 +1,3 @@
-export { MoreMyWrap } from './ui/more-my-wrap'
-export { MoreLabWrap } from './ui/more-lab-wrap'
-export { MoreServiceWrap } from './ui/more-service-wrap'
+export { MoreMySection } from './ui/more-my-section'
+export { MoreLabSection } from './ui/more-lab-section'
+export { MoreServiceSection } from './ui/more-service-section'

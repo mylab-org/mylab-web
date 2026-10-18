@@ -35,3 +35,7 @@ export type PostLabsJoinResponseType = {
   labName: string
   role: string
 }
+
+export type PatchLabsMemberChangeRolePayloadType = {
+  role: UserRoleType
+}

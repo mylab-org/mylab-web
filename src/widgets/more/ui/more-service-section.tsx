@@ -1,6 +1,5 @@
 'use client'
 
-import { MoreMenuWrap } from './more-menu-wrap'
 import { MoreServiceUse } from './side/more-service-use'
 import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
 import { UserPasswordUpdateForm } from '@/features/user'
@@ -12,13 +11,14 @@ import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/sto
 import { Button } from '@/shared/ui/override/button'
 import { Switch } from '@/shared/ui/override/switch'
 import { Text } from '@/shared/ui/override/text'
+import { MoreMenuContentWrap } from '@/shared/ui/template/more-menu-content-wrap'
 
 interface WrapProps {
   isMaxWidth?: boolean
   isMobile?: boolean
 }
 
-export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
+export const MoreServiceSection = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
@@ -51,7 +51,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
 
   return (
     <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
-      <MoreMenuWrap title={'서비스 설정'} isMobile={isMobile}>
+      <MoreMenuContentWrap title={'서비스 설정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <div>
             <h5 className={'text-[12px] font-bold md:text-[16px]'}>테마 설정</h5>
@@ -86,14 +86,14 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
             />
           </div>
         </div>
-      </MoreMenuWrap>
-      <MoreMenuWrap title={'이용 안내'} isMobile={isMobile}>
+      </MoreMenuContentWrap>
+      <MoreMenuContentWrap title={'이용 안내'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu onClick={() => openSideModal(MoreServiceUse, '서비스 이용약관')}>서비스 이용약관</Button.Menu>
           <Button.Menu>1:1 문의내역</Button.Menu>
         </div>
-      </MoreMenuWrap>
-      <MoreMenuWrap title={'계정'} isMobile={isMobile}>
+      </MoreMenuContentWrap>
+      <MoreMenuContentWrap title={'계정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-5'}>
           <Button.Menu onClick={() => openSideModal(UserPasswordUpdateForm, '비밀번호 변경')}>
             비밀번호 변경
@@ -105,7 +105,7 @@ export const MoreServiceWrap = ({ isMaxWidth = false, isMobile = false }: WrapPr
             회원 탈퇴
           </Button.Menu>
         </div>
-      </MoreMenuWrap>
+      </MoreMenuContentWrap>
     </section>
   )
 }

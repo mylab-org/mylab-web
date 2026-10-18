@@ -30,14 +30,6 @@ type ProvisionalTokens = {
   refreshToken: string
 }
 
-/**
- * 백엔드가 login 응답에 hasLab을 내려주기 전 임시 스위치입니다.
- * - true  → 소속 랩 있음: 쿠키 저장 + redirect/홈 이동
- * - false → 소속 랩 없음: 생성/참여 온보딩 모달
- * 백엔드 연동 후에는 응답의 hasLab을 우선하고, 이 값은 fallback으로만 쓰면 됩니다.
- */
-const TEMP_HAS_LAB = true
-
 const getSafeRedirectPath = (redirect: string | null) => {
   if (!redirect) return ROUTES.HOME
   // 외부 URL / 프로토콜 상대 경로 차단
@@ -114,7 +106,7 @@ export const useLoginFormHook = () => {
       const accessToken = response.data.accessToken
       const refreshToken = response.data.refreshToken
       // 응답 hasLab이 오면 우선 사용, 없으면 TEMP_HAS_LAB로 제어
-      const hasLab = response.data.hasLab ?? TEMP_HAS_LAB
+      const hasLab = response.data.lab !== null
 
       if (hasLab) {
         setAccessToken(accessToken)
@@ -171,6 +163,7 @@ export const useLoginFormHook = () => {
     setRefreshToken(current.refreshToken)
     provisionalTokensRef.current = null
     setProvisionalTokens(null)
+    router.push(getSafeRedirectPath(searchParams.get('redirect')))
   }
 
   return {
@@ -179,9 +172,9 @@ export const useLoginFormHook = () => {
     isValid,
     errors,
     isSubmitting: postLoginMutation.isPending || postResendEmailValidateMutation.isPending,
+    userName: postLoginMutation.data?.data.user.name,
     labModal,
     ensureProvisionalAccessToken,
-    setLabModal,
     closeLabModal,
     hideLabFormModal,
     persistProvisionalSession,

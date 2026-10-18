@@ -5,7 +5,7 @@ import { CalendarDays, MapPin, Newspaper, UsersRound } from 'lucide-react'
 import { useState } from 'react'
 import { WORKS_DETAIL_TAB } from '../../config/works-tab'
 import { WorksUpdatePaperModal } from '../modal/works-update-paper-modal'
-import { getUsersMe } from '@/entities/user/api/get-users-me'
+import { useUsersMeHook } from '@/entities/user'
 import { WorksMyProgress } from '@/entities/works'
 import { getWorksPaperDetail } from '@/entities/works/api/get-works-paper-detail'
 import type { WorksPaperDetailResponseType } from '@/entities/works/model/types'
@@ -32,10 +32,7 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
     queryFn: () => getWorksPaperDetail(TEST_LAB_ID, paperId),
   })
 
-  const { data: me } = useQuery({
-    queryKey: QUERY_KEYS.USERS.ROOT,
-    queryFn: getUsersMe,
-  })
+  const { me } = useUsersMeHook()
 
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const [isEditOpen, setIsEditOpen] = useState(false)
