@@ -4,19 +4,6 @@ import { useSignupRoleRadioHook } from '../model/use-signup-role-radio-hook'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
 
 export const RegistRoleRadio = () => {
-  // const { watch, setValue } = useFormContext<PostAuthRegisterPayloadType>()
-  // const degree = watch('degree')
-  // const role = degree === 'PROFESSOR' ? 'professor' : 'researcher'
-
-  // const handleRoleChange = (value: string) => {
-  //   if (value === 'professor') {
-  //     setValue('degree', 'PROFESSOR')
-  //     return
-  //   }
-
-  //   setValue('degree', 'BACHELOR')
-  // }
-
   const { role, degree, setValue, handleRoleChange } = useSignupRoleRadioHook()
 
   return (
