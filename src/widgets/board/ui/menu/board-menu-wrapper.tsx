@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
-import { Suspense } from 'react'
 import { getBoardCategory } from '@/entities/board/api/get-board-category'
 import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
@@ -13,7 +12,7 @@ type BoardMenuWrapperProps = {
   variant?: 'pc' | 'mobile'
 }
 
-const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
+export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
   const isMobile = variant === 'mobile'
   const { categoryId, isCategorySelected, setCategoryId } = useBoardCategoryIdHook()
 
@@ -51,13 +50,5 @@ const BoardMenuWrapperContent = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
         ))}
       </div>
     </section>
-  )
-}
-
-export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
-  return (
-    <Suspense fallback={null}>
-      <BoardMenuWrapperContent variant={variant} />
-    </Suspense>
   )
 }
