@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient, type QueryKey, type UseMutationOptions } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import type { AxiosError } from 'axios'
-import type { FieldValues, Path, UseFormSetError } from 'react-hook-form'
-
-const VALIDATION_ERROR_CODE = 'E4400'
+import type { FieldValues, UseFormSetError } from 'react-hook-form'
 
 type UseApiMutationOptions<TData, TVariables, TForm extends FieldValues> = Omit<
   UseMutationOptions<TData, AxiosError<ApiResponseType>, TVariables>,
@@ -28,7 +26,6 @@ export function useApiMutation<TData, TVariables = void, TForm extends FieldValu
   const queryClient = useQueryClient()
   const {
     mutationFn,
-    setError,
     defaultErrorMessage = '요청에 실패했습니다.',
     successMessage,
     invalidateQueryKeys,
@@ -59,22 +56,7 @@ export function useApiMutation<TData, TVariables = void, TForm extends FieldValu
     },
     onError: (error, variables, onMutateResult, context) => {
       const responseData = error.response?.data
-      // const code = responseData?.code
       const message = responseData?.message || defaultErrorMessage
-
-      // if (code === VALIDATION_ERROR_CODE) {
-      //   const fieldErrors = responseData?.data
-      //   if (setError && Array.isArray(fieldErrors)) {
-      //     fieldErrors.forEach(({ field, message: fieldMessage }) => {
-      //       setError(field as Path<TForm>, {
-      //         type: 'server',
-      //         message: fieldMessage,
-      //       })
-      //     })
-      //   }
-      // } else {
-      //   toast.error(message, { icon: false })
-      // }
 
       toast.error(message, { icon: false })
 
