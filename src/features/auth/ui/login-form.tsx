@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
-import { Suspense, type ComponentType } from 'react'
+import { type ComponentType } from 'react'
 import { useLoginFormHook } from '../model/use-login-form-hook'
 import { Button } from '@/shared/ui/override/button'
 import { InputBox } from '@/shared/ui/template/input-box'
@@ -20,7 +20,7 @@ type Props = {
   LabModal: ComponentType<LabModalProps>
 }
 
-const LoginFormContent = ({ LabModal }: Props) => {
+export const LoginForm = ({ LabModal }: Props) => {
   const {
     register,
     onSubmit,
@@ -82,13 +82,5 @@ const LoginFormContent = ({ LabModal }: Props) => {
         userName={userName}
       />
     </>
-  )
-}
-
-export const LoginForm = ({ LabModal }: Props) => {
-  return (
-    <Suspense fallback={null}>
-      <LoginFormContent LabModal={LabModal} />
-    </Suspense>
   )
 }

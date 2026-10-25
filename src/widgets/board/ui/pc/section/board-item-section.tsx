@@ -1,6 +1,5 @@
 'use client'
 
-import { Suspense } from 'react'
 import { BoardUpdateModal } from '../../modal/board-update-modal'
 import { BoardItem } from '@/entities/board'
 import type { PostType } from '@/entities/board/model/types'
@@ -98,7 +97,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
   )
 }
 
-const BoardItemSectionContent = () => {
+export const BoardItemSection = () => {
   const {
     posts,
     isPending,
@@ -159,13 +158,5 @@ const BoardItemSectionContent = () => {
         }}
       />
     </>
-  )
-}
-
-export const BoardItemSection = () => {
-  return (
-    <Suspense fallback={null}>
-      <BoardItemSectionContent />
-    </Suspense>
   )
 }
