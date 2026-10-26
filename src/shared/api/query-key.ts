@@ -20,4 +20,7 @@ export const QUERY_KEYS = {
     LIST: (labId: number) => ['paper', 'list', labId],
     DETAIL: (labId: number, paperId: number) => ['paper', 'detail', labId, paperId],
   },
+  TASK: {
+    LIST: ['task', 'list'],
+  },
 }

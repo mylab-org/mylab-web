@@ -38,4 +38,8 @@ export const ENDPOINTS = {
     MEMBER_USER_ID: (labId: number, paperId: number, memberUserId: number) =>
       `/api/labs/${labId}/papers/${paperId}/members/${memberUserId}`,
   },
+  TASK: {
+    ROOT: '/api/task',
+    STATUS: (taskId: number) => `/api/task/${taskId}/status`,
+  },
 }
