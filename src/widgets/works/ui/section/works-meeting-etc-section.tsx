@@ -1,33 +1,61 @@
 'use client'
 
 import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { SquarePlus } from 'lucide-react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { WORKS_TASK_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorksCreateMeetEtc } from '../side/works-create-meet-etc'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksMeetEtcCard } from '@/entities/works'
+import { getWorksTaskList } from '@/entities/works/api/get-works-task-list'
+import type { TaskListResponseType } from '@/entities/works/model/types'
+import { patchWorksTaskStatus } from '@/features/works/api/patch-works-task-status'
+import { QUERY_KEYS } from '@/shared/api/query-key'
+import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
 
-const initialData: Record<string, any[]> = {
-  todo: [{ id: '1', title: '업무 1', type: 'MEET' }],
-  doing: [
-    { id: '2', title: '업무 2', type: 'PERSONAL' },
-    { id: '3', title: '업무 3', type: 'PERSONAL' },
-    { id: '4', title: '업무 4', type: 'PERSONAL' },
-    { id: '5', title: '업무 5', type: 'PERSONAL' },
-    { id: '6', title: '업무 6', type: 'PERSONAL' },
-    { id: '7', title: '업무 7', type: 'PERSONAL' },
-    { id: '8', title: '업무 8', type: 'PERSONAL' },
-  ],
-  done: [],
-}
+type TaskKanbanItemType = TaskListResponseType & { id: number }
+
+const groupTasksByStatus = (tasks: TaskListResponseType[]) =>
+  WORKS_TASK_COLUMNS.reduce(
+    (columns, { status }) => ({
+      ...columns,
+      [status]: tasks.filter(task => task.status === status).map(task => ({ ...task, id: task.taskId })),
+    }),
+    {} as Record<TaskStatusType, TaskKanbanItemType[]>,
+  )
 
 export const WorksMeetingEtcSection = () => {
+  const queryClient = useQueryClient()
   const openSideModal = useSideModalStore(state => state.openSideModal)
+
+  const { data: tasks } = useQuery({
+    queryKey: QUERY_KEYS.TASK.LIST,
+    queryFn: getWorksTaskList,
+  })
+
+  // 카드는 드롭 즉시 옮겨 보여주고, 실패하면 서버 목록 기준으로 되돌림
+  const patchWorksTaskStatusMutation = useApiMutation({
+    mutationFn: ({ taskId, status }: { taskId: number; status: TaskStatusType }) =>
+      patchWorksTaskStatus(taskId, { status }),
+    defaultErrorMessage: '업무 상태 변경에 실패했습니다.',
+    onSuccess: updatedTast => {
+      queryClient.setQueryData<TaskListResponseType[]>(QUERY_KEYS.TASK.LIST, prev =>
+        prev?.map(task => (task.taskId === updatedTast.taskId ? updatedTast : task)),
+      )
+    },
+    onError: () => {
+      const cachedTasks = queryClient.getQueryData<TaskListResponseType[]>(QUERY_KEYS.TASK.LIST)
+      if (cachedTasks) setColumns(groupTasksByStatus(cachedTasks))
+    },
+  })
 
   const {
     columns,
+    setColumns,
     activeId,
     activeItem,
     isDragging,
@@ -37,7 +65,16 @@ export const WorksMeetingEtcSection = () => {
     handleDragStart,
     handleDragOver,
     handleDragEnd,
-  } = useWorksKanbanHook({ initialColumns: initialData })
+  } = useWorksKanbanHook<TaskStatusType, TaskKanbanItemType>({
+    initialColumns: () => groupTasksByStatus(tasks ?? []),
+    onColumnChange: ({ itemId, to }) => {
+      patchWorksTaskStatusMutation.mutate({ taskId: Number(itemId), status: to })
+    },
+  })
+
+  useEffect(() => {
+    if (tasks) setColumns(groupTasksByStatus(tasks))
+  }, [tasks, setColumns])
 
   if (!enabled) return null
 
@@ -58,17 +95,23 @@ export const WorksMeetingEtcSection = () => {
           }`}
         />
 
-        {Object.entries(columns).map(([columnId, items]) => (
-          <WorksDragContainer key={columnId} id={columnId} items={items} isDragging={isDragging} isConference={false}>
+        {WORKS_TASK_COLUMNS.map(({ status }) => (
+          <WorksDragContainer
+            key={status}
+            id={status}
+            items={columns[status]}
+            isDragging={isDragging}
+            isConference={false}
+          >
             <div className="flex items-center justify-between">
               <h4
                 className={`text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
                   isDragging ? 'text-white' : 'text-black'
                 }`}
               >
-                {columnId === 'todo' ? '시작 전' : columnId === 'doing' ? '진행 중' : '완료'}
+                {status === 'READY' ? '시작 전' : status === 'IN_PROGRESS' ? '진행 중' : '완료'}
               </h4>
-              {columnId !== 'done' && (
+              {status === 'READY' && (
                 <SquarePlus
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
                   onClick={() => openSideModal(WorksCreateMeetEtc, '업무 생성')}
@@ -82,9 +125,9 @@ export const WorksMeetingEtcSection = () => {
       {/* 드래그 중인 카드 미리보기 (Portal) */}
       {createPortal(
         <DragOverlay zIndex={5}>
-          {activeId ? (
+          {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              <WorksMeetEtcCard id={'test'} type={activeItem?.type} />
+              <WorksMeetEtcCard id={activeItem.id} type={activeItem.type} />
             </div>
           ) : null}
         </DragOverlay>,

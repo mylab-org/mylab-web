@@ -5,8 +5,8 @@ import { CSS } from '@dnd-kit/utilities'
 import { Text } from '@/shared/ui/override/text'
 
 interface MeetEtcCardProps {
-  id: string
-  type: 'MEET' | 'PERSONAL'
+  id: string | number
+  type: TaskType
 }
 
 export const WorksMeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
@@ -26,7 +26,7 @@ export const WorksMeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px] ${type === 'MEET' ? 'border-red-500' : 'border-violet-500'}`}
+      className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px] ${type === 'MEETING' ? 'border-red-500' : 'border-violet-500'}`}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
         {/*<Tag.WorkType type={type} />*/}
