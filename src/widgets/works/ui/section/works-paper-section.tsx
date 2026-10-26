@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { SquarePlus } from 'lucide-react'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { WOROS_PAPER_COLUMNS } from '../../config/const'
+import { WORKS_PAPER_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorksCreatePaper } from '../side/works-create-paper'
 import { WorkPaperDetail } from '../side/works-paper-detail'
@@ -20,7 +20,7 @@ import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
 
 const groupPapersByStatus = (papers: WorksPaperListResponseType[]) =>
-  WOROS_PAPER_COLUMNS.reduce(
+  WORKS_PAPER_COLUMNS.reduce(
     (columns, { status }) => ({ ...columns, [status]: papers.filter(paper => paper.status === status) }),
     {} as Record<PaperStatusType, WorksPaperListResponseType[]>,
   )
@@ -92,7 +92,7 @@ export const WorksPaperSection = () => {
           }`}
         />
 
-        {WOROS_PAPER_COLUMNS.map(({ status, label }) => (
+        {WORKS_PAPER_COLUMNS.map(({ status, label }) => (
           <WorksDragContainer
             key={status}
             id={status}
