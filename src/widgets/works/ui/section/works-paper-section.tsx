@@ -7,12 +7,12 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { WORKS_PAPER_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
-import { WorksCreatePaper } from '../side/works-create-paper'
 import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksPaperCard } from '@/entities/works'
 import { getWorksPaperList } from '@/entities/works/api/get-works-paper-list'
 import type { WorksPaperListResponseType } from '@/entities/works/model/types'
+import { WorksCreatePaperForm } from '@/features/works'
 import { patchWorksPaperStatus } from '@/features/works/api/patch-works-paper-status'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { TEST_LAB_ID } from '@/shared/constant/test'
@@ -106,7 +106,7 @@ export const WorksPaperSection = () => {
               {status === 'RESEARCH_PREP' && (
                 <SquarePlus
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
-                  onClick={() => openSideModal(WorksCreatePaper, '업무 생성')}
+                  onClick={() => openSideModal(WorksCreatePaperForm, '업무 생성')}
                 />
               )}
             </div>

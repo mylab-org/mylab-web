@@ -10,7 +10,7 @@ export const WorksCreatePaperForm = () => {
   const { register, onSubmit, isValid, isPending } = useWorksCreatePaperFormHook()
 
   return (
-    <>
+    <div className="flex min-h-0 w-full flex-1 flex-col gap-2.5 px-5 lg:w-[750px] lg:px-7.5">
       <form className={'flex flex-col gap-7.5 py-5'}>
         <div className={'w-full'}>
           <Text className={'text-[14px] font-medium text-gray-600!'}>논문 제목</Text>
@@ -36,6 +36,6 @@ export const WorksCreatePaperForm = () => {
       <Button className={'mb-5'} disabled={!isValid || isPending} onClick={onSubmit}>
         업무 생성하기
       </Button>
-    </>
+    </div>
   )
 }
