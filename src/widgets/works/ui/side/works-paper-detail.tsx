@@ -42,7 +42,7 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
   if (isError) return <div className={'px-5 lg:w-[750px] lg:px-7.5'}>논문 정보를 불러오지 못했습니다.</div>
 
   const { schedule, members, statusStep, totalSteps, leadAuthor } = paper
-  const isLeadAuthor = me !== undefined && leadAuthor?.userId === me.id
+  const isLeadAuthor = me !== undefined && leadAuthor?.userId === Number(me.id)
 
   // 사이드 모달 헤더의 제목도 바뀐 제목으로 갱신
   const handleEditSuccess = (updatedPaper: WorksPaperDetailResponseType) => {
