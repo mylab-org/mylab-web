@@ -30,9 +30,9 @@ interface MemberTagProps {
 }
 
 const WORK_TAG_COLOR: Record<keyof typeof WORK_TYPE, string> = {
-  MEET: ' bg-red-100 text-red-800',
-  PERSONAL: 'bg-violet-100 text-violet-800',
-  CONFERENCE: 'bg-blue-100 text-blue-800',
+  MEETING: ' bg-red-100 text-red-800',
+  WORK: 'bg-violet-100 text-violet-800',
+  PAPER: 'bg-blue-100 text-blue-800',
 }
 
 const LabTag = ({ children, Icon, className }: LabTagProps) => {
@@ -66,7 +66,7 @@ const ETCTag = ({ variant }: ETCTagProps) => {
   )
 }
 
-const WorkTag = ({ isActive, children, type = 'CONFERENCE' }: WorkTagProps) => {
+const WorkTag = ({ isActive, children, type = 'PAPER' }: WorkTagProps) => {
   return (
     <span
       className={clsx(

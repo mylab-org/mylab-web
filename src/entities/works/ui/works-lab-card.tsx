@@ -9,7 +9,7 @@ interface Props {
   className?: string
 }
 
-export const WorksLabCard = ({ className, type = 'CONFERENCE' }: Props) => {
+export const WorksLabCard = ({ className, type = 'PAPER' }: Props) => {
   return (
     <div className={cn('flex w-full flex-col gap-2.5 md:w-[373px] md:shrink-0', className)}>
       <div className={'flex flex-col gap-1.25'}>

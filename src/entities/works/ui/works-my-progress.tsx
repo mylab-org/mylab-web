@@ -9,7 +9,7 @@ interface Props {
   totalSteps?: number
 }
 
-export const WorksMyProgress = ({ type = 'CONFERENCE', statusStep, totalSteps }: Props) => {
+export const WorksMyProgress = ({ type = 'PAPER', statusStep, totalSteps }: Props) => {
   const hasStep = statusStep !== undefined && totalSteps !== undefined
   const activeStep = statusStep ?? 3
 
@@ -22,7 +22,7 @@ export const WorksMyProgress = ({ type = 'CONFERENCE', statusStep, totalSteps }:
             style={hasStep ? { width: `${(statusStep / totalSteps) * 100}%` } : undefined}
           />
         </div>
-        {type === 'CONFERENCE' ? (
+        {type === 'PAPER' ? (
           <div className={'flex gap-1'}>
             <Tag.Work isActive={activeStep === 1}>연구 준비</Tag.Work>
             <Tag.Work isActive={activeStep === 2}>실험 진행</Tag.Work>

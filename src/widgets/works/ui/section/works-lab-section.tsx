@@ -20,8 +20,8 @@ export const WorksLabSection = () => {
         </div>
         {isOpen && (
           <div className={'flex w-full min-w-0 flex-1 flex-col items-center gap-2.5 md:flex-row md:overflow-x-auto'}>
-            <WorksLabCard type={'MEET'} />
-            <WorksLabCard type={'PERSONAL'} />
+            <WorksLabCard type={'MEETING'} />
+            <WorksLabCard type={'WORK'} />
             <WorksLabCard />
             <WorksLabCard />
           </div>
