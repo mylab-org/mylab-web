@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { WorkPaperDetail } from './side/works-paper-detail'
-import { WorksPaperCard, WorksMeetEtcCard, WorksEmptyCard } from '@/entities/works'
+import { WorksPaperCard, WorksTaskCard, WorksEmptyCard } from '@/entities/works'
 
 export const WorksDragContainer = ({ id, items, isDragging, isConference = false, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
@@ -24,7 +24,7 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
               {isConference ? (
                 <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
-                <WorksMeetEtcCard id={item.id} type={item.type} />
+                <WorksTaskCard id={item.id} type={item.type} />
               )}
             </div>
           ))}

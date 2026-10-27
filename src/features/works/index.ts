@@ -1,4 +1,4 @@
-export { WorksCreateMeetEtcForm } from './ui/works-create-meet-etc-form'
+export { WorksCreateTaskForm } from './ui/works-create-task-form'
 export { WorksCreatePaperForm } from './ui/works-create-paper-form'
 export { WorkChatForm } from './ui/work-chat-form'
 export { WorksPaperMoreMenu } from './ui/works-paper-more-menu'

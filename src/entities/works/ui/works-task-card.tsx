@@ -4,12 +4,12 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Text } from '@/shared/ui/override/text'
 
-interface MeetEtcCardProps {
+interface Props {
   id: string | number
   type: TaskType
 }
 
-export const WorksMeetEtcCard = ({ id, type }: MeetEtcCardProps) => {
+export const WorksTaskCard = ({ id, type }: Props) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
 
   const style = {

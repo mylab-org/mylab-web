@@ -1,6 +1,6 @@
 export { WorksLabCard } from './ui/works-lab-card'
 export { WorksMyProgress } from './ui/works-my-progress'
-export { WorksMeetEtcCard } from './ui/works-meet-etc-card'
+export { WorksTaskCard } from './ui/works-task-card'
 export { WorksPaperCard } from './ui/works-paper-card'
 export { ChatItem } from './ui/side-item/chat-item'
 export { MemberProgressItem } from './ui/side-item/member-progress-item'

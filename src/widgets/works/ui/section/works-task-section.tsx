@@ -7,11 +7,11 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { WORKS_TASK_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
-import { WorksCreateMeetEtc } from '../side/works-create-meet-etc'
 import { WorksDragContainer } from '../works-drag-container'
-import { WorksMeetEtcCard } from '@/entities/works'
+import { WorksTaskCard } from '@/entities/works'
 import { getWorksTaskList } from '@/entities/works/api/get-works-task-list'
 import type { TaskListResponseType } from '@/entities/works/model/types'
+import { WorksCreateTaskForm } from '@/features/works'
 import { patchWorksTaskStatus } from '@/features/works/api/patch-works-task-status'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
@@ -28,7 +28,7 @@ const groupTasksByStatus = (tasks: TaskListResponseType[]) =>
     {} as Record<TaskStatusType, TaskKanbanItemType[]>,
   )
 
-export const WorksMeetingEtcSection = () => {
+export const WorksTaskSection = () => {
   const queryClient = useQueryClient()
   const openSideModal = useSideModalStore(state => state.openSideModal)
 
@@ -114,7 +114,7 @@ export const WorksMeetingEtcSection = () => {
               {status === 'READY' && (
                 <SquarePlus
                   className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
-                  onClick={() => openSideModal(WorksCreateMeetEtc, '업무 생성')}
+                  onClick={() => openSideModal(WorksCreateTaskForm, '업무 생성')}
                 />
               )}
             </div>
@@ -127,7 +127,7 @@ export const WorksMeetingEtcSection = () => {
         <DragOverlay zIndex={5}>
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              <WorksMeetEtcCard id={activeItem.id} type={activeItem.type} />
+              <WorksTaskCard id={activeItem.id} type={activeItem.type} />
             </div>
           ) : null}
         </DragOverlay>,
