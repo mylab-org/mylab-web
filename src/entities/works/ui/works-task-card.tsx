@@ -2,15 +2,20 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { cn } from '@/shared/lib'
+import { formatDateWithWeekday } from '@/shared/lib/format'
+import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
+import type { TaskListResponseType } from '../model/types'
 
 interface Props {
-  id: string | number
-  type: TaskType
+  task: TaskListResponseType
 }
 
-export const WorksTaskCard = ({ id, type }: Props) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
+export const WorksTaskCard = ({ task }: Props) => {
+  const { title, description, startAt, endAt } = task
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.taskId })
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -26,15 +31,21 @@ export const WorksTaskCard = ({ id, type }: Props) => {
       style={style}
       {...attributes}
       {...listeners}
-      className={`${isDragging ? 'relative z-0' : 'relative z-10'} flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px] ${type === 'MEETING' ? 'border-red-500' : 'border-violet-500'}`}
+      className={cn(
+        'flex w-[250px] shrink-0 cursor-pointer flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px]',
+        isDragging ? 'relative z-0' : 'relative z-10',
+        task.type === 'MEETING' ? 'border-red-500' : 'border-violet-500',
+      )}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
-        {/*<Tag.WorkType type={type} />*/}
-        <h5 className={'text-[14px] font-semibold md:text-[18px]'}>주어진 오토인코더 논문 리뷰 PPT 제작</h5>
+        <Tag.WorkType type={task.type} />
+        <h5 className={'text-[14px] font-semibold md:text-[18px]'}>{title}</h5>
       </div>
       <div className={'flex w-full flex-col gap-1.25'}>
-        <Text className={'text-[10px] font-normal md:text-[14px]'}>2026.02.04(수) ~ 2026.02.06(금)</Text>
-        <Text className={'text-[10px] font-normal md:text-[14px]'}>설명</Text>
+        <Text className={'text-[10px] font-normal md:text-[14px]'}>
+          {formatDateWithWeekday(startAt)} ~ {formatDateWithWeekday(endAt)}
+        </Text>
+        <Text className={'text-[10px] font-normal md:text-[14px]'}>{description}</Text>
       </div>
     </div>
   )

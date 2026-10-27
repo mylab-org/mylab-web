@@ -24,7 +24,7 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
               {isConference ? (
                 <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
-                <WorksTaskCard id={item.id} type={item.type} />
+                <WorksTaskCard task={item} />
               )}
             </div>
           ))}

@@ -127,7 +127,7 @@ export const WorksTaskSection = () => {
         <DragOverlay zIndex={5}>
           {activeId && activeItem ? (
             <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              <WorksTaskCard id={activeItem.id} type={activeItem.type} />
+              <WorksTaskCard task={activeItem} />
             </div>
           ) : null}
         </DragOverlay>,
