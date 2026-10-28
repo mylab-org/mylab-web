@@ -7,12 +7,14 @@ import { formatDateWithWeekday } from '@/shared/lib/format'
 import { Tag } from '@/shared/ui/override/tag'
 import { Text } from '@/shared/ui/override/text'
 import type { TaskListResponseType } from '../model/types'
+import type { ReactNode } from 'react'
 
 interface Props {
   task: TaskListResponseType
+  moreMenu?: ReactNode
 }
 
-export const WorksTaskCard = ({ task }: Props) => {
+export const WorksTaskCard = ({ task, moreMenu }: Props) => {
   const { title, description, startAt, endAt } = task
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.taskId })
@@ -32,13 +34,16 @@ export const WorksTaskCard = ({ task }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex w-[250px] shrink-0 cursor-pointer flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px]',
+        'flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px]',
         isDragging ? 'relative z-0' : 'relative z-10',
         task.type === 'MEETING' ? 'border-red-500' : 'border-violet-500',
       )}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
-        <Tag.WorkType type={task.type} />
+        <div className={'flex items-center justify-between gap-2.5'}>
+          <Tag.WorkType type={task.type} />
+          {moreMenu}
+        </div>
         <h5 className={'text-[14px] font-semibold md:text-[18px]'}>{title}</h5>
       </div>
       <div className={'flex w-full flex-col gap-1.25'}>

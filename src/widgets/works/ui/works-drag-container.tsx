@@ -1,9 +1,12 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { WorkPaperDetail } from './side/works-paper-detail'
-import { WorksPaperCard, WorksTaskCard, WorksEmptyCard } from '@/entities/works'
+import { WorksPaperCard, WorksEmptyCard, WorksTaskCard } from '@/entities/works'
+import { WorksMoreMenu } from '@/features/works'
+import { deleteWorksTask } from '@/features/works/api/delete-works-task'
+import { QUERY_KEYS } from '@/shared/api/query-key'
 
-export const WorksDragContainer = ({ id, items, isDragging, isConference = false, children }: any) => {
+export const WorksDragContainer = ({ id, items, isDragging, isConference = false, onEditTask, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
 
   return (
@@ -24,7 +27,25 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
               {isConference ? (
                 <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
-                <WorksTaskCard task={item} />
+                <WorksTaskCard
+                  task={item}
+                  moreMenu={
+                    onEditTask ? (
+                      <div onPointerDown={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
+                        <WorksMoreMenu
+                          onEdit={() => onEditTask(item)}
+                          deleteConfig={{
+                            mutationFn: () => deleteWorksTask(item.taskId),
+                            confirmMessage: '정말 업무를 삭제하시겠습니까?',
+                            successMessage: '업무가 삭제되었습니다.',
+                            defaultErrorMessage: '업무 삭제에 실패했습니다.',
+                            invalidateQueryKeys: [QUERY_KEYS.TASK.LIST],
+                          }}
+                        />
+                      </div>
+                    ) : undefined
+                  }
+                />
               )}
             </div>
           ))}

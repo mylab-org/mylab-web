@@ -1,5 +1,6 @@
 export { WorksCreateTaskForm } from './ui/works-create-task-form'
 export { WorksCreatePaperForm } from './ui/works-create-paper-form'
 export { WorkChatForm } from './ui/work-chat-form'
-export { WorksPaperMoreMenu } from './ui/works-paper-more-menu'
+export { WorksMoreMenu } from './ui/works-more-menu'
 export { WorksUpdatePaperForm } from './ui/works-update-paper-form'
+export { WorksUpdateTaskForm } from './ui/works-update-task-form'

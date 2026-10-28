@@ -3,10 +3,11 @@
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { SquarePlus } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { WORKS_TASK_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
+import { WorksUpdateTaskModal } from '../modal/works-update-task-modal'
 import { WorksDragContainer } from '../works-drag-container'
 import { WorksTaskCard } from '@/entities/works'
 import { getWorksTaskList } from '@/entities/works/api/get-works-task-list'
@@ -31,6 +32,7 @@ const groupTasksByStatus = (tasks: TaskListResponseType[]) =>
 export const WorksTaskSection = () => {
   const queryClient = useQueryClient()
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const [editingTask, setEditingTask] = useState<TaskListResponseType | null>(null)
 
   const { data: tasks } = useQuery({
     queryKey: QUERY_KEYS.TASK.LIST,
@@ -102,6 +104,7 @@ export const WorksTaskSection = () => {
             items={columns[status]}
             isDragging={isDragging}
             isConference={false}
+            onEditTask={setEditingTask}
           >
             <div className="flex items-center justify-between">
               <h4
@@ -132,6 +135,18 @@ export const WorksTaskSection = () => {
           ) : null}
         </DragOverlay>,
         document.body,
+      )}
+
+      {editingTask && (
+        <WorksUpdateTaskModal
+          key={editingTask.taskId}
+          open
+          onOpenChange={nextOpen => {
+            if (!nextOpen) setEditingTask(null)
+          }}
+          task={editingTask}
+          onSuccess={() => setEditingTask(null)}
+        />
       )}
     </DndContext>
   )

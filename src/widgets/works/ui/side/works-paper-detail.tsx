@@ -9,7 +9,8 @@ import { useUsersMeHook } from '@/entities/user'
 import { WorksMyProgress } from '@/entities/works'
 import { getWorksPaperDetail } from '@/entities/works/api/get-works-paper-detail'
 import type { WorksPaperDetailResponseType } from '@/entities/works/model/types'
-import { WorksPaperMoreMenu } from '@/features/works'
+import { WorksMoreMenu } from '@/features/works'
+import { deleteWorksPaper } from '@/features/works/api/delete-works-paper'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { TEST_LAB_ID } from '@/shared/constant/test'
 import { formatDateWithWeekday, formatWorksDDay } from '@/shared/lib/format'
@@ -35,6 +36,7 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
   const { me } = useUsersMeHook()
 
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const closeSideModal = useSideModalStore(state => state.closeSideModal)
   const [isEditOpen, setIsEditOpen] = useState(false)
 
   if (isPending) return <div className={'px-5 lg:w-[750px] lg:px-7.5'}>Loading...</div>
@@ -91,7 +93,19 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
               </div>
             </div>
           </div>
-          {isLeadAuthor && <WorksPaperMoreMenu paperId={paperId} onEdit={() => setIsEditOpen(true)} />}
+          {isLeadAuthor && (
+            <WorksMoreMenu
+              onEdit={() => setIsEditOpen(true)}
+              deleteConfig={{
+                mutationFn: () => deleteWorksPaper(TEST_LAB_ID, paperId),
+                confirmMessage: '정말 논문을 삭제하시겠습니까?',
+                successMessage: '논문이 삭제되었습니다.',
+                defaultErrorMessage: '논문 삭제에 실패했습니다.',
+                invalidateQueryKeys: [QUERY_KEYS.PAPER.LIST(TEST_LAB_ID)],
+                onSuccess: () => closeSideModal(),
+              }}
+            />
+          )}
         </div>
         <WorksMyProgress statusStep={statusStep} totalSteps={totalSteps} />
       </section>
