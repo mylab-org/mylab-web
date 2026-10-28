@@ -40,6 +40,7 @@ export const ENDPOINTS = {
   },
   TASK: {
     ROOT: '/api/task',
+    TASK_ID: (taskId: number) => `/api/task/${taskId}`,
     STATUS: (taskId: number) => `/api/task/${taskId}/status`,
   },
 }

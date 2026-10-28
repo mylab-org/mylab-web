@@ -37,3 +37,5 @@ export type PostWorksTaskCreatePayloadType = {
 export type PatchWorksTaskStatusPayloadType = {
   status: TaskStatusType
 }
+
+export type PatchWorksTaskUpdatePayloadType = PostWorksTaskCreatePayloadType
