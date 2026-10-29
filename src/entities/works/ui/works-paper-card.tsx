@@ -39,7 +39,7 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 p-2.5 shadow-lg md:min-h-[165px] md:p-5',
+        'flex cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 border-[#2B7FFF] p-2.5 shadow-lg md:min-h-[165px] md:p-5',
         isDragging ? 'relative z-0' : 'relative z-10',
         isEnd ? 'bg-gray-200' : 'bg-white',
         isDeadLine && 'border-error',
@@ -47,6 +47,10 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
       onClick={() => openSideModal(detailComponent, title)}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
+        <div className={'flex items-center justify-between gap-2.5'}>
+          <Tag.WorkType type={'PAPER'} />
+          {/* {moreMenu} */}
+        </div>
         <h5 className={'text-[14px] font-bold md:text-[18px]'}>{title}</h5>
         {schedule ? (
           <div className={'flex flex-col gap-1.25'}>
