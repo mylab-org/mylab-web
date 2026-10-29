@@ -12,7 +12,6 @@ import type { WorksPaperDetailResponseType } from '@/entities/works/model/types'
 import { WorksMoreMenu } from '@/features/works'
 import { deleteWorksPaper } from '@/features/works/api/delete-works-paper'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { TEST_LAB_ID } from '@/shared/constant/test'
 import { formatDateWithWeekday, formatWorksDDay } from '@/shared/lib/format'
 import { useSideModalStore } from '@/shared/store'
 import { Tab } from '@/shared/ui/override/tab'
@@ -24,16 +23,18 @@ interface Props {
 }
 
 export const WorkPaperDetail = ({ paperId }: Props) => {
+  const { me } = useUsersMeHook()
+  const labId = me?.lab?.labId
+
   const {
     data: paper,
     isPending,
     isError,
   } = useQuery({
-    queryKey: QUERY_KEYS.PAPER.DETAIL(TEST_LAB_ID, paperId),
-    queryFn: () => getWorksPaperDetail(TEST_LAB_ID, paperId),
+    queryKey: QUERY_KEYS.PAPER.DETAIL(labId ?? 0, paperId),
+    queryFn: () => getWorksPaperDetail(labId ?? 0, paperId),
+    enabled: labId !== undefined,
   })
-
-  const { me } = useUsersMeHook()
 
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const closeSideModal = useSideModalStore(state => state.closeSideModal)
@@ -97,11 +98,11 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
             <WorksMoreMenu
               onEdit={() => setIsEditOpen(true)}
               deleteConfig={{
-                mutationFn: () => deleteWorksPaper(TEST_LAB_ID, paperId),
+                mutationFn: () => deleteWorksPaper(labId ?? 0, paperId),
                 confirmMessage: '정말 논문을 삭제하시겠습니까?',
                 successMessage: '논문이 삭제되었습니다.',
                 defaultErrorMessage: '논문 삭제에 실패했습니다.',
-                invalidateQueryKeys: [QUERY_KEYS.PAPER.LIST(TEST_LAB_ID)],
+                invalidateQueryKeys: [QUERY_KEYS.PAPER.LIST(labId ?? 0)],
                 onSuccess: () => closeSideModal(),
               }}
             />

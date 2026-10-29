@@ -9,13 +9,13 @@ import { WORKS_PAPER_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
+import { useUsersMeHook } from '@/entities/user'
 import { WorksPaperCard } from '@/entities/works'
 import { getWorksPaperList } from '@/entities/works/api/get-works-paper-list'
 import type { WorksPaperListResponseType } from '@/entities/works/model/types'
 import { WorksCreatePaperForm } from '@/features/works'
 import { patchWorksPaperStatus } from '@/features/works/api/patch-works-paper-status'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { TEST_LAB_ID } from '@/shared/constant/test'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
 
@@ -27,18 +27,21 @@ const groupPapersByStatus = (papers: WorksPaperListResponseType[]) =>
 
 export const WorksPaperSection = () => {
   const queryClient = useQueryClient()
-  const paperListQueryKey = QUERY_KEYS.PAPER.LIST(TEST_LAB_ID)
+  const { me } = useUsersMeHook()
+  const labId = me?.lab?.labId
+  const paperListQueryKey = QUERY_KEYS.PAPER.LIST(labId ?? 0)
   const openSideModal = useSideModalStore(state => state.openSideModal)
 
   const { data: papers } = useQuery({
     queryKey: paperListQueryKey,
-    queryFn: () => getWorksPaperList(TEST_LAB_ID),
+    queryFn: () => getWorksPaperList(labId ?? 0),
+    enabled: labId !== undefined,
   })
 
   // 카드는 드롭 즉시 옮겨 보여주고, 실패하면 서버 목록 기준으로 되돌림
   const patchWorksPaperStatusMutation = useApiMutation({
     mutationFn: ({ paperId, status }: { paperId: number; status: PaperStatusType }) =>
-      patchWorksPaperStatus(TEST_LAB_ID, paperId, { status }),
+      patchWorksPaperStatus(labId ?? 0, paperId, { status }),
     defaultErrorMessage: '논문 상태 변경에 실패했습니다.',
     onSuccess: updatedPaper => {
       queryClient.setQueryData<WorksPaperListResponseType[]>(paperListQueryKey, prev =>
