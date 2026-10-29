@@ -33,7 +33,12 @@ export const useWorksUpdateTaskFormHook = ({ task, onSuccess }: Props) => {
     mode: 'onChange',
   })
 
+  register('startAt', { required: true })
+  register('endAt', { required: true })
+
   const type = watch('type')
+  const startAt = watch('startAt')
+  const endAt = watch('endAt')
 
   const patchWorksTaskUpdateMutation = useApiMutation({
     mutationFn: (payload: PatchWorksTaskUpdatePayloadType) => patchWorksTaskUpdate(task.taskId, payload),
@@ -51,10 +56,18 @@ export const useWorksUpdateTaskFormHook = ({ task, onSuccess }: Props) => {
     })
   })
 
+  const handleRangeChange = (nextStartAt: string, nextEndAt: string) => {
+    setValue('startAt', nextStartAt, { shouldValidate: true })
+    setValue('endAt', nextEndAt, { shouldValidate: true })
+  }
+
   return {
     register,
     setValue,
     type,
+    startAt,
+    endAt,
+    handleRangeChange,
     onSubmit,
     isPending: patchWorksTaskUpdateMutation.isPending,
     isValid,

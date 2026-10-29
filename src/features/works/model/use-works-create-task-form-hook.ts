@@ -31,7 +31,12 @@ export const useWorksCreateTaskFormHook = () => {
     mode: 'onChange',
   })
 
+  register('startAt', { required: true })
+  register('endAt', { required: true })
+
   const type = watch('type')
+  const startAt = watch('startAt')
+  const endAt = watch('endAt')
 
   const postWorksTaskCreateMutation = useApiMutation({
     mutationFn: postWorksTaskCreate,
@@ -50,10 +55,18 @@ export const useWorksCreateTaskFormHook = () => {
     })
   })
 
+  const handleRangeChange = (nextStartAt: string, nextEndAt: string) => {
+    setValue('startAt', nextStartAt, { shouldValidate: true })
+    setValue('endAt', nextEndAt, { shouldValidate: true })
+  }
+
   return {
     register,
     setValue,
     type,
+    startAt,
+    endAt,
+    handleRangeChange,
     onSubmit,
     isPending: postWorksTaskCreateMutation.isPending,
     isValid,

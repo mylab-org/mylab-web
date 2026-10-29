@@ -4,9 +4,11 @@
 import { useWorksUpdateTaskFormHook } from '../model/use-works-update-task-form-hook'
 import type { TaskListResponseType } from '@/entities/works/model/types'
 import { Button } from '@/shared/ui/override/button'
+import { DateRangePicker } from '@/shared/ui/override/date-picker'
 import { Input } from '@/shared/ui/override/input'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
 import { Text } from '@/shared/ui/override/text'
+import { InputBox } from '@/shared/ui/template/input-box'
 
 interface Props {
   task: TaskListResponseType
@@ -14,7 +16,8 @@ interface Props {
 }
 
 export const WorksUpdateTaskForm = ({ task, onSuccess }: Props) => {
-  const { register, setValue, type, onSubmit, isValid, isPending } = useWorksUpdateTaskFormHook({ task, onSuccess })
+  const { register, setValue, type, startAt, endAt, handleRangeChange, onSubmit, isValid, isPending } =
+    useWorksUpdateTaskFormHook({ task, onSuccess })
 
   return (
     <>
@@ -29,36 +32,15 @@ export const WorksUpdateTaskForm = ({ task, onSuccess }: Props) => {
             <Radio id={'update-task-type-meeting'} value={'MEETING'} title={'미팅 준비'} />
           </RadioGroup>
         </div>
+        <InputBox labelName={'업무 제목'} placeholder={'제목'} {...register('title', { required: true })} />
+        <InputBox labelName={'업무 설명'} placeholder={'설명'} {...register('description', { required: true })} />
         <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>업무 제목</Text>
-          <Input
-            {...register('title', { required: true })}
-            placeholder={'제목'}
-            className={'w-full text-[14px] font-medium md:text-[18px]'}
-          />
-        </div>
-        <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>업무 설명</Text>
-          <Input
-            {...register('description', { required: true })}
-            placeholder={'설명'}
-            className={'w-full text-[14px] font-medium md:text-[18px]'}
-          />
-        </div>
-        <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>시작일</Text>
-          <Input
-            type={'date'}
-            {...register('startAt', { required: true })}
-            className={'w-full text-[14px] font-medium md:text-[18px]'}
-          />
-        </div>
-        <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>종료일</Text>
-          <Input
-            type={'date'}
-            {...register('endAt', { required: true })}
-            className={'w-full text-[14px] font-medium md:text-[18px]'}
+          <Text className={'text-[14px] font-medium text-gray-600!'}>기간</Text>
+          <DateRangePicker
+            startAt={startAt}
+            endAt={endAt}
+            onChange={handleRangeChange}
+            placeholder={'시작일 ~ 종료일'}
           />
         </div>
       </form>
