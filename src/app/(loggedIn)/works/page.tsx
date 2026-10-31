@@ -1,6 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { headers } from 'next/headers'
 import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
+import { getWorksAllListServer } from '@/entities/works/api/get-works-all-list-server'
 import { getWorksPaperListServer } from '@/entities/works/api/get-works-paper-list-server'
 import { getWorksTaskListServer } from '@/entities/works/api/get-works-task-list-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
@@ -19,6 +20,11 @@ export default async function Works() {
     await queryClient.prefetchQuery({
       queryKey: QUERY_KEYS.PAPER.LIST(labId),
       queryFn: () => getWorksPaperListServer(labId),
+    })
+
+    await queryClient.prefetchQuery({
+      queryKey: QUERY_KEYS.TASK.WORKS_ALL_LIST(labId),
+      queryFn: () => getWorksAllListServer(labId),
     })
   }
 

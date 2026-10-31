@@ -42,5 +42,6 @@ export const ENDPOINTS = {
     ROOT: '/api/task',
     TASK_ID: (taskId: number) => `/api/task/${taskId}`,
     STATUS: (taskId: number) => `/api/task/${taskId}/status`,
+    WORKS_ALL_LIST: (labId: number) => `/api/task/lab/${labId}`,
   },
 }

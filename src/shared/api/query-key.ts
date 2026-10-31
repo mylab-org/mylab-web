@@ -22,5 +22,6 @@ export const QUERY_KEYS = {
   },
   TASK: {
     LIST: ['task', 'list'],
+    WORKS_ALL_LIST: (labId: number) => ['task', 'works-all-list', labId],
   },
 }

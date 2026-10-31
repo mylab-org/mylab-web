@@ -54,3 +54,12 @@ export type TaskListResponseType = {
   totalSteps: number
   createdAt: string
 }
+
+export type WorksAllListResponseType = {
+  userId: number
+  name: string
+  degree: UserDegreeType
+  role: UserRoleType
+  papers: WorksPaperListResponseType[]
+  tasks: TaskListResponseType[]
+}
