@@ -5,18 +5,21 @@ import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
 import { BoardContentSection } from '../../pc/section/board-content-section'
 import { getBoardCategory } from '@/entities/board/api/get-board-category'
+import { useUsersMeHook } from '@/entities/user'
 import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { BASE_PATHS } from '@/shared/constant/routes'
-import { TEST_LAB_ID } from '@/shared/constant/test'
 import { Text } from '@/shared/ui/override/text'
 
 export const BoardMobileContentSection = () => {
   const { categoryId } = useBoardCategoryIdHook()
+  const { me } = useUsersMeHook()
+  const labId = me?.lab?.labId
 
   const { data: boardCategory } = useQuery({
-    queryKey: QUERY_KEYS.BOARD.CATEGORY(TEST_LAB_ID),
-    queryFn: () => getBoardCategory(TEST_LAB_ID),
+    queryKey: QUERY_KEYS.BOARD.CATEGORY(labId ?? 0),
+    queryFn: () => getBoardCategory(labId ?? 0),
+    enabled: labId !== undefined,
   })
 
   const categoryName = [...(boardCategory?.service ?? []), ...(boardCategory?.lab ?? [])].find(
