@@ -23,3 +23,19 @@ export type PostWorksPaperAddMemberPayloadType = {
 export type PatchWorksPaperMemberRolePayloadType = {
   role: string
 }
+
+// task
+
+export type PostWorksTaskCreatePayloadType = {
+  type: TaskType
+  title: string
+  description: string
+  startAt: string
+  endAt: string
+}
+
+export type PatchWorksTaskStatusPayloadType = {
+  status: TaskStatusType
+}
+
+export type PatchWorksTaskUpdatePayloadType = PostWorksTaskCreatePayloadType

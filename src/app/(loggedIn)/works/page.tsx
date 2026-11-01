@@ -1,8 +1,10 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { headers } from 'next/headers'
+import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
+import { getWorksAllListServer } from '@/entities/works/api/get-works-all-list-server'
 import { getWorksPaperListServer } from '@/entities/works/api/get-works-paper-list-server'
+import { getWorksTaskListServer } from '@/entities/works/api/get-works-task-list-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { TEST_LAB_ID } from '@/shared/constant/test'
 import { WorkPage } from '@/views/(loggedIn)/works'
 import { MobileWorkPage } from '@/views/(loggedIn)/works/mobile-work-page'
 
@@ -11,9 +13,24 @@ export default async function Works() {
   const ua = h.get('user-agent') ?? ''
 
   const queryClient = new QueryClient()
+  const me = await getUsersMeServer().catch(() => null)
+  const labId = me?.lab?.labId
+
+  if (labId !== undefined) {
+    await queryClient.prefetchQuery({
+      queryKey: QUERY_KEYS.PAPER.LIST(labId),
+      queryFn: () => getWorksPaperListServer(labId),
+    })
+
+    await queryClient.prefetchQuery({
+      queryKey: QUERY_KEYS.TASK.WORKS_ALL_LIST(labId),
+      queryFn: () => getWorksAllListServer(labId),
+    })
+  }
+
   await queryClient.prefetchQuery({
-    queryKey: QUERY_KEYS.PAPER.LIST(TEST_LAB_ID),
-    queryFn: () => getWorksPaperListServer(TEST_LAB_ID),
+    queryKey: QUERY_KEYS.TASK.LIST,
+    queryFn: getWorksTaskListServer,
   })
 
   return (

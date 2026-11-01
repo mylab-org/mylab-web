@@ -1,7 +1,7 @@
 'use client'
 
 import { Tab } from '@/shared/ui/override/tab'
-import { WorksMeetingEtcSection, WorksPaperSection, WorksLabSection } from '@/widgets/works'
+import { WorksTaskSection, WorksPaperSection, WorksLabSection } from '@/widgets/works'
 
 export const MobileWorkPage = () => {
   const tabs = [
@@ -15,7 +15,7 @@ export const MobileWorkPage = () => {
     },
     {
       name: '미팅 & 개인',
-      content: <WorksMeetingEtcSection />,
+      content: <WorksTaskSection />,
     },
   ]
 

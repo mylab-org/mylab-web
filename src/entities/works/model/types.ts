@@ -37,3 +37,29 @@ export type WorksPaperListResponseType = {
 }
 
 export type WorksPaperDetailResponseType = WorksPaperListResponseType
+
+// task
+
+export type TaskListResponseType = {
+  taskId: number
+  userId: number
+  type: TaskType
+  title: string
+  description: string
+  startAt: string
+  endAt: string
+  status: TaskStatusType
+  statusLabel: string
+  statusStep: number
+  totalSteps: number
+  createdAt: string
+}
+
+export type WorksAllListResponseType = {
+  userId: number
+  name: string
+  degree: UserDegreeType
+  role: UserRoleType
+  papers: WorksPaperListResponseType[]
+  tasks: TaskListResponseType[]
+}

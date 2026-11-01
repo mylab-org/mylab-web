@@ -5,21 +5,15 @@ import { useWorksCreatePaperFormHook } from '../model/use-works-create-paper-for
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/override/text'
+import { InputBox } from '@/shared/ui/template/input-box'
 
 export const WorksCreatePaperForm = () => {
   const { register, onSubmit, isValid, isPending } = useWorksCreatePaperFormHook()
 
   return (
-    <>
+    <div className="flex min-h-0 w-full flex-1 flex-col gap-2.5 px-5 lg:w-[750px] lg:px-7.5">
       <form className={'flex flex-col gap-7.5 py-5'}>
-        <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>논문 제목</Text>
-          <Input
-            {...register('title', { required: true })}
-            placeholder={'제목'}
-            className={'w-full text-[14px] font-medium md:text-[18px]'}
-          />
-        </div>
+        <InputBox labelName={'논문 제목'} placeholder={'제목'} {...register('title', { required: true })} />
         <div className={'w-full'}>
           <Text className={'text-[14px] font-medium text-gray-600!'}>제출 학회 (선택)</Text>
           <Input placeholder={'학회'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
@@ -36,6 +30,6 @@ export const WorksCreatePaperForm = () => {
       <Button className={'mb-5'} disabled={!isValid || isPending} onClick={onSubmit}>
         업무 생성하기
       </Button>
-    </>
+    </div>
   )
 }

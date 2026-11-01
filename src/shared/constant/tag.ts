@@ -35,15 +35,15 @@ export const ROLL_TAG: Record<
 } as const
 
 export const WORK_TYPE = {
-  MEET: {
+  MEETING: {
     NAME: '미팅 준비',
     BG: 'bg-[#FF2056]',
   },
-  CONFERENCE: {
-    NAME: '학회 업무',
+  PAPER: {
+    NAME: '논문 업무',
     BG: 'bg-[#2B7FFF]',
   },
-  PERSONAL: {
+  WORK: {
     NAME: '개인 업무',
     BG: 'bg-[#8E51FF]',
   },

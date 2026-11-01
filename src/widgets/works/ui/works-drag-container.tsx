@@ -1,9 +1,13 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { WorkPaperDetail } from './side/works-paper-detail'
-import { WorksPaperCard, WorksMeetEtcCard, WorksEmptyCard } from '@/entities/works'
+import { WorksPaperCard, WorksTaskCard } from '@/entities/works'
+import { WorksMoreMenu } from '@/features/works'
+import { deleteWorksTask } from '@/features/works/api/delete-works-task'
+import { QUERY_KEYS } from '@/shared/api/query-key'
+import { Text } from '@/shared/ui/override/text'
 
-export const WorksDragContainer = ({ id, items, isDragging, isConference = false, children }: any) => {
+export const WorksDragContainer = ({ id, items, isDragging, isConference = false, onEditTask, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
 
   return (
@@ -24,12 +28,40 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
               {isConference ? (
                 <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
-                <WorksMeetEtcCard id={item.id} type={item.type} />
+                <WorksTaskCard
+                  task={item}
+                  moreMenu={
+                    onEditTask ? (
+                      <div onPointerDown={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
+                        <WorksMoreMenu
+                          onEdit={() => onEditTask(item)}
+                          deleteConfig={{
+                            mutationFn: () => deleteWorksTask(item.taskId),
+                            confirmMessage: '정말 업무를 삭제하시겠습니까?',
+                            successMessage: '업무가 삭제되었습니다.',
+                            defaultErrorMessage: '업무 삭제에 실패했습니다.',
+                            invalidateQueryKeys: [QUERY_KEYS.TASK.LIST],
+                          }}
+                        />
+                      </div>
+                    ) : undefined
+                  }
+                />
               )}
             </div>
           ))}
 
-          {items.length === 0 && !isDragging && <WorksEmptyCard />}
+          {items.length === 0 && !isDragging && (
+            <div
+              className={
+                'flex min-h-[130px] items-center justify-center rounded-[12px] border-2 border-dashed border-gray-300 bg-gray-100 p-5 md:min-h-[165px]'
+              }
+            >
+              <Text className={'text-[14px] font-semibold text-gray-400 md:text-[18px]'}>
+                아이템을 이곳에 드래그하여 옮길 수 있어요
+              </Text>
+            </div>
+          )}
         </div>
       </SortableContext>
     </section>
