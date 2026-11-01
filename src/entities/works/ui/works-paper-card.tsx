@@ -39,7 +39,7 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 border-[#2B7FFF] p-2.5 shadow-lg md:min-h-[165px] md:p-5',
+        'flex w-[250px] cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 border-[#2B7FFF] p-2.5 shadow-lg md:min-h-[165px] md:w-full md:p-5',
         isDragging ? 'relative z-0' : 'relative z-10',
         isEnd ? 'bg-gray-200' : 'bg-white',
         isDeadLine && 'border-error',

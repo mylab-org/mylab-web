@@ -1,10 +1,11 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { WorkPaperDetail } from './side/works-paper-detail'
-import { WorksPaperCard, WorksEmptyCard, WorksTaskCard } from '@/entities/works'
+import { WorksPaperCard, WorksTaskCard } from '@/entities/works'
 import { WorksMoreMenu } from '@/features/works'
 import { deleteWorksTask } from '@/features/works/api/delete-works-task'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { Text } from '@/shared/ui/override/text'
 
 export const WorksDragContainer = ({ id, items, isDragging, isConference = false, onEditTask, children }: any) => {
   const { setNodeRef } = useDroppable({ id })
@@ -50,7 +51,17 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
             </div>
           ))}
 
-          {items.length === 0 && !isDragging && <WorksEmptyCard />}
+          {items.length === 0 && !isDragging && (
+            <div
+              className={
+                'flex min-h-[130px] items-center justify-center rounded-[12px] border-2 border-dashed border-gray-300 bg-gray-100 p-5 md:min-h-[165px]'
+              }
+            >
+              <Text className={'text-[14px] font-semibold text-gray-400 md:text-[18px]'}>
+                아이템을 이곳에 드래그하여 옮길 수 있어요
+              </Text>
+            </div>
+          )}
         </div>
       </SortableContext>
     </section>
