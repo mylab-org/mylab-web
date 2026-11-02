@@ -2,13 +2,15 @@
 
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { SquarePlus } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { WORKS_TASK_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorksUpdateTaskModal } from '../modal/works-update-task-modal'
 import { WorksDragContainer } from '../works-drag-container'
+import { WorksMobileStatusDropRow } from '../works-mobile-status-drop-row'
+import { WorksStatusChips } from '../works-status-chips'
 import { WorksTaskCard } from '@/entities/works'
 import { getWorksTaskList } from '@/entities/works/api/get-works-task-list'
 import type { TaskListResponseType } from '@/entities/works/model/types'
@@ -17,6 +19,7 @@ import { patchWorksTaskStatus } from '@/features/works/api/patch-works-task-stat
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
+import { Text } from '@/shared/ui/override/text'
 
 type TaskKanbanItemType = TaskListResponseType & { id: number }
 
@@ -29,17 +32,24 @@ const groupTasksByStatus = (tasks: TaskListResponseType[]) =>
     {} as Record<TaskStatusType, TaskKanbanItemType[]>,
   )
 
-export const WorksTaskSection = () => {
+type WorksTaskSectionProps = {
+  variant?: 'pc' | 'mobile'
+}
+
+export const WorksTaskSection = ({ variant = 'pc' }: WorksTaskSectionProps) => {
+  const isMobile = variant === 'mobile'
   const queryClient = useQueryClient()
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const [editingTask, setEditingTask] = useState<TaskListResponseType | null>(null)
+  const [activeStatus, setActiveStatus] = useState<TaskStatusType>('READY')
 
-  const { data: tasks } = useQuery({
+  const { data: tasks, isPending } = useQuery({
     queryKey: QUERY_KEYS.TASK.LIST,
     queryFn: getWorksTaskList,
   })
 
-  // 카드는 드롭 즉시 옮겨 보여주고, 실패하면 서버 목록 기준으로 되돌림
+  const openCreate = () => openSideModal(WorksCreateTaskForm, '업무 생성')
+
   const patchWorksTaskStatusMutation = useApiMutation({
     mutationFn: ({ taskId, status }: { taskId: number; status: TaskStatusType }) =>
       patchWorksTaskStatus(taskId, { status }),
@@ -78,7 +88,13 @@ export const WorksTaskSection = () => {
     if (tasks) setColumns(groupTasksByStatus(tasks))
   }, [tasks, setColumns])
 
-  if (!enabled) return null
+  if (!enabled || isPending) {
+    return <Text className={'py-8 text-center text-[14px] text-gray-400!'}>업무를 불러오는 중...</Text>
+  }
+
+  const visibleColumns = isMobile
+    ? WORKS_TASK_COLUMNS.filter(column => column.status === activeStatus)
+    : WORKS_TASK_COLUMNS
 
   return (
     <DndContext
@@ -88,48 +104,85 @@ export const WorksTaskSection = () => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      {/* 반응형 레이아웃: 기본 flex-col(모바일), md 이상 flex-row(PC) */}
-      <section className="relative isolate flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
-        {/* 드래그 중 배경 어둡게 */}
+      <section className={'relative isolate flex flex-1 flex-col gap-4'}>
+        {isMobile && (
+          <div className={'flex flex-col gap-3'}>
+            <div className={'flex items-center justify-between gap-2'}>
+              <Text className={'text-[14px] font-semibold'}>미팅 & 개인</Text>
+              <button
+                type={'button'}
+                onClick={openCreate}
+                className={
+                  'inline-flex items-center gap-1 rounded-[10px] bg-[#2562CD] px-3 py-1.5 text-[12px] font-semibold text-white'
+                }
+              >
+                <Plus className={'h-3.5 w-3.5'} />
+                생성
+              </button>
+            </div>
+            <WorksStatusChips
+              items={WORKS_TASK_COLUMNS.map(({ status, label }) => ({
+                status,
+                label,
+                count: columns[status]?.length ?? 0,
+              }))}
+              activeStatus={activeStatus}
+              onChange={status => setActiveStatus(status as TaskStatusType)}
+            />
+            <WorksMobileStatusDropRow items={WORKS_TASK_COLUMNS} activeStatus={activeStatus} isDragging={isDragging} />
+          </div>
+        )}
+
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
-            isDragging ? 'bg-black/40 opacity-100' : 'bg-transparent opacity-0'
+            isDragging ? (isMobile ? 'bg-black/20 opacity-100' : 'bg-black/30 opacity-100') : 'bg-transparent opacity-0'
           }`}
         />
 
-        {WORKS_TASK_COLUMNS.map(({ status }) => (
-          <WorksDragContainer
-            key={status}
-            id={status}
-            items={columns[status]}
-            isDragging={isDragging}
-            isConference={false}
-            onEditTask={setEditingTask}
-          >
-            <div className="flex items-center justify-between">
-              <h4
-                className={`text-[16px] font-bold uppercase transition-colors duration-300 md:text-[22px] ${
-                  isDragging ? 'text-white' : 'text-black'
-                }`}
-              >
-                {status === 'READY' ? '시작 전' : status === 'IN_PROGRESS' ? '진행 중' : '완료'}
-              </h4>
-              {status === 'READY' && (
-                <SquarePlus
-                  className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
-                  onClick={() => openSideModal(WorksCreateTaskForm, '업무 생성')}
-                />
+        <div className={'flex flex-1 flex-col gap-4 overflow-x-auto md:flex-row md:items-start md:justify-start'}>
+          {visibleColumns.map(({ status, label }) => (
+            <WorksDragContainer
+              key={status}
+              id={status}
+              items={columns[status]}
+              isDragging={isDragging}
+              isConference={false}
+              onEditTask={setEditingTask}
+              variant={variant}
+              onCreate={status === 'READY' ? openCreate : undefined}
+              createLabel={'업무 만들기'}
+            >
+              {!isMobile && (
+                <div className={'flex items-center justify-between gap-2 px-0.5'}>
+                  <h4 className={'text-[16px] font-bold md:text-[18px]'}>
+                    {label}
+                    <span className={'ml-1.5 text-[13px] font-medium text-gray-400'}>
+                      {columns[status]?.length ?? 0}
+                    </span>
+                  </h4>
+                  {status === 'READY' && (
+                    <button
+                      type={'button'}
+                      onClick={openCreate}
+                      className={`inline-flex items-center gap-1 rounded-[10px] border border-[#2562CD]/30 bg-[#2562CD]/5 px-2.5 py-1.5 text-[12px] font-semibold text-[#2562CD] ${
+                        isDragging ? 'opacity-0' : 'opacity-100'
+                      }`}
+                    >
+                      <Plus className={'h-3.5 w-3.5'} />
+                      생성
+                    </button>
+                  )}
+                </div>
               )}
-            </div>
-          </WorksDragContainer>
-        ))}
+            </WorksDragContainer>
+          ))}
+        </div>
       </section>
 
-      {/* 드래그 중인 카드 미리보기 (Portal) */}
       {createPortal(
         <DragOverlay zIndex={5}>
           {activeId && activeItem ? (
-            <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
+            <div className={'scale-105 cursor-grabbing shadow-2xl transition-transform duration-200'}>
               <WorksTaskCard task={activeItem} />
             </div>
           ) : null}

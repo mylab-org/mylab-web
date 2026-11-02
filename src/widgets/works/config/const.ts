@@ -7,7 +7,7 @@ export const WORKS_PAPER_COLUMNS: { status: PaperStatusType; label: string }[] =
 ]
 
 export const WORKS_TASK_COLUMNS: { status: TaskStatusType; label: string }[] = [
-  { status: 'READY', label: '할 일' },
+  { status: 'READY', label: '시작 전' },
   { status: 'IN_PROGRESS', label: '진행 중' },
   { status: 'COMPLETED', label: '완료' },
 ]

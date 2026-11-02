@@ -1,7 +1,8 @@
 'use client'
 
-import { Tab } from '@/shared/ui/override/tab'
-import { WorksTaskSection, WorksPaperSection, WorksLabSection } from '@/widgets/works'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { WorksLabSection, WorksPaperSection, WorksTaskSection } from '@/widgets/works'
+import { WorksModeTabs } from '@/widgets/works/ui/works-mode-tabs'
 
 const tabs = [
   {
@@ -10,22 +11,20 @@ const tabs = [
   },
   {
     name: '논문 업무',
-    content: <WorksPaperSection />,
+    content: <WorksPaperSection variant={'pc'} />,
   },
   {
     name: '미팅 & 개인',
-    content: <WorksTaskSection />,
+    content: <WorksTaskSection variant={'pc'} />,
   },
 ]
 
 export const WorkPage = () => {
   return (
     <div
-      className={
-        'flex min-w-0 flex-1 flex-col gap-2.5 rounded-[12px] bg-white px-7.5 py-2.5 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] focus:outline-none'
-      }
+      className={`flex min-h-0 min-w-0 flex-1 flex-col rounded-[20px] bg-white p-5 ${CARD_SHADOW} focus:outline-none`}
     >
-      <Tab tabs={tabs} />
+      <WorksModeTabs tabs={tabs} />
     </div>
   )
 }
