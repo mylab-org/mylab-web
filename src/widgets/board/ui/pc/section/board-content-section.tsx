@@ -1,29 +1,61 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
 import { Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { BoardItemSection } from './board-item-section'
-import { BoardCreateForm } from '@/features/board'
+import { BoardNoticeBanner } from './board-notice-banner'
+import { getBoardCategory } from '@/entities/board/api/get-board-category'
+import { useUsersMeHook } from '@/entities/user'
+import { BoardCreateForm, useBoardCategoryIdHook } from '@/features/board'
+import { QUERY_KEYS } from '@/shared/api/query-key'
+import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 
-export const BoardContentSection = () => {
+type BoardContentSectionProps = {
+  variant?: 'pc' | 'mobile'
+}
+
+export const BoardContentSection = ({ variant = 'pc' }: BoardContentSectionProps) => {
+  const isMobile = variant === 'mobile'
   const [isPostFormOpen, setIsPostFormOpen] = useState(false)
+  const { categoryId } = useBoardCategoryIdHook()
+  const { me } = useUsersMeHook()
+  const labId = me?.lab?.labId
+
+  const { data: boardCategory } = useQuery({
+    queryKey: QUERY_KEYS.BOARD.CATEGORY(labId ?? 0),
+    queryFn: () => getBoardCategory(labId ?? 0),
+    enabled: labId !== undefined,
+  })
+
+  const categoryName = [...(boardCategory?.service ?? []), ...(boardCategory?.lab ?? [])].find(
+    menu => Number(menu.category_id) === categoryId,
+  )?.category_name
+
+  const openWriteForm = () => setIsPostFormOpen(true)
 
   return (
-    <section className={'mt-3.75 flex flex-1 flex-col gap-2.5 lg:p-2.5'}>
+    <section className={cn('flex min-w-0 flex-1 flex-col gap-3', isMobile ? 'gap-3' : 'gap-3.5')}>
       <button
         type="button"
-        className={
-          'flex cursor-pointer items-center gap-2.5 rounded-full border border-gray-300 bg-gray-100 px-5 py-2.5'
-        }
+        className={cn(
+          'flex cursor-pointer items-center gap-2.5 rounded-[14px] border px-4 py-3 transition-colors',
+          'border-[#2562CD]/30 bg-[#2562CD]/5 hover:bg-[#2562CD]/10',
+        )}
         onClick={() => setIsPostFormOpen(prev => !prev)}
       >
-        <Text className={'w-full text-left text-[12px] text-gray-500! lg:text-[16px]'}>새 소식을 전해보세요!</Text>
-        <Pencil className="h-4 w-4 text-gray-400 lg:h-6 lg:w-6" size={24} />
+        <Text className={'w-full text-left text-[13px] font-medium text-[#2562CD]! md:text-[15px]'}>
+          {categoryName ? `${categoryName}에 새 소식을 전해보세요!` : '새 소식을 전해보세요!'}
+        </Text>
+        <Pencil className="h-4 w-4 shrink-0 text-[#2562CD] md:h-5 md:w-5" />
       </button>
       {isPostFormOpen && <BoardCreateForm onClose={() => setIsPostFormOpen(false)} />}
-      <div className={'flex flex-1 flex-col gap-5 py-2.5'}>
-        <BoardItemSection />
+
+      <BoardNoticeBanner />
+
+      <div className={'flex flex-1 flex-col gap-3'}>
+        <BoardItemSection onWriteClick={openWriteForm} />
       </div>
     </section>
   )

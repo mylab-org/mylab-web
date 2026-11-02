@@ -9,11 +9,9 @@ import { AlarmWrapper } from '@/entities/alarm'
 export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const pathname = usePathname()
-  const isWhite = pathname !== '/'
-  console.log(pathname)
 
   return (
-    <header className={clsx('relative flex items-center justify-between px-[20px] py-[10px]', isWhite && 'bg-white')}>
+    <header className={clsx('relative flex items-center justify-between px-[20px] py-[10px]')}>
       <div className={'flex cursor-pointer items-center justify-center gap-[5px]'}>
         <Image src={'/Mylab_Logo.png'} alt={'로고'} width={30} height={30} />
         <h1 className={'text-[18px] font-bold text-gray-900'}>MyLab</h1>
