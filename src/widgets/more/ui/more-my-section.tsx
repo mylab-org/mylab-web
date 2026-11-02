@@ -1,7 +1,8 @@
 'use client'
 
 import { MoreUserUpdate } from './side/more-user-update'
-import { UserInfo, useUsersMeHook } from '@/entities/user'
+import { useUsersMeHook } from '@/entities/user'
+import { UserMoreInfo } from '@/entities/user/ui/user-more-info'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
@@ -31,7 +32,7 @@ export const MoreMySection = ({ isMaxWidth = false, isMobile = false }: WrapProp
       <div
         className={`flex flex-col gap-2.5 rounded-[12px] bg-white ${isMobile ? 'p-3' : 'p-5'} shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]`}
       >
-        <UserInfo user={me} />
+        <UserMoreInfo user={me} />
         <Button
           className={'text-[12px]! md:text-[16px]!'}
           onClick={() => openSideModal(MoreUserUpdate, '내 정보 수정')}
