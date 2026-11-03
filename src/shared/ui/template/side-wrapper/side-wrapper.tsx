@@ -35,7 +35,7 @@ export const SideWrapper = () => {
             if (e.target instanceof Node && !e.target.isConnected) e.preventDefault()
           }}
           className={
-            'fixed top-0 right-0 z-50 flex h-dvh w-full flex-col bg-white shadow-lg outline-none lg:w-fit lg:rounded-l-[20px] ' +
+            'bg-card fixed top-0 right-0 z-50 flex h-dvh w-full flex-col shadow-lg outline-none lg:w-fit lg:rounded-l-[20px] ' +
             'data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right duration-350 ease-[cubic-bezier(0.22,1,0.36,1)]'
           }
         >

@@ -67,7 +67,7 @@ export const WorkPaperDetail = ({ paperId }: Props) => {
                     {schedule.endAt && ` ~ ${formatDateWithWeekday(schedule.endAt)}`}
                   </Text>
                   {schedule.dDay !== null && (
-                    <div className={'rounded-[8px] bg-gray-100 px-2.5 py-1.25 text-[10px] font-bold md:text-[12px]'}>
+                    <div className={'bg-muted rounded-[8px] px-2.5 py-1.25 text-[10px] font-bold md:text-[12px]'}>
                       제출마감 {formatWorksDDay(schedule.dDay)}
                     </div>
                   )}

@@ -40,7 +40,7 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={'relative flex flex-col rounded-[20px] bg-white shadow-lg'}
+            className={'bg-card relative flex flex-col rounded-[20px] shadow-lg'}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -55,7 +55,7 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
                 <X className={'h-5 w-5 cursor-pointer'} onClick={onClose} />
               </div>
               <form className={'flex flex-col gap-2.5'}>
-                <Text className={'text-[12px] font-medium text-gray-600 md:text-[14px]'}>
+                <Text className={'text-muted-foreground text-[12px] font-medium md:text-[14px]'}>
                   추가할 링크 정보를 입력해주세요
                 </Text>
                 <Input placeholder={'링크 제목'} />

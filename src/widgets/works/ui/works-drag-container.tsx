@@ -49,8 +49,8 @@ export const WorksDragContainer = ({
             'flex flex-1 flex-col gap-3 rounded-[16px] transition-colors duration-300',
             isMobile ? 'min-h-[180px]' : 'min-h-[150px] md:min-h-[480px]',
             isDragging
-              ? 'border-2 border-dashed border-[#2562CD]/40 bg-[#2562CD]/5'
-              : 'border border-transparent bg-gray-50/80 p-2.5 md:p-3',
+              ? 'border-brand/40 bg-brand/5 border-2 border-dashed'
+              : 'bg-muted/80 border border-transparent p-2.5 md:p-3',
           )}
         >
           {items.map((item: any) => (
@@ -84,17 +84,17 @@ export const WorksDragContainer = ({
           {items.length === 0 && !isDragging && (
             <div
               className={
-                'flex min-h-[140px] flex-col items-center justify-center gap-3 rounded-[12px] border border-dashed border-gray-200 bg-white px-4 py-6'
+                'border-border bg-card flex min-h-[140px] flex-col items-center justify-center gap-3 rounded-[12px] border border-dashed px-4 py-6'
               }
             >
-              <Text className={'text-center text-[13px] font-medium text-gray-400 md:text-[15px]'}>
+              <Text className={'text-subtle-foreground text-center text-[13px] font-medium md:text-[15px]'}>
                 {onCreate ? '아직 항목이 없습니다.' : '아이템을 이곳으로 드래그할 수 있어요'}
               </Text>
               {onCreate && (
                 <button
                   type={'button'}
                   onClick={onCreate}
-                  className={'rounded-[10px] bg-[#2562CD] px-3.5 py-2 text-[13px] font-semibold text-white'}
+                  className={'bg-brand rounded-[10px] px-3.5 py-2 text-[13px] font-semibold text-white'}
                 >
                   {createLabel}
                 </button>

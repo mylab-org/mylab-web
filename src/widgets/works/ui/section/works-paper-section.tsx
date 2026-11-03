@@ -88,7 +88,7 @@ export const WorksPaperSection = ({ variant = 'pc' }: WorksPaperSectionProps) =>
   }, [papers, setColumns])
 
   if (!enabled || isPending) {
-    return <Text className={'py-8 text-center text-[14px] text-gray-400!'}>논문 업무를 불러오는 중...</Text>
+    return <Text className={'text-subtle-foreground! py-8 text-center text-[14px]'}>논문 업무를 불러오는 중...</Text>
   }
 
   const visibleColumns = isMobile
@@ -112,7 +112,7 @@ export const WorksPaperSection = ({ variant = 'pc' }: WorksPaperSectionProps) =>
                 type={'button'}
                 onClick={openCreate}
                 className={
-                  'inline-flex items-center gap-1 rounded-[10px] bg-[#2562CD] px-3 py-1.5 text-[12px] font-semibold text-white'
+                  'bg-brand inline-flex items-center gap-1 rounded-[10px] px-3 py-1.5 text-[12px] font-semibold text-white'
                 }
               >
                 <Plus className={'h-3.5 w-3.5'} />
@@ -154,7 +154,7 @@ export const WorksPaperSection = ({ variant = 'pc' }: WorksPaperSectionProps) =>
                 <div className={'flex items-center justify-between gap-2 px-0.5'}>
                   <h4 className={'text-[16px] font-bold md:text-[18px]'}>
                     {label}
-                    <span className={'ml-1.5 text-[13px] font-medium text-gray-400'}>
+                    <span className={'text-subtle-foreground ml-1.5 text-[13px] font-medium'}>
                       {columns[status]?.length ?? 0}
                     </span>
                   </h4>
@@ -162,7 +162,7 @@ export const WorksPaperSection = ({ variant = 'pc' }: WorksPaperSectionProps) =>
                     <button
                       type={'button'}
                       onClick={openCreate}
-                      className={`inline-flex items-center gap-1 rounded-[10px] border border-[#2562CD]/30 bg-[#2562CD]/5 px-2.5 py-1.5 text-[12px] font-semibold text-[#2562CD] ${
+                      className={`border-brand/30 bg-brand/5 text-brand inline-flex items-center gap-1 rounded-[10px] border px-2.5 py-1.5 text-[12px] font-semibold ${
                         isDragging ? 'opacity-0' : 'opacity-100'
                       }`}
                     >

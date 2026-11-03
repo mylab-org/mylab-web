@@ -25,7 +25,7 @@ export const MoreLabMember = ({ role, labId }: Props) => {
 
   return (
     <div className={'flex min-h-0 w-full flex-1 flex-col gap-2.5 overflow-auto px-5 pb-5 lg:w-[550px] lg:px-7.5'}>
-      <Text className={'text-[14px] font-medium text-gray-900!'}>{`총 ${members.length}명`}</Text>
+      <Text className={'text-foreground! text-[14px] font-medium'}>{`총 ${members.length}명`}</Text>
       <div className={'flex flex-col gap-7.5 py-5'}>
         {members.map(m => (
           <div key={m.userId} className={'flex items-center justify-between gap-2.5'}>
@@ -36,7 +36,7 @@ export const MoreLabMember = ({ role, labId }: Props) => {
               height={40}
               imgClassName={'h-[20px] w-[20px] rounded-full md:h-[40px] md:w-[40px]'}
             >
-              <Text className={'text-[12px] font-medium text-gray-900! md:text-[14px]'}>{m.name}</Text>
+              <Text className={'text-foreground! text-[12px] font-medium md:text-[14px]'}>{m.name}</Text>
               <Tag.Roll variant={m.degree} />
             </Avatar>
 
@@ -56,7 +56,7 @@ export const MoreLabMember = ({ role, labId }: Props) => {
                 onCheckedChange={checked => changeRole(m.userId, checked === true ? 'SUB_LEADER' : 'MEMBER')}
               />
               <div className={'flex cursor-pointer gap-1'}>
-                <LogOut className={'h-4 w-4 text-gray-400'} />
+                <LogOut className={'text-subtle-foreground h-4 w-4'} />
                 <Text className={'text-[10px] font-normal text-slate-400 md:text-[12px]'}>내보내기</Text>
               </div>
             </div>

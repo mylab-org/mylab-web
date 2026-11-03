@@ -11,7 +11,7 @@ export const LabLinkItem = ({ href, name, ...rest }: LabLinkProps) => {
     <a
       href={href}
       className={
-        'flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2.5 py-1.5 text-[12px] md:text-[14px]'
+        'border-border bg-card flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[12px] md:text-[14px]'
       }
       {...rest}
     >

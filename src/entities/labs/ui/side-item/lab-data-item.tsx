@@ -9,12 +9,12 @@ export const LabDataItem = () => {
           시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
         </Text>
         <Avatar src={'/icon/link.svg'} alt={'link'} width={16} height={16}>
-          <Text className={'min-w-0 truncate text-[12px] font-normal text-gray-500 lg:text-[14px]'}>
+          <Text className={'text-muted-foreground min-w-0 truncate text-[12px] font-normal lg:text-[14px]'}>
             시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
           </Text>
         </Avatar>
         <Avatar src={'/icon/icon_main_download.svg'} alt={'down'} width={16} height={16}>
-          <Text className={'min-w-0 truncate text-[12px] font-normal text-gray-500 lg:text-[14px]'}>
+          <Text className={'text-muted-foreground min-w-0 truncate text-[12px] font-normal lg:text-[14px]'}>
             시맨틱 통신 기반 mmWave/THz 대역 통신/네트워크 기술 최적화 연구
           </Text>
         </Avatar>

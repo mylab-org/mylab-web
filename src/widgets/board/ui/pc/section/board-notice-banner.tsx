@@ -28,10 +28,10 @@ export const BoardNoticeBanner = () => {
   const hiddenCount = DUMMY_NOTICES.length - PREVIEW_COUNT
 
   return (
-    <div className={'flex flex-col gap-2 rounded-[12px] border border-[#2562CD]/20 bg-[#2562CD]/5 px-3.5 py-3 md:px-4'}>
+    <div className={'border-brand/20 bg-brand/5 flex flex-col gap-2 rounded-[12px] border px-3.5 py-3 md:px-4'}>
       <div className={'flex items-center gap-1.5'}>
-        <Pin className={'h-3.5 w-3.5 text-[#2562CD]'} aria-hidden />
-        <Text className={'text-[12px] font-semibold text-[#2562CD]! md:text-[13px]'}>공지사항</Text>
+        <Pin className={'text-brand h-3.5 w-3.5'} aria-hidden />
+        <Text className={'text-brand! text-[12px] font-semibold md:text-[13px]'}>공지사항</Text>
       </div>
 
       <ul className={'flex flex-col gap-2'}>
@@ -39,10 +39,10 @@ export const BoardNoticeBanner = () => {
           <li key={notice.id}>
             <button
               type={'button'}
-              className={'flex w-full flex-col gap-0.5 rounded-[8px] px-1 py-1 text-left hover:bg-white/60'}
+              className={'hover:bg-card/60 flex w-full flex-col gap-0.5 rounded-[8px] px-1 py-1 text-left'}
             >
               <Text className={'line-clamp-1 text-[14px] font-bold md:text-[15px]'}>{notice.title}</Text>
-              <Text className={'text-[12px] font-medium text-gray-400!'}>{notice.dateLabel}</Text>
+              <Text className={'text-subtle-foreground! text-[12px] font-medium'}>{notice.dateLabel}</Text>
             </button>
           </li>
         ))}
@@ -50,7 +50,7 @@ export const BoardNoticeBanner = () => {
 
       {hiddenCount > 0 && (
         <button type={'button'} className={'self-start px-1'} onClick={() => setIsExpanded(prev => !prev)}>
-          <Text className={'text-[12px] font-medium text-[#2562CD]!'}>
+          <Text className={'text-brand! text-[12px] font-medium'}>
             {isExpanded ? '접기' : `공지 ${hiddenCount}개 더보기`}
           </Text>
         </button>

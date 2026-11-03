@@ -13,7 +13,7 @@ export const LabMenuItem = ({ children, name, onClick, compact = false }: LabTop
   return (
     <div
       className={cn(
-        'flex cursor-pointer flex-col items-center justify-center gap-1 rounded-[12px] bg-white md:rounded-[16px]',
+        'bg-card flex cursor-pointer flex-col items-center justify-center gap-1 rounded-[12px] md:rounded-[16px]',
         CARD_SHADOW,
         compact ? 'min-w-0 flex-1 px-1 py-2 xl:px-2 xl:py-2.5' : 'w-[150px] flex-1 p-1.25 md:px-5 md:py-2.5',
       )}

@@ -22,7 +22,7 @@ export const MobileWorkPage = () => {
 
   return (
     <div className={'flex flex-1 flex-col gap-4 px-5 focus:outline-none'}>
-      <div className={`flex min-h-0 flex-1 flex-col rounded-[20px] bg-white p-4 ${CARD_SHADOW}`}>
+      <div className={`bg-card flex min-h-0 flex-1 flex-col rounded-[20px] p-4 ${CARD_SHADOW}`}>
         <WorksModeTabs tabs={tabs} />
       </div>
     </div>

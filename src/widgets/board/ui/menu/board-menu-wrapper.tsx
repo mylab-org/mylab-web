@@ -34,7 +34,7 @@ export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
         className={cn(
           'w-full rounded-[10px] text-left!',
           isMobile ? 'min-h-11 px-3 py-3 text-[14px]!' : 'px-2.5 py-2 text-[14px]!',
-          isActive ? 'bg-[#2562CD]/10 text-[#2562CD]!' : 'text-gray-600!',
+          isActive ? 'bg-brand/10 text-brand!' : 'text-muted-foreground!',
         )}
         isActive={isActive}
         onClick={() => setCategoryId(menu.category_id)}
@@ -47,12 +47,12 @@ export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
   if (isMobile) {
     return (
       <section className={'flex flex-1 flex-col gap-4'}>
-        <div className={cn('flex flex-col gap-2 rounded-[20px] bg-white p-4', CARD_SHADOW)}>
-          <h3 className={'px-1 text-[12px] font-semibold text-gray-400!'}>공유 카테고리</h3>
+        <div className={cn('bg-card flex flex-col gap-2 rounded-[20px] p-4', CARD_SHADOW)}>
+          <h3 className={'text-subtle-foreground! px-1 text-[12px] font-semibold'}>공유 카테고리</h3>
           <div className={'flex flex-col gap-1'}>{boardCategory?.service.map(renderMenuButton)}</div>
         </div>
-        <div className={cn('flex flex-col gap-2 rounded-[20px] bg-white p-4', CARD_SHADOW)}>
-          <h3 className={'px-1 text-[12px] font-semibold text-gray-400!'}>우리 연구실 메뉴</h3>
+        <div className={cn('bg-card flex flex-col gap-2 rounded-[20px] p-4', CARD_SHADOW)}>
+          <h3 className={'text-subtle-foreground! px-1 text-[12px] font-semibold'}>우리 연구실 메뉴</h3>
           <div className={'flex flex-col gap-1'}>{boardCategory?.lab.map(renderMenuButton)}</div>
         </div>
       </section>
@@ -62,11 +62,11 @@ export const BoardMenuWrapper = ({ variant = 'pc' }: BoardMenuWrapperProps) => {
   return (
     <section className={'flex flex-1 flex-col gap-4'}>
       <div className={'flex flex-col gap-1.5'}>
-        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400!'}>공유 카테고리</h3>
+        <h3 className={'text-subtle-foreground! px-1.5 text-[12px] font-semibold'}>공유 카테고리</h3>
         {boardCategory?.service.map(renderMenuButton)}
       </div>
-      <div className={'flex flex-col gap-1.5 border-t border-gray-100 pt-4'}>
-        <h3 className={'px-1.5 text-[12px] font-semibold text-gray-400!'}>우리 연구실 메뉴</h3>
+      <div className={'border-border flex flex-col gap-1.5 border-t pt-4'}>
+        <h3 className={'text-subtle-foreground! px-1.5 text-[12px] font-semibold'}>우리 연구실 메뉴</h3>
         {boardCategory?.lab.map(renderMenuButton)}
       </div>
     </section>

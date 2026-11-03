@@ -28,7 +28,7 @@ export const MoreModeTabs = ({ tabs }: MoreModeTabsProps) => {
               type={'button'}
               className={cn(
                 'shrink-0 rounded-full px-3.5 py-2 text-[13px] font-semibold transition-colors',
-                isActive ? 'bg-[#2562CD] text-white' : 'bg-white text-gray-500 shadow-sm',
+                isActive ? 'bg-brand text-brand-foreground' : 'bg-card text-muted-foreground shadow-sm',
               )}
               onClick={() => setCurrentTab(tab.name)}
             >

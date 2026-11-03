@@ -30,7 +30,7 @@ export const WorksModeTabs = ({ tabs, rightItem }: WorksModeTabsProps) => {
                 type={'button'}
                 className={cn(
                   'shrink-0 rounded-full px-3.5 py-2 text-[13px] font-semibold transition-colors md:text-[15px]',
-                  isActive ? 'bg-[#2562CD] text-white' : 'bg-gray-100 text-gray-500',
+                  isActive ? 'bg-brand text-brand-foreground' : 'bg-muted text-muted-foreground',
                 )}
                 onClick={() => setCurrentTab(tab.name)}
               >

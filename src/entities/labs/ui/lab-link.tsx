@@ -12,7 +12,7 @@ interface LabLinkProps {
 
 export const LabLink = ({ setIsOpen }: LabLinkProps) => {
   return (
-    <div className={cn('flex flex-col gap-3 rounded-[20px] bg-white p-5', CARD_SHADOW)}>
+    <div className={cn('bg-card flex flex-col gap-3 rounded-[20px] p-5', CARD_SHADOW)}>
       <div className={'flex items-center justify-between'}>
         <h3 className={'text-[18px] leading-7 font-bold md:text-[20px]'}>링크</h3>
         <Image

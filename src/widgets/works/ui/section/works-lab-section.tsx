@@ -43,15 +43,13 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
   }
 
   if (isPending) {
-    return <Text className={'py-8 text-center text-[14px] text-gray-400!'}>연구실 업무를 불러오는 중...</Text>
+    return <Text className={'text-subtle-foreground! py-8 text-center text-[14px]'}>연구실 업무를 불러오는 중...</Text>
   }
 
   if (!members?.length) {
     return (
-      <div
-        className={'flex flex-col items-center gap-2 rounded-[16px] border border-dashed border-gray-200 px-4 py-10'}
-      >
-        <Text className={'text-[14px] font-medium text-gray-400!'}>표시할 연구실 멤버가 없습니다.</Text>
+      <div className={'border-border flex flex-col items-center gap-2 rounded-[16px] border border-dashed px-4 py-10'}>
+        <Text className={'text-subtle-foreground! text-[14px] font-medium'}>표시할 연구실 멤버가 없습니다.</Text>
       </div>
     )
   }
@@ -63,7 +61,7 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
         const workCount = member.papers.length + member.tasks.length
 
         return (
-          <div key={member.userId} className={'overflow-hidden rounded-[16px] border border-gray-100 bg-white'}>
+          <div key={member.userId} className={'border-border bg-card overflow-hidden rounded-[16px] border'}>
             <button
               type={'button'}
               className={'flex w-full items-center justify-between gap-3 px-3.5 py-3 text-left md:px-4'}
@@ -72,18 +70,18 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
               <Avatar src={'/test.png'} alt={'profile'} width={24} height={24} imgClassName={'rounded-full'}>
                 <div className={'flex min-w-0 flex-col'}>
                   <Text className={'text-[15px] font-semibold md:text-[18px]'}>{member.name}</Text>
-                  <Text className={'text-[11px] font-medium text-gray-400! md:text-[12px]'}>
+                  <Text className={'text-subtle-foreground! text-[11px] font-medium md:text-[12px]'}>
                     논문 {member.papers.length} · 업무 {member.tasks.length}
                   </Text>
                 </div>
               </Avatar>
               <div className={'flex shrink-0 items-center gap-2'}>
-                <span className={'rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold text-gray-500'}>
+                <span className={'bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold'}>
                   {workCount}
                 </span>
                 <ChevronDown
                   className={cn(
-                    'size-4 shrink-0 text-gray-400 transition-transform duration-200',
+                    'text-subtle-foreground size-4 shrink-0 transition-transform duration-200',
                     isOpen && 'rotate-180',
                   )}
                 />
@@ -91,10 +89,10 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
             </button>
 
             {isOpen && (
-              <div className={'max-h-[600px] overflow-y-auto border-t border-gray-100 px-3.5 py-3 md:px-4'}>
+              <div className={'border-border max-h-[600px] overflow-y-auto border-t px-3.5 py-3 md:px-4'}>
                 {workCount === 0 ? (
                   <div className={'flex h-[88px] items-center justify-center'}>
-                    <Text className={'text-[13px] font-medium text-gray-400 md:text-[14px]'}>
+                    <Text className={'text-subtle-foreground text-[13px] font-medium md:text-[14px]'}>
                       진행 중인 업무가 없습니다.
                     </Text>
                   </div>
@@ -104,14 +102,14 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
                       <WorksLabCard
                         key={`paper-${paper.id}`}
                         paper={paper}
-                        className={'w-full rounded-[12px] border border-[#e2e3e5] p-3.5 md:w-full'}
+                        className={'border-border w-full rounded-[12px] border p-3.5 md:w-full'}
                       />
                     ))}
                     {member.tasks.map(task => (
                       <WorksLabCard
                         key={`task-${task.taskId}`}
                         task={task}
-                        className={'w-full rounded-[12px] border border-[#e2e3e5] p-3.5 md:w-full'}
+                        className={'border-border w-full rounded-[12px] border p-3.5 md:w-full'}
                       />
                     ))}
                   </div>
@@ -123,14 +121,14 @@ export const WorksLabSection = ({ variant = 'pc' }: WorksLabSectionProps) => {
                           <WorksLabCard
                             key={`paper-${paper.id}`}
                             paper={paper}
-                            className={'rounded-[12px] border border-[#e2e3e5] p-4'}
+                            className={'border-border rounded-[12px] border p-4'}
                           />
                         ))}
                         {member.tasks.map(task => (
                           <WorksLabCard
                             key={`task-${task.taskId}`}
                             task={task}
-                            className={'rounded-[12px] border border-[#e2e3e5] p-4'}
+                            className={'border-border rounded-[12px] border p-4'}
                           />
                         ))}
                       </div>

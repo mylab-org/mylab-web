@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body className="flex min-h-dvh w-full bg-[#f9f9f9]">
+      <body className="bg-canvas flex min-h-dvh w-full">
         <AppProviders>
           {children}
           <Confirm />

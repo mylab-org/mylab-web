@@ -30,7 +30,7 @@ export const Dialog = () => {
         <DialogPrimitive.Content
           aria-describedby={undefined}
           className={
-            'fixed top-1/2 left-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col rounded-[20px] bg-white shadow-lg outline-none'
+            'bg-card fixed top-1/2 left-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col rounded-[20px] shadow-lg outline-none'
           }
         >
           <div className={'flex w-[300px] flex-col p-5 md:w-[600px]'}>
@@ -43,11 +43,11 @@ export const Dialog = () => {
               </DialogClose>
             </div>
             <div className={'flex flex-col gap-2.5 py-5'}>
-              <Text className={'text-[12px] font-medium whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
+              <Text className={'text-muted-foreground! text-[12px] font-medium whitespace-pre-wrap md:text-[14px]'}>
                 {item.description}
               </Text>
               {item.etc && (
-                <Text className={'text-[12px] font-bold whitespace-pre-wrap text-gray-600! md:text-[14px]'}>
+                <Text className={'text-muted-foreground! text-[12px] font-bold whitespace-pre-wrap md:text-[14px]'}>
                   {item.etc}
                 </Text>
               )}

@@ -13,7 +13,7 @@ export const LabWorkingSection = ({ isMobile = false }: { isMobile?: boolean }) 
   return (
     <div
       className={cn(
-        'flex w-full flex-col gap-3.5 rounded-[20px] bg-white p-5 md:p-6',
+        'bg-card flex w-full flex-col gap-3.5 rounded-[20px] p-5 md:p-6',
         CARD_SHADOW,
         !isMobile && 'min-h-0 flex-1',
       )}
@@ -22,17 +22,17 @@ export const LabWorkingSection = ({ isMobile = false }: { isMobile?: boolean }) 
         <h3 className={'min-w-0 text-[18px] leading-7 font-bold md:text-[22px] md:leading-8'}>진행 중인 업무 현황</h3>
         {isMobile && (
           <button type={'button'} className={'shrink-0'} onClick={() => openSideModal(SideWork, '진행 중인 업무 현황')}>
-            <Text className={'text-[12px] font-medium text-[#2562CD]!'}>전체 보기</Text>
+            <Text className={'text-brand! text-[12px] font-medium'}>전체 보기</Text>
           </button>
         )}
       </div>
       <WorksLabCard
         paper={DUMMY_WORKS_PAPER}
-        className={'w-full max-w-full shrink rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'}
+        className={'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'}
       />
       <WorksLabCard
         task={DUMMY_WORKS_TASK}
-        className={'w-full max-w-full shrink rounded-[12px] border border-[#e2e3e5] p-4 md:w-full'}
+        className={'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'}
       />
     </div>
   )

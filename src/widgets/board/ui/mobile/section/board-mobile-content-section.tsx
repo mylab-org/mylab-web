@@ -32,16 +32,18 @@ export const BoardMobileContentSection = () => {
   return (
     <section className={'flex flex-1 flex-col gap-3'}>
       <div className={'flex items-center gap-4'}>
-        <Link href={BASE_PATHS.BOARD} aria-label={'카테고리 목록으로'} className={'mt-0.5 shrink-0 text-gray-900'}>
+        <Link href={BASE_PATHS.BOARD} aria-label={'카테고리 목록으로'} className={'text-foreground mt-0.5 shrink-0'}>
           <ChevronLeftIcon className={'h-6 w-6'} />
         </Link>
         <div className={'flex min-w-0 flex-col'}>
-          {categoryGroupLabel && <Text className={'text-[11px] font-medium text-gray-400!'}>{categoryGroupLabel}</Text>}
+          {categoryGroupLabel && (
+            <Text className={'text-subtle-foreground! text-[11px] font-medium'}>{categoryGroupLabel}</Text>
+          )}
           <Text className={'truncate text-[16px] font-semibold'}>{categoryName}</Text>
         </div>
       </div>
 
-      <div className={cn('flex flex-1 flex-col rounded-[20px] bg-white p-4', CARD_SHADOW)}>
+      <div className={cn('bg-card flex flex-1 flex-col rounded-[20px] p-4', CARD_SHADOW)}>
         <BoardContentSection variant={'mobile'} />
       </div>
     </section>

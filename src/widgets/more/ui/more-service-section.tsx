@@ -55,7 +55,7 @@ export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
           <div className={'flex flex-col gap-2'}>
             <div className={'flex items-center justify-between gap-2'}>
               <h5 className={'text-[13px] font-bold md:text-[15px]'}>테마 설정</h5>
-              <span className={'rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold text-gray-400'}>
+              <span className={'bg-muted text-subtle-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold'}>
                 준비 중
               </span>
             </div>
@@ -67,14 +67,14 @@ export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
               <Button.Setup className={'pointer-events-none flex-1'}>다크</Button.Setup>
             </div>
           </div>
-          <div className={'flex flex-col gap-2 rounded-[12px] bg-gray-50 px-3 py-3'}>
+          <div className={'bg-muted flex flex-col gap-2 rounded-[12px] px-3 py-3'}>
             <div className={'flex items-center justify-between gap-2'}>
               <Text className={'text-[13px] font-bold md:text-[15px]'}>알림 설정</Text>
-              <span className={'rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-gray-400'}>
+              <span className={'bg-card text-subtle-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold'}>
                 준비 중
               </span>
             </div>
-            <Text className={'text-[12px] font-medium text-gray-500!'}>
+            <Text className={'text-muted-foreground! text-[12px] font-medium'}>
               업무 시간 외·자정 시간 알림 금지는 추후 제공될 예정입니다.
             </Text>
           </div>
@@ -96,7 +96,7 @@ export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
             onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => postAuthLogoutMutation.mutate())}
           />
         </div>
-        <div className={'border-t border-gray-100 pt-1'}>
+        <div className={'border-border border-t pt-1'}>
           <MoreMenuRow label={'회원 탈퇴'} destructive onClick={handleServiceLeave} />
         </div>
       </MoreMenuContentWrap>

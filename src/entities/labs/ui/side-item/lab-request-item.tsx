@@ -12,7 +12,7 @@ export const LabRequestItem = ({ isCheck = false }: { isCheck?: boolean }) => {
         </div>
         <Text className={'text-[14px] font-bold lg:text-[18px]'}>{Number(30000).toLocaleString()} 원</Text>
         <Avatar src={'/icon/link.svg'} alt={'link'} width={16} height={16}>
-          <Text className={'min-w-0 truncate text-[12px] font-normal text-gray-500 lg:text-[14px]'}>
+          <Text className={'text-muted-foreground min-w-0 truncate text-[12px] font-normal lg:text-[14px]'}>
             https://prod.danawa.com/info/?pcode=11317038&keyword=%EB%A1%9C%EC%A7%80%ED%85%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&cate=112787
           </Text>
         </Avatar>

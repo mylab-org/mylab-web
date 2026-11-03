@@ -21,8 +21,8 @@ export const UserMoreInfo = ({ user }: Props) => {
           <Tag.Roll variant={user.degree} />
         </div>
         <div className={'text-[12px] font-medium md:text-[14px]'}>
-          <Text className={'truncate text-gray-600!'}>{user.lab.labName}</Text>
-          <Text className={'truncate text-gray-600!'}>{user.email}</Text>
+          <Text className={'text-muted-foreground! truncate'}>{user.lab.labName}</Text>
+          <Text className={'text-muted-foreground! truncate'}>{user.email}</Text>
         </div>
       </div>
     </div>

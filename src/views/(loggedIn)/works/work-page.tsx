@@ -22,7 +22,7 @@ const tabs = [
 export const WorkPage = () => {
   return (
     <div
-      className={`flex min-h-0 min-w-0 flex-1 flex-col rounded-[20px] bg-white p-5 ${CARD_SHADOW} focus:outline-none`}
+      className={`bg-card flex min-h-0 min-w-0 flex-1 flex-col rounded-[20px] p-5 ${CARD_SHADOW} focus:outline-none`}
     >
       <WorksModeTabs tabs={tabs} />
     </div>

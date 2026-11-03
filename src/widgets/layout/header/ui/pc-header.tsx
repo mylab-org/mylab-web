@@ -11,8 +11,8 @@ export const PcHeader = () => {
     <header className={'relative flex items-center justify-between'}>
       <div className={'flex cursor-pointer items-center gap-[10px]'}>
         <Image src={'/Mylab_Logo.png'} alt={'로고'} width={40} height={40} />
-        <h1 className={'text-[28px] leading-none font-extrabold text-gray-900 md:text-[32px]'}>
-          My<span className={'text-[#2562CD]'}>Lab</span>
+        <h1 className={'text-foreground text-[28px] leading-none font-extrabold md:text-[32px]'}>
+          My<span className={'text-brand'}>Lab</span>
         </h1>
       </div>
       <Image

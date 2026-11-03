@@ -31,7 +31,7 @@ export const MoreMySection = ({ isMobile = false }: WrapProps) => {
 
   return (
     <section className={'flex w-full flex-col gap-3'}>
-      <div className={cn('flex flex-col gap-3 rounded-[20px] bg-white', CARD_SHADOW, isMobile ? 'p-4' : 'p-5')}>
+      <div className={cn('bg-card flex flex-col gap-3 rounded-[20px]', CARD_SHADOW, isMobile ? 'p-4' : 'p-5')}>
         <UserMoreInfo user={me} />
         <Button
           className={'text-[13px]! md:text-[15px]!'}
@@ -47,7 +47,7 @@ export const MoreMySection = ({ isMobile = false }: WrapProps) => {
           <MoreMenuRow label={'내가 작성한 글 확인'} upcoming />
           <MoreMenuRow label={'내가 작성한 댓글 확인'} upcoming />
         </div>
-        <div className={'border-t border-gray-100 pt-1'}>
+        <div className={'border-border border-t pt-1'}>
           <MoreMenuRow label={'연구실 나가기'} destructive onClick={handleLabExit} />
         </div>
       </MoreMenuContentWrap>

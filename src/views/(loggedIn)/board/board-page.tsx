@@ -31,10 +31,10 @@ export const BoardPage = async ({ categoryId }: BoardPageProps) => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
-        <aside className={`flex w-[220px] shrink-0 flex-col rounded-[20px] bg-white p-3 ${CARD_SHADOW}`}>
+        <aside className={`bg-card flex w-[220px] shrink-0 flex-col rounded-[20px] p-3 ${CARD_SHADOW}`}>
           <BoardMenuWrapper />
         </aside>
-        <div className={`flex min-w-0 flex-1 flex-col rounded-[20px] bg-white p-4 ${CARD_SHADOW}`}>
+        <div className={`bg-card flex min-w-0 flex-1 flex-col rounded-[20px] p-4 ${CARD_SHADOW}`}>
           <BoardContentSection variant={'pc'} />
         </div>
       </div>

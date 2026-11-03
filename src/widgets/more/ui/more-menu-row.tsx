@@ -26,23 +26,23 @@ export const MoreMenuRow = ({
       onClick={onClick}
       className={cn(
         'flex w-full items-center justify-between gap-3 rounded-[12px] px-1 py-2.5 text-left transition-colors',
-        isDisabled ? 'cursor-not-allowed' : 'cursor-pointer hover:bg-gray-50',
+        isDisabled ? 'cursor-not-allowed' : 'hover:bg-muted cursor-pointer',
       )}
     >
       <Text
         className={cn(
           'text-[13px] font-medium md:text-[15px]',
-          destructive && !isDisabled ? 'text-error!' : isDisabled ? 'text-gray-400!' : 'text-gray-900!',
+          destructive && !isDisabled ? 'text-error!' : isDisabled ? 'text-subtle-foreground!' : 'text-foreground!',
         )}
       >
         {label}
       </Text>
       {upcoming ? (
-        <span className={'shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold text-gray-400'}>
+        <span className={'bg-muted text-subtle-foreground shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold'}>
           준비 중
         </span>
       ) : (
-        <ChevronRight className={cn('h-4 w-4 shrink-0', destructive ? 'text-error/60' : 'text-gray-300')} />
+        <ChevronRight className={cn('h-4 w-4 shrink-0', destructive ? 'text-error/60' : 'text-muted-foreground/50')} />
       )}
     </button>
   )

@@ -31,7 +31,7 @@ export const Confirm = () => {
           aria-describedby={undefined}
           onInteractOutside={e => e.preventDefault()}
           className={
-            'fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] bg-white outline-none'
+            'bg-card fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] outline-none'
           }
         >
           <div className="flex w-full flex-1 items-center justify-center p-12.5">

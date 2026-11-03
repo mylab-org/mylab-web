@@ -21,14 +21,14 @@ export const UserInfo = ({ user }: Props) => {
   return (
     <div
       className={cn(
-        'flex w-full items-center justify-between gap-3 rounded-[20px] bg-white p-4 md:gap-6 md:p-6',
+        'bg-card flex w-full items-center justify-between gap-3 rounded-[20px] p-4 md:gap-6 md:p-6',
         CARD_SHADOW,
       )}
     >
       <div className={'flex min-w-0 flex-1 items-center gap-2.5 md:gap-6'}>
-        <div className={'h-[56px] w-[56px] shrink-0 rounded-full bg-gray-300 md:h-[72px] md:w-[72px]'} />
+        <div className={'bg-muted h-[56px] w-[56px] shrink-0 rounded-full md:h-[72px] md:w-[72px]'} />
         <div className={'flex min-w-0 flex-col gap-2'}>
-          <Text className={'text-[13px] font-medium text-gray-500! md:text-[15px]'}>{getGreeting()}</Text>
+          <Text className={'text-muted-foreground! text-[13px] font-medium md:text-[15px]'}>{getGreeting()}</Text>
           <div className={'flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1'}>
             <Text className={'truncate text-[16px] font-bold md:text-[20px]'}>{user.name}</Text>
             <div className={'flex gap-1.25'}>
@@ -38,18 +38,20 @@ export const UserInfo = ({ user }: Props) => {
               <Tag.Roll variant={user.degree} />
             </div>
           </div>
-          <Text className={'truncate text-[12px] font-medium text-gray-600! md:text-[14px]'}>{user.lab.labName}</Text>
+          <Text className={'text-subtle-foreground! truncate text-[12px] font-medium md:text-[14px]'}>
+            {user.lab.labName}
+          </Text>
         </div>
       </div>
 
       <div className={'hidden shrink-0 items-center gap-3 md:flex'}>
-        <div className={'flex min-w-[72px] flex-col items-center gap-1 rounded-[12px] bg-gray-50 px-3 py-2.5'}>
-          <Text className={'text-[18px] font-bold text-[#2562CD]! md:text-[20px]'}>2</Text>
-          <Text className={'text-[11px] font-medium text-gray-500! md:text-[12px]'}>오늘 일정</Text>
+        <div className={'bg-muted flex min-w-[72px] flex-col items-center gap-1 rounded-[12px] px-3 py-2.5'}>
+          <Text className={'text-brand! text-[18px] font-bold md:text-[20px]'}>2</Text>
+          <Text className={'text-muted-foreground! text-[11px] font-medium md:text-[12px]'}>오늘 일정</Text>
         </div>
-        <div className={'flex min-w-[72px] flex-col items-center gap-1 rounded-[12px] bg-gray-50 px-3 py-2.5'}>
-          <Text className={'text-[18px] font-bold text-[#2562CD]! md:text-[20px]'}>2</Text>
-          <Text className={'text-[11px] font-medium text-gray-500! md:text-[12px]'}>진행 업무</Text>
+        <div className={'bg-muted flex min-w-[72px] flex-col items-center gap-1 rounded-[12px] px-3 py-2.5'}>
+          <Text className={'text-brand! text-[18px] font-bold md:text-[20px]'}>2</Text>
+          <Text className={'text-muted-foreground! text-[11px] font-medium md:text-[12px]'}>진행 업무</Text>
         </div>
       </div>
     </div>

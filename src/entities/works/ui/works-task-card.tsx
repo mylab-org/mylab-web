@@ -32,7 +32,7 @@ export const WorksTaskCard = ({ task, moreMenu }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex w-full flex-col gap-2.5 rounded-[16px] border border-l-4 border-[#e2e3e5] bg-white p-3.5 shadow-sm md:gap-3 md:p-4',
+        'border-border flex w-full flex-col gap-2.5 rounded-[16px] border border-l-4 bg-white p-3.5 shadow-sm md:gap-3 md:p-4',
         isDragging ? 'relative z-0' : 'relative z-10',
         task.type === 'MEETING' ? 'border-l-red-400' : 'border-l-violet-400',
       )}

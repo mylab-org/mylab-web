@@ -27,11 +27,13 @@ export const WorksStatusChips = ({ items, activeStatus, onChange }: WorksStatusC
             onClick={() => onChange(item.status)}
             className={cn(
               'shrink-0 rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors',
-              isActive ? 'bg-[#2562CD] text-white' : 'bg-gray-100 text-gray-600',
+              isActive ? 'bg-brand text-brand-foreground' : 'bg-muted text-subtle-foreground',
             )}
           >
             {item.label}
-            <span className={cn('ml-1', isActive ? 'text-white/80' : 'text-gray-400')}>{item.count}</span>
+            <span className={cn('ml-1', isActive ? 'text-brand-foreground/80' : 'text-subtle-foreground')}>
+              {item.count}
+            </span>
           </button>
         )
       })}

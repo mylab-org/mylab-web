@@ -41,14 +41,14 @@ export const BoardContentSection = ({ variant = 'pc' }: BoardContentSectionProps
         type="button"
         className={cn(
           'flex cursor-pointer items-center gap-2.5 rounded-[14px] border px-4 py-3 transition-colors',
-          'border-[#2562CD]/30 bg-[#2562CD]/5 hover:bg-[#2562CD]/10',
+          'border-brand/30 bg-brand/5 hover:bg-brand/10',
         )}
         onClick={() => setIsPostFormOpen(prev => !prev)}
       >
-        <Text className={'w-full text-left text-[13px] font-medium text-[#2562CD]! md:text-[15px]'}>
+        <Text className={'text-brand! w-full text-left text-[13px] font-medium md:text-[15px]'}>
           {categoryName ? `${categoryName}에 새 소식을 전해보세요!` : '새 소식을 전해보세요!'}
         </Text>
-        <Pencil className="h-4 w-4 shrink-0 text-[#2562CD] md:h-5 md:w-5" />
+        <Pencil className="text-brand h-4 w-4 shrink-0 md:h-5 md:w-5" />
       </button>
       {isPostFormOpen && <BoardCreateForm onClose={() => setIsPostFormOpen(false)} />}
 

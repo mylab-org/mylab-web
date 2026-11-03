@@ -13,7 +13,7 @@ import {
 export const LabUserDataSkeleton = () => {
   return (
     <section className={'flex w-110.25 flex-col gap-7.5'}>
-      <div className={cn('flex items-center gap-2.5 rounded-[24px] bg-white p-5 md:p-6', CARD_SHADOW)}>
+      <div className={cn('bg-card flex items-center gap-2.5 rounded-[24px] p-5 md:p-6', CARD_SHADOW)}>
         <Skeleton circle className={'h-17.5 w-17.5 md:h-25 md:w-25'} />
 
         <div className={'flex flex-col gap-2.5 p-2.5'}>
