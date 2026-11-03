@@ -1,3 +1,6 @@
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { cn } from '@/shared/lib'
+
 interface MoreMenuWrapProps {
   title: string
   children: React.ReactNode
@@ -6,10 +9,8 @@ interface MoreMenuWrapProps {
 
 export const MoreMenuContentWrap = ({ title, children, isMobile = false }: MoreMenuWrapProps) => {
   return (
-    <div
-      className={`${isMobile ? 'p-3' : 'p-5'} flex flex-col gap-5 rounded-[12px] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]`}
-    >
-      <h3 className={'text-[16px] font-bold md:text-[22px]'}>{title}</h3>
+    <div className={cn('flex flex-col gap-4 rounded-[20px] bg-white', CARD_SHADOW, isMobile ? 'gap-3.5 p-4' : 'p-5')}>
+      <h3 className={'text-[16px] font-bold md:text-[20px]'}>{title}</h3>
       {children}
     </div>
   )

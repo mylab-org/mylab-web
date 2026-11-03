@@ -9,6 +9,7 @@ export const MorePage = async () => {
 
   const me = await getUsersMeServer().catch(() => null)
   const labId = me?.lab?.labId
+  const showLabSection = me?.lab.role !== 'MEMBER'
 
   if (labId !== undefined) {
     await queryClient.prefetchQuery({
@@ -18,11 +19,17 @@ export const MorePage = async () => {
   }
 
   return (
-    <div className={'flex flex-1 gap-7.5 focus:outline-none'}>
+    <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <MoreMySection isMaxWidth />
-        {me?.lab.role !== 'MEMBER' && <MoreLabSection isMaxWidth />}
-        <MoreServiceSection isMaxWidth />
+        <div className={'flex min-w-0 flex-1 flex-col gap-4'}>
+          <MoreMySection />
+          <MoreServiceSection />
+        </div>
+        {showLabSection && (
+          <div className={'flex w-full max-w-[480px] shrink-0 flex-col'}>
+            <MoreLabSection />
+          </div>
+        )}
       </HydrationBoundary>
     </div>
   )

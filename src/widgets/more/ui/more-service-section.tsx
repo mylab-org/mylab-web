@@ -1,5 +1,6 @@
 'use client'
 
+import { MoreMenuRow } from './more-menu-row'
 import { MoreServiceUse } from './side/more-service-use'
 import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
 import { UserPasswordUpdateForm } from '@/features/user'
@@ -9,16 +10,14 @@ import { clearAccessToken, runLogoutHandler } from '@/shared/lib/token/client-ac
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useConfirmStore, useDialogStore, useSideModalStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
-import { Switch } from '@/shared/ui/override/switch'
 import { Text } from '@/shared/ui/override/text'
 import { MoreMenuContentWrap } from '@/shared/ui/template/more-menu-content-wrap'
 
 interface WrapProps {
-  isMaxWidth?: boolean
   isMobile?: boolean
 }
 
-export const MoreServiceSection = ({ isMaxWidth = false, isMobile = false }: WrapProps) => {
+export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
@@ -50,60 +49,55 @@ export const MoreServiceSection = ({ isMaxWidth = false, isMobile = false }: Wra
   })
 
   return (
-    <section className={`flex flex-[1_0_400px] flex-col gap-2.5 ${isMaxWidth && 'max-w-[550px]'}`}>
+    <section className={'flex w-full flex-col gap-3'}>
       <MoreMenuContentWrap title={'서비스 설정'} isMobile={isMobile}>
-        <div className={'flex flex-col gap-5'}>
-          <div>
-            <h5 className={'text-[12px] font-bold md:text-[16px]'}>테마 설정</h5>
-            <div className={'flex items-center justify-between p-2.5'}>
-              <Button.Setup isActive>시스템 설정</Button.Setup>
-              <Button.Setup>라이트</Button.Setup>
-              <Button.Setup>다크</Button.Setup>
+        <div className={'flex flex-col gap-4'}>
+          <div className={'flex flex-col gap-2'}>
+            <div className={'flex items-center justify-between gap-2'}>
+              <h5 className={'text-[13px] font-bold md:text-[15px]'}>테마 설정</h5>
+              <span className={'rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold text-gray-400'}>
+                준비 중
+              </span>
+            </div>
+            <div className={'flex items-center gap-2 opacity-50'}>
+              <Button.Setup isActive className={'pointer-events-none flex-1'}>
+                시스템
+              </Button.Setup>
+              <Button.Setup className={'pointer-events-none flex-1'}>라이트</Button.Setup>
+              <Button.Setup className={'pointer-events-none flex-1'}>다크</Button.Setup>
             </div>
           </div>
-          <div className={'flex flex-col gap-2.5'}>
-            <Switch
-              isSwitch={true}
-              onSwitch={() => {}}
-              isBetween
-              title={<Text className={'text-[12px] font-bold md:text-[16px]'}>업무 시간 외 알림 금지 설정</Text>}
-              description={
-                <Text className={'text-[10px] font-medium text-gray-600! md:text-[14px]'}>
-                  9시 ~ 18시 외 발생하는 푸시알림 유무를 선택합니다.
-                </Text>
-              }
-            />
-            <Switch
-              isSwitch={true}
-              onSwitch={() => {}}
-              isBetween
-              title={<Text className={'text-[12px] font-bold md:text-[16px]'}>자정 시간 알림 금지 설정</Text>}
-              description={
-                <Text className={'text-[10px] font-medium text-gray-600! md:text-[14px]'}>
-                  0시 ~ 6시까지 발생하는 푸시알림 유무를 선택합니다.
-                </Text>
-              }
-            />
+          <div className={'flex flex-col gap-2 rounded-[12px] bg-gray-50 px-3 py-3'}>
+            <div className={'flex items-center justify-between gap-2'}>
+              <Text className={'text-[13px] font-bold md:text-[15px]'}>알림 설정</Text>
+              <span className={'rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-gray-400'}>
+                준비 중
+              </span>
+            </div>
+            <Text className={'text-[12px] font-medium text-gray-500!'}>
+              업무 시간 외·자정 시간 알림 금지는 추후 제공될 예정입니다.
+            </Text>
           </div>
         </div>
       </MoreMenuContentWrap>
+
       <MoreMenuContentWrap title={'이용 안내'} isMobile={isMobile}>
-        <div className={'flex flex-col gap-5'}>
-          <Button.Menu onClick={() => openSideModal(MoreServiceUse, '서비스 이용약관')}>서비스 이용약관</Button.Menu>
-          <Button.Menu>1:1 문의내역</Button.Menu>
+        <div className={'flex flex-col gap-1'}>
+          <MoreMenuRow label={'서비스 이용약관'} onClick={() => openSideModal(MoreServiceUse, '서비스 이용약관')} />
+          <MoreMenuRow label={'1:1 문의내역'} upcoming />
         </div>
       </MoreMenuContentWrap>
+
       <MoreMenuContentWrap title={'계정'} isMobile={isMobile}>
-        <div className={'flex flex-col gap-5'}>
-          <Button.Menu onClick={() => openSideModal(UserPasswordUpdateForm, '비밀번호 변경')}>
-            비밀번호 변경
-          </Button.Menu>
-          <Button.Menu onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => postAuthLogoutMutation.mutate())}>
-            로그아웃
-          </Button.Menu>
-          <Button.Menu onClick={handleServiceLeave} isGray>
-            회원 탈퇴
-          </Button.Menu>
+        <div className={'flex flex-col gap-1'}>
+          <MoreMenuRow label={'비밀번호 변경'} onClick={() => openSideModal(UserPasswordUpdateForm, '비밀번호 변경')} />
+          <MoreMenuRow
+            label={'로그아웃'}
+            onClick={() => onOpenConfirm('로그아웃 하시겠습니까?', () => postAuthLogoutMutation.mutate())}
+          />
+        </div>
+        <div className={'border-t border-gray-100 pt-1'}>
+          <MoreMenuRow label={'회원 탈퇴'} destructive onClick={handleServiceLeave} />
         </div>
       </MoreMenuContentWrap>
     </section>
