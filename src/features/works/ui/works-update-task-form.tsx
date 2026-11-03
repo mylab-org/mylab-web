@@ -5,7 +5,6 @@ import { useWorksUpdateTaskFormHook } from '../model/use-works-update-task-form-
 import type { TaskListResponseType } from '@/entities/works/model/types'
 import { Button } from '@/shared/ui/override/button'
 import { DateRangePicker } from '@/shared/ui/override/date-picker'
-import { Input } from '@/shared/ui/override/input'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
 import { Text } from '@/shared/ui/override/text'
 import { InputBox } from '@/shared/ui/template/input-box'
@@ -35,7 +34,7 @@ export const WorksUpdateTaskForm = ({ task, onSuccess }: Props) => {
         <InputBox labelName={'업무 제목'} placeholder={'제목'} {...register('title', { required: true })} />
         <InputBox labelName={'업무 설명'} placeholder={'설명'} {...register('description', { required: true })} />
         <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>기간</Text>
+          <Text className={'text-[14px] font-medium'}>기간</Text>
           <DateRangePicker
             startAt={startAt}
             endAt={endAt}

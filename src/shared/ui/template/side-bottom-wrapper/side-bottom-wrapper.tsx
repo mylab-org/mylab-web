@@ -28,7 +28,7 @@ export const SideBottomWrapper = ({ activeBtn, children, onClose, isOpen }: Side
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={'flex w-full flex-col rounded-t-[24px] bg-white px-5 lg:px-10'}
+            className={'bg-card text-foreground flex w-full flex-col rounded-t-[24px] px-5 lg:px-10'}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -38,7 +38,7 @@ export const SideBottomWrapper = ({ activeBtn, children, onClose, isOpen }: Side
             }}
           >
             <div className={'flex items-center justify-center py-2.5'}>
-              <div className={'h-2.5 w-[200px] cursor-pointer rounded-[10px] bg-gray-200'} onClick={handleClose} />
+              <div className={'bg-muted h-2.5 w-[200px] cursor-pointer rounded-[10px]'} onClick={handleClose} />
             </div>
             {children}
             {activeBtn && activeBtn}

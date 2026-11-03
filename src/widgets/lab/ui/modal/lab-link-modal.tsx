@@ -40,7 +40,7 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={'bg-card relative flex flex-col rounded-[20px] shadow-lg'}
+            className={'bg-card text-foreground relative flex flex-col rounded-[20px] shadow-lg'}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -52,7 +52,7 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
             <div className={'flex w-[300px] flex-col gap-2.5 p-7.5 md:w-[600px]'}>
               <div className={'flex flex-1 items-center justify-between'}>
                 <h3 className={'text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
-                <X className={'h-5 w-5 cursor-pointer'} onClick={onClose} />
+                <X className={'text-muted-foreground h-5 w-5 cursor-pointer'} onClick={onClose} />
               </div>
               <form className={'flex flex-col gap-2.5'}>
                 <Text className={'text-muted-foreground text-[12px] font-medium md:text-[14px]'}>

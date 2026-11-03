@@ -16,11 +16,11 @@ export const MoreLabUpdate = () => {
           </div>
         </div>
         <div className={'w-full'}>
-          <Text className={'text-muted-foreground! text-[12px] md:text-[16px]'}>연구실 이름</Text>
+          <Text className={'text-[12px] md:text-[16px]'}>연구실 이름</Text>
           <Input placeholder={'연구실 이름'} className={'w-full'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-muted-foreground! text-[12px] md:text-[16px]'}>연구실 소개</Text>
+          <Text className={'text-[12px] md:text-[16px]'}>연구실 소개</Text>
           <Input placeholder={'연구실 소개'} className={'w-full'} />
         </div>
         <div className={'flex flex-col gap-5'}>

@@ -19,9 +19,9 @@ export const LabDataItem = () => {
           </Text>
         </Avatar>
         <div className={'flex items-center justify-between text-[10px] lg:text-[14px]'}>
-          <Text className={'text-[#1a1a1a]'}>2025.12.04(수) 12:31</Text>
+          <Text className={'text-subtle-foreground'}>2025.12.04(수) 12:31</Text>
           <Avatar src={'/test.png'} alt={'profile'} width={20} height={20} imgClassName={'rounded-full'}>
-            <Text className={'text-[#1a1a1a]'}>김교수</Text>
+            <Text className={'text-subtle-text'}>김교수</Text>
           </Avatar>
         </div>
       </div>

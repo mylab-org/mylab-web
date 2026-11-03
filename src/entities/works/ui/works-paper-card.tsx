@@ -37,7 +37,7 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'border-border flex w-full cursor-pointer flex-col gap-3 rounded-[16px] border border-l-4 bg-white p-3.5 shadow-sm md:min-h-[150px] md:p-4',
+        'border-border bg-card flex w-full cursor-pointer flex-col gap-3 rounded-[16px] border border-l-4 p-3.5 shadow-sm md:min-h-[150px] md:p-4',
         isDragging ? 'relative z-0' : 'relative z-10',
         isEnd ? 'border-l-border bg-muted' : 'border-l-brand',
         isDeadLine && 'border-l-error',

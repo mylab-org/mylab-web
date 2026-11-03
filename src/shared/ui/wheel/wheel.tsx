@@ -89,7 +89,7 @@ export const Wheel = ({
     <div className={`relative ${width} overflow-hidden`} style={{ height: WHEEL_HEIGHT }}>
       {showHighlight && (
         <div
-          className="pointer-events-none absolute right-0 left-0 z-30 border-y border-gray-300 shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+          className="border-border pointer-events-none absolute right-0 left-0 z-30 border-y shadow-[0_0_15px_color-mix(in_srgb,var(--card)_80%,transparent)]"
           style={{ top: WHEEL_CENTER_OFFSET, height: ITEM_HEIGHT }}
         />
       )}
@@ -113,7 +113,7 @@ export const Wheel = ({
             <span
               className={cn(
                 'text-[22px] transition-all duration-150',
-                i === index ? 'scale-105 font-bold text-black' : 'font-medium text-gray-300',
+                i === index ? 'text-foreground scale-105 font-bold' : 'text-muted-foreground/40 font-medium',
                 itemClassName,
               )}
             >
@@ -125,7 +125,7 @@ export const Wheel = ({
       </div>
 
       {/* 상하단 페이드 마스크 */}
-      <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-b from-white/90 via-transparent to-white/90" />
+      <div className="from-card/90 to-card/90 pointer-events-none absolute inset-0 z-20 bg-gradient-to-b via-transparent" />
     </div>
   )
 }

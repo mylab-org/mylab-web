@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
-      <body className="bg-canvas flex min-h-dvh w-full">
+      <body className="bg-canvas text-foreground flex min-h-dvh w-full">
         <AppProviders>
           {children}
           <Confirm />

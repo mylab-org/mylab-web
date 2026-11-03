@@ -30,7 +30,9 @@ export const WorksMoreMenu = ({ onEdit, deleteConfig }: Props) => {
   return (
     // 메뉴를 닫으면서 Confirm(Dialog)을 바로 열 때 body pointer-events가 잠기지 않도록 modal 해제
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger className={'shrink-0 cursor-pointer rounded-[8px] p-1 outline-none hover:bg-gray-100'}>
+      <DropdownMenuTrigger
+        className={'text-muted-foreground hover:bg-muted shrink-0 cursor-pointer rounded-[8px] p-1 outline-none'}
+      >
         <Ellipsis strokeWidth={2} className={'size-5'} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align={'end'}>

@@ -19,7 +19,7 @@ export const InputBox = forwardRef<HTMLInputElement, InputBoxProps>(
         <label
           htmlFor={inputId}
           className={cn(
-            'group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest uppercase transition-colors',
+            'group-focus-within:text-main bg-card absolute -top-2.5 left-4 px-2 text-[10px] font-bold tracking-widest uppercase transition-colors',
             isError ? 'text-error group-focus-within:text-error' : 'group-focus-within:text-main text-gray-400',
           )}
         >

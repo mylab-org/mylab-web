@@ -31,12 +31,12 @@ export const Confirm = () => {
           aria-describedby={undefined}
           onInteractOutside={e => e.preventDefault()}
           className={
-            'bg-card fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] outline-none'
+            'bg-card text-foreground fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] outline-none'
           }
         >
           <div className="flex w-full flex-1 items-center justify-center p-12.5">
             <DialogPrimitive.Title asChild>
-              <Text className="font-semibold text-black">{msg}</Text>
+              <Text className="text-foreground font-semibold">{msg}</Text>
             </DialogPrimitive.Title>
           </div>
           <div className="flex w-full">

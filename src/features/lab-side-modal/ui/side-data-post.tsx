@@ -1,5 +1,4 @@
-import { Image } from 'next/dist/client/image-component'
-
+import { FileUp } from 'lucide-react'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Radio, RadioGroup } from '@/shared/ui/override/radio'
@@ -17,11 +16,11 @@ export const SideDataPost = () => {
         <Input placeholder={'자료 링크'} />
         <div
           className={
-            'flex h-[165px] flex-col items-center justify-center gap-2.5 rounded-[16px] border-4 border-dotted border-gray-300 bg-gray-100'
+            'border-border bg-muted flex h-[165px] flex-col items-center justify-center gap-2.5 rounded-[16px] border-2'
           }
         >
-          <Image src={'/icon/icon_main_file.svg'} alt={''} width={30} height={30} />
-          <Text className={'text-[18px] font-semibold text-gray-400!'}>
+          <FileUp className={'text-muted-foreground h-7 w-7'} />
+          <Text className={'text-muted-foreground text-[14px] font-semibold'}>
             이곳을 클릭하거나 첨부 파일을 드래그해 놓으세요
           </Text>
         </div>

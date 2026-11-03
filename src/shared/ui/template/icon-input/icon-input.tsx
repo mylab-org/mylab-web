@@ -12,7 +12,7 @@ export const IconInput = ({ state, ...props }: Props) => {
       <input
         {...props}
         className={clsx(
-          'flex-1 py-2.5 text-[14px] font-medium text-gray-900 outline-0 placeholder:text-gray-400 md:text-[18px]',
+          'text-suble-text flex-1 py-2.5 text-[14px] font-medium outline-0 placeholder:text-gray-400 md:text-[18px]',
           props.className,
         )}
         autoComplete="off"

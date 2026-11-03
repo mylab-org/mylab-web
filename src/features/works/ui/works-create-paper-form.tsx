@@ -15,15 +15,15 @@ export const WorksCreatePaperForm = () => {
       <form className={'flex flex-col gap-7.5 py-5'}>
         <InputBox labelName={'논문 제목'} placeholder={'제목'} {...register('title', { required: true })} />
         <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>제출 학회 (선택)</Text>
+          <Text className={'text-[14px] font-medium'}>제출 학회 (선택)</Text>
           <Input placeholder={'학회'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>주저자 (선택)</Text>
+          <Text className={'text-[14px] font-medium'}>주저자 (선택)</Text>
           <Input placeholder={'미입력 시 본인'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] font-medium text-gray-600!'}>공동저자 (선택)</Text>
+          <Text className={'text-[14px] font-medium'}>공동저자 (선택)</Text>
           <Input placeholder={'공동저자'} className={'w-full text-[14px] font-medium md:text-[18px]'} />
         </div>
       </form>
