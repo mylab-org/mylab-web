@@ -142,7 +142,7 @@ export const ButtonSetup = ({ children, isActive = false, ...rest }: SetupButton
       {...rest}
       className={cn(
         'min-w-[80px] cursor-pointer rounded-[10px] px-2.5 py-1.25 text-center text-[12px] font-semibold md:text-[16px]',
-        isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-400',
+        isActive ? 'bg-muted text-foreground' : 'text-muted-foreground',
         rest.className,
       )}
     >

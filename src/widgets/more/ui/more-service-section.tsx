@@ -1,5 +1,7 @@
 'use client'
 
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 import { MoreMenuRow } from './more-menu-row'
 import { MoreServiceUse } from './side/more-service-use'
 import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
@@ -13,6 +15,12 @@ import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'
 import { MoreMenuContentWrap } from '@/shared/ui/template/more-menu-content-wrap'
 
+const THEME_OPTIONS = [
+  { value: 'system', label: '시스템' },
+  { value: 'light', label: '라이트' },
+  { value: 'dark', label: '다크' },
+] as const
+
 interface WrapProps {
   isMobile?: boolean
 }
@@ -21,6 +29,14 @@ export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
   const onOpenConfirm = useConfirmStore(state => state.onOpenConfirm)
+  const { theme, setTheme } = useTheme()
+  const [isThemeReady, setIsThemeReady] = useState(false)
+
+  useEffect(() => {
+    setIsThemeReady(true)
+  }, [])
+
+  const activeTheme = isThemeReady ? (theme ?? 'system') : 'system'
 
   const deleteUsersMeMutation = useApiMutation({
     mutationFn: deleteUsersMe,
@@ -53,18 +69,18 @@ export const MoreServiceSection = ({ isMobile = false }: WrapProps) => {
       <MoreMenuContentWrap title={'서비스 설정'} isMobile={isMobile}>
         <div className={'flex flex-col gap-4'}>
           <div className={'flex flex-col gap-2'}>
-            <div className={'flex items-center justify-between gap-2'}>
-              <h5 className={'text-[13px] font-bold md:text-[15px]'}>테마 설정</h5>
-              <span className={'bg-muted text-subtle-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold'}>
-                준비 중
-              </span>
-            </div>
-            <div className={'flex items-center gap-2 opacity-50'}>
-              <Button.Setup isActive className={'pointer-events-none flex-1'}>
-                시스템
-              </Button.Setup>
-              <Button.Setup className={'pointer-events-none flex-1'}>라이트</Button.Setup>
-              <Button.Setup className={'pointer-events-none flex-1'}>다크</Button.Setup>
+            <h5 className={'text-[13px] font-bold md:text-[15px]'}>테마 설정</h5>
+            <div className={'flex items-center gap-2'}>
+              {THEME_OPTIONS.map(option => (
+                <Button.Setup
+                  key={option.value}
+                  className={'flex-1'}
+                  isActive={activeTheme === option.value}
+                  onClick={() => setTheme(option.value)}
+                >
+                  {option.label}
+                </Button.Setup>
+              ))}
             </div>
           </div>
           <div className={'bg-muted flex flex-col gap-2 rounded-[12px] px-3 py-3'}>

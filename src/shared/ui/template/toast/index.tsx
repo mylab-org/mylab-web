@@ -1,8 +1,11 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { Flip, ToastContainer } from 'react-toastify'
 
 export const Toast = () => {
+  const { resolvedTheme } = useTheme()
+
   return (
     <ToastContainer
       position="bottom-center"
@@ -14,7 +17,7 @@ export const Toast = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="light"
+      theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
       transition={Flip}
       closeButton={false}
       className="w-[300px] font-bold text-black"
