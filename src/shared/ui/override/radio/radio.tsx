@@ -22,17 +22,16 @@ export const Radio = ({ title, id, value, className, disabled }: RadioProps) => 
   return (
     <label
       htmlFor={id}
-      className={cn('text-gray5 flex cursor-pointer items-center gap-1.25 text-[13px] font-bold', className)}
+      className={cn('text-foreground flex cursor-pointer items-center gap-1.25 text-[13px] font-bold', className)}
     >
       <RadioGroupItem
         id={id}
         value={value}
         disabled={disabled}
         className={cn(
-          'size-5 border-0 bg-gray-300 shadow-none after:hidden',
-          'data-checked:border-0 data-checked:bg-gray-700',
+          'bg-muted size-5 border-0 shadow-none after:hidden',
+          'data-checked:bg-foreground data-checked:border-0',
           'focus-visible:border-0 focus-visible:ring-0',
-          'dark:bg-gray-300 dark:data-checked:bg-gray-700',
           '**:data-[slot=radio-group-indicator]:hidden',
         )}
       />

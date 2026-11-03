@@ -21,7 +21,7 @@ export const MobileAuthHeader = ({ onPrev, isPrev = false }: MobileAuthHeaderPro
           alt={'prev'}
           width={24}
           height={24}
-          className={'rotate-180 cursor-pointer'}
+          className={'rotate-180 cursor-pointer dark:invert'}
           onClick={handlePrev}
         />
       )}

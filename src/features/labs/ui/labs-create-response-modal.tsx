@@ -70,11 +70,11 @@ export const LabsCreateResponseModal = ({
           <DialogTitle className="whitespace-pre-wrap">{'생성 된,\n연구실 정보입니다.'}</DialogTitle>
           <DialogDescription>그럼 마이랩과 즐거운 연구 생활을 시작하세요.</DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col overflow-hidden rounded-2xl bg-gray-50">
+        <div className="bg-muted flex flex-col overflow-hidden rounded-2xl">
           {LABS_CREATE_RESPONSE_INFO_ROWS.map(({ key, label }) => (
             <div key={key} className="flex flex-col gap-1 px-5 py-4">
-              <Text className="text-[12px] font-medium text-gray-500!">{label}</Text>
-              <Text className="text-[16px] font-semibold">{createLabResponse[key]}</Text>
+              <Text className="text-muted-foreground! text-[12px] font-medium">{label}</Text>
+              <Text className="text-foreground text-[16px] font-semibold">{createLabResponse[key]}</Text>
             </div>
           ))}
         </div>

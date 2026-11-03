@@ -27,7 +27,7 @@ export const SignUpForm = () => {
       <Button
         color="main"
         disabled={!isValid}
-        className="group flex w-full transform py-5 transition-all duration-300 hover:bg-gray-900 active:scale-[0.98]"
+        className="group hover:bg-foreground flex w-full transform py-5 transition-all duration-300 active:scale-[0.98]"
         onClick={onSubmit}
         icon={
           <ArrowRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" strokeWidth={3} />
