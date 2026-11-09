@@ -8,6 +8,8 @@ export const QUERY_KEYS = {
   LABS: {
     CHK_VALIDATE: (code: string) => ['labs', 'invite-codes', 'chk-validate', code],
     MEMBERS: (labId: number) => ['labs', 'members', labId],
+    LAB_INFO: (labId: number) => ['labs', 'info', labId],
+    LAB_LINK: (labId: number) => ['labs', 'link', labId],
   },
   BOARD: {
     CATEGORY: (labId: number) => ['board', 'category', labId],

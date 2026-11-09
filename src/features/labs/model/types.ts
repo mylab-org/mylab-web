@@ -39,3 +39,9 @@ export type PostLabsJoinResponseType = {
 export type PatchLabsMemberChangeRolePayloadType = {
   role: UserRoleType
 }
+
+export type PatchLabsInfoPayloadType = {
+  labName: string
+  description: string
+  hashtags: string[]
+}

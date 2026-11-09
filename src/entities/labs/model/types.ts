@@ -12,3 +12,18 @@ export type LabsMembersResponseType = {
   degree: UserDegreeType
   role: UserRoleType
 }
+
+export type LabInfoResponseType = {
+  labId: number
+  labName: string
+  description: string
+  hashtags: string[]
+  universityName: string
+  departmentName: string
+}
+
+export type LabLinkResponseType = {
+  linkId: number
+  name: string
+  url: string
+}
