@@ -53,3 +53,11 @@ export const isDateInEvent = (date: Date, { startDate, endDate }: CalendarEvent)
 }
 
 export const isSameDate = (a: Date, b: Date) => toDateKey(a) === toDateKey(b)
+
+/** 기준일이 속한 주(일요일 시작)의 [시작, 끝] 범위. 끝은 다음 주 일요일 00:00 (미포함) */
+export const getWeekRange = (baseDate: Date) => {
+  const start = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate() - baseDate.getDay())
+  const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7)
+
+  return { from: start.toISOString(), to: end.toISOString() }
+}

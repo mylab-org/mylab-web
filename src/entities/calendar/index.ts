@@ -8,6 +8,7 @@ export {
   formatEventPeriod,
   formatMonthTitle,
   getMonthCells,
+  getWeekRange,
   isDateInEvent,
   isSameDate,
   parseDateKey,

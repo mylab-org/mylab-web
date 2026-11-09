@@ -6,23 +6,11 @@ import { Text } from '@/shared/ui/override/text'
 import type { CalendarEvent } from '../model/types'
 
 interface CalendarListItemProps {
-  event?: CalendarEvent
+  event: CalendarEvent
   className?: string
 }
 
-/** TODO: API 연동 전, event 를 넘기지 않는 메인/사이드 화면을 위한 임시 기본값 */
-const DEFAULT_EVENT: CalendarEvent = {
-  id: 0,
-  key: 'default',
-  type: 'CONFERENCE',
-  title: '2025 한국통신학회 동계종합학술발표회',
-  startDate: '2026-02-04',
-  endDate: '2026-02-06',
-  place: '모나 용평(용평리조트)',
-  members: [],
-}
-
-export const CalendarListItem = ({ event = DEFAULT_EVENT, className }: CalendarListItemProps) => {
+export const CalendarListItem = ({ event, className }: CalendarListItemProps) => {
   const { type, title, place, members } = event
 
   return (

@@ -26,5 +26,6 @@ export const QUERY_KEYS = {
   },
   CALENDAR: {
     MONTHLY: (labId: number, year: number, month: number) => ['calendar', 'monthly', labId, year, month],
+    RANGE: (labId: number, from: string, to: string) => ['calendar', 'range', labId, from, to],
   },
 }
