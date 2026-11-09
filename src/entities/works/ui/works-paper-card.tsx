@@ -27,8 +27,6 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
-    // ⚠️ 드래그 중일 때 원본을 아예 없애지 말고 0.3 정도로 유지하거나,
-    // Overlay가 보일 수 있도록 아주 낮은 투명도를 줍니다.
     opacity: isDragging ? 0.3 : 1,
   }
 
@@ -39,22 +37,21 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex w-[250px] cursor-pointer flex-col items-center gap-5 rounded-[12px] border-3 border-[#2B7FFF] p-2.5 shadow-lg md:min-h-[165px] md:w-full md:p-5',
+        'border-border bg-card flex w-full cursor-pointer flex-col gap-3 rounded-[16px] border border-l-4 p-3.5 shadow-sm md:min-h-[150px] md:p-4',
         isDragging ? 'relative z-0' : 'relative z-10',
-        isEnd ? 'bg-gray-200' : 'bg-white',
-        isDeadLine && 'border-error',
+        isEnd ? 'border-l-border bg-muted' : 'border-l-brand',
+        isDeadLine && 'border-l-error',
       )}
       onClick={() => openSideModal(detailComponent, title)}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
         <div className={'flex items-center justify-between gap-2.5'}>
           <Tag.WorkType type={'PAPER'} />
-          {/* {moreMenu} */}
         </div>
-        <h5 className={'text-[14px] font-bold md:text-[18px]'}>{title}</h5>
+        <h5 className={'text-[14px] font-bold md:text-[17px]'}>{title}</h5>
         {schedule ? (
-          <div className={'flex flex-col gap-1.25'}>
-            <Text className={'text-[10px] font-normal md:text-[14px]'}>
+          <div className={'flex flex-col gap-1'}>
+            <Text className={'text-[12px] font-normal md:text-[14px]'}>
               {formatDateWithWeekday(schedule.startAt)}
               {schedule.endAt && ` ~ ${formatDateWithWeekday(schedule.endAt)}`}
               {schedule.dDay !== null && (
@@ -64,17 +61,17 @@ export const WorksPaperCard = ({ paper, detailComponent }: Props) => {
               )}
             </Text>
             <div>
-              <Text className={'text-[10px] font-normal md:text-[14px]'}>{schedule.title}</Text>
+              <Text className={'text-[12px] font-normal md:text-[14px]'}>{schedule.title}</Text>
               {schedule.location && (
-                <Text className={'text-[10px] font-normal md:text-[14px]'}>{schedule.location}</Text>
+                <Text className={'text-[12px] font-normal md:text-[14px]'}>{schedule.location}</Text>
               )}
             </div>
           </div>
         ) : (
-          <Text className={'text-[10px] font-normal md:text-[14px]'}>제출 학회 미정</Text>
+          <Text className={'text-[12px] font-normal md:text-[14px]'}>제출 학회 미정</Text>
         )}
       </div>
-      <div className={'flex w-full flex-wrap gap-2.5'}>
+      <div className={'flex w-full flex-wrap gap-2'}>
         {members.map(member => (
           <Tag.Member key={member.userId} name={member.name} />
         ))}

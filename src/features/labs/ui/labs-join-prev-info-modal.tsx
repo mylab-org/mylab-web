@@ -31,11 +31,11 @@ export const LabsJoinPrevInfoModal = ({ open, onOpenChange, onEnterLab, code, la
           <DialogTitle className="whitespace-pre-wrap">{'참여 전,\n연구실을 다시 확인하세요'}</DialogTitle>
           <DialogDescription>참여할 연구실 정보를 확인합니다.</DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col overflow-hidden rounded-2xl bg-gray-50">
+        <div className="bg-muted flex flex-col overflow-hidden rounded-2xl">
           {LABS_JOIN_MODAL_PREV_INFO_ROWS.map(({ key, label }) => (
             <div key={key} className="flex flex-col gap-1 px-5 py-4">
-              <Text className="text-[12px] font-medium text-gray-500!">{label}</Text>
-              <Text className="text-[16px] font-semibold">{labInfo?.[key] ?? ''}</Text>
+              <Text className="text-muted-foreground! text-[12px] font-medium">{label}</Text>
+              <Text className="text-foreground text-[16px] font-semibold">{labInfo?.[key] ?? ''}</Text>
             </div>
           ))}
         </div>

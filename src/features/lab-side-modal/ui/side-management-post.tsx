@@ -1,5 +1,4 @@
-import { Image } from 'next/dist/client/image-component'
-
+import { Image } from 'lucide-react'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
 import { Text } from '@/shared/ui/override/text'
@@ -11,11 +10,11 @@ export const SideManagementPost = () => {
         <Input placeholder={'비품 이름'} />
         <div
           className={
-            'flex h-[165px] flex-col items-center justify-center gap-2.5 rounded-[16px] border-4 border-dotted border-gray-300 bg-gray-100'
+            'border-border bg-muted flex h-[165px] flex-col items-center justify-center gap-2.5 rounded-[16px] border-2'
           }
         >
-          <Image src={'/icon/icon_main_img.svg'} alt={''} width={30} height={30} />
-          <Text className={'text-[14px] font-semibold text-gray-400! lg:text-[18px]'}>
+          <Image className={'text-muted-foreground h-7 w-7'} />
+          <Text className={'text-muted-foreground! text-[14px] font-semibold lg:text-[18px]'}>
             이곳을 클릭하거나 픔목 사진을 드래그해 놓으세요
           </Text>
         </div>

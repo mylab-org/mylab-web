@@ -7,19 +7,19 @@ export const MoreUserUpdate = () => {
   return (
     <div className={'flex min-h-0 w-full flex-1 flex-col gap-2.5 overflow-auto px-5 pb-5 lg:w-[550px] lg:px-7.5'}>
       <div className={'flex flex-col items-center gap-2.5 py-2.5'}>
-        <div className={'h-[80px] w-[80px] rounded-full bg-gray-300 md:h-[120px] md:w-[120px]'}></div>
+        <div className={'bg-muted h-[80px] w-[80px] rounded-full md:h-[120px] md:w-[120px]'}></div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] text-gray-600!'}>이름</Text>
+          <Text className={'text-[14px]'}>이름</Text>
           <Input placeholder={'이름'} className={'w-full'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[14px] text-gray-600!'}>이메일</Text>
+          <Text className={'text-[14px]'}>이메일</Text>
           <Input placeholder={'이메일'} className={'w-full'} />
         </div>
         <div className={'flex w-full items-center justify-between'}>
-          <Text className={'text-[14px] text-gray-600!'}>학위</Text>
+          <Text className={'text-[14px]'}>학위</Text>
           <Select>
-            <SelectTrigger className="w-[100px] rounded-[12px] border-none bg-gray-100 text-[18px] font-medium">
+            <SelectTrigger className="bg-muted w-[100px] rounded-[12px] border-none text-[18px] font-medium">
               <SelectValue placeholder="학위" />
             </SelectTrigger>
             <SelectContent

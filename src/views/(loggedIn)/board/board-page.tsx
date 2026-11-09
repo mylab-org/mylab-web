@@ -3,7 +3,8 @@ import { getBoardCategoryServer } from '@/entities/board/api/get-board-category-
 import { getBoardListServer } from '@/entities/board/api/get-board-list-server'
 import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { BoardContentSection, BoardMenuWrapper, BoardSideSection } from '@/widgets/board'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { BoardContentSection, BoardMenuWrapper } from '@/widgets/board'
 
 type BoardPageProps = {
   categoryId: number
@@ -29,14 +30,13 @@ export const BoardPage = async ({ categoryId }: BoardPageProps) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div
-        className={
-          'flex flex-1 gap-2.5 rounded-[12px] bg-white py-2.5 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] focus:outline-none'
-        }
-      >
-        <BoardMenuWrapper />
-        <BoardContentSection />
-        <BoardSideSection />
+      <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
+        <aside className={`bg-card flex w-[220px] shrink-0 flex-col rounded-[20px] p-3 ${CARD_SHADOW}`}>
+          <BoardMenuWrapper />
+        </aside>
+        <div className={`bg-card flex min-w-0 flex-1 flex-col rounded-[20px] p-4 ${CARD_SHADOW}`}>
+          <BoardContentSection variant={'pc'} />
+        </div>
       </div>
     </HydrationBoundary>
   )

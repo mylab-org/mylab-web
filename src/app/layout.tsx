@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={pretendard.variable}>
-      <body className="flex min-h-dvh w-full bg-[#f9f9f9]">
+    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
+      <body className="bg-canvas text-foreground flex min-h-dvh w-full">
         <AppProviders>
           {children}
           <Confirm />

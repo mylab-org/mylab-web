@@ -10,8 +10,8 @@ type Props = {
 export const AuthLinkItem = ({ text, title, href }: Props) => {
   return (
     <div>
-      <Text className={'text-[12px]'}>{text}</Text>
-      <Button.Link href={href} target={'_self'} className={'text-[12px] text-blue-400 lg:text-[12px]'}>
+      <Text className={'text-muted-foreground text-[12px]'}>{text}</Text>
+      <Button.Link href={href} target={'_self'} className={'text-brand text-[12px] lg:text-[12px]'}>
         {title}
       </Button.Link>
     </div>

@@ -1,21 +1,33 @@
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 
 type LabTopMenu = {
   name: string
   children: React.ReactNode
   onClick: () => void
+  compact?: boolean
 }
 
-export const LabMenuItem = ({ children, name, onClick }: LabTopMenu) => {
+export const LabMenuItem = ({ children, name, onClick, compact = false }: LabTopMenu) => {
   return (
     <div
-      className={
-        'flex w-[150px] flex-1 cursor-pointer flex-col items-center justify-center gap-1.25 rounded-[8px] bg-white p-1.25 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] md:rounded-[24px] md:px-5 md:py-2.5'
-      }
+      className={cn(
+        'bg-card flex cursor-pointer flex-col items-center justify-center gap-1 rounded-[12px] md:rounded-[16px]',
+        CARD_SHADOW,
+        compact ? 'min-w-0 flex-1 px-1 py-2 xl:px-2 xl:py-2.5' : 'w-[150px] flex-1 p-1.25 md:px-5 md:py-2.5',
+      )}
       onClick={onClick}
     >
-      <div className={'h-4 w-4 md:h-7.5 md:w-7.5'}>{children}</div>
-      <Text className={'text-[10px] font-bold md:text-[18px]'}>{name}</Text>
+      <div className={cn(compact ? 'h-4 w-4 md:h-5 md:w-5' : 'h-4 w-4 md:h-7.5 md:w-7.5')}>{children}</div>
+      <Text
+        className={cn(
+          'text-center font-bold break-keep',
+          compact ? 'text-[10px] leading-tight md:text-[12px]' : 'text-[10px] md:text-[18px]',
+        )}
+      >
+        {name}
+      </Text>
     </div>
   )
 }

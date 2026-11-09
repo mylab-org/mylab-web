@@ -10,23 +10,23 @@ export const MoreLabUpdate = () => {
       <div className={'flex flex-col gap-7.5 py-5'}>
         <div className={'flex flex-col gap-5'}>
           <Text className={'text-[12px] font-bold md:text-[16px]'}>연구 분야</Text>
-          <div className={'flex justify-between gap-5 rounded-[12px] border border-gray-200 px-3 py-2.5'}>
+          <div className={'border-border flex justify-between gap-5 rounded-[12px] border px-3 py-2.5'}>
             <Text className={'text-[14px] font-medium md:text-[18px]'}>컴퓨터 통신</Text>
             <Image src={'/icon/icon_common_drop.svg'} alt={''} width={10} height={5} />
           </div>
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 이름</Text>
+          <Text className={'text-[12px] md:text-[16px]'}>연구실 이름</Text>
           <Input placeholder={'연구실 이름'} className={'w-full'} />
         </div>
         <div className={'w-full'}>
-          <Text className={'text-[12px] text-gray-600! md:text-[16px]'}>연구실 소개</Text>
+          <Text className={'text-[12px] md:text-[16px]'}>연구실 소개</Text>
           <Input placeholder={'연구실 소개'} className={'w-full'} />
         </div>
         <div className={'flex flex-col gap-5'}>
           <Text className={'text-[12px]! font-bold md:text-[16px]!'}>연구실 해시태그</Text>
           <div className={'flex flex-wrap gap-1.5'}>
-            <span className={'rounded-full bg-gray-200 px-3 py-1 text-[12px] leading-5 font-medium md:text-[14px]'}>
+            <span className={'bg-muted rounded-full px-3 py-1 text-[12px] leading-5 font-medium md:text-[14px]'}>
               + 추가하기
             </span>
             <Tag.Lab

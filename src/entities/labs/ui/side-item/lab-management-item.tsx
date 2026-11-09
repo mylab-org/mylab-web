@@ -17,7 +17,7 @@ export const LabManagementItem = () => {
             className={'py-0'}
             isSwitch={enabled}
             onSwitch={() => setEnabled(prev => !prev)}
-            title={<Text className={'text-[10px] font-bold text-gray-500 lg:text-[16px]'}>대여 활성화</Text>}
+            title={<Text className={'text-muted-foreground text-[10px] font-bold lg:text-[16px]'}>대여 활성화</Text>}
           />
         </div>
       </div>

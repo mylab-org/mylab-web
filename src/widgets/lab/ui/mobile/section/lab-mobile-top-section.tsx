@@ -1,6 +1,5 @@
 'use client'
 
-import { LabInfo } from '@/entities/labs'
 import { UserInfo, useUsersMeHook } from '@/entities/user'
 
 export const LabMobileTopSection = () => {
@@ -8,10 +7,5 @@ export const LabMobileTopSection = () => {
 
   if (isError || !me) return null
 
-  return (
-    <>
-      <UserInfo isShadow user={me} />
-      <LabInfo className={'p-5 md:p-6'} isShadow />
-    </>
-  )
+  return <UserInfo user={me} />
 }

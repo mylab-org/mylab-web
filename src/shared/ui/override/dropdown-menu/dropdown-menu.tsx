@@ -17,7 +17,10 @@ type DropdownMenuContentProps = ComponentProps<typeof ShadcnDropdownMenuContent>
 export const DropdownMenuContent = ({ className, ...props }: DropdownMenuContentProps) => {
   return (
     <ShadcnDropdownMenuContent
-      className={cn('z-[60] min-w-[120px] rounded-[12px] bg-white p-1.25 shadow-lg ring-0', className)}
+      className={cn(
+        'bg-popover text-popover-foreground border-border z-[60] min-w-[120px] rounded-[12px] border p-1.25 shadow-lg',
+        className,
+      )}
       {...props}
     />
   )
@@ -29,8 +32,8 @@ export const DropdownMenuItem = ({ className, ...props }: DropdownMenuItemProps)
   return (
     <ShadcnDropdownMenuItem
       className={cn(
-        'cursor-pointer rounded-[8px] px-2.5 py-2 text-[14px] font-medium focus:bg-gray-100',
-        'data-[variant=destructive]:text-error data-[variant=destructive]:focus:text-error data-[variant=destructive]:focus:bg-gray-100',
+        'text-foreground focus:bg-muted focus:text-foreground cursor-pointer rounded-[8px] px-2.5 py-2 text-[14px] font-medium',
+        'data-[variant=destructive]:text-error data-[variant=destructive]:focus:text-error data-[variant=destructive]:focus:bg-muted',
         className,
       )}
       {...props}

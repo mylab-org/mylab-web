@@ -19,14 +19,14 @@ export default async function AuthLayout({
   const ua = h.get('user-agent') ?? ''
   if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) {
     return (
-      <main className={'flex w-full flex-col items-center justify-center overscroll-auto bg-white'}>
+      <main className={'bg-card flex w-full flex-col items-center justify-center overscroll-auto'}>
         <div className={'flex h-full w-full flex-col lg:w-4xl'}>{children}</div>
       </main>
     )
   } else {
     return (
-      <main className="flex min-h-screen w-full flex-col items-center justify-center bg-[#f9f9f9] p-4">
-        <div className="flex min-h-3/4 w-full max-w-6xl flex-col overflow-hidden rounded-[40px] bg-white shadow-[0_40px_100px_-20px_rgba(37,98,205,0.3)] md:flex-row">
+      <main className="bg-canvas flex min-h-screen w-full flex-col items-center justify-center p-4">
+        <div className="bg-card flex min-h-3/4 w-full max-w-6xl flex-col overflow-hidden rounded-[40px] shadow-[0_40px_100px_-20px_rgba(37,98,205,0.3)] md:flex-row">
           {/* 왼쪽 섹션 */}
           <div className="relative flex flex-col justify-between overflow-hidden p-10 text-white md:w-[45%] md:p-14 md:shadow-2xl">
             <AuthBackground />
@@ -69,15 +69,15 @@ export default async function AuthLayout({
           </div>
 
           {/* 오른쪽 섹션: 로그인 폼 */}
-          <div className="flex flex-col justify-center bg-white p-10 md:relative md:w-[55%] md:p-20">
+          <div className="bg-card text-foreground flex flex-col justify-center p-10 md:relative md:w-[55%] md:p-20">
             <div className="mb-14 flex flex-col">
               <div className="mb-2 flex items-center space-x-3">
                 <Image src={'/MyLab_Logo.png'} alt={'MyLab'} width={40} height={40} />
-                <span className="text-2xl font-black tracking-tighter text-gray-900">
-                  My<b className={'text-[#2562CD]'}>Lab</b>
+                <span className="text-foreground text-2xl font-black tracking-tighter">
+                  My<b className={'text-brand'}>Lab</b>
                 </span>
               </div>
-              <p className="ml-1 flex items-center text-xs font-medium text-gray-600">
+              <p className="text-muted-foreground ml-1 flex items-center text-xs font-medium">
                 <span className="bg-main mr-2 h-2 w-2 rounded-full" />
                 대학 연구실 커뮤니티 플랫폼
               </p>

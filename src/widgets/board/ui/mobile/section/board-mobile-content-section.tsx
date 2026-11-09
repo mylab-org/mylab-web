@@ -9,6 +9,8 @@ import { useUsersMeHook } from '@/entities/user'
 import { useBoardCategoryIdHook } from '@/features/board'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { BASE_PATHS } from '@/shared/constant/routes'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 
 export const BoardMobileContentSection = () => {
@@ -22,19 +24,28 @@ export const BoardMobileContentSection = () => {
     enabled: labId !== undefined,
   })
 
-  const categoryName = [...(boardCategory?.service ?? []), ...(boardCategory?.lab ?? [])].find(
-    menu => Number(menu.category_id) === categoryId,
-  )?.category_name
+  const serviceCategory = boardCategory?.service.find(menu => Number(menu.category_id) === categoryId)
+  const labCategory = boardCategory?.lab.find(menu => Number(menu.category_id) === categoryId)
+  const categoryName = serviceCategory?.category_name ?? labCategory?.category_name
+  const categoryGroupLabel = serviceCategory ? '공유 카테고리' : labCategory ? '우리 연구실 메뉴' : undefined
 
   return (
-    <section className={'flex flex-1 flex-col gap-2.5'}>
-      <div className={'flex items-center gap-1'}>
-        <Link href={BASE_PATHS.BOARD} aria-label={'카테고리 목록으로'} className={'text-gray-900'}>
+    <section className={'flex flex-1 flex-col gap-3'}>
+      <div className={'flex items-center gap-4'}>
+        <Link href={BASE_PATHS.BOARD} aria-label={'카테고리 목록으로'} className={'text-foreground mt-0.5 shrink-0'}>
           <ChevronLeftIcon className={'h-6 w-6'} />
         </Link>
-        <Text className={'text-[16px] font-semibold'}>{categoryName}</Text>
+        <div className={'flex min-w-0 flex-col'}>
+          {categoryGroupLabel && (
+            <Text className={'text-subtle-foreground! text-[11px] font-medium'}>{categoryGroupLabel}</Text>
+          )}
+          <Text className={'truncate text-[16px] font-semibold'}>{categoryName}</Text>
+        </div>
       </div>
-      <BoardContentSection />
+
+      <div className={cn('bg-card flex flex-1 flex-col rounded-[20px] p-4', CARD_SHADOW)}>
+        <BoardContentSection variant={'mobile'} />
+      </div>
     </section>
   )
 }

@@ -35,7 +35,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
         <motion.section
           ref={modalRef}
           className={
-            'fixed top-0 right-0 z-10 flex h-dvh w-full flex-col gap-3.5 bg-white p-6 shadow-md md:top-20 md:right-5 md:h-[600px] md:w-[400px] md:rounded-[24px]'
+            'bg-popover text-popover-foreground border-border fixed top-0 right-0 z-10 flex h-dvh w-full flex-col gap-3.5 border p-6 shadow-md md:top-20 md:right-5 md:h-[600px] md:w-[400px] md:rounded-[24px]'
           }
           key="alarm-modal"
           initial={{ opacity: 0, y: -12 }}
@@ -53,7 +53,7 @@ export const AlarmWrapper = ({ isOpen, onClose }: AlarmWrapperProps) => {
               alt={''}
               width={30}
               height={30}
-              className={'block shrink-0 md:hidden'}
+              className={'block shrink-0 md:hidden dark:invert'}
               onClick={onClose}
             />
           </div>

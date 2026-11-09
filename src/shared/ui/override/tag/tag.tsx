@@ -38,7 +38,10 @@ const WORK_TAG_COLOR: Record<keyof typeof WORK_TYPE, string> = {
 const LabTag = ({ children, Icon, className }: LabTagProps) => {
   return (
     <span
-      className={clsx('rounded-full bg-gray-100 px-3 py-1 text-[12px] leading-5 font-medium md:text-[14px]', className)}
+      className={clsx(
+        'bg-muted text-subtle-text rounded-full px-3 py-1 text-[12px] leading-5 font-medium md:text-[14px]',
+        className,
+      )}
     >
       # {children}
       {Icon && Icon}
@@ -71,7 +74,7 @@ const WorkTag = ({ isActive, children, type = 'PAPER' }: WorkTagProps) => {
     <span
       className={clsx(
         'rounded-[20px] px-2 py-1 text-[10px] lg:text-[12px]',
-        isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-gray-100 text-gray-400',
+        isActive ? `font-semibold ${WORK_TAG_COLOR[type]}` : 'bg-muted text-muted-foreground',
       )}
     >
       {children}

@@ -29,8 +29,15 @@ export const CommentItem = ({
   deleteFn,
   isDeletePending,
 }: Props) => {
+  const isDeleted = !comment.author.name
+
   return (
-    <div className={'flex flex-col gap-1 py-1.25'}>
+    <div
+      className={cn(
+        'flex flex-col gap-1 py-1.25',
+        isDeleted && 'bg-muted/70 border-border rounded-[10px] border border-dashed px-3 py-2.5',
+      )}
+    >
       {comment.author.name && (
         <div className={'flex items-center justify-between'}>
           <div className={'flex items-center gap-1.25'}>
@@ -70,18 +77,22 @@ export const CommentItem = ({
         {isEditing ? (
           updateForm
         ) : (
-          <Text className={'py-2 text-[12px] font-normal lg:text-[14px]'}>{comment.content}</Text>
+          <Text
+            className={cn('py-2 text-[12px] font-normal lg:text-[14px]', isDeleted && 'text-muted-foreground! py-0')}
+          >
+            {comment.content}
+          </Text>
         )}
-        <div className={cn('flex items-center gap-2', comment.author.name !== '' ? 'justify-between' : 'justify-end')}>
-          {comment.author.name !== '' && (
+        <div className={cn('flex items-center gap-2', isDeleted ? 'justify-end' : 'justify-between')}>
+          {!isDeleted && (
             <button type="button" onClick={replyFn} className="flex cursor-pointer items-center gap-1">
               <CornerDownRight className="text-gray-400" size={14} />
               <Text className={'text-[10px] text-gray-400 lg:text-[12px]'}>댓글 달기</Text>
             </button>
           )}
           <div className={'flex items-center gap-1.25'}>
-            <Clock className="text-gray-400" size={14} />
-            <Text className={'text-[10px] font-medium text-slate-400 lg:text-[12px]'}>
+            <Clock className={cn('text-gray-400')} size={14} />
+            <Text className={cn('text-[10px] font-medium text-slate-400 lg:text-[12px]')}>
               {formatRelativeDate(comment.createdAt)}
             </Text>
           </div>

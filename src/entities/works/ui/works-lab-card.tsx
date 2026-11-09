@@ -10,7 +10,7 @@ type Props = {
   className?: string
 } & ({ paper: WorksPaperListResponseType; task?: never } | { task: TaskListResponseType; paper?: never })
 
-const cardClassName = 'flex w-[280px] shrink-0 flex-col md:w-[373px]'
+const cardClassName = 'flex w-[280px] max-w-full shrink-0 flex-col md:w-[373px]'
 
 export const WorksLabCard = ({ className, paper, task }: Props) => {
   const type = (task?.type ?? 'PAPER') as keyof typeof WORK_TYPE

@@ -19,8 +19,8 @@ export const InputBox = forwardRef<HTMLInputElement, InputBoxProps>(
         <label
           htmlFor={inputId}
           className={cn(
-            'group-focus-within:text-main absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-bold tracking-widest uppercase transition-colors',
-            isError ? 'text-error group-focus-within:text-error' : 'group-focus-within:text-main text-gray-400',
+            'group-focus-within:text-main bg-card absolute -top-2.5 left-4 px-2 text-[10px] font-bold tracking-widest uppercase transition-colors',
+            isError ? 'text-error group-focus-within:text-error' : 'text-muted-foreground group-focus-within:text-main',
           )}
         >
           {labelName}
@@ -32,8 +32,8 @@ export const InputBox = forwardRef<HTMLInputElement, InputBoxProps>(
           className={cn(
             'w-full rounded-2xl border-2 px-5 py-4.5 text-sm font-medium transition-all outline-none focus:ring-0',
             isError
-              ? 'text-error focus:text-error border-error focus:border-error placeholder:text-gray-300'
-              : 'focus:border-main border-gray-100 text-gray-900 placeholder:text-gray-300 focus:text-gray-900',
+              ? 'text-error focus:text-error border-error focus:border-error placeholder:text-muted-foreground/50'
+              : 'border-border text-foreground placeholder:text-muted-foreground/50 focus:border-main focus:text-foreground',
           )}
         />
         {isError && <Text className={'text-error text-[12px]'}>{errorMsg}</Text>}

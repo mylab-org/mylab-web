@@ -8,25 +8,23 @@ import {
 
 export const LabLabInfoSkeleton = () => {
   return (
-    <div className={'flex flex-1 flex-col gap-7.5'}>
+    <div className={'grid grid-cols-1 gap-5 lg:grid-cols-3'}>
       <SkeletonCard padding="md">
-        <SkeletonTitle width="w-60" />
-        <SkeletonTagGroup count={5} width="w-30" />
-        <div className={'w-full rounded-[8px] bg-gray-100 px-2.5 py-2'}>
-          <SkeletonLine width="w-85" />
+        <SkeletonTitle width="w-40" />
+        <SkeletonTagGroup count={4} width="w-24" />
+        <div className={'w-full rounded-[12px] bg-gray-100 px-2.5 py-2'}>
+          <SkeletonLine width="w-full" />
         </div>
       </SkeletonCard>
 
       <SkeletonCard padding="md">
-        <div className={'flex items-center justify-between'}>
-          <SkeletonTitle width="w-42.5" />
-        </div>
-        <SkeletonTagGroup count={4} width="w-40" height="h-7.5" />
+        <SkeletonTitle width="w-20" />
+        <SkeletonTagGroup count={4} width="w-24" height="h-7.5" />
       </SkeletonCard>
 
-      <SkeletonCard>
-        <SkeletonTitle width="w-45" />
-        {Array.from({ length: 5 }).map((_, index) => (
+      <SkeletonCard padding="md">
+        <SkeletonTitle width="w-24" />
+        {Array.from({ length: 3 }).map((_, index) => (
           <SkeletonMemberRow key={index} />
         ))}
       </SkeletonCard>

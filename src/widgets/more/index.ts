@@ -1,3 +1,6 @@
 export { MoreMySection } from './ui/more-my-section'
 export { MoreLabSection } from './ui/more-lab-section'
 export { MoreServiceSection } from './ui/more-service-section'
+export { MoreModeTabs } from './ui/more-mode-tabs'
+export { MobileMoreView } from './ui/mobile-more-view'
+export { MoreMenuRow } from './ui/more-menu-row'

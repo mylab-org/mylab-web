@@ -22,8 +22,6 @@ export const WorksTaskCard = ({ task, moreMenu }: Props) => {
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
-    // ⚠️ 드래그 중일 때 원본을 아예 없애지 말고 0.3 정도로 유지하거나,
-    // Overlay가 보일 수 있도록 아주 낮은 투명도를 줍니다.
     opacity: isDragging ? 0.3 : 1,
   }
 
@@ -34,9 +32,9 @@ export const WorksTaskCard = ({ task, moreMenu }: Props) => {
       {...attributes}
       {...listeners}
       className={cn(
-        'flex w-[250px] shrink-0 flex-col items-center gap-[10px] rounded-[12px] border-3 bg-white p-[10px] shadow-lg md:w-full md:gap-[20px] md:p-[20px]',
+        'border-border bg-card flex w-full flex-col gap-2.5 rounded-[16px] border border-l-4 p-3.5 shadow-sm md:gap-3 md:p-4',
         isDragging ? 'relative z-0' : 'relative z-10',
-        task.type === 'MEETING' ? 'border-red-500' : 'border-violet-500',
+        task.type === 'MEETING' ? 'border-l-red-400' : 'border-l-violet-400',
       )}
     >
       <div className={'flex w-full flex-col gap-1.25'}>
@@ -44,13 +42,13 @@ export const WorksTaskCard = ({ task, moreMenu }: Props) => {
           <Tag.WorkType type={task.type} />
           {moreMenu}
         </div>
-        <h5 className={'text-[14px] font-semibold md:text-[18px]'}>{title}</h5>
+        <h5 className={'text-[14px] font-semibold md:text-[17px]'}>{title}</h5>
       </div>
-      <div className={'flex w-full flex-col gap-1.25'}>
-        <Text className={'text-[10px] font-normal md:text-[14px]'}>
+      <div className={'flex w-full flex-col gap-1'}>
+        <Text className={'text-[12px] font-normal md:text-[14px]'}>
           {formatDateWithWeekday(startAt)} ~ {formatDateWithWeekday(endAt)}
         </Text>
-        <Text className={'text-[10px] font-normal md:text-[14px]'}>{description}</Text>
+        <Text className={'text-[12px] font-normal md:text-[14px]'}>{description}</Text>
       </div>
     </div>
   )

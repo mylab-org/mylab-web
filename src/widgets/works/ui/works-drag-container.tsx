@@ -5,26 +5,56 @@ import { WorksPaperCard, WorksTaskCard } from '@/entities/works'
 import { WorksMoreMenu } from '@/features/works'
 import { deleteWorksTask } from '@/features/works/api/delete-works-task'
 import { QUERY_KEYS } from '@/shared/api/query-key'
+import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 
-export const WorksDragContainer = ({ id, items, isDragging, isConference = false, onEditTask, children }: any) => {
+type WorksDragContainerProps = {
+  id: string
+  items: any[]
+  isDragging: boolean
+  isConference?: boolean
+  onEditTask?: (task: any) => void
+  onCreate?: () => void
+  createLabel?: string
+  variant?: 'pc' | 'mobile'
+  children?: React.ReactNode
+}
+
+export const WorksDragContainer = ({
+  id,
+  items,
+  isDragging,
+  isConference = false,
+  onEditTask,
+  onCreate,
+  createLabel = '만들기',
+  variant = 'pc',
+  children,
+}: WorksDragContainerProps) => {
   const { setNodeRef } = useDroppable({ id })
+  const isMobile = variant === 'mobile'
 
   return (
-    <section className="relative z-20 flex w-full shrink-0 flex-col gap-2.5 md:w-[373px] md:gap-7.5">
+    <section
+      className={cn(
+        'relative z-20 flex w-full shrink-0 flex-col gap-3',
+        !isMobile && 'md:w-[300px] md:gap-4 lg:w-[320px]',
+      )}
+    >
       {children}
       <SortableContext id={id} items={items.map((i: any) => i.id)} strategy={verticalListSortingStrategy}>
         <div
           ref={setNodeRef}
-          className={`touch-action-pan-x flex min-h-[150px] flex-1 flex-row items-center gap-2.5 overflow-x-auto rounded-[12px] transition-colors duration-300 md:min-h-[500px] md:flex-col md:overflow-x-visible ${
+          className={cn(
+            'flex flex-1 flex-col gap-3 rounded-[16px] transition-colors duration-300',
+            isMobile ? 'min-h-[180px]' : 'min-h-[150px] md:min-h-[480px]',
             isDragging
-              ? 'border-2 border-dashed border-white/40 bg-white/5'
-              : 'border-2 border-transparent bg-transparent'
-          } `}
+              ? 'border-brand/40 bg-brand/5 border-2 border-dashed'
+              : 'bg-muted/80 border border-transparent p-2.5 md:p-3',
+          )}
         >
           {items.map((item: any) => (
-            /* [중요] 가로 배열 시 아이템이 부모 너비에 맞춰 줄어들지 않도록 고정 너비 부여 */
-            <div key={item.id} className="shrink-0 md:w-full md:shrink">
+            <div key={item.id} className={'w-full'}>
               {isConference ? (
                 <WorksPaperCard paper={item} detailComponent={() => <WorkPaperDetail paperId={item.id} />} />
               ) : (
@@ -54,12 +84,21 @@ export const WorksDragContainer = ({ id, items, isDragging, isConference = false
           {items.length === 0 && !isDragging && (
             <div
               className={
-                'flex min-h-[130px] items-center justify-center rounded-[12px] border-2 border-dashed border-gray-300 bg-gray-100 p-5 md:min-h-[165px]'
+                'border-border bg-card flex min-h-[140px] flex-col items-center justify-center gap-3 rounded-[12px] border border-dashed px-4 py-6'
               }
             >
-              <Text className={'text-[14px] font-semibold text-gray-400 md:text-[18px]'}>
-                아이템을 이곳에 드래그하여 옮길 수 있어요
+              <Text className={'text-subtle-foreground text-center text-[13px] font-medium md:text-[15px]'}>
+                {onCreate ? '아직 항목이 없습니다.' : '아이템을 이곳으로 드래그할 수 있어요'}
               </Text>
+              {onCreate && (
+                <button
+                  type={'button'}
+                  onClick={onCreate}
+                  className={'bg-brand rounded-[10px] px-3.5 py-2 text-[13px] font-semibold text-white'}
+                >
+                  {createLabel}
+                </button>
+              )}
             </div>
           )}
         </div>

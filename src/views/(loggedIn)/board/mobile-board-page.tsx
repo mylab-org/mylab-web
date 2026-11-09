@@ -30,7 +30,7 @@ export const MobileBoardPage = async ({ categoryId }: MobileBoardPageProps) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className={'flex flex-1 gap-2.5 bg-white px-4 py-2.5 focus:outline-none'}>
+      <div className={'flex flex-1 flex-col gap-4 px-5 focus:outline-none'}>
         {categoryId === undefined ? <BoardMobileMenuSection /> : <BoardMobileContentSection />}
       </div>
     </HydrationBoundary>

@@ -29,10 +29,10 @@ export const LoginMobileSection = () => {
     <div className={'flex flex-1 flex-col gap-7.5 px-7.5 pb-5'}>
       <div className={'flex flex-1 flex-col items-center justify-center'}>
         <Image src={'/MyLab_Logo.png'} alt={'MyLab'} width={60} height={60} />
-        <span className="text-[30px] font-bold text-gray-900">
-          My<b className={'text-[#2562CD]'}>Lab</b>
+        <span className="text-foreground text-[30px] font-bold">
+          My<b className={'text-brand'}>Lab</b>
         </span>
-        <span className="text-[15px] font-semibold text-gray-900">내 손안의 작은 연구실</span>
+        <span className="text-foreground text-[15px] font-semibold">내 손안의 작은 연구실</span>
       </div>
       <Button onClick={() => setIsLogin(true)}>로그인</Button>
     </div>

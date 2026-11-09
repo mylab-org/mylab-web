@@ -37,10 +37,10 @@ export const TimePicker = () => {
   const [minute, setMinute] = useState(String(Math.floor(now.getMinutes() / 10) * 10).padStart(2, '0'))
 
   return (
-    <div className="flex items-center justify-center gap-7 bg-white">
+    <div className="bg-card flex items-center justify-center gap-7">
       <Wheel items={dates} width="w-[160px]" onChange={setDate} />
       <Wheel items={hours} width="w-[70px]" initialIndex={now.getHours()} onChange={setHour} />
-      <div className="pb-1 text-[26px] font-semibold text-black/80">:</div>
+      <div className="text-foreground/80 pb-1 text-[26px] font-semibold">:</div>
       <Wheel items={minutes} width="w-[70px]" initialIndex={Math.floor(now.getMinutes() / 10)} onChange={setMinute} />
     </div>
   )

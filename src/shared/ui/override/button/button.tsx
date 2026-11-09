@@ -38,9 +38,9 @@ interface SetupButtonProps extends BaseButtonProps {
 }
 
 const colorVariants: Record<Color, string> = {
-  main: 'bg-main hover:bg-gray-900 disabled:hover:bg-gray-300',
-  secondary: 'bg-secondary',
-  black: 'bg-black',
+  main: 'bg-main hover:bg-foreground disabled:hover:bg-muted',
+  secondary: 'bg-secondary text-secondary-foreground',
+  black: 'bg-foreground text-background',
   error: 'bg-error',
   none: '',
 }
@@ -55,7 +55,7 @@ export const ButtonRoot = ({
   ...rest
 }: ButtonRootProps) => {
   const base =
-    'flex items-center justify-center gap-[5px] rounded-[10px] text-[14px] lg:text-[16px] text-white font-bold px-[20px] py-[10px] cursor-pointer'
+    'flex items-center justify-center gap-[5px] rounded-[10px] text-[14px] lg:text-[16px] text-brand-foreground font-bold px-[20px] py-[10px] cursor-pointer'
 
   const content =
     iconPosition === 'after' ? (
@@ -73,7 +73,7 @@ export const ButtonRoot = ({
   return (
     <button
       {...rest}
-      className={cn(base, colorVariants[color], disabled && 'cursor-not-allowed bg-gray-300', rest.className)}
+      className={cn(base, colorVariants[color], disabled && 'bg-muted cursor-not-allowed', rest.className)}
       style={width ? { width } : undefined}
       disabled={disabled}
     >
@@ -142,7 +142,7 @@ export const ButtonSetup = ({ children, isActive = false, ...rest }: SetupButton
       {...rest}
       className={cn(
         'min-w-[80px] cursor-pointer rounded-[10px] px-2.5 py-1.25 text-center text-[12px] font-semibold md:text-[16px]',
-        isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-400',
+        isActive ? 'bg-muted text-foreground' : 'text-muted-foreground',
         rest.className,
       )}
     >

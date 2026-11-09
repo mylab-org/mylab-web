@@ -2,6 +2,8 @@
 
 import { Image } from 'next/dist/client/image-component'
 import { LabLinkItem } from '@/entities/labs'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { cn } from '@/shared/lib'
 import type { Dispatch, SetStateAction } from 'react'
 
 interface LabLinkProps {
@@ -10,13 +12,9 @@ interface LabLinkProps {
 
 export const LabLink = ({ setIsOpen }: LabLinkProps) => {
   return (
-    <div
-      className={
-        'flex flex-col gap-3.5 rounded-[24px] bg-white p-5 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)] md:p-6'
-      }
-    >
+    <div className={cn('bg-card flex flex-col gap-3 rounded-[20px] p-5', CARD_SHADOW)}>
       <div className={'flex items-center justify-between'}>
-        <h3 className={'text-[18px] leading-8 font-bold md:text-[24px]'}>링크</h3>
+        <h3 className={'text-[18px] leading-7 font-bold md:text-[20px]'}>링크</h3>
         <Image
           src={'/icon/icon_main_add.svg'}
           alt={''}

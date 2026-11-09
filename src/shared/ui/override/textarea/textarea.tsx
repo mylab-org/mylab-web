@@ -10,7 +10,7 @@ export const Textarea = ({ className, ...props }: TextareaProps) => {
       {...props}
       className={cn(
         'min-h-0 resize-none rounded-none border-0 bg-transparent px-0 py-0 font-medium shadow-none',
-        'placeholder:text-gray-400',
+        'placeholder:text-muted-foreground text-foreground',
         'focus-visible:border-0 focus-visible:ring-0',
         'disabled:bg-transparent',
         'aria-invalid:border-destructive aria-invalid:ring-0',

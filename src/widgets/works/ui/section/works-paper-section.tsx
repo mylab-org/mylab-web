@@ -2,13 +2,15 @@
 
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { SquarePlus } from 'lucide-react'
-import { useEffect } from 'react'
+import { Plus } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { WORKS_PAPER_COLUMNS } from '../../config/const'
 import { useWorksKanbanHook } from '../../model/use-works-kanban-hook'
 import { WorkPaperDetail } from '../side/works-paper-detail'
 import { WorksDragContainer } from '../works-drag-container'
+import { WorksMobileStatusDropRow } from '../works-mobile-status-drop-row'
+import { WorksStatusChips } from '../works-status-chips'
 import { useUsersMeHook } from '@/entities/user'
 import { WorksPaperCard } from '@/entities/works'
 import { getWorksPaperList } from '@/entities/works/api/get-works-paper-list'
@@ -18,6 +20,7 @@ import { patchWorksPaperStatus } from '@/features/works/api/patch-works-paper-st
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useSideModalStore } from '@/shared/store'
+import { Text } from '@/shared/ui/override/text'
 
 const groupPapersByStatus = (papers: WorksPaperListResponseType[]) =>
   WORKS_PAPER_COLUMNS.reduce(
@@ -25,20 +28,27 @@ const groupPapersByStatus = (papers: WorksPaperListResponseType[]) =>
     {} as Record<PaperStatusType, WorksPaperListResponseType[]>,
   )
 
-export const WorksPaperSection = () => {
+type WorksPaperSectionProps = {
+  variant?: 'pc' | 'mobile'
+}
+
+export const WorksPaperSection = ({ variant = 'pc' }: WorksPaperSectionProps) => {
+  const isMobile = variant === 'mobile'
   const queryClient = useQueryClient()
   const { me } = useUsersMeHook()
   const labId = me?.lab?.labId
   const paperListQueryKey = QUERY_KEYS.PAPER.LIST(labId ?? 0)
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const [activeStatus, setActiveStatus] = useState<PaperStatusType>('RESEARCH_PREP')
 
-  const { data: papers } = useQuery({
+  const { data: papers, isPending } = useQuery({
     queryKey: paperListQueryKey,
     queryFn: () => getWorksPaperList(labId ?? 0),
     enabled: labId !== undefined,
   })
 
-  // 카드는 드롭 즉시 옮겨 보여주고, 실패하면 서버 목록 기준으로 되돌림
+  const openCreate = () => openSideModal(WorksCreatePaperForm, '논문 생성')
+
   const patchWorksPaperStatusMutation = useApiMutation({
     mutationFn: ({ paperId, status }: { paperId: number; status: PaperStatusType }) =>
       patchWorksPaperStatus(labId ?? 0, paperId, { status }),
@@ -77,7 +87,13 @@ export const WorksPaperSection = () => {
     if (papers) setColumns(groupPapersByStatus(papers))
   }, [papers, setColumns])
 
-  if (!enabled) return null
+  if (!enabled || isPending) {
+    return <Text className={'text-subtle-foreground! py-8 text-center text-[14px]'}>논문 업무를 불러오는 중...</Text>
+  }
+
+  const visibleColumns = isMobile
+    ? WORKS_PAPER_COLUMNS.filter(column => column.status === activeStatus)
+    : WORKS_PAPER_COLUMNS
 
   return (
     <DndContext
@@ -87,41 +103,84 @@ export const WorksPaperSection = () => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <section className="relative isolate flex flex-1 flex-col gap-7.5 overflow-x-auto p-2.5 md:flex-row md:items-start md:justify-start">
-        {/* 드래그 배경 오버레이 */}
+      <section className={'relative isolate flex flex-1 flex-col gap-4'}>
+        {isMobile && (
+          <div className={'flex flex-col gap-3'}>
+            <div className={'flex items-center justify-between gap-2'}>
+              <Text className={'text-[14px] font-semibold'}>논문 칸반</Text>
+              <button
+                type={'button'}
+                onClick={openCreate}
+                className={
+                  'bg-brand inline-flex items-center gap-1 rounded-[10px] px-3 py-1.5 text-[12px] font-semibold text-white'
+                }
+              >
+                <Plus className={'h-3.5 w-3.5'} />
+                생성
+              </button>
+            </div>
+            <WorksStatusChips
+              items={WORKS_PAPER_COLUMNS.map(({ status, label }) => ({
+                status,
+                label,
+                count: columns[status]?.length ?? 0,
+              }))}
+              activeStatus={activeStatus}
+              onChange={status => setActiveStatus(status as PaperStatusType)}
+            />
+            <WorksMobileStatusDropRow items={WORKS_PAPER_COLUMNS} activeStatus={activeStatus} isDragging={isDragging} />
+          </div>
+        )}
+
         <div
           className={`pointer-events-none fixed inset-0 z-10 transition-opacity duration-300 ${
-            isDragging ? 'bg-black/40 opacity-100' : 'bg-transparent opacity-0'
+            isDragging ? (isMobile ? 'bg-black/20 opacity-100' : 'bg-black/30 opacity-100') : 'bg-transparent opacity-0'
           }`}
         />
 
-        {WORKS_PAPER_COLUMNS.map(({ status, label }) => (
-          <WorksDragContainer
-            key={status}
-            id={status}
-            items={columns[status]}
-            isDragging={isDragging}
-            isConference={true}
-          >
-            <div className="flex items-center justify-between">
-              <h4 className={`text-[18px] font-bold transition-colors duration-300 md:text-[22px]`}>{label}</h4>
-              {/* 서버가 신규 논문을 항상 연구 준비(RESEARCH_PREP) 단계로 생성하므로 연구 준비 컬럼에만 노출합니다. */}
-              {status === 'RESEARCH_PREP' && (
-                <SquarePlus
-                  className={`h-6 w-6 cursor-pointer md:h-7.5 md:w-7.5 ${isDragging ? 'opacity-0' : 'opacity-100'}`}
-                  onClick={() => openSideModal(WorksCreatePaperForm, '업무 생성')}
-                />
+        <div className={'flex flex-1 flex-col gap-4 overflow-x-auto md:flex-row md:items-start md:justify-start'}>
+          {visibleColumns.map(({ status, label }) => (
+            <WorksDragContainer
+              key={status}
+              id={status}
+              items={columns[status]}
+              isDragging={isDragging}
+              isConference={true}
+              variant={variant}
+              onCreate={status === 'RESEARCH_PREP' ? openCreate : undefined}
+              createLabel={'논문 만들기'}
+            >
+              {!isMobile && (
+                <div className={'flex items-center justify-between gap-2 px-0.5'}>
+                  <h4 className={'text-[16px] font-bold md:text-[18px]'}>
+                    {label}
+                    <span className={'text-subtle-foreground ml-1.5 text-[13px] font-medium'}>
+                      {columns[status]?.length ?? 0}
+                    </span>
+                  </h4>
+                  {status === 'RESEARCH_PREP' && (
+                    <button
+                      type={'button'}
+                      onClick={openCreate}
+                      className={`border-brand/30 bg-brand/5 text-brand inline-flex items-center gap-1 rounded-[10px] border px-2.5 py-1.5 text-[12px] font-semibold ${
+                        isDragging ? 'opacity-0' : 'opacity-100'
+                      }`}
+                    >
+                      <Plus className={'h-3.5 w-3.5'} />
+                      생성
+                    </button>
+                  )}
+                </div>
               )}
-            </div>
-          </WorksDragContainer>
-        ))}
+            </WorksDragContainer>
+          ))}
+        </div>
       </section>
 
       {createPortal(
         <DragOverlay zIndex={5}>
           {activeId && activeItem ? (
-            <div className="scale-105 cursor-grabbing shadow-2xl transition-transform duration-200">
-              {/* Conference 전용 카드 렌더링 */}
+            <div className={'scale-105 cursor-grabbing shadow-2xl transition-transform duration-200'}>
               <WorksPaperCard paper={activeItem} detailComponent={() => <WorkPaperDetail paperId={activeItem.id} />} />
             </div>
           ) : null}

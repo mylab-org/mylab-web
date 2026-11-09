@@ -42,12 +42,12 @@ export const Alert = () => {
         <DialogPrimitive.Content
           aria-describedby={undefined}
           className={
-            'fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] bg-white outline-none'
+            'bg-card text-foreground fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] outline-none'
           }
         >
           <div className="flex w-full flex-1 items-center justify-center p-7.5">
             <DialogPrimitive.Title asChild>
-              <Text className="text-center font-semibold whitespace-pre-line text-black">{msg}</Text>
+              <Text className="text-foreground text-center font-semibold whitespace-pre-line">{msg}</Text>
             </DialogPrimitive.Title>
           </div>
           <Button className="w-full rounded-none rounded-b-[20px]" onClick={handleConfirm}>

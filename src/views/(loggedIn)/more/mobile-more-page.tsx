@@ -2,13 +2,14 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { getLabsMembersServer } from '@/entities/labs/api/get-labs-members-server'
 import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { MoreLabSection, MoreMySection, MoreServiceSection } from '@/widgets/more'
+import { MobileMoreView } from '@/widgets/more/ui/mobile-more-view'
 
 export const MobileMorePage = async () => {
   const queryClient = new QueryClient()
 
   const me = await getUsersMeServer().catch(() => null)
   const labId = me?.lab?.labId
+  const showLabSection = me?.lab.role !== 'MEMBER'
 
   if (labId !== undefined) {
     await queryClient.prefetchQuery({
@@ -18,11 +19,9 @@ export const MobileMorePage = async () => {
   }
 
   return (
-    <div className={'flex flex-1 flex-col gap-4 bg-white px-2 pb-5 focus:outline-none md:px-4'}>
+    <div className={'flex flex-1 flex-col px-5 pb-5 focus:outline-none'}>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <MoreMySection isMobile />
-        {me?.lab.role !== 'MEMBER' && <MoreLabSection isMobile />}
-        <MoreServiceSection isMobile />
+        <MobileMoreView showLabSection={showLabSection} />
       </HydrationBoundary>
     </div>
   )

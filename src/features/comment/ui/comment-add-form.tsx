@@ -30,7 +30,7 @@ export const CommentAddForm = ({ postId, parentId = 0, replyTarget, onClearReply
   })
 
   return (
-    <form className={'flex gap-2.5 rounded-[8px] bg-gray-100 px-3.75 py-1'}>
+    <form className={'bg-muted flex gap-2.5 rounded-[8px] px-3.75 py-1'}>
       <Input
         type="text"
         className={'w-full border-none text-[12px] md:text-[12px]'}

@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -9,8 +9,8 @@
 }
 
 @theme {
-  --color-main : #364153;
-  --color-secondary : #D1D5DC;
+  --color-main: #364153;
+  --color-secondary: #d1d5dc;
   --color-black: #121212;
   /*--color-gray900: #101828;*/
   /*--color-gray700: #364153;*/
@@ -19,17 +19,17 @@
   /*--color-gray100 : #F3F4F6;*/
   --color-success: #2ecc71;
   --color-warning: #f1c40f;
-  --color-error: #E74C3C;
+  --color-error: #e74c3c;
   /*--color-blue500: #2B7FFF;*/
-  --color-tag1: #1E75F8;
-  --color-tag2: #E35C67;
+  --color-tag1: #1e75f8;
+  --color-tag2: #e35c67;
 
   --color-dark: #121212;
   --color-dark5: #1e1e1e;
   --color-dark8: #252525;
   --color-dark12: #2e2e2e;
   --color-SkeletonDark: #4d4d4d;
-  --font-pretendard: "Pretendard-Regular";
+  --font-pretendard: 'Pretendard-Regular';
 }
 
 @theme {
@@ -51,13 +51,19 @@ input::-webkit-inner-spin-button {
 }
 
 @layer base {
+  /* Chrome 자동완성 기본 흰 배경 덮어쓰기 — 테마 토큰 사용 */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-    box-shadow: 0 0 0 1000px #ffffff inset !important;
-    -webkit-text-fill-color: #111827 !important;
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--card) inset !important;
+    box-shadow: 0 0 0 1000px var(--card) inset !important;
+    -webkit-text-fill-color: var(--foreground) !important;
+    caret-color: var(--foreground);
     transition: background-color 9999s ease-out 0s;
   }
 }
@@ -123,9 +129,9 @@ html body[data-scroll-locked] {
   ::-webkit-scrollbar-button:end:increment,
   ::-webkit-scrollbar-button {
     display: none !important; /* 강제 숨김 */
-    width: 0 !important;      /* 너비 제거 */
-    height: 0 !important;     /* 높이 제거 */
-    background: transparent;  /* 혹시 보일 경우를 대비해 투명화 */
+    width: 0 !important; /* 너비 제거 */
+    height: 0 !important; /* 높이 제거 */
+    background: transparent; /* 혹시 보일 경우를 대비해 투명화 */
   }
 
   /* 3. 스크롤 막대 배경 (Track) */
@@ -135,7 +141,7 @@ html body[data-scroll-locked] {
 
   /* 4. 스크롤 막대 (Thumb) */
   ::-webkit-scrollbar-thumb {
-    background-color: #D1D5DC;
+    background-color: #d1d5dc;
     border-radius: 10px;
     /* 팁: 막대가 너무 길게 붙어 보인다면 투명 테두리를 주어 여백을 만듭니다 */
     border: 1px solid transparent;
@@ -143,87 +149,112 @@ html body[data-scroll-locked] {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #99A1AF;
+    background-color: #99a1af;
   }
 }
 
 /*---break---*/
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* MyLab semantic surfaces */
+  --canvas: #f9f9f9;
+  --brand: #2562cd;
+  --brand-foreground: #ffffff;
+  --brand-muted: color-mix(in srgb, #2562cd 10%, transparent);
+  --subtle-foreground: #99a1af;
+  --mylab-shadow-card: 0px 1px 3px rgba(0, 0, 0, 0.03), 0px 4px 16px rgba(0, 0, 0, 0.04);
+
+  --subtle-text: #1a1a1a;
+
+  --background: #f9f9f9;
+  --foreground: #101828;
+  --card: #ffffff;
+  --card-foreground: #101828;
+  --popover: #ffffff;
+  --popover-foreground: #101828;
+  --primary: #364153;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #364153;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f3f4f6;
+  --accent-foreground: #364153;
+  --destructive: #e74c3c;
+  --border: #e2e3e5;
+  --input: #e2e3e5;
+  --ring: #2562cd;
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #101828;
+  --sidebar-primary: #2562cd;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #364153;
+  --sidebar-border: #e2e3e5;
+  --sidebar-ring: #2562cd;
 }
 
 /*---break---*/
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --canvas: #121212;
+  --brand: #5b8def;
+  --brand-foreground: #ffffff;
+  --brand-muted: color-mix(in srgb, #5b8def 15%, transparent);
+  --subtle-foreground: #99a1af;
+  --mylab-shadow-card: 0px 1px 3px rgba(0, 0, 0, 0.25), 0px 4px 16px rgba(0, 0, 0, 0.4);
+
+  --subtle-text: #99a1af;
+
+  --background: #121212;
+  --foreground: #f9fafb;
+  --card: #1e1e1e;
+  --card-foreground: #f9fafb;
+  --popover: #2a2a2a;
+  --popover-foreground: #f9fafb;
+  --primary: #d1d5dc;
+  --primary-foreground: #121212;
+  --secondary: #252525;
+  --secondary-foreground: #f9fafb;
+  --muted: #252525;
+  --muted-foreground: #9ca3af;
+  --accent: #252525;
+  --accent-foreground: #f9fafb;
+  --destructive: #f07167;
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 15%);
+  --ring: #5b8def;
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #1e1e1e;
+  --sidebar-foreground: #f9fafb;
+  --sidebar-primary: #5b8def;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #252525;
+  --sidebar-accent-foreground: #f9fafb;
+  --sidebar-border: rgb(255 255 255 / 10%);
+  --sidebar-ring: #5b8def;
 }
 
 /*---break---*/
 
 @theme inline {
   --font-sans: var(--font-sans);
+  --color-canvas: var(--canvas);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-muted: var(--brand-muted);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --shadow-card: var(--mylab-shadow-card);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

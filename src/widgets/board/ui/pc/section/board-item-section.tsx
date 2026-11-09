@@ -7,7 +7,9 @@ import { CommentItem } from '@/entities/comment'
 import type { CommentType } from '@/entities/comment/model/types'
 import { BoardItemNav } from '@/features/board'
 import { CommentAddForm, CommentUpdateForm } from '@/features/comment'
+import { cn } from '@/shared/lib'
 import { useIntersectionObserver } from '@/shared/model'
+import { SkeletonCard, SkeletonLine, SkeletonTitle } from '@/shared/ui/override/skeleton'
 import { Text } from '@/shared/ui/override/text'
 import { useBoardCommentHook } from '@/widgets/board/model/use-board-comment-hook'
 import { useBoardListHook } from '@/widgets/board/model/use-board-list-hook'
@@ -37,7 +39,7 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
     post.isMine && target.isMine && post.isAnonymous === target.isAnonymous
 
   return (
-    <div className={'flex flex-col gap-1.25'}>
+    <div className={'border-border mt-2 flex flex-col gap-1.25 border-t pt-3'}>
       <CommentAddForm
         postId={postId}
         replyTarget={replyTarget}
@@ -59,9 +61,8 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
               deleteFn={() => handleDeleteComment(comment.cid)}
               isDeletePending={isDeletePending}
             />
-            {/* 대댓글 영역 */}
             {comment.replies.length > 0 && (
-              <div className={'flex flex-col gap-2.5 rounded-[12px] bg-gray-50 px-5 py-2.5'}>
+              <div className={'bg-muted flex flex-col gap-2.5 rounded-[12px] px-4 py-2.5'}>
                 {comment.replies.map(reply => (
                   <CommentItem
                     isWriter={isWriterComment(reply)}
@@ -97,7 +98,24 @@ const BoardPostComments = ({ post }: BoardPostCommentsProps) => {
   )
 }
 
-export const BoardItemSection = () => {
+const BoardFeedSkeleton = () => (
+  <div className={'flex flex-col gap-3'}>
+    {Array.from({ length: 3 }).map((_, index) => (
+      <SkeletonCard key={index} className={'rounded-[16px]'} padding="md">
+        <SkeletonTitle width="w-40" />
+        <SkeletonLine size="xs" width="w-32" />
+        <SkeletonLine width="w-full" />
+        <SkeletonLine width="w-4/5" />
+      </SkeletonCard>
+    ))}
+  </div>
+)
+
+type BoardItemSectionProps = {
+  onWriteClick?: () => void
+}
+
+export const BoardItemSection = ({ onWriteClick }: BoardItemSectionProps) => {
   const {
     posts,
     isPending,
@@ -115,7 +133,6 @@ export const BoardItemSection = () => {
     isLikePending,
   } = useBoardListHook()
 
-  // 목록 끝 요소가 보이면 다음 페이지 요청
   const nextPageTriggerRef = useIntersectionObserver<HTMLDivElement>({
     onIntersect: handleFetchNextPage,
     enabled: hasNextPage && !isFetchingNextPage,
@@ -123,33 +140,58 @@ export const BoardItemSection = () => {
   })
 
   if (isPending) {
-    return <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>
+    return <BoardFeedSkeleton />
   }
 
   if (!posts.length) {
-    return <Text className={'text-[14px] text-gray-400!'}>게시글이 없습니다.</Text>
+    return (
+      <div className={'border-border flex flex-col items-center gap-3 rounded-[16px] border border-dashed px-4 py-10'}>
+        <Text className={'text-subtle-foreground! text-[14px] font-medium'}>아직 게시글이 없습니다.</Text>
+        <Text className={'text-subtle-foreground! text-[12px]'}>첫 소식을 남겨 연구실 멤버와 공유해 보세요.</Text>
+        {onWriteClick && (
+          <button
+            type={'button'}
+            onClick={onWriteClick}
+            className={'bg-brand mt-1 rounded-[10px] px-4 py-2 text-[13px] font-semibold text-white'}
+          >
+            글쓰기
+          </button>
+        )}
+      </div>
+    )
   }
 
   return (
     <>
-      {posts.map(post => (
-        <div key={post.id} className={'flex flex-col gap-1 border-b border-gray-200 py-2.5'}>
-          <BoardItem post={post} />
-          {/* 댓글 영역 */}
-          <BoardItemNav
-            post={post}
-            commentFn={() => toggleComment(post.id)}
-            updateFn={() => setEditingPost(post)}
-            deleteFn={() => handleDeleteBoardItem(post.id)}
-            isDeletePending={isDeletePending}
-            likeFn={post.isLiked ? () => handleDeleteBoardItemLike(post.id) : () => handlePostBoardItemLike(post.id)}
-            isLikePending={isLikePending}
-          />
-          {openCommentPostIds.includes(post.id) && <BoardPostComments post={post} />}
-        </div>
-      ))}
+      {posts.map(post => {
+        const isCommentOpen = openCommentPostIds.includes(post.id)
+
+        return (
+          <article
+            key={post.id}
+            className={cn(
+              'border-border bg-card flex flex-col gap-2 rounded-[16px] border p-4',
+              isCommentOpen && 'border-brand/20',
+            )}
+          >
+            <BoardItem post={post} />
+            <BoardItemNav
+              post={post}
+              commentFn={() => toggleComment(post.id)}
+              updateFn={() => setEditingPost(post)}
+              deleteFn={() => handleDeleteBoardItem(post.id)}
+              isDeletePending={isDeletePending}
+              likeFn={post.isLiked ? () => handleDeleteBoardItemLike(post.id) : () => handlePostBoardItemLike(post.id)}
+              isLikePending={isLikePending}
+            />
+            {isCommentOpen && <BoardPostComments post={post} />}
+          </article>
+        )
+      })}
       <div ref={nextPageTriggerRef} />
-      {isFetchingNextPage && <Text className={'text-[14px] text-gray-400!'}>게시글을 불러오는 중...</Text>}
+      {isFetchingNextPage && (
+        <Text className={'text-subtle-foreground! py-2 text-center text-[13px]'}>게시글을 불러오는 중...</Text>
+      )}
       <BoardUpdateModal
         open={editingPost !== null}
         post={editingPost}

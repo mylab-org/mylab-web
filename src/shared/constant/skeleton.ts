@@ -1,3 +1,4 @@
-export const CARD_SHADOW = 'shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]'
+/** 카드 공통 그림자 — globals.css `--shadow-card` / `.dark` 대응 */
+export const CARD_SHADOW = 'shadow-card'
 
-export const SKELETON_TONE = 'bg-gray-300'
+export const SKELETON_TONE = 'bg-muted'
