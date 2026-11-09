@@ -22,7 +22,7 @@ export const CalendarWeek = () => {
     <div>
       <div className={'grid grid-cols-7 text-center'}>
         {['일', '월', '화', '수', '목', '금', '토'].map(day => (
-          <Text key={day} className="text-[14px] font-medium text-[#6B7280]!">
+          <Text key={day} className="text-muted-foreground! text-[14px] font-medium">
             {day}
           </Text>
         ))}
@@ -33,7 +33,7 @@ export const CalendarWeek = () => {
           <div key={date.toISOString()} className="flex justify-center">
             <Text
               className={`flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium ${
-                isToday(date) ? 'bg-dark text-white' : 'text-gray-900'
+                isToday(date) ? 'bg-foreground text-background' : 'text-foreground'
               } `}
             >
               {date.getDate()}

@@ -34,7 +34,7 @@ export const MemberSelect = ({ members, selected, onChange, className }: MemberS
             key={group}
             type={'button'}
             className={
-              'cursor-pointer rounded-[20px] px-2.5 py-1 text-[14px] font-medium text-gray-500 hover:bg-gray-100'
+              'text-muted-foreground hover:bg-muted cursor-pointer rounded-[20px] px-2.5 py-1 text-[14px] font-medium'
             }
             onClick={() => handleGroupClick(group)}
           >
@@ -52,7 +52,7 @@ export const MemberSelect = ({ members, selected, onChange, className }: MemberS
               aria-pressed={isSelected}
               className={cn(
                 'cursor-pointer rounded-[20px] px-2.5 py-1 text-[14px] font-medium transition-colors',
-                isSelected ? 'bg-gray-200 text-gray-900' : 'text-gray-500 hover:bg-gray-100',
+                isSelected ? 'bg-brand text-brand-foreground' : 'text-muted-foreground hover:bg-muted',
               )}
               onClick={() => toggleMember(member)}
             >

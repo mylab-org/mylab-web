@@ -102,7 +102,9 @@ const WorkMemberTag = ({ name }: MemberTagProps) => {
 const CalendarMemberTag = ({ name }: MemberTagProps) => {
   return (
     <span
-      className={'w-fit rounded-[20px] border border-[#E2E3E5] px-2 py-0.5 text-[10px] text-gray-500 lg:text-[12px]'}
+      className={
+        'border-border text-muted-foreground w-fit rounded-[20px] border px-2 py-0.5 text-[10px] lg:text-[12px]'
+      }
     >
       {name}
     </span>

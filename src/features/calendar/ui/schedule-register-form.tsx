@@ -37,15 +37,15 @@ const UnderlineField = ({
   type: 'date' | 'time'
   className?: string
 }) => (
-  <div className={cn('flex flex-1 items-center gap-2.5 border-b-2 border-b-gray-300 py-2.5', className)}>
-    <label htmlFor={name} className={'shrink-0 text-[14px] font-medium text-gray-400'}>
+  <div className={cn('border-b-border flex flex-1 items-center gap-2.5 border-b-2 py-2.5', className)}>
+    <label htmlFor={name} className={'text-subtle-foreground shrink-0 text-[14px] font-medium'}>
       {label}
     </label>
     <input
       id={name}
       name={name}
       type={type}
-      className={'w-full text-[14px] font-medium text-gray-900 outline-0'}
+      className={'text-foreground w-full text-[14px] font-medium outline-0'}
       autoComplete={'off'}
     />
   </div>
@@ -103,7 +103,7 @@ export const ScheduleRegisterForm = ({ type, members }: ScheduleRegisterFormProp
                   aria-pressed={repeat === option}
                   className={cn(
                     'cursor-pointer rounded-[20px] px-3 py-1 text-[12px] font-medium transition-colors',
-                    repeat === option ? 'bg-gray-200 text-gray-900' : 'text-gray-500 hover:bg-gray-100',
+                    repeat === option ? 'bg-brand text-brand-foreground' : 'text-muted-foreground hover:bg-muted',
                   )}
                   onClick={() => setRepeat(prev => (prev === option ? null : option))}
                 >

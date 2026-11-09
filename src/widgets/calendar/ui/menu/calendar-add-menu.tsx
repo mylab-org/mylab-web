@@ -37,7 +37,7 @@ export const CalendarAddMenu = ({ onSelect }: CalendarAddMenuProps) => {
         type={'button'}
         aria-label={'일정 등록하기'}
         aria-expanded={isOpen}
-        className={'cursor-pointer text-gray-900'}
+        className={'text-foreground cursor-pointer'}
         onClick={() => setIsOpen(prev => !prev)}
       >
         <PlusIcon size={24} />
@@ -45,14 +45,14 @@ export const CalendarAddMenu = ({ onSelect }: CalendarAddMenuProps) => {
       {isOpen && (
         <ul
           className={
-            'absolute top-full right-0 z-30 mt-2 w-[150px] overflow-hidden rounded-[12px] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_4px_16px_rgba(0,0,0,0.08)]'
+            'bg-card absolute top-full right-0 z-30 mt-2 w-[150px] overflow-hidden rounded-[12px] shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_4px_16px_rgba(0,0,0,0.08)]'
           }
         >
           {TYPES.map(type => (
             <li key={type}>
               <button
                 type={'button'}
-                className={'w-full cursor-pointer px-4 py-3 text-left text-[14px] font-medium hover:bg-gray-50'}
+                className={'hover:bg-muted w-full cursor-pointer px-4 py-3 text-left text-[14px] font-medium'}
                 onClick={() => handleSelect(type)}
               >
                 {CALENDAR_TYPE[type].NAME} 등록하기

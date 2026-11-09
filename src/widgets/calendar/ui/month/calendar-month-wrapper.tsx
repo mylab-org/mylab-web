@@ -13,6 +13,7 @@ import {
 } from '@/entities/calendar'
 import type { CalendarEvent, CalendarFilter } from '@/entities/calendar'
 import { CalendarTypeFilter, MonthPicker } from '@/features/calendar'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 import type { ReactNode } from 'react'
@@ -69,9 +70,7 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
     <section
       className={cn(
         'flex flex-col gap-3.75',
-        isMobile
-          ? 'flex-1 px-5'
-          : 'min-w-0 flex-1 rounded-[24px] bg-white p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]',
+        isMobile ? 'flex-1 px-5' : `bg-card min-w-0 flex-1 rounded-[24px] p-6 ${CARD_SHADOW}`,
         className,
       )}
     >
@@ -81,7 +80,7 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
           <button
             type={'button'}
             aria-label={'이전 달'}
-            className={'cursor-pointer text-gray-400 hover:text-gray-900'}
+            className={'text-subtle-foreground hover:text-foreground cursor-pointer'}
             onClick={() => moveMonth(-1)}
           >
             <ChevronLeftIcon size={20} />
@@ -106,7 +105,7 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
           <button
             type={'button'}
             aria-label={'다음 달'}
-            className={'cursor-pointer text-gray-400 hover:text-gray-900'}
+            className={'text-subtle-foreground hover:text-foreground cursor-pointer'}
             onClick={() => moveMonth(1)}
           >
             <ChevronRightIcon size={20} />
@@ -115,7 +114,7 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
             <button
               type={'button'}
               className={
-                'absolute top-1/2 left-full ml-2.5 -translate-y-1/2 cursor-pointer rounded-[20px] bg-gray-100 px-2.5 py-0.75 text-[12px] font-semibold whitespace-nowrap text-gray-600 hover:bg-gray-200'
+                'bg-muted text-muted-foreground hover:bg-secondary absolute top-1/2 left-full ml-2.5 -translate-y-1/2 cursor-pointer rounded-[20px] px-2.5 py-0.75 text-[12px] font-semibold whitespace-nowrap'
               }
               onClick={goToday}
             >
@@ -140,7 +139,9 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
           <Text className={'text-[14px] font-bold'}>{formatDateLabel(toDateKey(selectedDate))} 일정</Text>
           <button
             type={'button'}
-            className={'cursor-pointer text-[12px] font-medium text-gray-400 underline hover:text-gray-600'}
+            className={
+              'text-subtle-foreground hover:text-muted-foreground cursor-pointer text-[12px] font-medium underline'
+            }
             onClick={() => setSelectedDate(null)}
           >
             전체보기
@@ -149,7 +150,7 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
       )}
 
       {selectedDate && listEvents.length === 0 ? (
-        <Text className={'py-5 text-center text-[14px] text-gray-400'}>등록된 일정이 없습니다</Text>
+        <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>등록된 일정이 없습니다</Text>
       ) : (
         <ul className={cn('grid gap-2.5', isMobile ? 'grid-cols-1' : 'grid-cols-2')}>
           {listEvents.map(event => (

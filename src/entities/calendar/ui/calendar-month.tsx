@@ -31,7 +31,7 @@ export const CalendarMonth = ({
     <div className={cn('flex flex-col gap-2.5', className)}>
       <div className={'grid grid-cols-7 text-center'}>
         {WEEK_LABEL.map(day => (
-          <Text key={day} className={'text-[14px] font-medium text-[#6B7280]!'}>
+          <Text key={day} className={'text-muted-foreground! text-[14px] font-medium'}>
             {day}
           </Text>
         ))}
@@ -58,9 +58,9 @@ export const CalendarMonth = ({
               <Text
                 className={cn(
                   'flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium',
-                  isSelected && 'bg-dark text-white!',
-                  isToday && !isSelected && 'border-dark border-2 text-gray-900',
-                  !isSelected && !isToday && 'text-gray-900',
+                  isSelected && 'bg-foreground text-background!',
+                  isToday && !isSelected && 'border-foreground text-foreground border-2',
+                  !isSelected && !isToday && 'text-foreground',
                 )}
               >
                 {date.getDate()}
@@ -79,7 +79,7 @@ export const CalendarMonth = ({
                     </span>
                   </li>
                 ))}
-                {restCount > 0 && <li className={'text-[10px] font-medium text-gray-400'}>+{restCount}</li>}
+                {restCount > 0 && <li className={'text-subtle-foreground text-[10px] font-medium'}>+{restCount}</li>}
               </ul>
             </button>
           )

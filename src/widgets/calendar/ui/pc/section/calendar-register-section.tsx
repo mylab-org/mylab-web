@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { CalendarType } from '@/entities/calendar'
 import { CalendarTypeSelect, ScheduleRegisterForm } from '@/features/calendar'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
 
 interface CalendarRegisterSectionProps {
@@ -16,7 +17,8 @@ export const CalendarRegisterSection = ({ members, className }: CalendarRegister
   return (
     <section
       className={cn(
-        'flex h-fit w-[560px] shrink-0 flex-col gap-7.5 rounded-[24px] bg-white p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.03),0px_4px_16px_rgba(0,0,0,0.04)]',
+        'bg-card flex h-fit w-[560px] shrink-0 flex-col gap-7.5 rounded-[24px] p-6',
+        CARD_SHADOW,
         className,
       )}
     >

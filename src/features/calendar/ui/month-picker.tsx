@@ -58,13 +58,13 @@ export const MonthPicker = ({ currentDate, onConfirm, onClose }: MonthPickerProp
     <div
       ref={ref}
       className={
-        'absolute top-full left-1/2 z-40 mt-2 flex -translate-x-1/2 flex-col gap-2.5 rounded-[16px] bg-white px-5 py-2.5 shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_4px_16px_rgba(0,0,0,0.12)]'
+        'bg-card absolute top-full left-1/2 z-40 mt-2 flex -translate-x-1/2 flex-col gap-2.5 rounded-[16px] px-5 py-2.5 shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_4px_16px_rgba(0,0,0,0.12)]'
       }
     >
       <div className={'relative flex items-center'}>
         {/* 두 휠을 가로지르는 하나의 선택 영역 표시 */}
         <div
-          className={'pointer-events-none absolute right-0 left-0 z-30 border-y border-gray-300'}
+          className={'border-border pointer-events-none absolute right-0 left-0 z-30 border-y'}
           style={{ top: WHEEL_CENTER_OFFSET, height: ITEM_HEIGHT }}
         />
         <Wheel

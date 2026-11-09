@@ -11,7 +11,7 @@ interface CalendarTypeFilterProps {
 }
 
 const FILTERS: { value: CalendarFilter; name: string; bg: string; tc: string }[] = [
-  { value: 'ALL', name: '전체', bg: 'bg-gray-100', tc: 'text-gray-600' },
+  { value: 'ALL', name: '전체', bg: 'bg-muted', tc: 'text-muted-foreground' },
   ...(Object.keys(CALENDAR_TYPE) as (keyof typeof CALENDAR_TYPE)[]).map(type => ({
     value: type as CalendarFilter,
     name: CALENDAR_TYPE[type].NAME,

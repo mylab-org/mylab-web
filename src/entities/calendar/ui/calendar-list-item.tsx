@@ -25,7 +25,7 @@ export const CalendarListItem = ({ event = DEFAULT_EVENT, className }: CalendarL
   const { type, title, place, members } = event
 
   return (
-    <div className={cn('flex flex-col gap-1.25 rounded-[12px] border border-[#E2E3E5] px-3 py-4', className)}>
+    <div className={cn('border-border flex flex-col gap-1.25 rounded-[12px] border px-3 py-4', className)}>
       <div className={'flex items-center gap-1.25'}>
         <span className={cn('h-2.5 w-2.5 shrink-0 rounded-full', CALENDAR_TYPE[type].DOT)} />
         <Text className={'text-[14px] font-bold'}>{title}</Text>
