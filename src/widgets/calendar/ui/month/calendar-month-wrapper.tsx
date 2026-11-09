@@ -2,6 +2,7 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
+import { useCalendarScheduleHook } from '../../model/use-calendar-schedule-hook'
 import {
   CalendarListItem,
   CalendarMonth,
@@ -11,7 +12,7 @@ import {
   isSameDate,
   toDateKey,
 } from '@/entities/calendar'
-import type { CalendarEvent, CalendarFilter } from '@/entities/calendar'
+import type { CalendarFilter } from '@/entities/calendar'
 import { CalendarTypeFilter, MonthPicker } from '@/features/calendar'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
@@ -19,7 +20,6 @@ import { Text } from '@/shared/ui/override/text'
 import type { ReactNode } from 'react'
 
 interface CalendarMonthWrapperProps {
-  events: CalendarEvent[]
   /** 모바일은 타이틀을 좌측 정렬하고 일정 목록을 1열로 쌓는다 */
   variant?: 'pc' | 'mobile'
   /** 헤더 우측 영역 (모바일 일정 등록 메뉴 등) */
@@ -27,13 +27,10 @@ interface CalendarMonthWrapperProps {
   className?: string
 }
 
-export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, className }: CalendarMonthWrapperProps) => {
+export const CalendarMonthWrapper = ({ variant = 'pc', headerRight, className }: CalendarMonthWrapperProps) => {
   const isMobile = variant === 'mobile'
 
-  const [currentDate, setCurrentDate] = useState(() => {
-    const today = new Date()
-    return new Date(today.getFullYear(), today.getMonth(), 1)
-  })
+  const { currentDate, setCurrentDate, events, isPending } = useCalendarScheduleHook()
   const [filter, setFilter] = useState<CalendarFilter>('ALL')
   const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false)
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -149,12 +146,14 @@ export const CalendarMonthWrapper = ({ events, variant = 'pc', headerRight, clas
         </div>
       )}
 
-      {selectedDate && listEvents.length === 0 ? (
+      {isPending ? (
+        <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>일정을 불러오는 중입니다</Text>
+      ) : listEvents.length === 0 ? (
         <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>등록된 일정이 없습니다</Text>
       ) : (
         <ul className={cn('grid gap-2.5', isMobile ? 'grid-cols-1' : 'grid-cols-2')}>
           {listEvents.map(event => (
-            <li key={event.id}>
+            <li key={event.key}>
               <CalendarListItem event={event} />
             </li>
           ))}

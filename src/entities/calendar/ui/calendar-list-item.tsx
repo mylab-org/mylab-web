@@ -13,6 +13,7 @@ interface CalendarListItemProps {
 /** TODO: API 연동 전, event 를 넘기지 않는 메인/사이드 화면을 위한 임시 기본값 */
 const DEFAULT_EVENT: CalendarEvent = {
   id: 0,
+  key: 'default',
   type: 'CONFERENCE',
   title: '2025 한국통신학회 동계종합학술발표회',
   startDate: '2026-02-04',

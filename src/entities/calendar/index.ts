@@ -14,4 +14,13 @@ export {
   toDateKey,
 } from './lib/date'
 
-export type { CalendarEvent, CalendarFilter, CalendarType } from './model/types'
+export { toCalendarEvent, toCalendarEvents } from './lib/mapper'
+
+export type {
+  CalendarEvent,
+  CalendarFilter,
+  CalendarRecurrenceType,
+  CalendarScheduleCreatePayloadType,
+  CalendarScheduleResponseType,
+  CalendarType,
+} from './model/types'

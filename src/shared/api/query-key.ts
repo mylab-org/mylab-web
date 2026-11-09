@@ -24,4 +24,7 @@ export const QUERY_KEYS = {
     LIST: ['task', 'list'],
     WORKS_ALL_LIST: (labId: number) => ['task', 'works-all-list', labId],
   },
+  CALENDAR: {
+    MONTHLY: (labId: number, year: number, month: number) => ['calendar', 'monthly', labId, year, month],
+  },
 }

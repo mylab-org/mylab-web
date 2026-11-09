@@ -75,7 +75,7 @@ export const CALENDAR_TYPE = {
     BG: 'bg-[#ECF9DB]',
     TC: 'text-[#1BAD20]',
   },
-  DINNER: {
+  LAB_DINNER: {
     NAME: '회식',
     DOT: 'bg-[#E35C67]',
     BG: 'bg-[#FFEBEC]',

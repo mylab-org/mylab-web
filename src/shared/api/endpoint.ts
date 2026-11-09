@@ -44,4 +44,10 @@ export const ENDPOINTS = {
     STATUS: (taskId: number) => `/api/task/${taskId}/status`,
     WORKS_ALL_LIST: (labId: number) => `/api/task/lab/${labId}`,
   },
+  CALENDAR: {
+    ROOT: (labId: number) => `/api/labs/${labId}/calendar`,
+    DATES: (labId: number) => `/api/labs/${labId}/calendar/dates`,
+    SCHEDULE: (labId: number, scheduleId: number) => `/api/labs/${labId}/calendar/${scheduleId}`,
+    OCCURRENCES: (labId: number, scheduleId: number) => `/api/labs/${labId}/calendar/${scheduleId}/occurrences`,
+  },
 }

@@ -1,11 +1,39 @@
-import { MOCK_CALENDAR_EVENTS, MOCK_MEMBERS } from './model/mock'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import { getCalendarMonthlyServer } from '@/entities/calendar/api/get-calendar-monthly-server'
+import { getLabsMembersServer } from '@/entities/labs/api/get-labs-members-server'
+import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
+import { QUERY_KEYS } from '@/shared/api/query-key'
 import { CalendarMonthWrapper, CalendarRegisterSection } from '@/widgets/calendar'
 
-export const CalendarPage = () => {
+export const CalendarPage = async () => {
+  const queryClient = new QueryClient()
+
+  const me = await getUsersMeServer().catch(() => null)
+  const labId = me?.lab?.labId
+
+  if (labId !== undefined) {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = today.getMonth() + 1
+
+    await Promise.all([
+      queryClient.prefetchQuery({
+        queryKey: QUERY_KEYS.CALENDAR.MONTHLY(labId, year, month),
+        queryFn: () => getCalendarMonthlyServer(labId, year, month),
+      }),
+      queryClient.prefetchQuery({
+        queryKey: QUERY_KEYS.LABS.MEMBERS(labId),
+        queryFn: () => getLabsMembersServer(labId),
+      }),
+    ])
+  }
+
   return (
-    <div className={'flex flex-1 gap-7.5 focus:outline-none'}>
-      <CalendarMonthWrapper events={MOCK_CALENDAR_EVENTS} />
-      <CalendarRegisterSection members={MOCK_MEMBERS} />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className={'flex flex-1 gap-7.5 focus:outline-none'}>
+        <CalendarMonthWrapper />
+        <CalendarRegisterSection />
+      </div>
+    </HydrationBoundary>
   )
 }

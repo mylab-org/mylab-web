@@ -1,18 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+import { useCalendarScheduleHook } from '../../../model/use-calendar-schedule-hook'
 import type { CalendarType } from '@/entities/calendar'
 import { CalendarTypeSelect, ScheduleRegisterForm } from '@/features/calendar'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
 
 interface CalendarRegisterSectionProps {
-  members: string[]
   className?: string
 }
 
-export const CalendarRegisterSection = ({ members, className }: CalendarRegisterSectionProps) => {
+export const CalendarRegisterSection = ({ className }: CalendarRegisterSectionProps) => {
   const [type, setType] = useState<CalendarType>('CONFERENCE')
+  const { members } = useCalendarScheduleHook()
 
   return (
     <section
