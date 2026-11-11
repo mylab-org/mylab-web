@@ -17,15 +17,11 @@ export const CalendarRegisterSection = ({ className }: CalendarRegisterSectionPr
 
   return (
     <section
-      className={cn(
-        'bg-card flex h-fit w-[560px] shrink-0 flex-col gap-7.5 rounded-[24px] p-6',
-        CARD_SHADOW,
-        className,
-      )}
+      className={cn('bg-card flex h-fit w-[420px] shrink-0 flex-col gap-5 rounded-[20px] p-5', CARD_SHADOW, className)}
     >
       <div className={'flex items-center gap-1.25'}>
         <CalendarTypeSelect value={type} onChange={setType} />
-        <h3 className={'text-[20px] leading-8 font-bold lg:text-[24px]'}>등록하기</h3>
+        <h3 className={'text-[18px] leading-7 font-bold md:text-[22px] md:leading-8'}>등록하기</h3>
       </div>
       {/* 종류가 바뀌면 입력값을 초기화하기 위해 key 로 폼을 새로 마운트한다 */}
       <ScheduleRegisterForm key={type} type={type} members={members} />

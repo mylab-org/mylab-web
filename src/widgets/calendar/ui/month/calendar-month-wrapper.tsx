@@ -66,27 +66,28 @@ export const CalendarMonthWrapper = ({ variant = 'pc', headerRight, className }:
   return (
     <section
       className={cn(
-        'flex flex-col gap-3.75',
-        isMobile ? 'flex-1 px-5' : `bg-card min-w-0 flex-1 rounded-[24px] p-6 ${CARD_SHADOW}`,
+        'flex flex-col gap-4',
+        isMobile ? 'flex-1 px-4' : `bg-card min-w-0 flex-1 rounded-[20px] p-5 ${CARD_SHADOW}`,
         className,
       )}
     >
-      <div className={cn('flex items-center gap-2.5', isMobile ? 'justify-between' : 'justify-center')}>
-        {/* '오늘' 버튼이 생겨도 타이틀·피커 위치가 밀리지 않도록 relative + absolute 로 띄운다 */}
-        <div className={'relative flex items-center gap-2.5'}>
+      <div className={'flex items-center justify-between gap-2.5'}>
+        <div className={'flex items-center gap-1'}>
           <button
             type={'button'}
             aria-label={'이전 달'}
-            className={'text-subtle-foreground hover:text-foreground cursor-pointer'}
+            className={'text-subtle-foreground hover:bg-muted hover:text-foreground cursor-pointer rounded-full p-1.5'}
             onClick={() => moveMonth(-1)}
           >
-            <ChevronLeftIcon size={20} />
+            <ChevronLeftIcon size={18} />
           </button>
           <div className={'relative'}>
             <button
               type={'button'}
               aria-expanded={isPickerOpen}
-              className={'cursor-pointer text-[20px] leading-8 font-bold lg:text-[24px]'}
+              className={
+                'hover:bg-muted cursor-pointer rounded-[10px] px-2 py-1 text-[18px] leading-7 font-bold md:text-[22px] md:leading-8'
+              }
               onClick={() => setIsPickerOpen(prev => !prev)}
             >
               {formatMonthTitle(currentDate)}
@@ -102,16 +103,16 @@ export const CalendarMonthWrapper = ({ variant = 'pc', headerRight, className }:
           <button
             type={'button'}
             aria-label={'다음 달'}
-            className={'text-subtle-foreground hover:text-foreground cursor-pointer'}
+            className={'text-subtle-foreground hover:bg-muted hover:text-foreground cursor-pointer rounded-full p-1.5'}
             onClick={() => moveMonth(1)}
           >
-            <ChevronRightIcon size={20} />
+            <ChevronRightIcon size={18} />
           </button>
           {!isThisMonth && (
             <button
               type={'button'}
               className={
-                'bg-muted text-muted-foreground hover:bg-secondary absolute top-1/2 left-full ml-2.5 -translate-y-1/2 cursor-pointer rounded-[20px] px-2.5 py-0.75 text-[12px] font-semibold whitespace-nowrap'
+                'bg-muted text-muted-foreground hover:bg-secondary ml-1.5 cursor-pointer rounded-full px-3 py-1.5 text-[12px] font-semibold whitespace-nowrap'
               }
               onClick={goToday}
             >
@@ -122,7 +123,7 @@ export const CalendarMonthWrapper = ({ variant = 'pc', headerRight, className }:
         {headerRight}
       </div>
 
-      <CalendarTypeFilter selected={filter} onSelect={setFilter} className={isMobile ? '' : 'justify-end'} />
+      <CalendarTypeFilter selected={filter} onSelect={setFilter} />
 
       <CalendarMonth
         currentDate={currentDate}
@@ -131,27 +132,28 @@ export const CalendarMonthWrapper = ({ variant = 'pc', headerRight, className }:
         onSelectDate={handleSelectDate}
       />
 
-      {selectedDate && (
-        <div className={'flex items-center justify-between'}>
-          <Text className={'text-[14px] font-bold'}>{formatDateLabel(toDateKey(selectedDate))} 일정</Text>
+      <div className={'border-border flex items-center justify-between gap-2 border-t pt-4'}>
+        <Text className={'text-[15px] font-bold md:text-[17px]'}>
+          {selectedDate ? `${formatDateLabel(toDateKey(selectedDate))} 일정` : '이번 달 일정'}
+          <span className={'text-subtle-foreground ml-1.5 text-[13px] font-semibold'}>{listEvents.length}</span>
+        </Text>
+        {selectedDate && (
           <button
             type={'button'}
-            className={
-              'text-subtle-foreground hover:text-muted-foreground cursor-pointer text-[12px] font-medium underline'
-            }
+            className={'text-brand hover:bg-muted cursor-pointer rounded-full px-2.5 py-1 text-[12px] font-semibold'}
             onClick={() => setSelectedDate(null)}
           >
             전체보기
           </button>
-        </div>
-      )}
+        )}
+      </div>
 
       {isPending ? (
-        <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>일정을 불러오는 중입니다</Text>
+        <Text className={'text-subtle-foreground py-8 text-center text-[14px]'}>일정을 불러오는 중입니다</Text>
       ) : listEvents.length === 0 ? (
-        <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>등록된 일정이 없습니다</Text>
+        <Text className={'text-subtle-foreground py-8 text-center text-[14px]'}>등록된 일정이 없습니다</Text>
       ) : (
-        <ul className={cn('grid gap-2.5', isMobile ? 'grid-cols-1' : 'grid-cols-2')}>
+        <ul className={cn('grid gap-3', isMobile ? 'grid-cols-1' : 'grid-cols-2')}>
           {listEvents.map(event => (
             <li key={event.key}>
               <CalendarListItem event={event} />

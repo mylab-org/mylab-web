@@ -30,7 +30,7 @@ export const CalendarPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className={'flex flex-1 gap-7.5 focus:outline-none'}>
+      <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
         <CalendarMonthWrapper />
         <CalendarRegisterSection />
       </div>

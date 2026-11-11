@@ -37,15 +37,13 @@ export const MemberSelect = ({ members, selected, onChange, className }: MemberS
 
   return (
     <div className={cn('flex flex-col gap-2.5', className)}>
-      <Text className={'text-[16px] font-bold'}>참가인원</Text>
+      <Text className={'text-[14px] font-bold'}>참가인원</Text>
       <div className={'flex flex-wrap gap-1.75'}>
         {GROUP_OPTIONS.map(({ label, degree }) => (
           <button
             key={label}
             type={'button'}
-            className={
-              'text-muted-foreground hover:bg-muted cursor-pointer rounded-[20px] px-2.5 py-1 text-[14px] font-medium'
-            }
+            className={'text-brand hover:bg-muted cursor-pointer rounded-full px-2.5 py-1 text-[13px] font-semibold'}
             onClick={() => handleGroupClick(degree)}
           >
             {label}
@@ -61,8 +59,8 @@ export const MemberSelect = ({ members, selected, onChange, className }: MemberS
               type={'button'}
               aria-pressed={isSelected}
               className={cn(
-                'cursor-pointer rounded-[20px] px-2.5 py-1 text-[14px] font-medium transition-colors',
-                isSelected ? 'bg-brand text-brand-foreground' : 'text-muted-foreground hover:bg-muted',
+                'cursor-pointer rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors',
+                isSelected ? 'bg-brand text-brand-foreground' : 'bg-muted text-muted-foreground hover:bg-secondary',
               )}
               onClick={() => toggleMember(member.userId)}
             >

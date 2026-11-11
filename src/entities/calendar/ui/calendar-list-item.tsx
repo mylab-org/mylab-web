@@ -1,3 +1,4 @@
+import { CalendarIcon, MapPinIcon } from 'lucide-react'
 import { formatEventPeriod } from '../lib/date'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
@@ -12,17 +13,33 @@ interface CalendarListItemProps {
 
 export const CalendarListItem = ({ event, className }: CalendarListItemProps) => {
   const { type, title, place, members } = event
+  const { NAME, BG, TC } = CALENDAR_TYPE[type]
 
   return (
-    <div className={cn('border-border flex flex-col gap-1.25 rounded-[12px] border px-3 py-4', className)}>
-      <div className={'flex items-center gap-1.25'}>
-        <span className={cn('h-2.5 w-2.5 shrink-0 rounded-full', CALENDAR_TYPE[type].DOT)} />
-        <Text className={'text-[14px] font-bold'}>{title}</Text>
+    <div
+      className={cn(
+        'border-border hover:border-brand flex flex-col gap-2.5 rounded-[14px] border p-4 transition-colors',
+        className,
+      )}
+    >
+      <div className={'flex flex-col gap-1.5'}>
+        <span className={cn('w-fit rounded-full px-2.5 py-1 text-[11px] font-semibold', BG, TC)}>{NAME}</span>
+        <Text className={'line-clamp-1 text-[15px] font-bold'}>{title}</Text>
       </div>
-      <div>
-        <Text className={'text-[14px] font-light'}>{formatEventPeriod(event)}</Text>
-        <Text className={'text-[14px] font-light'}>{place}</Text>
+
+      <div className={'flex flex-col gap-1'}>
+        <div className={'text-muted-foreground flex items-center gap-1.5'}>
+          <CalendarIcon size={13} className={'shrink-0'} />
+          <Text className={'text-muted-foreground! text-[13px] font-medium'}>{formatEventPeriod(event)}</Text>
+        </div>
+        {place && (
+          <div className={'text-muted-foreground flex items-center gap-1.5'}>
+            <MapPinIcon size={13} className={'shrink-0'} />
+            <Text className={'text-muted-foreground! line-clamp-1 text-[13px] font-medium'}>{place}</Text>
+          </div>
+        )}
       </div>
+
       {members.length > 0 && (
         <ul className={'flex flex-wrap items-center gap-1.25'}>
           {members.map(member => (

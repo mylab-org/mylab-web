@@ -60,14 +60,14 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
   const { NAME } = CALENDAR_TYPE[type]
   const { isRange, withTime } = DATE_FIELD[type]
 
-  // lg:min-h - 종류를 바꿔도 카드 높이가 흔들리지 않도록 가장 큰 폼(미팅) 기준으로 최소 높이를 잡는다
+  // min-h - 종류를 바꿔도 카드 높이가 흔들리지 않도록 가장 큰 폼(미팅) 기준으로 최소 높이를 잡는다
   return (
-    <form className={'flex flex-col gap-7.5 lg:min-h-[360px] lg:flex-row'} onSubmit={onSubmit}>
-      <div className={'flex flex-1 flex-col gap-7.5'}>
+    <form className={'flex min-h-[520px] flex-col gap-5'} onSubmit={onSubmit}>
+      <div className={'flex flex-1 flex-col gap-5'}>
         {type === 'CONFERENCE' && (
           <div className={'flex justify-end'}>
             {/* TODO: 학회 검색 시트 연결 */}
-            <Button.Menu isGray className={'text-[12px]!'}>
+            <Button.Menu isGray className={'text-brand! text-[12px]! font-semibold'}>
               검색해서 학회 찾기
             </Button.Menu>
           </div>
@@ -75,7 +75,7 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
 
         <FloatingLabel labelName={`${NAME} 이름`} className={'w-full'} {...register('title', { required: true })} />
 
-        <div className={'flex items-center gap-7.5'}>
+        <div className={'flex items-center gap-4'}>
           <UnderlineField
             label={isRange ? '시작일' : '날짜'}
             id={'startDate'}
@@ -88,7 +88,7 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
         </div>
 
         {isRange && (
-          <div className={'flex items-center gap-7.5'}>
+          <div className={'flex items-center gap-4'}>
             <UnderlineField label={'종료일'} id={'endDate'} type={'date'} registration={register('endDate')} />
             {withTime && (
               <UnderlineField label={'시간'} id={'endTime'} type={'time'} registration={register('endTime')} />
@@ -108,8 +108,8 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
                   type={'button'}
                   aria-pressed={repeat === value}
                   className={cn(
-                    'cursor-pointer rounded-[20px] px-3 py-1 text-[12px] font-medium transition-colors',
-                    repeat === value ? 'bg-brand text-brand-foreground' : 'text-muted-foreground hover:bg-muted',
+                    'cursor-pointer rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors',
+                    repeat === value ? 'bg-brand text-brand-foreground' : 'bg-muted text-muted-foreground',
                   )}
                   onClick={() => setRepeat(repeat === value ? null : value)}
                 >
@@ -121,7 +121,7 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
         )}
       </div>
 
-      <div className={'flex w-full flex-col justify-between gap-7.5 lg:w-[210px]'}>
+      <div className={'flex w-full flex-col gap-5'}>
         <MemberSelect members={members} selected={selectedMemberIds} onChange={setSelectedMemberIds} />
         <Button type={'submit'} className={'w-full'} disabled={isPending}>
           {isPending ? '등록 중...' : '등록하기'}

@@ -31,15 +31,15 @@ export const CalendarMonth = ({
     <div className={cn('flex flex-col gap-2.5', className)}>
       <div className={'grid grid-cols-7 text-center'}>
         {WEEK_LABEL.map(day => (
-          <Text key={day} className={'text-muted-foreground! text-[14px] font-medium'}>
+          <Text key={day} className={'text-subtle-foreground! py-1 text-[12px] font-semibold'}>
             {day}
           </Text>
         ))}
       </div>
 
-      <div className={'grid grid-cols-7'}>
+      <div className={'grid grid-cols-7 gap-0.5'}>
         {cells.map((date, idx) => {
-          if (!date) return <div key={`empty-${idx}`} className={'min-h-[64px] lg:min-h-[84px]'} />
+          if (!date) return <div key={`empty-${idx}`} className={'min-h-[76px] lg:min-h-[104px]'} />
 
           const dayEvents = events.filter(event => isDateInEvent(date, event))
           const visibleEvents = dayEvents.slice(0, maxVisibleEvents)
@@ -52,34 +52,42 @@ export const CalendarMonth = ({
               key={toDateKey(date)}
               type={'button'}
               aria-pressed={isSelected}
-              className={'flex min-h-[64px] cursor-pointer flex-col items-center gap-1 px-1 lg:min-h-[84px]'}
+              className={cn(
+                'flex min-h-[76px] cursor-pointer flex-col items-center gap-1 rounded-[10px] p-1 transition-colors lg:min-h-[104px]',
+                isSelected ? 'bg-muted' : 'hover:bg-muted',
+              )}
               onClick={() => onSelectDate?.(date)}
             >
               <Text
                 className={cn(
-                  'flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium',
+                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[14px] font-semibold',
                   isSelected && 'bg-foreground text-background!',
-                  isToday && !isSelected && 'border-foreground text-foreground border-2',
+                  isToday && !isSelected && 'bg-brand text-brand-foreground!',
                   !isSelected && !isToday && 'text-foreground',
                 )}
               >
                 {date.getDate()}
               </Text>
-              <ul className={'flex w-full flex-col items-center gap-0.5'}>
+              <ul className={'flex w-full min-w-0 flex-col gap-0.5'}>
                 {visibleEvents.map(event => (
-                  <li key={event.id} className={'w-full'}>
+                  <li key={event.key} className={'w-full min-w-0'}>
+                    {/* 칸이 좁아 제목이 잘리므로 색 막대로 종류를 먼저 읽히게 한다 */}
                     <span
                       className={cn(
-                        'block truncate rounded-[4px] px-1 text-center text-[10px] font-medium',
+                        'flex min-w-0 items-center gap-1 rounded-[5px] py-0.5 pr-1 pl-0.5 text-left',
                         CALENDAR_TYPE[event.type].BG,
-                        CALENDAR_TYPE[event.type].TC,
                       )}
                     >
-                      {event.title}
+                      <span className={cn('h-3 w-[3px] shrink-0 rounded-full', CALENDAR_TYPE[event.type].DOT)} />
+                      <span className={cn('min-w-0 truncate text-[11px] font-semibold', CALENDAR_TYPE[event.type].TC)}>
+                        {event.title}
+                      </span>
                     </span>
                   </li>
                 ))}
-                {restCount > 0 && <li className={'text-subtle-foreground text-[10px] font-medium'}>+{restCount}</li>}
+                {restCount > 0 && (
+                  <li className={'text-subtle-foreground pl-1 text-left text-[11px] font-medium'}>+{restCount}건</li>
+                )}
               </ul>
             </button>
           )
