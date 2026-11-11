@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { MoreLabMember } from './side/more-lab-member'
 import { MoreLabUpdate } from './side/more-lab-update'
 import { LabInfo } from '@/entities/labs'
+import { getLabsInfo } from '@/entities/labs/api/get-labs-info'
 import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useUsersMeHook } from '@/entities/user'
 import { deleteLabsRevokeInviteCodes } from '@/features/labs/api/delete-labs-revoke-invite-codes'
@@ -54,6 +55,12 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
     enabled: !!labId,
   })
 
+  const { data: labInfo } = useQuery({
+    queryKey: QUERY_KEYS.LABS.LAB_INFO(labId ?? 0),
+    queryFn: () => getLabsInfo(labId ?? 0),
+    enabled: labId !== undefined,
+  })
+
   const deleteLabsRevokeInviteCodesMutation = useApiMutation({
     mutationFn: (code: string) => deleteLabsRevokeInviteCodes(labId ?? 0, code),
     onSuccess: () => setLabInviteCode(null),
@@ -76,12 +83,12 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
     postLabsInviteCodesMutation.mutate()
   }
 
-  if (labId === undefined || members === undefined) return null
+  if (labId === undefined || members === undefined || labInfo === undefined) return null
 
   return (
     <section className={'flex w-full flex-col gap-3'}>
       <div className={cn('bg-card flex flex-col gap-3 rounded-[20px]', CARD_SHADOW, isMobile ? 'p-4' : 'p-5')}>
-        <LabInfo />
+        <LabInfo labInfo={labInfo} />
         <Button
           className={'text-[13px]! md:text-[15px]!'}
           onClick={() => openSideModal(MoreLabUpdate, '연구실 정보 수정')}
