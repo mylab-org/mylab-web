@@ -12,6 +12,7 @@ import { useUsersMeHook } from '@/entities/user'
 import { deleteLabsRevokeInviteCodes } from '@/features/labs/api/delete-labs-revoke-invite-codes'
 import { postLabsInviteCodes } from '@/features/labs/api/post-labs-invite-codes'
 import type { PostLabsInviteCodesResponseType } from '@/features/labs/model/types'
+import { useLabsDeleteHook } from '@/features/labs/model/use-labs-delete-hook'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
@@ -24,13 +25,14 @@ import { Text } from '@/shared/ui/override/text'
 import { IconInput } from '@/shared/ui/template/icon-input'
 import { MoreMenuContentWrap } from '@/shared/ui/template/more-menu-content-wrap'
 
-interface WrapProps {
+type Props = {
   isMobile?: boolean
 }
 
-export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
+export const MoreLabSection = ({ isMobile = false }: Props) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
+  const { handleDelete } = useLabsDeleteHook()
 
   const [labInviteCode, setLabInviteCode] = useState<string | null>(null)
 
@@ -40,9 +42,7 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
   }
 
   const handleLabDelete = () => {
-    openDialogModal(DIALOG_MAP['LAB_DELETE'], '연구실 삭제', () => {
-      console.log('연구실 삭제')
-    })
+    openDialogModal(DIALOG_MAP['LAB_DELETE'], '연구실 삭제', handleDelete)
   }
 
   const { me } = useUsersMeHook()
