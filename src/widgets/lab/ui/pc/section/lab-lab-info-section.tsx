@@ -58,7 +58,7 @@ export const LabLabInfoSection = () => {
           showViewAll={members.length > MEMBER_PREVIEW_COUNT}
         />
       </div>
-      <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <LabLinkModal open={isOpen} onOpenChange={setIsOpen} />
     </>
   )
 }

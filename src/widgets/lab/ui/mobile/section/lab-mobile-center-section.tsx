@@ -51,7 +51,7 @@ export const LabMobileCenterSection = () => {
         onViewAll={() => openSideModal(SideMember, '연구실 구성원')}
         showViewAll={members.length > MEMBER_PREVIEW_COUNT}
       />
-      <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <LabLinkModal open={isOpen} onOpenChange={setIsOpen} />
     </div>
   )
 }

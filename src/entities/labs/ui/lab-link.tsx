@@ -16,7 +16,7 @@ export const LabLink = ({ setIsOpen, labLink }: Props) => {
   return (
     <div className={cn('bg-card flex flex-col gap-3 rounded-[20px] p-5', CARD_SHADOW)}>
       <div className={'flex items-center justify-between'}>
-        <h3 className={'text-[18px] leading-7 font-bold md:text-[20px]'}>링크</h3>
+        <h3 className={'text-[18px] leading-7 font-bold md:text-[20px]'}>연구활동 링크</h3>
         <button
           type={'button'}
           onClick={() => setIsOpen(true)}
