@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useLabInfoHook } from '../../../model/use-lab-info-hook'
 import { LabLinkModal } from '../../modal/lab-link-modal'
 import { SideMember } from '../../side/side-member'
 import { LabInfo, LabLink, LabMember } from '@/entities/labs'
@@ -13,6 +14,7 @@ import { useSideModalStore } from '@/shared/store/useSideModalStore'
 const MEMBER_PREVIEW_COUNT = 3
 
 export const LabMobileCenterSection = () => {
+  const { lab, links } = useLabInfoHook()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { me } = useUsersMeHook()
   const openSideModal = useSideModalStore(state => state.openSideModal)
@@ -28,8 +30,8 @@ export const LabMobileCenterSection = () => {
 
   return (
     <div className={'flex flex-col gap-4'}>
-      <LabInfo className={'p-5'} isShadow />
-      <LabLink setIsOpen={setIsOpen} />
+      <LabInfo lab={lab} className={'p-5'} isShadow />
+      <LabLink links={links} setIsOpen={setIsOpen} />
       <LabMember
         members={members.slice(0, MEMBER_PREVIEW_COUNT)}
         onViewAll={() => openSideModal(SideMember, '연구실 구성원')}

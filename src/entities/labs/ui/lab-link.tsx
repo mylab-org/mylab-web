@@ -4,13 +4,16 @@ import { Image } from 'next/dist/client/image-component'
 import { LabLinkItem } from '@/entities/labs'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
+import { Text } from '@/shared/ui/override/text'
+import type { LabsLinkResponseType } from '../model/types'
 import type { Dispatch, SetStateAction } from 'react'
 
 interface LabLinkProps {
+  links?: LabsLinkResponseType[]
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const LabLink = ({ setIsOpen }: LabLinkProps) => {
+export const LabLink = ({ links = [], setIsOpen }: LabLinkProps) => {
   return (
     <div className={cn('bg-card flex flex-col gap-3 rounded-[20px] p-5', CARD_SHADOW)}>
       <div className={'flex items-center justify-between'}>
@@ -24,12 +27,15 @@ export const LabLink = ({ setIsOpen }: LabLinkProps) => {
           onClick={() => setIsOpen(true)}
         />
       </div>
-      <div className={'flex flex-wrap gap-1.5'}>
-        <LabLinkItem href={'#'} name={'연구실 홈페이지'} />
-        <LabLinkItem href={'#'} name={'엑셀'} />
-        <LabLinkItem href={'#'} name={'이것저것'} />
-        <LabLinkItem href={'#'} name={'링크'} />
-      </div>
+      {links.length === 0 ? (
+        <Text className={'text-subtle-foreground text-[12px] md:text-[14px]'}>등록된 링크가 없습니다</Text>
+      ) : (
+        <div className={'flex flex-wrap gap-1.5'}>
+          {links.map(link => (
+            <LabLinkItem key={link.linkId} href={link.url} name={link.name} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
