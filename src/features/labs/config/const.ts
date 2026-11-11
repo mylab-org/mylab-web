@@ -8,3 +8,6 @@ export const LABS_JOIN_MODAL_PREV_INFO_ROWS = [
   ...LABS_CREATE_RESPONSE_INFO_ROWS,
   { key: 'professorName', label: '지도교수' },
 ] as const
+
+export const MAX_HASHTAG_COUNT = 5
+export const MAX_HASHTAG_LENGTH = 20

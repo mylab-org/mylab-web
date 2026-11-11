@@ -91,7 +91,7 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
         <LabInfo labInfo={labInfo} />
         <Button
           className={'text-[13px]! md:text-[15px]!'}
-          onClick={() => openSideModal(MoreLabUpdate, '연구실 정보 수정')}
+          onClick={() => openSideModal(() => <MoreLabUpdate labInfo={labInfo} />, '연구실 정보 수정')}
         >
           수정하기
         </Button>
