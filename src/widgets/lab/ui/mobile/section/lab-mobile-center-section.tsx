@@ -9,6 +9,7 @@ import { getLabsInfo } from '@/entities/labs/api/get-labs-info'
 import { getLabsLink } from '@/entities/labs/api/get-labs-link'
 import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useUsersMeHook } from '@/entities/user'
+import { useLabsLinkDeleteHook } from '@/features/labs/model/use-labs-link-delete-hook'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 
@@ -18,6 +19,7 @@ export const LabMobileCenterSection = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { me } = useUsersMeHook()
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const { handleDelete, pendingLinkId } = useLabsLinkDeleteHook()
   const labId = me?.lab.labId
 
   const getLabMembersQuery = useQuery({
@@ -45,7 +47,12 @@ export const LabMobileCenterSection = () => {
   return (
     <div className={'flex flex-col gap-4'}>
       <LabInfo className={'p-5'} isShadow labInfo={getLabInfoQuery.data} />
-      <LabLink setIsOpen={setIsOpen} labLink={getLabLinkQuery.data} />
+      <LabLink
+        setIsOpen={setIsOpen}
+        labLink={getLabLinkQuery.data}
+        onDelete={handleDelete}
+        pendingLinkId={pendingLinkId}
+      />
       <LabMember
         members={members.slice(0, MEMBER_PREVIEW_COUNT)}
         onViewAll={() => openSideModal(SideMember, '연구실 구성원')}

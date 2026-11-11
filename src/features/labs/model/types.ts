@@ -45,3 +45,8 @@ export type PatchLabsInfoPayloadType = {
   description: string
   hashtags: string[]
 }
+
+export type PostLabsLinkPayloadType = {
+  name: string
+  url: string
+}

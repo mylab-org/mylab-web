@@ -11,3 +11,5 @@ export const LABS_JOIN_MODAL_PREV_INFO_ROWS = [
 
 export const MAX_HASHTAG_COUNT = 5
 export const MAX_HASHTAG_LENGTH = 20
+
+export const MAX_LINK_NAME_LENGTH = 20

@@ -4,9 +4,11 @@ import type { AnchorHTMLAttributes } from 'react'
 interface LabLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
   name: string
+  onDelete?: () => void
+  isDeleting?: boolean
 }
 
-export const LabLinkItem = ({ href, name, ...rest }: LabLinkProps) => {
+export const LabLinkItem = ({ href, name, onDelete, isDeleting = false, ...rest }: LabLinkProps) => {
   return (
     <a
       href={href}
@@ -19,7 +21,21 @@ export const LabLinkItem = ({ href, name, ...rest }: LabLinkProps) => {
         <LinkIcon className={'h-4 w-4'} />
         {name}
       </div>
-      <X className={'h-4 w-4'} />
+      {onDelete && (
+        <button
+          type={'button'}
+          aria-label={`${name} 삭제`}
+          disabled={isDeleting}
+          className={'disabled:opacity-50'}
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            onDelete()
+          }}
+        >
+          <X className={'h-4 w-4 cursor-pointer'} />
+        </button>
+      )}
     </a>
   )
 }

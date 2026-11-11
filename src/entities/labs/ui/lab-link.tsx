@@ -10,9 +10,11 @@ import type { Dispatch, SetStateAction } from 'react'
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
   labLink: LabLinkResponseType[]
+  onDelete?: (linkId: number) => void
+  pendingLinkId?: number
 }
 
-export const LabLink = ({ setIsOpen, labLink }: Props) => {
+export const LabLink = ({ setIsOpen, labLink, onDelete, pendingLinkId }: Props) => {
   return (
     <div className={cn('bg-card flex flex-col gap-3 rounded-[20px] p-5', CARD_SHADOW)}>
       <div className={'flex items-center justify-between'}>
@@ -42,7 +44,13 @@ export const LabLink = ({ setIsOpen, labLink }: Props) => {
       ) : (
         <div className={'flex flex-wrap gap-1.5'}>
           {labLink.map(link => (
-            <LabLinkItem key={link.linkId} href={link.url} name={link.name} />
+            <LabLinkItem
+              key={link.linkId}
+              href={link.url}
+              name={link.name}
+              onDelete={onDelete ? () => onDelete(link.linkId) : undefined}
+              isDeleting={pendingLinkId === link.linkId}
+            />
           ))}
         </div>
       )}
