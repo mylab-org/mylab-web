@@ -25,9 +25,7 @@ export const CalendarScheduleListSection = ({
   className,
 }: CalendarScheduleListSectionProps) => {
   return (
-    <section
-      className={cn(`bg-card flex w-[360px] shrink-0 flex-col gap-4 rounded-[20px] p-5 ${CARD_SHADOW}`, className)}
-    >
+    <section className={cn(`bg-card flex flex-col gap-4 rounded-[20px] p-5 ${CARD_SHADOW}`, className)}>
       <div className={'flex items-center justify-between gap-2'}>
         <Text className={'text-[18px] leading-7 font-bold md:text-[20px]'}>
           {selectedDate ? formatDateLabel(toDateKey(selectedDate)) : '이번 달 일정'}

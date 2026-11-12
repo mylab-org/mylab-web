@@ -27,7 +27,9 @@ export const CalendarBoardSection = () => {
   const { openRegisterModal } = useCalendarRegisterModal(members)
 
   return (
-    <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
+    // 행 높이를 월 그리드가 정하도록 두고, 일정 목록은 absolute 로 그 높이를 채운다.
+    // (목록이 길어져도 행이 늘어나지 않아 월 그리드 아래에 빈 여백이 생기지 않는다)
+    <div className={'flex min-h-0 gap-4 focus:outline-none'}>
       <CalendarMonthWrapper
         currentDate={currentDate}
         onChangeDate={setCurrentDate}
@@ -40,13 +42,16 @@ export const CalendarBoardSection = () => {
         selectedDate={selectedDate}
         onSelectDate={handleSelectDate}
       />
-      <CalendarScheduleListSection
-        events={listEvents}
-        selectedDate={selectedDate}
-        onClearSelectedDate={() => setSelectedDate(null)}
-        onAddSchedule={() => openRegisterModal('CONFERENCE')}
-        isPending={isPending}
-      />
+      <div className={'relative w-[360px] shrink-0'}>
+        <CalendarScheduleListSection
+          className={'absolute inset-0'}
+          events={listEvents}
+          selectedDate={selectedDate}
+          onClearSelectedDate={() => setSelectedDate(null)}
+          onAddSchedule={() => openRegisterModal('CONFERENCE')}
+          isPending={isPending}
+        />
+      </div>
     </div>
   )
 }
