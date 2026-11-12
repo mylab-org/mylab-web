@@ -1,4 +1,4 @@
-export type DialogTypeKey = 'LAB_DELETE' | 'LAB_EXIT' | 'SERVICE_LEAVE'
+export type DialogTypeKey = 'LAB_DELETE' | 'LAB_EXIT' | 'SERVICE_LEAVE' | 'LINK_DELETE'
 
 export interface DialogType {
   title: string
@@ -22,5 +22,10 @@ export const DIALOG_MAP: Record<DialogTypeKey, DialogType> = {
     description:
       '회원 탈퇴를 진행하면 회원님의 모든 정보는 삭제됩니다.\n다만 서비스 내에서 활동한 연구실 기록들은 연구의 지속성을 위해 탈퇴 이후에도 연구실 구성원들에 의해 조회가 가능합니다.',
     etc: '(자유게시판 등 커뮤니티 활동 외 연구실 내 활동을 뜻함)',
+  },
+  LINK_DELETE: {
+    title: '링크 삭제',
+    // 호출부에서 앞에 링크 이름을 붙여 쓴다
+    description: '링크를 삭제할까요?\n삭제한 링크는 복구할 수 없습니다.',
   },
 }
