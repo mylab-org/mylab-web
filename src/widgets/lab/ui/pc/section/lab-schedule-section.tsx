@@ -2,7 +2,7 @@
 
 import { useLabScheduleHook } from '../../../model/use-lab-schedule-hook'
 import { SideWeek } from '../../side/side-week'
-import { CalendarListItem, CalendarWeek } from '@/entities/calendar'
+import { CalendarListItem, CalendarWeek, formatDateLabel, toDateKey } from '@/entities/calendar'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
@@ -10,7 +10,8 @@ import { Text } from '@/shared/ui/override/text'
 
 export const LabScheduleSection = ({ isMobile = false }: { isMobile?: boolean }) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
-  const { events, isPending } = useLabScheduleHook()
+  const { events, listEvents, selectedDate, setSelectedDate, handleSelectDate, goToCalendar, isPending } =
+    useLabScheduleHook()
 
   return (
     <div
@@ -28,14 +29,34 @@ export const LabScheduleSection = ({ isMobile = false }: { isMobile?: boolean })
           </button>
         )}
       </div>
-      <CalendarWeek />
+
+      <CalendarWeek events={events} selectedDate={selectedDate} onSelectDate={handleSelectDate} />
+
+      {selectedDate && (
+        <div className={'flex items-center justify-between gap-2'}>
+          <Text className={'text-[14px] font-semibold'}>
+            {formatDateLabel(toDateKey(selectedDate))}
+            <span className={'text-subtle-foreground ml-1.5 text-[13px] font-semibold'}>{listEvents.length}</span>
+          </Text>
+          <button
+            type={'button'}
+            className={'text-brand cursor-pointer rounded-full px-2.5 py-1 text-[12px] font-semibold'}
+            onClick={() => setSelectedDate(null)}
+          >
+            이번 주 전체 보기
+          </button>
+        </div>
+      )}
+
       <div className={'flex flex-col gap-2.5'}>
         {isPending ? (
           <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>일정을 불러오는 중입니다</Text>
-        ) : events.length === 0 ? (
-          <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>이번 주 일정이 없습니다</Text>
+        ) : listEvents.length === 0 ? (
+          <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>
+            {selectedDate ? '선택한 날짜에 일정이 없습니다' : '이번 주 일정이 없습니다'}
+          </Text>
         ) : (
-          events.map(event => <CalendarListItem key={event.key} event={event} />)
+          listEvents.map(event => <CalendarListItem key={event.key} event={event} onClick={goToCalendar} />)
         )}
       </div>
     </div>

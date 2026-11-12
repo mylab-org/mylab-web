@@ -9,16 +9,28 @@ import type { CalendarEvent } from '../model/types'
 interface CalendarListItemProps {
   event: CalendarEvent
   className?: string
+  /** 전달하면 카드 전체가 버튼이 됩니다. */
+  onClick?: () => void
 }
 
-export const CalendarListItem = ({ event, className }: CalendarListItemProps) => {
+export const CalendarListItem = ({ event, className, onClick }: CalendarListItemProps) => {
   const { type, title, place, members } = event
   const { NAME, BG, TC } = CALENDAR_TYPE[type]
 
+  // 참가인원 목록(ul)을 품고 있어 button 으로 감싸지 않고 role 로 처리한다
   return (
     <div
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onClick={onClick}
+      onKeyDown={event => {
+        if (!onClick || (event.key !== 'Enter' && event.key !== ' ')) return
+        event.preventDefault()
+        onClick()
+      }}
       className={cn(
         'border-border hover:border-brand flex flex-col gap-2.5 rounded-[14px] border p-4 transition-colors',
+        onClick && 'focus-visible:border-brand cursor-pointer outline-none',
         className,
       )}
     >
