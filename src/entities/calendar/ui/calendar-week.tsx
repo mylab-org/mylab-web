@@ -29,51 +29,51 @@ export const CalendarWeek = ({ events = [], selectedDate, onSelectDate }: Calend
   const weekDates = getWeekDates(today)
 
   return (
-    <div>
-      <div className={'grid grid-cols-7 text-center'}>
-        {WEEK_LABEL.map(day => (
-          <Text key={day} className="text-muted-foreground! text-[14px] font-medium">
-            {day}
-          </Text>
-        ))}
-      </div>
-      {/* 날짜 */}
-      <div className="grid grid-cols-7 text-center">
-        {weekDates.map(date => {
-          const isToday = isSameDate(date, today)
-          const isSelected = !!selectedDate && isSameDate(date, selectedDate)
-          const hasEvent = events.some(event => isDateInEvent(date, event))
+    // 요일과 날짜를 한 셀로 묶어 칸 전체가 클릭 영역이 되게 한다
+    <div className={'grid grid-cols-7 gap-1'}>
+      {weekDates.map(date => {
+        const isToday = isSameDate(date, today)
+        const isSelected = !!selectedDate && isSameDate(date, selectedDate)
+        const hasEvent = events.some(event => isDateInEvent(date, event))
 
-          return (
-            <div key={date.toISOString()} className="flex flex-col items-center gap-1">
-              <button
-                type={'button'}
-                aria-pressed={isSelected}
-                aria-label={`${date.getMonth() + 1}월 ${date.getDate()}일 일정 보기`}
-                disabled={!onSelectDate}
-                className={cn(
-                  'flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium transition-colors',
-                  onSelectDate && 'cursor-pointer',
-                  isSelected
-                    ? 'bg-brand text-brand-foreground'
-                    : isToday
-                      ? 'bg-foreground text-background'
-                      : cn('text-foreground', onSelectDate && 'hover:bg-muted'),
-                )}
-                onClick={() => onSelectDate?.(date)}
-              >
-                {date.getDate()}
-              </button>
-              <span
-                className={cn(
-                  'h-1 w-1 rounded-full',
-                  hasEvent ? (isSelected ? 'bg-brand' : 'bg-subtle-foreground') : 'bg-transparent',
-                )}
-              />
-            </div>
-          )
-        })}
-      </div>
+        return (
+          <button
+            key={date.toISOString()}
+            type={'button'}
+            aria-pressed={isSelected}
+            aria-label={`${date.getMonth() + 1}월 ${date.getDate()}일 일정 보기`}
+            disabled={!onSelectDate}
+            className={cn(
+              'flex flex-col items-center gap-1 rounded-[12px] py-2 transition-colors',
+              onSelectDate && 'hover:bg-muted cursor-pointer',
+              isSelected && 'bg-muted',
+            )}
+            onClick={() => onSelectDate?.(date)}
+          >
+            <Text className={cn('text-[14px] font-medium', isSelected ? 'text-foreground!' : 'text-muted-foreground!')}>
+              {WEEK_LABEL[date.getDay()]}
+            </Text>
+            <span
+              className={cn(
+                'flex h-7.5 w-7.5 items-center justify-center rounded-full text-[18px] font-medium transition-colors',
+                isSelected
+                  ? 'bg-brand text-brand-foreground'
+                  : isToday
+                    ? 'bg-foreground text-background'
+                    : 'text-foreground',
+              )}
+            >
+              {date.getDate()}
+            </span>
+            <span
+              className={cn(
+                'h-1 w-1 rounded-full',
+                hasEvent ? (isSelected ? 'bg-brand' : 'bg-subtle-foreground') : 'bg-transparent',
+              )}
+            />
+          </button>
+        )
+      })}
     </div>
   )
 }
