@@ -19,6 +19,9 @@ export const ENDPOINTS = {
     JOIN: `/api/labs/join`,
     MEMBERS: (labId: number) => `/api/labs/${labId}/members`,
     CHANGE_ROLE: (labId: number, userId: number) => `/api/labs/${labId}/members/${userId}/change-role`,
+    DETAIL: (labId: number) => `/api/labs/${labId}`,
+    LINKS: (labId: number) => `/api/labs/${labId}/links`,
+    LINK_ID: (labId: number, linkId: number) => `/api/labs/${labId}/links/${linkId}`,
   },
   BOARD: {
     CATEGORY: (labId: number) => `/api/board/${labId}/category`,

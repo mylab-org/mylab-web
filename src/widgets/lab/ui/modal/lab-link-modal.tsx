@@ -1,8 +1,10 @@
 'use client'
+'use no memo'
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
+import { useLabsLinkHook } from '@/features/labs'
 import { useLockBodyScroll } from '@/shared/model'
 import { Button } from '@/shared/ui/override/button'
 import { Input } from '@/shared/ui/override/input'
@@ -11,9 +13,15 @@ import { Text } from '@/shared/ui/override/text'
 interface LabLinkModal {
   onClose?: () => void
   isOpen: boolean
+  labId?: number
 }
 
-export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
+export const LabLinkModal = ({ onClose, isOpen, labId }: LabLinkModal) => {
+  const { register, errors, isValid, isAdding, onSubmit, reset } = useLabsLinkHook({
+    labId,
+    onAddSuccess: () => onClose?.(),
+  })
+
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
       onClose?.()
@@ -27,6 +35,11 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
       onClose?.()
     }
   }, [])
+
+  // 닫았다 다시 열면 이전 입력값이 남지 않도록 비웁니다.
+  useEffect(() => {
+    if (!isOpen) reset()
+  }, [isOpen, reset])
 
   return (
     <AnimatePresence>
@@ -54,13 +67,34 @@ export const LabLinkModal = ({ onClose, isOpen }: LabLinkModal) => {
                 <h3 className={'text-[16px] font-bold lg:text-[20px]'}>링크 추가</h3>
                 <X className={'text-muted-foreground h-5 w-5 cursor-pointer'} onClick={onClose} />
               </div>
-              <form className={'flex flex-col gap-2.5'}>
+              <form className={'flex flex-col gap-2.5'} onSubmit={onSubmit}>
                 <Text className={'text-muted-foreground text-[12px] font-medium md:text-[14px]'}>
                   추가할 링크 정보를 입력해주세요
                 </Text>
-                <Input placeholder={'링크 제목'} />
-                <Input placeholder={'링크 주소'} />
-                <Button>등록</Button>
+                <Input
+                  placeholder={'링크 제목'}
+                  aria-invalid={!!errors.name}
+                  {...register('name', {
+                    required: '링크 제목을 입력해주세요.',
+                    maxLength: { value: 50, message: '링크 제목은 50자 이하여야 합니다.' },
+                  })}
+                />
+                {errors.name && <Text className={'text-error text-[12px]'}>{errors.name.message}</Text>}
+                <Input
+                  placeholder={'링크 주소 (http:// 또는 https:// 포함)'}
+                  aria-invalid={!!errors.url}
+                  {...register('url', {
+                    required: '링크 주소를 입력해주세요.',
+                    pattern: {
+                      value: /^https?:\/\/.+/,
+                      message: '올바른 링크 주소를 입력해주세요. (http:// 또는 https:// 포함)',
+                    },
+                  })}
+                />
+                {errors.url && <Text className={'text-error text-[12px]'}>{errors.url.message}</Text>}
+                <Button type={'submit'} disabled={!isValid || isAdding}>
+                  {isAdding ? '등록 중...' : '등록'}
+                </Button>
               </form>
             </div>
           </motion.div>

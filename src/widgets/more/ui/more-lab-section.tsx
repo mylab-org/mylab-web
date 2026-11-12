@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { MoreLabMember } from './side/more-lab-member'
 import { MoreLabUpdate } from './side/more-lab-update'
 import { LabInfo } from '@/entities/labs'
+import { getLabsDetail } from '@/entities/labs/api/get-labs-detail'
 import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useUsersMeHook } from '@/entities/user'
 import { deleteLabsRevokeInviteCodes } from '@/features/labs/api/delete-labs-revoke-invite-codes'
@@ -29,6 +30,7 @@ interface WrapProps {
 
 export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const closeSideModal = useSideModalStore(state => state.closeSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
   const [labInviteCode, setLabInviteCode] = useState<string | null>(null)
@@ -47,6 +49,12 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
   const { me } = useUsersMeHook()
 
   const labId = me?.lab?.labId
+
+  const { data: lab } = useQuery({
+    queryKey: QUERY_KEYS.LABS.DETAIL(labId ?? 0),
+    queryFn: () => getLabsDetail(labId as number),
+    enabled: labId !== undefined,
+  })
 
   const { data: members } = useQuery({
     queryKey: QUERY_KEYS.LABS.MEMBERS(labId ?? 0),
@@ -81,13 +89,20 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
   return (
     <section className={'flex w-full flex-col gap-3'}>
       <div className={cn('bg-card flex flex-col gap-3 rounded-[20px]', CARD_SHADOW, isMobile ? 'p-4' : 'p-5')}>
-        <LabInfo />
-        <Button
-          className={'text-[13px]! md:text-[15px]!'}
-          onClick={() => openSideModal(MoreLabUpdate, '연구실 정보 수정')}
-        >
-          수정하기
-        </Button>
+        <LabInfo lab={lab} />
+        {isProfessorOrLabLeader(me?.lab.role as UserRoleType) && (
+          <Button
+            className={'text-[13px]! md:text-[15px]!'}
+            onClick={() =>
+              openSideModal(
+                () => <MoreLabUpdate labId={labId} lab={lab} onUpdated={closeSideModal} />,
+                '연구실 정보 수정',
+              )
+            }
+          >
+            수정하기
+          </Button>
+        )}
         {me?.lab.role === 'PROFESSOR' && (
           <Button
             color={'none'}
