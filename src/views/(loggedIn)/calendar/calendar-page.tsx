@@ -3,7 +3,7 @@ import { getCalendarMonthlyServer } from '@/entities/calendar/api/get-calendar-m
 import { getLabsMembersServer } from '@/entities/labs/api/get-labs-members-server'
 import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
-import { CalendarMonthWrapper, CalendarRegisterSection } from '@/widgets/calendar'
+import { CalendarBoardSection } from '@/widgets/calendar'
 
 export const CalendarPage = async () => {
   const queryClient = new QueryClient()
@@ -30,10 +30,7 @@ export const CalendarPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
-        <CalendarMonthWrapper />
-        <CalendarRegisterSection />
-      </div>
+      <CalendarBoardSection />
     </HydrationBoundary>
   )
 }
