@@ -30,6 +30,7 @@ interface WrapProps {
 
 export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const closeSideModal = useSideModalStore(state => state.closeSideModal)
   const openDialogModal = useDialogStore(state => state.openDialogModal)
 
   const [labInviteCode, setLabInviteCode] = useState<string | null>(null)
@@ -89,12 +90,19 @@ export const MoreLabSection = ({ isMobile = false }: WrapProps) => {
     <section className={'flex w-full flex-col gap-3'}>
       <div className={cn('bg-card flex flex-col gap-3 rounded-[20px]', CARD_SHADOW, isMobile ? 'p-4' : 'p-5')}>
         <LabInfo lab={lab} />
-        <Button
-          className={'text-[13px]! md:text-[15px]!'}
-          onClick={() => openSideModal(MoreLabUpdate, '연구실 정보 수정')}
-        >
-          수정하기
-        </Button>
+        {isProfessorOrLabLeader(me?.lab.role as UserRoleType) && (
+          <Button
+            className={'text-[13px]! md:text-[15px]!'}
+            onClick={() =>
+              openSideModal(
+                () => <MoreLabUpdate labId={labId} lab={lab} onUpdated={closeSideModal} />,
+                '연구실 정보 수정',
+              )
+            }
+          >
+            수정하기
+          </Button>
+        )}
         {me?.lab.role === 'PROFESSOR' && (
           <Button
             color={'none'}
