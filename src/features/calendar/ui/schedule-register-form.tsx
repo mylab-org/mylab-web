@@ -15,7 +15,6 @@ interface ScheduleRegisterFormProps {
   type: CalendarType
   /** 참가인원으로 선택할 수 있는 연구실 구성원 */
   members: LabsMembersResponseType[]
-  /** 등록 성공 후 처리 (모바일 사이드 모달 닫기 등) */
   onRegistered?: () => void
 }
 
@@ -60,7 +59,6 @@ export const ScheduleRegisterForm = ({ type, members, onRegistered }: ScheduleRe
   const { NAME } = CALENDAR_TYPE[type]
   const { isRange, withTime } = DATE_FIELD[type]
 
-  // min-h - 종류를 바꿔도 카드 높이가 흔들리지 않도록 가장 큰 폼(미팅) 기준으로 최소 높이를 잡는다
   return (
     <form className={'flex min-h-[520px] flex-col gap-5'} onSubmit={onSubmit}>
       <div className={'flex flex-1 flex-col gap-5'}>

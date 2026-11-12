@@ -10,7 +10,6 @@ interface CalendarTypeFilterProps {
   className?: string
 }
 
-/** 선택되지 않은 칩에 종류를 알려주는 점을 찍기 위해 DOT 색을 함께 들고 있는다 */
 const FILTERS: { value: CalendarFilter; name: string; dot?: string }[] = [
   { value: 'ALL', name: '전체' },
   ...(Object.keys(CALENDAR_TYPE) as (keyof typeof CALENDAR_TYPE)[]).map(type => ({

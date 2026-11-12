@@ -36,7 +36,6 @@ export const LabLinkModal = ({ onClose, isOpen, labId }: LabLinkModal) => {
     }
   }, [])
 
-  // 닫았다 다시 열면 이전 입력값이 남지 않도록 비웁니다.
   useEffect(() => {
     if (!isOpen) reset()
   }, [isOpen, reset])

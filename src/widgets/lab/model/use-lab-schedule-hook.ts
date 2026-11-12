@@ -10,13 +10,11 @@ import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useUsersMeHook } from '@/entities/user'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 
-/** 메인 화면의 '이번 주 일정'. 일요일~토요일 범위를 조회한다 */
 export const useLabScheduleHook = () => {
   const router = useRouter()
   const { lab } = useUsersMeHook()
   const labId = lab?.labId
 
-  // 날짜가 바뀌어도 렌더마다 범위가 흔들리지 않도록 마운트 시점 기준으로 고정
   const { from, to } = useMemo(() => getWeekRange(new Date()), [])
 
   const { data: members } = useQuery({
@@ -37,7 +35,6 @@ export const useLabScheduleHook = () => {
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
-  /** 같은 날짜를 다시 누르면 선택을 해제해 이번 주 전체를 보여준다 */
   const handleSelectDate = (date: Date) => {
     setSelectedDate(prev => (prev && isSameDate(prev, date) ? null : date))
   }

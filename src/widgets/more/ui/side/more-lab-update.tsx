@@ -28,7 +28,7 @@ export const MoreLabUpdate = ({ labId, lab, onUpdated }: MoreLabUpdateProps) => 
     if (!addResearchField(fieldDraft)) return
 
     setFieldDraft('')
-    // 조합 중에 비우면 compositionend 가 마지막 글자를 되돌려 넣으므로 한 번 더 비워야 한다
+    // 조합 중 비우면 compositionend 가 마지막 글자를 되돌려 넣어 한 번 더 비움
     if (isComposingRef.current) clearAfterCompositionRef.current = true
   }
 
@@ -91,11 +91,10 @@ export const MoreLabUpdate = ({ labId, lab, onUpdated }: MoreLabUpdateProps) => 
                 isComposingRef.current = true
               }}
               onCompositionEnd={handleCompositionEnd}
-              // form 안이라 Enter 가 전체 제출로 번지지 않게 막습니다.
               onKeyDown={e => {
                 if (e.key !== 'Enter') return
                 e.preventDefault()
-                // 한글 조합 중 Enter 는 조합을 확정하는 키라 태그 추가를 건너뛴다
+                // 한글 조합 중 Enter 는 조합 확정용이라 건너뜀
                 if (e.nativeEvent.isComposing || isComposingRef.current || e.keyCode === 229) return
                 handleAddField()
               }}

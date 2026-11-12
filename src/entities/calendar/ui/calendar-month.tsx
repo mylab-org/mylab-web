@@ -71,7 +71,6 @@ export const CalendarMonth = ({
               <ul className={'flex w-full min-w-0 flex-col gap-0.5'}>
                 {visibleEvents.map(event => (
                   <li key={event.key} className={'w-full min-w-0'}>
-                    {/* 칸이 좁아 제목이 잘리므로 색 막대로 종류를 먼저 읽히게 한다 */}
                     <span
                       className={cn(
                         'flex min-w-0 items-center gap-1 rounded-[5px] py-0.5 pr-1 pl-0.5 text-left',

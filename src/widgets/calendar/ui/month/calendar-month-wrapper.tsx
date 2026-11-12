@@ -20,9 +20,7 @@ interface CalendarMonthWrapperProps {
   events: CalendarEvent[]
   selectedDate: Date | null
   onSelectDate: (date: Date) => void
-  /** 모바일은 카드 없이 전체 폭을 쓴다 */
   variant?: 'pc' | 'mobile'
-  /** 헤더 우측 영역 (일정 등록 버튼 등) */
   headerRight?: ReactNode
   className?: string
 }

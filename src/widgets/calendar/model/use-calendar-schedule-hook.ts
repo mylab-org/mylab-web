@@ -8,10 +8,6 @@ import { getLabsMembers } from '@/entities/labs/api/get-labs-members'
 import { useUsersMeHook } from '@/entities/user/model/use-users-me-hook'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 
-/**
- * 보고 있는 달의 일정과 연구실 멤버를 함께 조회한다.
- * 일정 응답의 participant_ids(userId)를 이름으로 바꾸려면 멤버 목록이 필요하다.
- */
 export const useCalendarScheduleHook = () => {
   const { lab } = useUsersMeHook()
   const labId = lab?.labId
@@ -22,7 +18,6 @@ export const useCalendarScheduleHook = () => {
   })
 
   const year = currentDate.getFullYear()
-  // 서버는 1~12 월을 받는다
   const month = currentDate.getMonth() + 1
 
   const { data: members } = useQuery({

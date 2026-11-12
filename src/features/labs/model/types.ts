@@ -48,6 +48,5 @@ export type PostLabsLinksPayloadType = {
 export type PatchLabsDetailPayloadType = {
   labName?: string
   description?: string
-  /** 전체 교체 방식이라 변경 후 전체 목록을 보냅니다. */
   researchFields?: string[]
 }

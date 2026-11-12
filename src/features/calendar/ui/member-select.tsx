@@ -5,15 +5,12 @@ import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
 
 interface MemberSelectProps {
-  /** 선택 가능한 연구실 구성원 */
   members: LabsMembersResponseType[]
-  /** 선택된 구성원의 userId 목록 */
   selected: number[]
   onChange: (selected: number[]) => void
   className?: string
 }
 
-/** 개별 인원 앞에 붙는 그룹 선택지. degree 가 null 이면 전체 선택 */
 const GROUP_OPTIONS: { label: string; degree: UserDegreeType | null }[] = [
   { label: '전체', degree: null },
   { label: '박사 모두', degree: 'DOCTOR' },
@@ -26,7 +23,6 @@ export const MemberSelect = ({ members, selected, onChange, className }: MemberS
     onChange(selected.includes(userId) ? selected.filter(id => id !== userId) : [...selected, userId])
   }
 
-  /** 그룹에 해당하는 인원이 모두 선택돼 있으면 해제, 아니면 전부 추가 */
   const handleGroupClick = (degree: UserDegreeType | null) => {
     const targetIds = members.filter(member => degree === null || member.degree === degree).map(member => member.userId)
     if (targetIds.length === 0) return

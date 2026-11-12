@@ -25,7 +25,6 @@ export const DIALOG_MAP: Record<DialogTypeKey, DialogType> = {
   },
   LINK_DELETE: {
     title: '링크 삭제',
-    // 호출부에서 앞에 링크 이름을 붙여 쓴다
     description: '링크를 삭제할까요?\n삭제한 링크는 복구할 수 없습니다.',
   },
 }

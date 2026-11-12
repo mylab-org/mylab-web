@@ -6,7 +6,6 @@ import { Text } from '@/shared/ui/override/text'
 import type { CalendarEvent } from '../model/types'
 
 interface CalendarWeekProps {
-  /** 요일 아래 점으로 일정 유무를 표시합니다. */
   events?: CalendarEvent[]
   selectedDate?: Date | null
   onSelectDate?: (date: Date) => void
@@ -29,7 +28,6 @@ export const CalendarWeek = ({ events = [], selectedDate, onSelectDate }: Calend
   const weekDates = getWeekDates(today)
 
   return (
-    // 요일과 날짜를 한 셀로 묶어 칸 전체가 클릭 영역이 되게 한다
     <div className={'grid grid-cols-7 gap-1'}>
       {weekDates.map(date => {
         const isToday = isSameDate(date, today)

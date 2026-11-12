@@ -5,7 +5,6 @@ import { useCalendarBoardHook } from '../../../model/use-calendar-board-hook'
 import { useCalendarRegisterModal } from '../../../model/use-calendar-register-modal'
 import { CalendarMonthWrapper } from '../../month/calendar-month-wrapper'
 
-/** 월 그리드와 일정 목록이 상태를 공유하므로 한 곳에서 묶어 렌더한다 */
 export const CalendarBoardSection = () => {
   const {
     currentDate,
@@ -27,8 +26,7 @@ export const CalendarBoardSection = () => {
   const { openRegisterModal } = useCalendarRegisterModal(members)
 
   return (
-    // 행 높이를 월 그리드가 정하도록 두고, 일정 목록은 absolute 로 그 높이를 채운다.
-    // (목록이 길어져도 행이 늘어나지 않아 월 그리드 아래에 빈 여백이 생기지 않는다)
+    // 목록을 absolute 로 띄워 행 높이 계산에서 제외, 월 그리드 아래 빈 여백 방지
     <div className={'flex min-h-0 gap-4 focus:outline-none'}>
       <CalendarMonthWrapper
         currentDate={currentDate}

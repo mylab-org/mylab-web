@@ -4,7 +4,6 @@ import type { AnchorHTMLAttributes } from 'react'
 interface LabLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
   name: string
-  /** 전달하면 삭제 버튼이 노출됩니다. (교수·랩장 전용) */
   onDelete?: () => void
   isDeleting?: boolean
 }

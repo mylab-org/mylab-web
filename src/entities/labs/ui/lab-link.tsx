@@ -11,7 +11,6 @@ import type { Dispatch, SetStateAction } from 'react'
 interface LabLinkProps {
   links?: LabsLinkResponseType[]
   setIsOpen: Dispatch<SetStateAction<boolean>>
-  /** 교수·랩장만 추가·삭제할 수 있습니다. */
   canManage?: boolean
   onDeleteLink?: (link: LabsLinkResponseType) => void
   isDeleting?: boolean

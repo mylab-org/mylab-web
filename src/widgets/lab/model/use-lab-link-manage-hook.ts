@@ -8,7 +8,6 @@ import { DIALOG_MAP } from '@/shared/constant/dialog'
 import { isProfessorOrLabLeader } from '@/shared/lib/lab'
 import { useDialogStore } from '@/shared/store'
 
-/** 링크 추가 모달 열림 상태와 삭제 확인 처리. PC·모바일 섹션이 함께 씁니다. */
 export const useLabLinkManageHook = () => {
   const { me } = useUsersMeHook()
   const labId = me?.lab.labId
