@@ -19,9 +19,7 @@ export type LabsDetailResponseType = {
   universityName: string
   departmentName: string
   professorName: string
-  /** 연구실 소개. 없으면 null */
   description: string | null
-  /** 연구 분야. 없으면 빈 배열 */
   researchFields: string[]
 }
 

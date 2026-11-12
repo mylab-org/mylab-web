@@ -36,7 +36,6 @@ export const LabLinkModal = ({ onClose, isOpen, labId }: LabLinkModal) => {
     }
   }, [])
 
-  // 닫았다 다시 열면 이전 입력값이 남지 않도록 비웁니다.
   useEffect(() => {
     if (!isOpen) reset()
   }, [isOpen, reset])
@@ -81,7 +80,7 @@ export const LabLinkModal = ({ onClose, isOpen, labId }: LabLinkModal) => {
                 />
                 {errors.name && <Text className={'text-error text-[12px]'}>{errors.name.message}</Text>}
                 <Input
-                  placeholder={'링크 주소 (http:// 또는 https:// 포함)'}
+                  placeholder={'링크 주소'}
                   aria-invalid={!!errors.url}
                   {...register('url', {
                     required: '링크 주소를 입력해주세요.',

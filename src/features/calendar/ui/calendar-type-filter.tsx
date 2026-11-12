@@ -10,35 +10,37 @@ interface CalendarTypeFilterProps {
   className?: string
 }
 
-const FILTERS: { value: CalendarFilter; name: string; bg: string; tc: string }[] = [
-  { value: 'ALL', name: '전체', bg: 'bg-gray-100', tc: 'text-gray-600' },
+const FILTERS: { value: CalendarFilter; name: string; dot?: string }[] = [
+  { value: 'ALL', name: '전체' },
   ...(Object.keys(CALENDAR_TYPE) as (keyof typeof CALENDAR_TYPE)[]).map(type => ({
     value: type as CalendarFilter,
     name: CALENDAR_TYPE[type].NAME,
-    bg: CALENDAR_TYPE[type].BG,
-    tc: CALENDAR_TYPE[type].TC,
+    dot: CALENDAR_TYPE[type].DOT,
   })),
 ]
 
 export const CalendarTypeFilter = ({ selected, onSelect, className }: CalendarTypeFilterProps) => {
   return (
-    <div className={cn('flex items-center gap-1.25', className)}>
-      {FILTERS.map(({ value, name, bg, tc }) => (
-        <button
-          key={value}
-          type={'button'}
-          aria-pressed={selected === value}
-          className={cn(
-            'cursor-pointer rounded-[20px] px-2.5 py-0.75 text-[12px] font-semibold transition-all',
-            bg,
-            tc,
-            selected === value ? 'ring-1 ring-gray-900' : 'opacity-60 hover:opacity-100',
-          )}
-          onClick={() => onSelect(value)}
-        >
-          {name}
-        </button>
-      ))}
+    <div className={cn('scrollbar-hidden flex gap-2 overflow-x-auto', className)}>
+      {FILTERS.map(({ value, name, dot }) => {
+        const isActive = selected === value
+
+        return (
+          <button
+            key={value}
+            type={'button'}
+            aria-pressed={isActive}
+            className={cn(
+              'flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-semibold transition-colors md:text-[15px]',
+              isActive ? 'bg-brand text-brand-foreground' : 'bg-muted text-muted-foreground hover:bg-secondary',
+            )}
+            onClick={() => onSelect(value)}
+          >
+            {dot && <span className={cn('h-2 w-2 shrink-0 rounded-full', isActive ? 'bg-brand-foreground' : dot)} />}
+            {name}
+          </button>
+        )
+      })}
     </div>
   )
 }

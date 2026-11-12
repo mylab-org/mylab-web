@@ -12,7 +12,6 @@ type Props = {
   onAddSuccess?: () => void
 }
 
-/** 연구실 링크 추가·삭제 */
 export const useLabsLinkHook = ({ labId, onAddSuccess }: Props) => {
   const {
     register,
@@ -44,7 +43,7 @@ export const useLabsLinkHook = ({ labId, onAddSuccess }: Props) => {
 
   const onSubmit = handleSubmit((data: PostLabsLinksPayloadType) => {
     if (labId === undefined) return
-    postLabsLinksMutation.mutate(data)
+    postLabsLinksMutation.mutate({ name: data.name.trim(), url: data.url.trim() })
   })
 
   const deleteLink = (linkId: number) => {

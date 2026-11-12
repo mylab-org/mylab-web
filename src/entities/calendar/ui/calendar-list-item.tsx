@@ -1,3 +1,4 @@
+import { CalendarIcon, MapPinIcon } from 'lucide-react'
 import { formatEventPeriod } from '../lib/date'
 import { CALENDAR_TYPE } from '@/shared/constant/tag'
 import { cn } from '@/shared/lib'
@@ -6,34 +7,50 @@ import { Text } from '@/shared/ui/override/text'
 import type { CalendarEvent } from '../model/types'
 
 interface CalendarListItemProps {
-  event?: CalendarEvent
+  event: CalendarEvent
   className?: string
+  onClick?: () => void
 }
 
-/** TODO: API 연동 전, event 를 넘기지 않는 메인/사이드 화면을 위한 임시 기본값 */
-const DEFAULT_EVENT: CalendarEvent = {
-  id: 0,
-  type: 'CONFERENCE',
-  title: '2025 한국통신학회 동계종합학술발표회',
-  startDate: '2026-02-04',
-  endDate: '2026-02-06',
-  place: '모나 용평(용평리조트)',
-  members: [],
-}
-
-export const CalendarListItem = ({ event = DEFAULT_EVENT, className }: CalendarListItemProps) => {
+export const CalendarListItem = ({ event, className, onClick }: CalendarListItemProps) => {
   const { type, title, place, members } = event
+  const { NAME, BG, TC } = CALENDAR_TYPE[type]
 
   return (
-    <div className={cn('flex flex-col gap-1.25 rounded-[12px] border border-[#E2E3E5] px-3 py-4', className)}>
-      <div className={'flex items-center gap-1.25'}>
-        <span className={cn('h-2.5 w-2.5 shrink-0 rounded-full', CALENDAR_TYPE[type].DOT)} />
-        <Text className={'text-[14px] font-bold'}>{title}</Text>
+    // 참가인원 ul 을 품고 있어 button 대신 role 로 처리
+    <div
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onClick={onClick}
+      onKeyDown={event => {
+        if (!onClick || (event.key !== 'Enter' && event.key !== ' ')) return
+        event.preventDefault()
+        onClick()
+      }}
+      className={cn(
+        'border-border hover:border-brand flex flex-col gap-2.5 rounded-[14px] border p-4 transition-colors',
+        onClick && 'focus-visible:border-brand cursor-pointer outline-none',
+        className,
+      )}
+    >
+      <div className={'flex flex-col gap-1.5'}>
+        <span className={cn('w-fit rounded-full px-2.5 py-1 text-[11px] font-semibold', BG, TC)}>{NAME}</span>
+        <Text className={'line-clamp-1 text-[15px] font-bold'}>{title}</Text>
       </div>
-      <div>
-        <Text className={'text-[14px] font-light'}>{formatEventPeriod(event)}</Text>
-        <Text className={'text-[14px] font-light'}>{place}</Text>
+
+      <div className={'flex flex-col gap-1'}>
+        <div className={'text-muted-foreground flex items-center gap-1.5'}>
+          <CalendarIcon size={13} className={'shrink-0'} />
+          <Text className={'text-muted-foreground! text-[13px] font-medium'}>{formatEventPeriod(event)}</Text>
+        </div>
+        {place && (
+          <div className={'text-muted-foreground flex items-center gap-1.5'}>
+            <MapPinIcon size={13} className={'shrink-0'} />
+            <Text className={'text-muted-foreground! line-clamp-1 text-[13px] font-medium'}>{place}</Text>
+          </div>
+        )}
       </div>
+
       {members.length > 0 && (
         <ul className={'flex flex-wrap items-center gap-1.25'}>
           {members.map(member => (

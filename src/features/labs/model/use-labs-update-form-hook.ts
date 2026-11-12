@@ -9,7 +9,6 @@ import { QUERY_KEYS } from '@/shared/api/query-key'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import type { PatchLabsDetailPayloadType } from './types'
 
-/** 서버 UpdateLabRequestDto 제약과 맞춰둔 값 */
 export const RESEARCH_FIELD_MAX_COUNT = 10
 export const RESEARCH_FIELD_MAX_LENGTH = 30
 
@@ -24,7 +23,6 @@ type Props = {
   onUpdateSuccess?: () => void
 }
 
-/** 연구실 이름·소개·연구 분야 수정 */
 export const useLabsUpdateFormHook = ({ labId, lab, onUpdateSuccess }: Props) => {
   const {
     register,
@@ -76,9 +74,8 @@ export const useLabsUpdateFormHook = ({ labId, lab, onUpdateSuccess }: Props) =>
     if (labId === undefined) return
 
     patchLabsDetailMutation.mutate({
-      labName: data.labName,
-      // 서버는 빈 문자열도 그대로 저장하므로 비우면 소개를 지운 것으로 처리합니다.
-      description: data.description,
+      labName: data.labName.trim(),
+      description: data.description.trim(),
       researchFields,
     })
   })

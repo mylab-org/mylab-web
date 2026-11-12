@@ -15,7 +15,7 @@ const TYPES = Object.keys(CALENDAR_TYPE) as CalendarType[]
 export const CalendarTypeSelect = ({ value, onChange }: CalendarTypeSelectProps) => {
   return (
     <Select value={value} onValueChange={selected => onChange(selected as CalendarType)}>
-      <SelectTrigger className={'h-auto rounded-[12px] border-none bg-gray-100 text-[20px] font-bold'}>
+      <SelectTrigger className={'bg-muted h-auto rounded-[12px] border-none text-[20px] font-bold'}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent
@@ -25,7 +25,7 @@ export const CalendarTypeSelect = ({ value, onChange }: CalendarTypeSelectProps)
         className={'border-none text-[16px] font-medium ring-0'}
       >
         <SelectGroup>
-          <SelectLabel className={'text-[14px] text-gray-400'}>일정</SelectLabel>
+          <SelectLabel className={'text-subtle-foreground text-[14px]'}>일정</SelectLabel>
           {TYPES.map(type => (
             <SelectItem key={type} value={type} className={'text-[16px] font-medium'}>
               {CALENDAR_TYPE[type].NAME}

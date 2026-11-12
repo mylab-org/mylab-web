@@ -53,3 +53,10 @@ export const isDateInEvent = (date: Date, { startDate, endDate }: CalendarEvent)
 }
 
 export const isSameDate = (a: Date, b: Date) => toDateKey(a) === toDateKey(b)
+
+export const getWeekRange = (baseDate: Date) => {
+  const start = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate() - baseDate.getDay())
+  const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7)
+
+  return { from: start.toISOString(), to: end.toISOString() }
+}
