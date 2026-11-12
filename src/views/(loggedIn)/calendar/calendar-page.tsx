@@ -31,8 +31,6 @@ export const CalendarPage = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <CalendarBoardSection />
-      {/* 보드가 화면보다 짧을 때 남는 공간을 채워, 푸터가 달력 바로 밑에 뜨지 않게 한다 */}
-      <div className={'flex-1'} aria-hidden />
     </HydrationBoundary>
   )
 }
