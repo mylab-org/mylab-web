@@ -2,7 +2,7 @@
 'use no memo'
 
 import { X } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { LabsDetailResponseType } from '@/entities/labs/model/types'
 import { RESEARCH_FIELD_MAX_COUNT, useLabsUpdateFormHook } from '@/features/labs'
 import { Button } from '@/shared/ui/override/button'
@@ -21,9 +21,23 @@ export const MoreLabUpdate = ({ labId, lab, onUpdated }: MoreLabUpdateProps) => 
     useLabsUpdateFormHook({ labId, lab, onUpdateSuccess: onUpdated })
 
   const [fieldDraft, setFieldDraft] = useState<string>('')
+  const isComposingRef = useRef<boolean>(false)
+  const clearAfterCompositionRef = useRef<boolean>(false)
 
   const handleAddField = () => {
-    if (addResearchField(fieldDraft)) setFieldDraft('')
+    if (!addResearchField(fieldDraft)) return
+
+    setFieldDraft('')
+    // 조합 중에 비우면 compositionend 가 마지막 글자를 되돌려 넣으므로 한 번 더 비워야 한다
+    if (isComposingRef.current) clearAfterCompositionRef.current = true
+  }
+
+  const handleCompositionEnd = () => {
+    isComposingRef.current = false
+    if (!clearAfterCompositionRef.current) return
+
+    setFieldDraft('')
+    clearAfterCompositionRef.current = false
   }
 
   return (
@@ -73,10 +87,16 @@ export const MoreLabUpdate = ({ labId, lab, onUpdated }: MoreLabUpdateProps) => 
               placeholder={'예) 무선 네트워크'}
               className={'flex-1'}
               onChange={e => setFieldDraft(e.target.value)}
+              onCompositionStart={() => {
+                isComposingRef.current = true
+              }}
+              onCompositionEnd={handleCompositionEnd}
               // form 안이라 Enter 가 전체 제출로 번지지 않게 막습니다.
               onKeyDown={e => {
                 if (e.key !== 'Enter') return
                 e.preventDefault()
+                // 한글 조합 중 Enter 는 조합을 확정하는 키라 태그 추가를 건너뛴다
+                if (e.nativeEvent.isComposing || isComposingRef.current || e.keyCode === 229) return
                 handleAddField()
               }}
             />

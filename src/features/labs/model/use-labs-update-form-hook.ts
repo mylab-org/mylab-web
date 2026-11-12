@@ -76,9 +76,9 @@ export const useLabsUpdateFormHook = ({ labId, lab, onUpdateSuccess }: Props) =>
     if (labId === undefined) return
 
     patchLabsDetailMutation.mutate({
-      labName: data.labName,
+      labName: data.labName.trim(),
       // 서버는 빈 문자열도 그대로 저장하므로 비우면 소개를 지운 것으로 처리합니다.
-      description: data.description,
+      description: data.description.trim(),
       researchFields,
     })
   })

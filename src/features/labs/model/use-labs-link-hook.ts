@@ -44,7 +44,7 @@ export const useLabsLinkHook = ({ labId, onAddSuccess }: Props) => {
 
   const onSubmit = handleSubmit((data: PostLabsLinksPayloadType) => {
     if (labId === undefined) return
-    postLabsLinksMutation.mutate(data)
+    postLabsLinksMutation.mutate({ name: data.name.trim(), url: data.url.trim() })
   })
 
   const deleteLink = (linkId: number) => {
