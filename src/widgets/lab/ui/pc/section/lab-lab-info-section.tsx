@@ -1,7 +1,8 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useLabInfoHook } from '../../../model/use-lab-info-hook'
+import { useLabLinkManageHook } from '../../../model/use-lab-link-manage-hook'
 import { LabLinkModal } from '../../modal/lab-link-modal'
 import { SideMember } from '../../side/side-member'
 import { LabInfo } from '@/entities/labs'
@@ -15,9 +16,10 @@ import { useSideModalStore } from '@/shared/store/useSideModalStore'
 const MEMBER_PREVIEW_COUNT = 4
 
 export const LabLabInfoSection = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { lab, links } = useLabInfoHook()
   const { me, isError } = useUsersMeHook()
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const { canManage, isLinkModalOpen, setIsLinkModalOpen, handleDeleteLink, isDeleting } = useLabLinkManageHook()
 
   const labId = me?.lab.labId
 
@@ -34,15 +36,21 @@ export const LabLabInfoSection = () => {
   return (
     <>
       <div className={'grid grid-cols-1 gap-5 lg:grid-cols-3'}>
-        <LabInfo className={'p-5 md:p-5'} isShadow />
-        <LabLink setIsOpen={setIsOpen} />
+        <LabInfo lab={lab} className={'p-5 md:p-5'} isShadow />
+        <LabLink
+          links={links}
+          setIsOpen={setIsLinkModalOpen}
+          canManage={canManage}
+          onDeleteLink={handleDeleteLink}
+          isDeleting={isDeleting}
+        />
         <LabMember
           members={members.slice(0, MEMBER_PREVIEW_COUNT)}
           onViewAll={() => openSideModal(SideMember, '연구실 구성원')}
           showViewAll={members.length > MEMBER_PREVIEW_COUNT}
         />
       </div>
-      <LabLinkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <LabLinkModal isOpen={isLinkModalOpen} onClose={() => setIsLinkModalOpen(false)} labId={labId} />
     </>
   )
 }
