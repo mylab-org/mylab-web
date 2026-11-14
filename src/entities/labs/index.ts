@@ -3,6 +3,7 @@ export { LabMemberItem } from './ui/lab-member-item'
 export { LabLinkItem } from './ui/lab-link-item'
 export { LabInfo } from './ui/lab-info'
 export { LabLink } from './ui/lab-link'
+export { LabNotDataUI } from './ui/lab-not-data-ui'
 export { LabMember } from './ui/lab-member'
 
 export { LabManagementItem } from './ui/side-item/lab-management-item'
