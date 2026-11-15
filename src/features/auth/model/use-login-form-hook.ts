@@ -13,7 +13,7 @@ import { ALERT_CONFIRM_TYPE, ALERT_MESSAGE } from '@/shared/constant/alert'
 import { AUTH_ERROR_CODE } from '@/shared/constant/auth'
 import { ROUTES } from '@/shared/constant/routes'
 import { shouldRefreshAccessTokenOnServer } from '@/shared/lib/token/access-token-expiry'
-import { setAccessToken, setRefreshToken } from '@/shared/lib/token/client-access-token-store'
+import { setAccessToken } from '@/shared/lib/token/client-access-token-store'
 import { useApiMutation } from '@/shared/model/use-api-mutation'
 import { useAlertStore } from '@/shared/store'
 import type { PostAuthLoginPayloadType, PostAuthLoginResponseType } from './types'
@@ -30,7 +30,6 @@ type LabModalState = {
 
 type ProvisionalTokens = {
   accessToken: string
-  refreshToken: string
 }
 
 const getSafeRedirectPath = (redirect: string | null) => {
@@ -77,7 +76,8 @@ export const useLoginFormHook = () => {
     }
 
     try {
-      const next = await refreshProvisionalAccessToken(current.refreshToken)
+      // RT는 로그인 시 서버가 심은 httpOnly 쿠키를 사용합니다.
+      const next = await refreshProvisionalAccessToken()
       provisionalTokensRef.current = next
       setProvisionalTokens(next)
       return next.accessToken
@@ -106,20 +106,18 @@ export const useLoginFormHook = () => {
     mutationFn: postAuthLogin,
     onSuccess: (response: ApiResponseType<PostAuthLoginResponseType>) => {
       const accessToken = response.data.accessToken
-      const refreshToken = response.data.refreshToken
-      // 응답 hasLab이 오면 우선 사용, 없으면 TEMP_HAS_LAB로 제어
+      // RT는 응답 body가 아니라 Set-Cookie(httpOnly)로 내려옵니다.
       const hasLab = response.data.lab !== null
 
       if (hasLab) {
         setAccessToken(accessToken)
-        setRefreshToken(refreshToken)
         router.push(getSafeRedirectPath(searchParams.get('redirect')))
         return
       }
 
-      // 온보딩(생성/참여) 완료 전에는 쿠키에 저장하지 않습니다.
-      // 중간에 취소·새로고침해도 로그인 페이지에 머물도록 메모리에만 보관합니다.
-      const nextTokens = { accessToken, refreshToken }
+      // 온보딩 완료 전에는 AT만 메모리에 두고, AT 쿠키는 쓰지 않습니다.
+      // RT 쿠키는 로그인 응답 Set-Cookie로 이미 저장된 상태입니다.
+      const nextTokens = { accessToken }
       provisionalTokensRef.current = nextTokens
       setProvisionalTokens(nextTokens)
       setLabModal({
@@ -152,7 +150,8 @@ export const useLoginFormHook = () => {
   const closeLabModal = () => {
     // type은 유지해 닫힘 애니메이션 중 create로 깜빡이지 않게 함
     setLabModal(prev => ({ ...prev, open: false }))
-    // 온보딩 취소 시 임시 토큰 폐기 → 새로고침해도 미로그인 상태 유지
+    // 온보딩 취소 시 메모리 AT만 폐기합니다.
+    // httpOnly RT 쿠키 정리는 이후 로그아웃/세션 만료 연동에서 처리합니다.
     provisionalTokensRef.current = null
     setProvisionalTokens(null)
   }
@@ -160,9 +159,9 @@ export const useLoginFormHook = () => {
   const persistProvisionalSession = () => {
     const current = provisionalTokensRef.current
     if (!current) return
-    // 생성/참여 확인 모달의 '입장하기' 클릭 시 쿠키 저장
+    // 생성/참여 확인 모달의 '입장하기' 클릭 시 AT 쿠키 저장
+    // RT는 로그인 시 이미 httpOnly 쿠키로 저장되어 있습니다.
     setAccessToken(current.accessToken)
-    setRefreshToken(current.refreshToken)
     provisionalTokensRef.current = null
     setProvisionalTokens(null)
     router.push(getSafeRedirectPath(searchParams.get('redirect')))
