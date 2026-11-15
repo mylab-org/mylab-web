@@ -7,6 +7,7 @@ import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { LoginSchema } from './login.schema'
 import { postAuthLogin } from '@/features/auth/api/post-auth-login'
+import { postAuthLogout } from '@/features/auth/api/post-auth-logout'
 import { postAuthResendVerification } from '@/features/auth/api/post-auth-resend-verification'
 import { refreshProvisionalAccessToken } from '@/shared/api/refresh-provisional-access-token'
 import { ALERT_CONFIRM_TYPE, ALERT_MESSAGE } from '@/shared/constant/alert'
@@ -60,9 +61,14 @@ export const useLoginFormHook = () => {
   })
 
   const discardProvisionalSession = () => {
+    const accessToken = provisionalTokensRef.current?.accessToken
     provisionalTokensRef.current = null
     setProvisionalTokens(null)
     setLabModal(prev => ({ ...prev, open: false }))
+
+    if (!accessToken) return
+
+    void postAuthLogout({ accessToken }).catch(() => {})
   }
 
   const ensureProvisionalAccessToken = async ({ force = false }: { force?: boolean } = {}) => {
@@ -82,7 +88,7 @@ export const useLoginFormHook = () => {
       setProvisionalTokens(next)
       return next.accessToken
     } catch {
-      discardProvisionalSession()
+      void discardProvisionalSession()
       onOpenAlert({
         message: ALERT_MESSAGE.SESSION_EXPIRED,
         confirmType: ALERT_CONFIRM_TYPE.CLOSE,
@@ -149,11 +155,7 @@ export const useLoginFormHook = () => {
 
   const closeLabModal = () => {
     // type은 유지해 닫힘 애니메이션 중 create로 깜빡이지 않게 함
-    setLabModal(prev => ({ ...prev, open: false }))
-    // 온보딩 취소 시 메모리 AT만 폐기합니다.
-    // httpOnly RT 쿠키 정리는 이후 로그아웃/세션 만료 연동에서 처리합니다.
-    provisionalTokensRef.current = null
-    setProvisionalTokens(null)
+    void discardProvisionalSession()
   }
 
   const persistProvisionalSession = () => {
