@@ -1,14 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_BOARD_CATEGORY_ID } from './features/board/model/constants'
 import { BASE_PATHS } from './shared/constant/routes'
-import {
-  ACCESS_TOKEN_COOKIE_KEY,
-  CURRENT_ACCESS_TOKEN_HEADER,
-  REFRESH_TOKEN_COOKIE_KEY,
-  SESSION_EXPIRED_ROUTE,
-} from './shared/constant/token'
+import { ACCESS_TOKEN_COOKIE_KEY, CURRENT_ACCESS_TOKEN_HEADER, SESSION_EXPIRED_ROUTE } from './shared/constant/token'
 import { shouldRefreshAccessTokenOnServer } from './shared/lib/token/access-token-expiry'
-import { getAccessTokenFromRequest, getRefreshTokenFromRequest } from './shared/lib/token/server-access-tokne-cookies'
+import { getAccessTokenFromRequest } from './shared/lib/token/server-access-tokne-cookies'
 import { refreshServerSession } from './shared/lib/token/server-refresh-session'
 
 /** (loggedOut) 공개 라우트 — 로그인 상태면 접근 불가 */
@@ -33,60 +28,58 @@ function isAuthRequiredRoute(pathname: string) {
   return AUTH_REQUIRED_ROUTES.some(route => isMatchRoute(pathname, route))
 }
 
-//
-
-function buildCookieHeaderWithTokens({
+// cookie의 AT만 새값으로 교체
+function buildCookieHeaderWithAccessToken({
   cookieHeader,
   nextAccessToken,
-  nextRefreshToken,
 }: {
   cookieHeader: string | null
   nextAccessToken: string
-  nextRefreshToken?: string | null
 }) {
+  // request Cookie 헤더에는 name=value 쌍만 있으므로,
+  // 기존 쿠키 중 AT만 교체하여 RT 같은 다른 세션 쿠키는 그대로 유지
   const cookieEntries = (cookieHeader ?? '')
     .split(';')
     .map(entry => entry.trim())
     .filter(Boolean)
-    // AT, RT 둘 다 기존 값 제거
-    .filter(
-      entry => !entry.startsWith(`${ACCESS_TOKEN_COOKIE_KEY}=`) && !entry.startsWith(`${REFRESH_TOKEN_COOKIE_KEY}=`),
-    )
-  const nextCookies = [`${ACCESS_TOKEN_COOKIE_KEY}=${encodeURIComponent(nextAccessToken)}`]
-  if (nextRefreshToken) {
-    nextCookies.push(`${REFRESH_TOKEN_COOKIE_KEY}=${encodeURIComponent(nextRefreshToken)}`)
-  }
-  return [...nextCookies, ...cookieEntries].join('; ')
+    .filter(entry => !entry.startsWith(`${ACCESS_TOKEN_COOKIE_KEY}=`))
+
+  return [`${ACCESS_TOKEN_COOKIE_KEY}=${encodeURIComponent(nextAccessToken)}`, ...cookieEntries].join('; ')
 }
 
 // 새로운 AT로 Header(SSR에 사용)의 토큰 교체
 function buildAuthenticatedResponse({
   requestHeaders,
   nextAccessToken,
-  nextRefreshToken,
   secureCookie,
+  upstreamSetCookies = [],
 }: {
   requestHeaders: Headers
   nextAccessToken?: string
-  nextRefreshToken?: string | null
   secureCookie: boolean
+  upstreamSetCookies?: string[]
 }) {
-  const response = NextResponse.next({ request: { headers: requestHeaders } })
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+
   if (nextAccessToken) {
+    // 브라우저 다음 요청뿐 아니라 현재 응답 이후의 클라이언트 네비게이션도
+    // 새 AT을 기준으로 시작할 수 있게 응답 쿠키를 같이 갱신
     response.cookies.set(ACCESS_TOKEN_COOKIE_KEY, nextAccessToken, {
       path: '/',
       sameSite: 'lax',
       secure: secureCookie,
     })
   }
-  if (nextRefreshToken) {
-    response.cookies.set(REFRESH_TOKEN_COOKIE_KEY, nextRefreshToken, {
-      path: '/',
-      sameSite: 'lax',
-      secure: secureCookie,
-      // 백엔드가 HttpOnly였다면 여기도 httpOnly: true
-    })
+
+  // 백엔드가 회전시킨 httpOnly RT Set-Cookie를 브라우저에 그대로 전달합니다.
+  for (const setCookie of upstreamSetCookies) {
+    response.headers.append('Set-Cookie', setCookie)
   }
+
   return response
 }
 
@@ -95,8 +88,14 @@ export async function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers)
   const secureCookie = request.nextUrl.protocol === 'https:'
 
+  // 메뉴 hover 등으로 발생하는 prefetch(RSC) 요청을 식별합니다.
+  // Next App Router는 prefetch 네비게이션에 Next-Router-Prefetch 헤더를 싣고,
+  // 브라우저 단 프리패치는 Sec-Purpose: prefetch를 보냅니다.
+  const isPrefetch =
+    request.headers.get('Next-Router-Prefetch') === '1' ||
+    (request.headers.get('Sec-Purpose')?.includes('prefetch') ?? false)
+
   const accessToken = getAccessTokenFromRequest(request)
-  const refreshToken = getRefreshTokenFromRequest(request)
 
   // 로그인 상태에서 loggedOut 경로 접근 → 홈으로
   if (accessToken && isGuestOnlyRoute(pathname)) {
@@ -140,18 +139,29 @@ export async function proxy(request: NextRequest) {
     })
   }
 
+  // prefetch는 사용자가 실제로 이동하지 않을 수도 있는 백그라운드 워밍입니다.
+  // 여기서 refresh를 돌리면 1회용 refresh token을 소모하고 응답 Set-Cookie로 토큰을 회전시켜
+  // 동시 진행되는 실제 요청과 경합할 수 있으므로, prefetch에서는 회전 없이 현재(만료 임박이지만 아직 유효한) AT로 통과시킵니다.
+  // 실제 네비게이션 시 다시 proxy를 거치며 그때 refresh됩니다.
+  if (isPrefetch) {
+    console.log('proxy skip refresh for prefetch', { pathname })
+    return buildAuthenticatedResponse({
+      requestHeaders,
+      secureCookie,
+    })
+  }
+
   try {
     // token refresh
-    const { nextAccessToken, nextRefreshToken } = await refreshServerSession({
+    const { nextAccessToken, setCookies } = await refreshServerSession({
       cookieHeader: request.headers.get('cookie'),
-      refreshToken,
+      accessToken,
     })
 
     // Cookie의 AT 교체
-    const nextCookieHeader = buildCookieHeaderWithTokens({
+    const nextCookieHeader = buildCookieHeaderWithAccessToken({
       cookieHeader: request.headers.get('cookie'),
       nextAccessToken,
-      nextRefreshToken,
     })
 
     // 현재 요청을 이어받는 서버 컴포넌트/레이아웃도 새 토큰을 읽을 수 있어야 하므로,
@@ -167,8 +177,8 @@ export async function proxy(request: NextRequest) {
     return buildAuthenticatedResponse({
       requestHeaders,
       nextAccessToken,
-      nextRefreshToken,
       secureCookie,
+      upstreamSetCookies: setCookies,
     })
   } catch {
     // Refresh 실패; RT 만료, 세션 유효하지 않음, refresh API 호출 실패
@@ -177,7 +187,6 @@ export async function proxy(request: NextRequest) {
     console.log('proxy redirect to session expired', {
       pathname,
       redirectTo: sessionExpiredUrl.toString(),
-      refreshToken,
     })
     return NextResponse.redirect(sessionExpiredUrl)
   }

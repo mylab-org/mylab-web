@@ -18,7 +18,9 @@ type RequestApiParams<TReq> = {
 }
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  // 로컬: '' + next.config rewrite → RT가 Next 호스트에 붙어 proxy SSR refresh 가능
+  // 배포: API 호스트 직행 + 서버 COOKIE_DOMAIN(.mylab.com) → OA와 동일한 쿠키 공유
+  baseURL: process.env.NODE_ENV === 'development' ? '' : process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 10000,
   withCredentials: true,
 })
