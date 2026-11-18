@@ -5,11 +5,10 @@ import type { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axio
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    // 인증 헤더를 붙이면 안 되는 요청(예: refresh 요청)에 사용합니다. => refresh에도 인증 헤더 붙도록 변경됨
+    /** AT 쿠키 주입을 건너뜁니다. refresh/온보딩 로그아웃처럼 헤더를 직접 넣거나 쿠키 RT만 쓸 때 사용합니다. */
     skipAuth?: boolean
-    // 401 발생 시 refresh 재시도를 막아야 하는 요청에 사용합니다.
+    /** 401 시 refresh 재시도를 막습니다. */
     skipRefresh?: boolean
-    // 같은 요청을 두 번 이상 재시도하지 않기 위한 내부 플래그입니다.
     _retry?: boolean
   }
 
@@ -30,8 +29,6 @@ function applyAuthorizationHeader(config: InternalAxiosRequestConfig) {
   if (!accessToken) {
     return config
   }
-
-  console.log('헤더 추가', accessToken)
 
   config.headers.set('Authorization', `Bearer ${accessToken}`)
   return config

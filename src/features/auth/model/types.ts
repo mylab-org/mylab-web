@@ -13,12 +13,11 @@ export type PostAuthLoginPayloadType = {
 
 export type PostAuthLoginResponseType = {
   accessToken: string
-  refreshToken: string
   lab: {
     labId: number
     labName: string
     role: UserRoleType
-  }
+  } | null
   user: {
     id: string
     email: string

@@ -3,21 +3,19 @@ import { ENDPOINTS } from './endpoint'
 
 type ProvisionalTokens = {
   accessToken: string
-  refreshToken: string
 }
 
 type RefreshAccessTokenApiResult = {
   accessToken: string
-  refreshToken: string
 }
 
 let provisionalRefreshPromise: Promise<ProvisionalTokens> | null = null
 
 /**
- * 온보딩(쿠키 미저장) 구간의 RT로 AT를 재발급합니다.
- * 쿠키에는 쓰지 않고, 갱신된 토큰 쌍만 반환합니다.
+ * 온보딩(AT 쿠키 미저장) 구간에서 httpOnly RT 쿠키로 AT를 재발급합니다.
+ * AT는 쿠키에 쓰지 않고 반환값으로만 넘깁니다.
  */
-export async function refreshProvisionalAccessToken(refreshToken: string): Promise<ProvisionalTokens> {
+export async function refreshProvisionalAccessToken(): Promise<ProvisionalTokens> {
   if (provisionalRefreshPromise) {
     return provisionalRefreshPromise
   }
@@ -29,22 +27,17 @@ export async function refreshProvisionalAccessToken(refreshToken: string): Promi
       {
         skipAuth: true,
         skipRefresh: true,
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
       },
     )
 
     const nextAccessToken = response.data.data.accessToken
-    const nextRefreshToken = response.data.data.refreshToken
 
-    if (!nextAccessToken || !nextRefreshToken) {
-      throw new Error('온보딩 세션 refresh 응답에 토큰이 없습니다.')
+    if (!nextAccessToken) {
+      throw new Error('온보딩 세션 refresh 응답에 accessToken이 없습니다.')
     }
 
     return {
       accessToken: nextAccessToken,
-      refreshToken: nextRefreshToken,
     }
   })().finally(() => {
     provisionalRefreshPromise = null
