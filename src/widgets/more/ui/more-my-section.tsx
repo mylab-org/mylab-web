@@ -1,6 +1,8 @@
 'use client'
 
 import { MoreMenuRow } from './more-menu-row'
+import { MoreMyRentals } from './side/more-my-rentals'
+import { MoreMyRequests } from './side/more-my-requests'
 import { MoreUserUpdate } from './side/more-user-update'
 import { useUsersMeHook } from '@/entities/user'
 import { UserMoreInfo } from '@/entities/user/ui/user-more-info'
@@ -42,8 +44,8 @@ export const MoreMySection = ({ isMobile = false }: WrapProps) => {
       </div>
       <MoreMenuContentWrap title={'나의 활동'} isMobile={isMobile}>
         <div className={'flex flex-col gap-1'}>
-          <MoreMenuRow label={'내 비품 대여 내역'} upcoming />
-          <MoreMenuRow label={'내 비품 신청 내역'} upcoming />
+          <MoreMenuRow label={'내 비품 대여 내역'} onClick={() => openSideModal(MoreMyRentals, '내 비품 대여 내역')} />
+          <MoreMenuRow label={'내 비품 신청 내역'} onClick={() => openSideModal(MoreMyRequests, '내 비품 신청 내역')} />
           <MoreMenuRow label={'내가 작성한 글 확인'} upcoming />
           <MoreMenuRow label={'내가 작성한 댓글 확인'} upcoming />
         </div>

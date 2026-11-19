@@ -26,6 +26,11 @@ export const QUERY_KEYS = {
     LIST: ['task', 'list'],
     WORKS_ALL_LIST: (labId: number) => ['task', 'works-all-list', labId],
   },
+  EQUIPMENT: {
+    LIST: (labId: number) => ['equipment', 'list', labId],
+    MY_RENTALS: (labId: number) => ['equipment', 'my-rentals', labId],
+    REQUESTS: (labId: number, status?: string) => ['equipment', 'requests', labId, status ?? 'ALL'],
+  },
   CALENDAR: {
     MONTHLY: (labId: number, year: number, month: number) => ['calendar', 'monthly', labId, year, month],
     RANGE: (labId: number, from: string, to: string) => ['calendar', 'range', labId, from, to],

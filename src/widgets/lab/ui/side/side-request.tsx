@@ -12,11 +12,11 @@ export const SideRequest = () => {
   const tabs = [
     {
       name: '비품 신청 내역',
-      content: <SideStuRequestList isBottom={isOpen} />,
+      content: <SideStuRequestList isBottom={isOpen} status={'PENDING'} emptyMessage={'신청 중인 비품이 없습니다'} />,
     },
     {
       name: '비품 승인 내역',
-      content: <SideStuRequestList isBottom={isOpen} />,
+      content: <SideStuRequestList isBottom={isOpen} status={'APPROVED'} emptyMessage={'승인된 비품이 없습니다'} />,
     },
   ]
 
