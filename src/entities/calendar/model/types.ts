@@ -10,23 +10,23 @@ export type CalendarRecurrenceType = 'NONE' | 'DAILY' | 'WEEKLY' | 'MONTHLY'
 export type CalendarScheduleResponseType = {
   id: number
   title: string
-  schedule_type: CalendarType
-  start_at: string
-  end_at: string | null
+  scheduleType: CalendarType
+  startAt: string
+  endAt: string | null
   location: string | null
-  participant_ids: number[]
-  recurrence_type: CalendarRecurrenceType
-  is_cancelled: boolean
+  participantIds: number[]
+  recurrenceType: CalendarRecurrenceType
+  isCancelled: boolean
 }
 
 export type CalendarScheduleCreatePayloadType = {
-  schedule_type: CalendarType
+  scheduleType: CalendarType
   title: string
-  start_at: string
-  end_at?: string
+  startAt: string
+  endAt?: string
   location: string
-  participant_ids: number[]
-  recurrence_type?: CalendarRecurrenceType
+  participantIds: number[]
+  recurrenceType?: CalendarRecurrenceType
 }
 
 export interface CalendarEvent {
