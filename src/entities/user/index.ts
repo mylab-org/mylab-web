@@ -1,3 +1,4 @@
 export { UserInfo } from './ui/user-info'
 export { useUsersMeHook } from './model/use-users-me-hook'
+export { useUsersMePostsListHook } from './model/use-users-me-posts-list-hook'
 export { UserMoreInfo } from './ui/user-more-info'
