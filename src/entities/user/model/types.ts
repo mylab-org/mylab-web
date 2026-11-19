@@ -12,3 +12,19 @@ export type UsersMeResponseType = {
     role: UserRoleType
   }
 }
+
+export type UsersMePostsResponseType = {
+  id: number
+  categoryId: number
+  categoryName: string
+  title: string
+  content: string
+  createdAt: string
+  likeCount: number
+  commentCount: number
+}
+
+export type UsersMePostsListResponseType = {
+  posts: UsersMePostsResponseType[]
+  page: CursorType
+}
