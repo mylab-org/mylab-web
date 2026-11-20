@@ -19,14 +19,14 @@ export const MorePage = async () => {
   }
 
   return (
-    <div className={'flex min-h-0 flex-1 gap-4 focus:outline-none'}>
+    <div className={'flex min-h-0 min-w-0 flex-1 flex-col gap-4 focus:outline-none xl:flex-row'}>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <div className={'flex min-w-0 flex-1 flex-col gap-4'}>
           <MoreMySection />
           <MoreServiceSection />
         </div>
         {showLabSection && (
-          <div className={'flex w-full max-w-[480px] shrink-0 flex-col'}>
+          <div className={'flex w-full min-w-0 flex-col xl:max-w-[480px] xl:flex-1'}>
             <MoreLabSection />
           </div>
         )}
