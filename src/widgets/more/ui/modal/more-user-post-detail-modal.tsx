@@ -16,6 +16,15 @@ type Props = {
   onOpenChange: (open: boolean) => void
 }
 
+const formatSafeDateTime = (value?: string) => {
+  if (!value) return null
+  try {
+    return formatDateTime(value)
+  } catch {
+    return null
+  }
+}
+
 export const MoreUserPostDetailModal = ({ open, postId, categoryName, onOpenChange }: Props) => {
   const {
     data: post,
@@ -26,6 +35,8 @@ export const MoreUserPostDetailModal = ({ open, postId, categoryName, onOpenChan
     queryFn: () => getBoardDetail(postId as number),
     enabled: open && postId !== null,
   })
+
+  const createdAtLabel = formatSafeDateTime(post?.createdAt)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -42,7 +53,7 @@ export const MoreUserPostDetailModal = ({ open, postId, categoryName, onOpenChan
             <>
               <div className={'flex flex-wrap items-center gap-x-2 gap-y-1'}>
                 {categoryName && <Text className={'text-brand! text-[12px] font-semibold'}>{categoryName}</Text>}
-                <Text className={'text-subtle-foreground! text-[12px]'}>{formatDateTime(post.createdAt)}</Text>
+                {createdAtLabel && <Text className={'text-subtle-foreground! text-[12px]'}>{createdAtLabel}</Text>}
               </div>
 
               <Avatar
