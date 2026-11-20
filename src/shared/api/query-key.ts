@@ -1,6 +1,8 @@
 export const QUERY_KEYS = {
   USERS: {
     ROOT: ['users', 'detail'],
+    POSTS: ['users', 'posts'],
+    COMMENTED_POSTS: ['users', 'commented-posts'],
   },
   AUTH: {
     VERIFY_EMAIL: ['auth', 'verify-email'],
@@ -14,6 +16,7 @@ export const QUERY_KEYS = {
   BOARD: {
     CATEGORY: (labId: number) => ['board', 'category', labId],
     LIST: (categoryId: number) => ['board', 'list', categoryId],
+    DETAIL: (pid: number) => ['board', 'detail', pid],
   },
   COMMENT: {
     LIST: (pid: number) => ['comment', 'list', pid],

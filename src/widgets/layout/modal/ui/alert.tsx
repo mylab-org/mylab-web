@@ -5,6 +5,8 @@ import { Dialog as DialogPrimitive } from 'radix-ui'
 import { useEffect } from 'react'
 import { ALERT_CONFIRM_TYPE } from '@/shared/constant/alert'
 import { ROUTES } from '@/shared/constant/routes'
+import { CARD_SHADOW } from '@/shared/constant/skeleton'
+import { cn } from '@/shared/lib'
 import { useAlertStore } from '@/shared/store'
 import { Button } from '@/shared/ui/override/button'
 import { Text } from '@/shared/ui/override/text'
@@ -41,18 +43,27 @@ export const Alert = () => {
         <DialogOverlay className={'supports-backdrop-filter:backdrop-blur-none'} />
         <DialogPrimitive.Content
           aria-describedby={undefined}
-          className={
-            'bg-card text-foreground fixed top-1/2 left-1/2 z-50 flex min-w-[250px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[20px] outline-none'
-          }
+          className={cn(
+            'bg-card text-foreground fixed top-1/2 left-1/2 z-50 w-[min(100%-2rem,360px)] -translate-x-1/2 -translate-y-1/2 rounded-[20px] outline-none',
+            CARD_SHADOW,
+          )}
         >
-          <div className="flex w-full flex-1 items-center justify-center p-7.5">
-            <DialogPrimitive.Title asChild>
-              <Text className="text-foreground text-center font-semibold whitespace-pre-line">{msg}</Text>
-            </DialogPrimitive.Title>
+          <div className={'flex flex-col gap-5 p-5 md:p-6'}>
+            <div className={'flex flex-col gap-2'}>
+              <DialogPrimitive.Title asChild>
+                <h3 className={'text-foreground text-[16px] font-bold md:text-[18px]'}>알림</h3>
+              </DialogPrimitive.Title>
+              <DialogPrimitive.Description asChild>
+                <Text className={'text-muted-foreground! text-[13px] font-medium whitespace-pre-wrap md:text-[14px]'}>
+                  {msg}
+                </Text>
+              </DialogPrimitive.Description>
+            </div>
+
+            <Button className={'w-full'} onClick={handleConfirm}>
+              확인
+            </Button>
           </div>
-          <Button className="w-full rounded-none rounded-b-[20px]" onClick={handleConfirm}>
-            확인
-          </Button>
         </DialogPrimitive.Content>
       </DialogPortal>
     </Dialog>
