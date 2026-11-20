@@ -3,6 +3,7 @@ export const ENDPOINTS = {
     ROOT: '/api/users/me',
     PASSWORD: '/api/users/me/password',
     POSTS: '/api/users/me/posts',
+    COMMENTED_POSTS: '/api/users/me/commented-posts',
   },
   AUTH: {
     REGISTER: '/api/auth/register',

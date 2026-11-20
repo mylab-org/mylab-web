@@ -2,6 +2,7 @@ export const QUERY_KEYS = {
   USERS: {
     ROOT: ['users', 'detail'],
     POSTS: ['users', 'posts'],
+    COMMENTED_POSTS: ['users', 'commented-posts'],
   },
   AUTH: {
     VERIFY_EMAIL: ['auth', 'verify-email'],
