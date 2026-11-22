@@ -4,7 +4,7 @@ import { useLabWorkingHook } from '../../model/use-lab-working-hook'
 import { WorksLabCard } from '@/entities/works'
 import { Text } from '@/shared/ui/override/text'
 
-const cardClassName = 'border-border rounded-[12px] border p-4 md:w-full'
+const cardClassName = 'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'
 
 export const SideWork = () => {
   const { papers, tasks, isPending, isError, isEmpty } = useLabWorkingHook()
