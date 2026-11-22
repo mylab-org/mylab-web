@@ -45,7 +45,7 @@ export type UsersMeCommentsListResponseType = {
   page: CursorType
 }
 
-export type PaperType = {
+export type UsersMeInProgressPaperType = {
   id: number
   labId: number
   title: string
@@ -56,7 +56,7 @@ export type PaperType = {
   leadAuthor: {
     userId: number
     name: string
-  }
+  } | null
   members: {
     userId: number
     name: string
@@ -77,7 +77,7 @@ export type PaperType = {
   createdAt: string
 }
 
-export type TaskType = {
+export type UsersMeInProgressTaskType = {
   taskId: number
   userId: number
   type: TaskType
@@ -93,6 +93,6 @@ export type TaskType = {
 }
 
 export type UsersMeInProgressResponseType = {
-  papers: PaperType[]
-  tasks: TaskType[]
+  papers: UsersMeInProgressPaperType[]
+  tasks: UsersMeInProgressTaskType[]
 }

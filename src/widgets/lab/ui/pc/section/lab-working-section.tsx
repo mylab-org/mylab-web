@@ -1,14 +1,18 @@
 'use client'
 
+import { useLabWorkingHook } from '../../../model/use-lab-working-hook'
 import { SideWork } from '../../side/side-work'
-import { DUMMY_WORKS_PAPER, DUMMY_WORKS_TASK, WorksLabCard } from '@/entities/works'
+import { WorksLabCard } from '@/entities/works'
 import { CARD_SHADOW } from '@/shared/constant/skeleton'
 import { cn } from '@/shared/lib'
 import { useSideModalStore } from '@/shared/store/useSideModalStore'
 import { Text } from '@/shared/ui/override/text'
 
+const cardClassName = 'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'
+
 export const LabWorkingSection = ({ isMobile = false }: { isMobile?: boolean }) => {
   const openSideModal = useSideModalStore(state => state.openSideModal)
+  const { papers, tasks, isPending, isError, isEmpty } = useLabWorkingHook()
 
   return (
     <div
@@ -26,14 +30,25 @@ export const LabWorkingSection = ({ isMobile = false }: { isMobile?: boolean }) 
           </button>
         )}
       </div>
-      <WorksLabCard
-        paper={DUMMY_WORKS_PAPER}
-        className={'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'}
-      />
-      <WorksLabCard
-        task={DUMMY_WORKS_TASK}
-        className={'border-border w-full max-w-full shrink rounded-[12px] border p-4 md:w-full'}
-      />
+
+      <div className={cn('flex flex-col gap-3.5', !isMobile && 'min-h-0 flex-1 overflow-auto')}>
+        {isPending ? (
+          <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>업무를 불러오는 중입니다</Text>
+        ) : isError ? (
+          <Text className={'text-error! py-5 text-center text-[14px]'}>진행 중인 업무를 불러오지 못했습니다</Text>
+        ) : isEmpty ? (
+          <Text className={'text-subtle-foreground py-5 text-center text-[14px]'}>진행 중인 업무가 없습니다</Text>
+        ) : (
+          <>
+            {papers.map(paper => (
+              <WorksLabCard key={`paper-${paper.id}`} paper={paper} className={cardClassName} />
+            ))}
+            {tasks.map(task => (
+              <WorksLabCard key={`task-${task.taskId}`} task={task} className={cardClassName} />
+            ))}
+          </>
+        )}
+      </div>
     </div>
   )
 }
