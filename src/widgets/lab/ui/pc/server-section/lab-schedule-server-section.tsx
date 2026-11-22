@@ -6,7 +6,11 @@ import { getLabsMembersServer } from '@/entities/labs/api/get-labs-members-serve
 import { getUsersMeServer } from '@/entities/user/api/get-users-me-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 
-export const LabScheduleServerSection = async () => {
+type Props = {
+  isMobile?: boolean
+}
+
+export const LabScheduleServerSection = async ({ isMobile = false }: Props) => {
   const queryClient = new QueryClient()
 
   const me = await getUsersMeServer().catch(() => null)
@@ -29,7 +33,7 @@ export const LabScheduleServerSection = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <LabScheduleSection />
+      <LabScheduleSection isMobile={isMobile} />
     </HydrationBoundary>
   )
 }

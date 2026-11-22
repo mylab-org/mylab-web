@@ -3,7 +3,11 @@ import { LabWorkingSection } from '../section/lab-working-section'
 import { getUsersMeInProgressServer } from '@/entities/user/api/get-users-me-in-progress-server'
 import { QUERY_KEYS } from '@/shared/api/query-key'
 
-export const LabWorkingServerSection = async () => {
+type Props = {
+  isMobile?: boolean
+}
+
+export const LabWorkingServerSection = async ({ isMobile = false }: Props) => {
   const queryClient = new QueryClient()
 
   await queryClient
@@ -15,7 +19,7 @@ export const LabWorkingServerSection = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <LabWorkingSection />
+      <LabWorkingSection isMobile={isMobile} />
     </HydrationBoundary>
   )
 }
