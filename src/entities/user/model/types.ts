@@ -44,3 +44,55 @@ export type UsersMeCommentsListResponseType = {
   posts: UsersMeCommentsPostsResponseType[]
   page: CursorType
 }
+
+export type PaperType = {
+  id: number
+  labId: number
+  title: string
+  status: PaperStatusType
+  statusLabel: string
+  statusStep: number
+  totalSteps: number
+  leadAuthor: {
+    userId: number
+    name: string
+  }
+  members: {
+    userId: number
+    name: string
+    degree: UserDegreeType
+    role: string | null
+    isLeadAuthor: boolean
+  }[]
+  schedule: {
+    id: number
+    scheduleType: PaperScheduleType
+    title: string
+    startAt: string
+    endAt: string | null
+    location: string | null
+    submissionDeadline: string | null
+    dDay: number | null
+  } | null
+  createdAt: string
+}
+
+export type TaskType = {
+  taskId: number
+  userId: number
+  type: TaskType
+  title: string
+  description: string
+  startAt: string
+  endAt: string
+  status: TaskStatusType
+  statusLabel: string
+  statusStep: number
+  totalSteps: number
+  createdAt: string
+}
+
+export type UsersMeInProgressResponseType = {
+  papers: PaperType[]
+  tasks: TaskType[]
+}
