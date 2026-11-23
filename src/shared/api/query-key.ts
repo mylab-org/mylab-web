@@ -3,6 +3,7 @@ export const QUERY_KEYS = {
     ROOT: ['users', 'detail'],
     POSTS: ['users', 'posts'],
     COMMENTED_POSTS: ['users', 'commented-posts'],
+    IN_PROGRESS: ['users', 'in-progress'],
   },
   AUTH: {
     VERIFY_EMAIL: ['auth', 'verify-email'],

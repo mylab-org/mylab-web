@@ -32,13 +32,13 @@ export const WorksMyProgress = ({ type = 'PAPER', statusStep, totalSteps }: Prop
           </div>
         ) : (
           <div className={'flex flex-wrap gap-1'}>
-            <Tag.Work type={type} isActive={false}>
+            <Tag.Work type={type} isActive={activeStep === 1}>
               업무 시작 전
             </Tag.Work>
-            <Tag.Work type={type} isActive={false}>
+            <Tag.Work type={type} isActive={activeStep === 2}>
               업무 진행 중
             </Tag.Work>
-            <Tag.Work type={type} isActive={true}>
+            <Tag.Work type={type} isActive={activeStep === 3}>
               업무 완료
             </Tag.Work>
           </div>

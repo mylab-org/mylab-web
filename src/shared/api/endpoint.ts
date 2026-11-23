@@ -4,6 +4,7 @@ export const ENDPOINTS = {
     PASSWORD: '/api/users/me/password',
     POSTS: '/api/users/me/posts',
     COMMENTED_POSTS: '/api/users/me/commented-posts',
+    IN_PROGRESS: '/api/users/me/in-progress',
   },
   AUTH: {
     REGISTER: '/api/auth/register',
