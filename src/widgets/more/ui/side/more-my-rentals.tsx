@@ -1,11 +1,11 @@
 'use client'
 
-import { useMyRentalsHook } from '@/entities/equipment'
+import { useMyRentalHistoryHook } from '@/entities/equipment'
 import { formatDateTime } from '@/shared/lib/format'
 import { Text } from '@/shared/ui/override/text'
 
 export const MoreMyRentals = () => {
-  const { rentals, isPending } = useMyRentalsHook()
+  const { rentals, isPending } = useMyRentalHistoryHook()
 
   return (
     <div

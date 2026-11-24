@@ -33,7 +33,9 @@ export const QUERY_KEYS = {
   EQUIPMENT: {
     LIST: (labId: number) => ['equipment', 'list', labId],
     MY_RENTALS: (labId: number) => ['equipment', 'my-rentals', labId],
+    MY_RENTAL_HISTORY: (labId: number) => ['equipment', 'my-rental-history', labId],
     REQUESTS: (labId: number, status?: string) => ['equipment', 'requests', labId, status ?? 'ALL'],
+    MY_REQUESTS: (labId: number, status?: string) => ['equipment', 'my-requests', labId, status ?? 'ALL'],
   },
   CALENDAR: {
     MONTHLY: (labId: number, year: number, month: number) => ['calendar', 'monthly', labId, year, month],

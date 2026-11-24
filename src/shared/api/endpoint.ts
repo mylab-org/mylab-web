@@ -58,7 +58,9 @@ export const ENDPOINTS = {
     RENTAL_ID: (labId: number, equipmentId: number, rentalId: number) =>
       `/api/labs/${labId}/equipments/${equipmentId}/rentals/${rentalId}`,
     MY_RENTALS: (labId: number) => `/api/labs/${labId}/rentals/me`,
+    MY_RENTAL_HISTORY: (labId: number) => `/api/labs/${labId}/rentals/me/history`,
     REQUESTS: (labId: number) => `/api/labs/${labId}/equipment-requests`,
+    MY_REQUESTS: (labId: number) => `/api/labs/${labId}/equipment-requests/me`,
     REQUEST_STATUS: (labId: number) => `/api/labs/${labId}/equipment-requests/status`,
     REQUEST_ID: (labId: number, requestId: number) => `/api/labs/${labId}/equipment-requests/${requestId}`,
   },
