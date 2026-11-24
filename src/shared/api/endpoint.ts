@@ -2,6 +2,9 @@ export const ENDPOINTS = {
   USERS: {
     ROOT: '/api/users/me',
     PASSWORD: '/api/users/me/password',
+    POSTS: '/api/users/me/posts',
+    COMMENTED_POSTS: '/api/users/me/commented-posts',
+    IN_PROGRESS: '/api/users/me/in-progress',
   },
   AUTH: {
     REGISTER: '/api/auth/register',
@@ -28,6 +31,7 @@ export const ENDPOINTS = {
     CATEGORY_ID: (categoryId: number) => `/api/board/${categoryId}`,
     BOARD_PID: (pid: number) => `/api/board/${pid}`,
     LIKE_PID: (pid: number) => `/api/board/${pid}/like`,
+    DETAIL: (pid: number) => `/api/board/posts/${pid}`,
   },
   COMMENT: {
     ROOT: (id: number) => `/api/comment/${id}`,
