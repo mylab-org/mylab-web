@@ -1,9 +1,10 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useMemo } from 'react'
 import { getEquipmentRequests } from '../api/get-equipment-requests'
 import { getEquipments } from '../api/get-equipments'
+import { getMyEquipmentRequests } from '../api/get-my-equipment-requests'
+import { getMyRentalHistory } from '../api/get-my-rental-history'
 import { getMyRentals } from '../api/get-my-rentals'
 import { useUsersMeHook } from '@/entities/user'
 import { QUERY_KEYS } from '@/shared/api/query-key'
@@ -37,6 +38,20 @@ export const useMyRentalsHook = () => {
   return { labId, rentals: data ?? [], isPending }
 }
 
+/** 지난 대여까지 포함한 내 비품 대여 내역 */
+export const useMyRentalHistoryHook = () => {
+  const { lab } = useUsersMeHook()
+  const labId = lab?.labId
+
+  const { data, isPending } = useQuery({
+    queryKey: QUERY_KEYS.EQUIPMENT.MY_RENTAL_HISTORY(labId ?? 0),
+    queryFn: () => getMyRentalHistory(labId as number),
+    enabled: labId !== undefined,
+  })
+
+  return { labId, rentals: data ?? [], isPending }
+}
+
 /** 비품 구매 신청 목록. 서버가 역할에 따라 전체 또는 본인 것만 내려준다 */
 export const useEquipmentRequestsHook = (status?: EquipmentRequestStatusType) => {
   const { lab } = useUsersMeHook()
@@ -51,15 +66,16 @@ export const useEquipmentRequestsHook = (status?: EquipmentRequestStatusType) =>
   return { labId, requests: data ?? [], isPending }
 }
 
-/** 내가 올린 구매 신청만. 관리자는 전체가 내려오므로 본인 것만 걸러낸다 */
+/** 내가 올린 구매 신청만 */
 export const useMyEquipmentRequestsHook = (status?: EquipmentRequestStatusType) => {
-  const { me } = useUsersMeHook()
-  const { requests, isPending } = useEquipmentRequestsHook(status)
+  const { lab } = useUsersMeHook()
+  const labId = lab?.labId
 
-  const myRequests = useMemo(
-    () => (me ? requests.filter(request => request.requesterId === me.id) : []),
-    [requests, me],
-  )
+  const { data, isPending } = useQuery({
+    queryKey: QUERY_KEYS.EQUIPMENT.MY_REQUESTS(labId ?? 0, status),
+    queryFn: () => getMyEquipmentRequests(labId as number, status),
+    enabled: labId !== undefined,
+  })
 
-  return { requests: myRequests, isPending }
+  return { requests: data ?? [], isPending }
 }
