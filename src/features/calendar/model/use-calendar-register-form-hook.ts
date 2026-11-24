@@ -66,13 +66,13 @@ export const useCalendarRegisterFormHook = (type: CalendarType, onSuccess?: () =
     const hasEnd = type !== 'LAB_DINNER' && Boolean(values.endDate)
 
     postCalendarScheduleMutation.mutate({
-      schedule_type: type,
+      scheduleType: type,
       title: values.title,
-      start_at: toIsoString(values.startDate, values.startTime),
-      ...(hasEnd ? { end_at: toIsoString(values.endDate, values.endTime) } : {}),
+      startAt: toIsoString(values.startDate, values.startTime),
+      ...(hasEnd ? { endAt: toIsoString(values.endDate, values.endTime) } : {}),
       location: values.location,
-      participant_ids: selectedMemberIds,
-      ...(type === 'MEETING' && repeat ? { recurrence_type: repeat } : {}),
+      participantIds: selectedMemberIds,
+      ...(type === 'MEETING' && repeat ? { recurrenceType: repeat } : {}),
     })
   })
 
