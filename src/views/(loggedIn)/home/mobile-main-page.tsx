@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { NoticeMobileBanner } from '@/entities/notice'
 import {
   LabMobileCenterSkeleton,
   LabMobileTopSkeleton,
@@ -16,6 +17,7 @@ import {
 export const MobileMainPage = () => {
   return (
     <section className={'flex w-full flex-col gap-4 overflow-x-hidden px-5'}>
+      <NoticeMobileBanner className="w-full" />
       <Suspense fallback={<LabMobileTopSkeleton />}>
         <LabMobileTopServerSection />
       </Suspense>
