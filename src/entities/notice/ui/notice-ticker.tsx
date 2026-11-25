@@ -1,27 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { CARD_HEIGHT, FLIP_DURATION_MS, PRISM_DEPTH, ROLL_INTERVAL_MS } from '../config/const'
+import { DUMMY_NOTICES } from '../config/dummy'
 import { cn } from '@/shared/lib'
 import { Text } from '@/shared/ui/override/text'
-
-type NoticeTickerItem = {
-  id: number
-  title: string
-}
-
-/** TODO: API 연동 전 임시 더미 */
-const DUMMY_NOTICES: NoticeTickerItem[] = [
-  { id: 1, title: '비품 확인해주세요' },
-  { id: 2, title: '연구실 세미나 일정 안내' },
-  { id: 3, title: '다음 주 랩미팅 장소 변경' },
-  { id: 4, title: '연구 윤리 교육 이수 안내' },
-]
-
-const ROLL_INTERVAL_MS = 3200
-const FLIP_DURATION_MS = 700
-/** 로고(40px)와 맞춰 헤더 높이 증가를 막음 */
-const CARD_HEIGHT = 36
-const PRISM_DEPTH = CARD_HEIGHT / 2
 
 type Props = {
   className?: string
